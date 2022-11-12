@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
@@ -8,8 +7,7 @@ import HelloWorld from './components/HelloWorld.vue'
     <RouterLink to="/" >Home</RouterLink>
     <RouterLink to="/about" >About</RouterLink>
   </nav>
-
-  <RouterView />
+  <router-view/>
 </template>
 
 <style scoped>
@@ -40,15 +38,6 @@ nav a:first-of-type {
     padding-right: calc(var(--section-gap) / 2);
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 
 
 }
