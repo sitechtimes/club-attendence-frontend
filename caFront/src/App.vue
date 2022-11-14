@@ -1,13 +1,8 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <nav>
-    <RouterLink to="/" >Home</RouterLink>
-    <RouterLink to="/about" >About</RouterLink>
-  </nav>
-  <router-view/>
+  <router-view></router-view>
 </template>
 
 <style scoped>
@@ -38,6 +33,15 @@ nav a:first-of-type {
     padding-right: calc(var(--section-gap) / 2);
   }
 
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
 
 
 }

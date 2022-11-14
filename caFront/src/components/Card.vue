@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <h2>{{name}}</h2>
-        <h2>{{date}}</h2>
+        <h3>{{date}}</h3>
     </div>
 </template>
 
@@ -17,15 +17,16 @@ export default {
 
 <style scoped>
 .card{
+    margin: 2rem;
     padding:2rem;
-    width: 30rem;
-    height: 15rem;
+    width: 20rem;
+    height: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 0.0625rem solid lightgray;
     border-radius: 1rem;
-    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.555);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.555);
 }
 
 </style>
