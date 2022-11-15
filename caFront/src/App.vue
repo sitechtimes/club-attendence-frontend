@@ -1,12 +1,28 @@
-<script setup lang="ts">
-</script>
-
 <template>
+
+    <nav>
+    <RouterLink to="/club" >Club</RouterLink>
+    <RouterLink to="/about" >About</RouterLink>
+  </nav>
   <router-view></router-view>
 </template>
 
-<style scoped>
+<script lang="ts">
+import { defineComponent } from 'vue';
 
+export default defineComponent({
+  name: 'App',
+  components:{},
+  methods:{
+    showModal(){
+ modalVisible.value = true;
+}
+  }
+}
+)
+</script>
+
+<style scoped>
 
 nav a.router-link-exact-active {
   color: var(--color-text);
