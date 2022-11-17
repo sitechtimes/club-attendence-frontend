@@ -12,8 +12,8 @@ export default {
 
 <style scoped>
 button{
-    width: 140px;
-  height: 45px;
+    width: 20rem;
+  height: 5rem;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;

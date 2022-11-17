@@ -2,7 +2,9 @@
     <div class="home">
         <div class="nav">
             <img id="cpic" src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png" alt="">
-            <Button>12/02/2022</Button>
+            <Button>
+              <h3>12/03/2022</h3>
+            </Button>
         </div>
   
   <div class="clublist">
@@ -45,6 +47,20 @@
       name: "Chinese Culture Club",
       date: "Next Meeting Date: 12/3/2022"
   },
+  {
+      name: "Chinese Culture Club",
+      date: "Next Meeting Date: 12/3/2022"
+  },  {
+      name: "Chinese Culture Club",
+      date: "Next Meeting Date: 12/3/2022"
+  },  {
+      name: "Chinese Culture Club",
+      date: "Next Meeting Date: 12/3/2022"
+  },
+  {
+      name: "Chinese Culture Club",
+      date: "Next Meeting Date: 12/3/2022"
+  },
   
   ]
       }
@@ -58,20 +74,27 @@
   .home{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
+  justify-content: center;
   }
   .nav{
     display: flex;
     justify-content: space-around;
    align-items: center;
     background-color: #F3C87C;
-    height: 5rem;
+    height: 10rem;
     width: 100%;
   }
   #cpic{
     height: 50px;
     width: 50px;
+  }
+
+  .clublist{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:row ;
+   
   }
 
   </style>

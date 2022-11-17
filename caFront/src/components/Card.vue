@@ -19,14 +19,14 @@ export default {
 .card{
     margin: 2rem;
     padding:2rem;
-    width: 20rem;
-    height: 10rem;
+    width: 50rem;
+    height: 30rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 0.0625rem solid lightgray;
     border-radius: 1rem;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.555);
+    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.555);
 }
 
 </style>

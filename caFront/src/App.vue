@@ -14,11 +14,8 @@ export default defineComponent({
   name: 'App',
   components:{},
   methods:{
-    showModal(){
- modalVisible.value = true;
 }
   }
-}
 )
 </script>
 
