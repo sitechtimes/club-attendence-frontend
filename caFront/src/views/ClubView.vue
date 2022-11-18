@@ -91,9 +91,8 @@
   }
 
   .clublist{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction:row ;
+    display: grid;
+    grid-template-columns: auto auto auto;
    
   }
 

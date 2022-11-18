@@ -1,7 +1,14 @@
 <template>
     <div class="card">
-        <h2>{{name}}</h2>
+
+        <div class="half">
+            <h2>{{name}}</h2>
+        </div>
+        
+        <div class="bottom">
         <h3>{{date}}</h3>
+        </div>
+        
     </div>
 </template>
 
@@ -17,16 +24,30 @@ export default {
 
 <style scoped>
 .card{
+    position: relative;
+    overflow: hidden;
     margin: 2rem;
-    padding:2rem;
-    width: 50rem;
+    width: 45rem;
     height: 30rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     border: 0.0625rem solid lightgray;
     border-radius: 1rem;
-    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.555);
+    border-color:  rgb(35, 35, 35);
+
 }
+.half{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgb(252, 66, 66);
+}
+
+.bottom{
+    position: absolute;
+}
+
 
 </style>
