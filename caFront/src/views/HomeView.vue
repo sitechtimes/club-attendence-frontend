@@ -80,12 +80,48 @@ export default defineComponent({
   width: 40rem;
   background-color: rgb(34, 34, 34);
   color: rgb(255, 255, 255);
-  font-size: 5rem;
-  font-weight: 300;
+  animation: float 3s ease-in-out infinite;
+
+}
+.OAuth h2{
+  position: relative;
+  width: 77%;
+  margin: auto;
 
 
 }
+
+.OAuth h2:before{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 0.2rem;
+  border-radius: 20rem;
+  background-color: white;
+  bottom: 0;
+  left: 0;
+  transition: all 0.5s;
+}
+
+
+.OAuth h2{
+  font-size: 3rem;
+  font-weight: 400;
+}
 .g-logo{
   height: 50%;
+}
+
+.OAuth:hover{
+  background-color: rgba(88, 88, 88, 0.444);
+}
+.OAuth:hover h2:before{
+  width: 100%;
+}
+
+@keyframes float{
+  0% { transform: translate(0,  0px);}
+    50%  { transform: translate(0, 20px); }
+    100%   { transform: translate(0, 0px); }   
 }
 </style>
