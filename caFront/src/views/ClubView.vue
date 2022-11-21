@@ -1,76 +1,90 @@
 <template>
-    <div class="home">
-        <div class="nav">
-            <img id="cpic" src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png" alt="">
-            <Button>
-              <h3>12/03/2022</h3>
-            </Button>
-        </div>
-  
-  <div class="clublist">
-    <Card
-  v-for="club in clubs"
-  :key="club.name"
-  :name="club.name"
-  :date="club.date"
-  
-  >
-  
-  </Card>
+  <div class="home">
+      <div class="nav">
+          <img id="cpic" src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png" alt="">
+          <Button  @click="showModal">
+            <h3>12/03/2022</h3>
+          </Button>
+      </div>
+
+<div class="clublist">
+  <Card
+v-for="club in clubs"
+:key="club.name"
+:name="club.name"
+:date="club.date"
+
+>
+
+</Card>
+<Modal v-show="isModalVisible" @close="closeModal" />
+</div>
+
   </div>
+</template>
   
-    </div>
-  </template>
-  
-  <script lang="ts">
-  import Card from '../components/Card.vue'
-  import Button from '../components/Button.vue'
-  
-  export default {
-    name: 'ClubView',
-    components: {
-      Card,
-      Button
+<script lang="ts">
+import Card from '../components/Card.vue'
+import Button from '../components/Button.vue'
+import Modal from '../components/Modal.vue';
+import { defineComponent } from 'vue';
+export default defineComponent( {
+  name: 'ClubView',
+  components: {
+    Card,
+    Button,
+    Modal
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
     },
-    data: () => {
-      return {
-        clubs: [
-  {
-      name: "Key Club",
-      date: "Next Meeting Date: 12/3/2022"
+    closeModal() {
+      this.isModalVisible = false;
+    }
   },
-  {
-      name: "Self Defense Club",
-      date: "Next Meeting Date: 12/3/2022"
+  data: () => {
+    return {
+      isModalVisible: false,
+      clubs: [
+        {
+          name: "Key Club",
+          date: "Next Meeting Date: 12/3/2022"
+        },
+        {
+          name: "Self Defense Club",
+          date: "Next Meeting Date: 12/3/2022"
+        },
+        {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022"
+        },
+        {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022"
+        }, {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022"
+        }, {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022"
+        },
+        {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022"
+        },
+
+      ]
+    }
   },
-  {
-      name: "Chinese Culture Club",
-      date: "Next Meeting Date: 12/3/2022"
-  },
-  {
-      name: "Chinese Culture Club",
-      date: "Next Meeting Date: 12/3/2022"
-  },  {
-      name: "Chinese Culture Club",
-      date: "Next Meeting Date: 12/3/2022"
-  },  {
-      name: "Chinese Culture Club",
-      date: "Next Meeting Date: 12/3/2022"
-  },
-  {
-      name: "Chinese Culture Club",
-      date: "Next Meeting Date: 12/3/2022"
-  },
+
+    })
+</script>
+ 
+
+
   
-  ]
-      }
-    },
-  
-  }
-  
-  </script>
-  
-  <style scoped>
+<style scoped>
   .home{
     display: flex;
     flex-direction: column;
@@ -92,7 +106,7 @@
 
   .clublist{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
    
   }
 

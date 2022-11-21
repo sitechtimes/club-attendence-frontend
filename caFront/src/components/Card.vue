@@ -27,7 +27,7 @@ export default {
     position: relative;
     overflow: hidden;
     margin: 2rem;
-    width: 45rem;
+    width: 40rem;
     height: 30rem;
     border: 0.0625rem solid lightgray;
     border-radius: 1rem;
