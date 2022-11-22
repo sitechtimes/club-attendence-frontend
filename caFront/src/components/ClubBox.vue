@@ -30,7 +30,7 @@ import { defineComponent } from "vue";
 <style scoped>
 .clubBox{
     height: 3rem;
-    width:20rem;
+    width:100%;
     background-color: grey;
     margin-top: 0.1rem;
     border-radius: 0.4rem;

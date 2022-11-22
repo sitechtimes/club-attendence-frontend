@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <div class="top"></div>
         <div class="bottom">
             <section class="left">
@@ -25,8 +25,8 @@
     </div>
 </template>
 
-<script>
-import { defineComponent } from "@vue/runtime-core";
+<script lang="ts">
+import { defineComponent } from "vue";
 import fakeData from "../assets/fakedata.json"
 import clubBox from "../components/ClubBox.vue"
 import tableData from "../components/tableData.vue"
@@ -48,7 +48,18 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.page{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
 .bottom{
     display: flex;
+    width: 100%;
+    height: 80vh;
+}
+.left{
+    width: 30%;
 }
 </style>
