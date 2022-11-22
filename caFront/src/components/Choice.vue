@@ -25,6 +25,9 @@ import {defineComponent} from 'vue'
 </script>
 
 <style scoped>
+.choice{
+    font-size: 3rem;
+}
 .remove{
     background-color: #EE4B2B;
 }
@@ -37,6 +40,7 @@ import {defineComponent} from 'vue'
   background-color: #EE4B2B;
   color: #fff;
   transform: translateY(-7px);
+    box-shadow: 0px 15px 20px rgba(252, 0, 0, 0.774);
 }
 .choice{
     display: flex;

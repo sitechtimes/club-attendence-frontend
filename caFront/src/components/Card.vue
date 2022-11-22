@@ -6,7 +6,7 @@
         </div>
         
         <div class="bottom">
-        <h3>{{date}}</h3>
+  
         </div>
         
     </div>
@@ -32,7 +32,12 @@ export default {
     border: 0.0625rem solid lightgray;
     border-radius: 1rem;
     border-color:  rgb(35, 35, 35);
+    transition: 0.5s;
 
+}
+
+.card:hover{
+transform: translateY(-7px);
 }
 .half{
     display: flex;
@@ -48,6 +53,4 @@ export default {
 .bottom{
     position: absolute;
 }
-
-
 </style>
