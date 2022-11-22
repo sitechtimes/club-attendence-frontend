@@ -1,27 +1,19 @@
-<template>
-
-    <nav>
-    <RouterLink to="/club" >Club</RouterLink>
-    <RouterLink to="/about" >About</RouterLink>
-  </nav>
-  <router-view></router-view>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-
-export default defineComponent( {
-  name: 'App',
-  components:{},
-  methods:{
-} 
-
-    })
-
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
 </script>
 
+<template>
+  <nav>
+    <RouterLink to="/" >Home</RouterLink>
+    <RouterLink to="/about" >About</RouterLink>
+  </nav>
+
+  <RouterView />
+</template>
+
 <style scoped>
+
 
 nav a.router-link-exact-active {
   color: var(--color-text);
