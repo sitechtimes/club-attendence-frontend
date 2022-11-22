@@ -5,12 +5,12 @@
       </slot>
 
       <slot name="body">
+<Calendar></Calendar>
       </slot>
 
       <slot name="footer">
 
       </slot>
-<Button @click="close">Close Modal></Button>
     </div>
 
   </div>
@@ -18,11 +18,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Calendar from '../components/Calendar.vue'
 import Button from '../components/Button.vue'
   export default defineComponent( {
     name:'Modal',
     components: {
-      Button
+      Button,
+      Calendar
     },
     props: [],
     methods: {
