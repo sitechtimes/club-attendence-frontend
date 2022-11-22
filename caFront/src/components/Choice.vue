@@ -7,27 +7,20 @@
         <Button class="remove">Remove</Button>
 
 
-        <Button @click="close">Close Modal></Button>
         </div>
        
     </div>
 </template>
 
 <script lang="ts">
-import Modal from '../components/Modal.vue'
 import Button from '../components/Button.vue'
 import {defineComponent} from 'vue'
     export default defineComponent ({
         name: 'Choice',
         components:{
             Button,
-            Modal,
         },
-        methods: {
-      close() {
-        this.$emit('close');
-      },
-    },
+
     })
 </script>
 
