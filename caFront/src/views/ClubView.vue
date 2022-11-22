@@ -106,7 +106,8 @@ export default defineComponent( {
 
   .clublist{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+  align-content: center;
+    grid-template-columns: auto auto auto;
    
   }
 
