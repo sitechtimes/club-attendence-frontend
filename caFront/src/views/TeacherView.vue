@@ -9,7 +9,7 @@
             </section>
             <section class="right">
                 <table>
-                    <tr>
+                    <tr class="head">
                         <th>Osis</th>
                         <th>Name</th>
                         <th>Grade</th>
@@ -58,8 +58,20 @@ export default defineComponent({
     display: flex;
     width: 100%;
     height: 80vh;
+    background-color: rgb(211, 211, 211);
 }
 .left{
     width: 30%;
+}
+.right{
+    width: 70%;
+
+}
+table{
+    height: 100%;
+    width: 100%;
+}
+.head{
+    font-size: 5rem;
 }
 </style>

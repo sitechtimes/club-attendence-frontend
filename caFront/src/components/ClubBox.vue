@@ -9,14 +9,14 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 
     export default defineComponent({
         props:{
             ClubName: String,
             Advisor: String,
-            Room: String | Number
+            Room: String || Number,
         },
         setup(){
 
@@ -29,12 +29,13 @@ import { defineComponent } from "vue";
 
 <style scoped>
 .clubBox{
-    height: 3rem;
+    height: 10%;
     width:100%;
     background-color: grey;
     margin-top: 0.1rem;
     border-radius: 0.4rem;
     padding: 00.1rem;
+    font-size: 3rem;
 }
 .bot{
     display: flex;
