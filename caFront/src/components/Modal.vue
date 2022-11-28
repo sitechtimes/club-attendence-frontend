@@ -5,7 +5,7 @@
       </slot>
 
       <slot name="body">
-<Choice></Choice>
+<Calendar></Calendar>
       </slot>
 
       <slot name="footer">
@@ -20,13 +20,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Choice from '../components/Choice.vue'
+import Calendar from '../components/Calendar.vue'
 import Button from '../components/Button.vue'
   export default defineComponent( {
     name:'Modal',
     components: {
       Button,
-      Choice
+      Calendar
     },
     props: [],
     methods: {
