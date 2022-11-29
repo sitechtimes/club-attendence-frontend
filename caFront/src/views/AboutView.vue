@@ -30,7 +30,7 @@
                 </div>
             </div>
         </header>
-        <section>
+        <section class="showcalendar">
             <div class="weekdays">
                 <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
                     {{ weekday }}
@@ -150,7 +150,22 @@ export default defineComponent({
      overflow: hidden;
      background-size: cover;
      user-select: none;
+     font-size: 5rem;
+    display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 1em;
+        margin: 0 auto;
+        max-width: 64em;
+        padding: 0;
 }
+.day{
+  align-items: center;
+        border: 1px solid red;
+        border-radius: 1rem;
+            height: 2rem;
+            max-height: 2rem;
+}
+
      .title {
          display: flex;
          justify-content: center;
@@ -196,5 +211,4 @@ export default defineComponent({
          .today {
              font-size: 2rem;
          }
-     
 </style>
