@@ -8,7 +8,7 @@
 
             </section>
             <section class="right">
-                <tableData :data="headings" :studentData="studentData" ></tableData>
+                <tableData :headings="headings" :theData="studentData"></tableData>
             </section>
 
         </div>

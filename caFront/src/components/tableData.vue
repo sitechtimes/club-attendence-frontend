@@ -1,32 +1,30 @@
 <template>
-    <table>
-        <div class="heading">
-            <th  v-for="header in data" :key="header">{{header}}</th>
+    
+    <div class="table">
+        <div v-for="head in headings" :key="head" class="header">{{head}}</div>
 
+        <div v-for="element in theData" :key="element" class="row">
+            
+
+
+            <div v-for="data in element" :key="data" class="asset">
+                {{data}}
+            </div>
         </div>
-        <div class="content">
-            <tr v-for="student in studentData" :key="student" >
-                <td>{{student[0]}}</td>
-                <td>{{student[1]}}</td>
-                <td>{{student[2]}}</td>
-                <td>{{student[3]}}</td>
-            </tr>
-
-        </div>
-        
- 
 
 
+    </div>
 
-    </table>
+
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
     export default defineComponent({
         props:{
-            data: Array,
-            studentData: Array,
+            headings:Array,
+            theData: Array,
+
 
 
         }
@@ -34,10 +32,14 @@ import {defineComponent} from "vue";
 </script>
 
 <style scoped>
- .heading{
+
+.table{
+    display: grid;
+    grid-template-columns: repeat(4,auto);
     font-size: 3rem;
- }
- .content{
-    font-size: 3rem;
- }
+}
+.row{
+    display: contents;
+}
+
 </style>
