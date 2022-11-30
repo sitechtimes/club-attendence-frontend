@@ -33,10 +33,11 @@ export default defineComponent({
             "Osis",
             "Name",
             "Grade",
-            "Class",
-        ]
+            "Class",]
+
+        const asdf = []
         return{
-            data,headings, studentData
+            data,headings, studentData, asdf,
         }
     }
 
@@ -50,12 +51,17 @@ export default defineComponent({
     width: 100vw;
     display: flex;
     flex-direction: column;
+    padding: 4rem;
+}
+.top{
+    height: 20vh;
+    background-color: rgb(163, 163, 163);
 }
 .bottom{
     display: flex;
     width: 100%;
     height: 80vh;
-    background-color: rgb(211, 211, 211);
+    background-color: wheat;
 }
 .left{
     width: 30%;
