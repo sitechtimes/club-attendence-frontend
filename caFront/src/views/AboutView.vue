@@ -1,6 +1,6 @@
 <template>
     <article id="calendar">
-        <header class="title">
+        <header>
             <div class="current-date">
                 <div class="current-day">
                     {{ weekdayNames[currentDay] }}
@@ -30,22 +30,22 @@
                 </div>
             </div>
         </header>
-        <section class="showcalendar">
+        <section>
             <div class="weekdays">
                 <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
                     {{ weekday }}
                 </div>
             </div>
             <div class="date">
-                <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
-                    {{ (prevMonthDays + 1) - firstMonthDay + n }}
+                <div class="day-hidden" v-for="(n, index) in (firstMonthDay -1)" :key="'prev'+index">
+                    {{ (prevMonthDays +1) - firstMonthDay + n }}
                 </div>
-                <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
-                    v-for="(n, index) in currentMonthDays" :key="'day' + index">
+                <div class="day" :class="{ active: n === currentDate.date}" @click="currentDate.date = n"
+                    v-for="(n, index) in currentMonthDays" :key="'day'+index">
                     {{ n }}
                 </div>
                 <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))"
-                    :key="'next' + index">
+                    :key="'next'+index">
                     {{ n }}
                 </div>
             </div>
@@ -54,9 +54,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue'
 export default defineComponent({
-    name: 'Calendar',
     data: function () {
         return {
             weekdays: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
@@ -141,74 +140,91 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+
 #calendar {
-     width: 460px;
-     height: 730px;
-     background-color: #efefef;
-     font-family: 'Anton';
-     border-radius: 15px;
-     overflow: hidden;
-     background-size: cover;
-     user-select: none;
-     font-size: 5rem;
-    display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-gap: 1em;
-        margin: 0 auto;
-        max-width: 64em;
-        padding: 0;
+    width: 460px;
+    height: 730px;
+    background-color: #efefef;
+    font-family: 'Anton';
+    border-radius: 15px;
+    overflow: hidden;
+    background-size: cover;
+    user-select: none;
+    font-size: 8rem;
 }
-.day{
-  align-items: center;
-        border: 1px solid red;
-        border-radius: 1rem;
-            height: 2rem;
-            max-height: 2rem;
-}
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: top;
+        height: 400px;
+        padding: 20px 0 0;
+        text-align: center;
+        overflow: hidden;
+        color: #efefef;
+        text-shadow: 1px 1px 1px #222,
+            1px -1px 1px #222,
+            -1px 1px 1px #222,
+            -1px -1px 1px #222;
+    }
+        .current-date {
+            width: 300px;
+        }
 
-     .title {
-         display: flex;
-         justify-content: center;
-         align-items: top;
-         height: 400px;
-         padding: 20px 0 0;
-         text-align: center;
-         overflow: hidden;
-         color: #efefef;
-     }
+        .arrow-up {
+            border-bottom: 10px solid #fff;
 
-         .current-date {
-             width: 300px;
-         }
+        }
 
-         .arrow-up {
+        .arrow-down {
+            border-top: 10px solid #fff;
 
-             border-bottom: 10px solid #fff;
+        }
 
-         }
-                  .arrow-up:hover {
-                      border-bottom: 10px solid rgba(0, 0, 0, .4);
-                  }
+        .today {
+            display: grid;
+            grid-template-columns: 40px auto 70px;
+            grid-gap: 0;
+        }
 
-         .arrow-down {
-             border-top: 10px solid #fff;
+        .current-day {
+            font-size: 4rem;
+        }
 
-      
-         }  .arrow-down.hover {
-                 border-top: 10px solid rgba(0, 0, 0, .4);
-             }
+        .today {
+            font-size: 2rem;
+        }
+        .date{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
 
-         .today {
-             display: grid;
-             grid-template-columns: 40px auto 70px;
-             grid-gap: 0;
-         }
+    .weekdays {
 
-         .current-day {
-             font-size: 4rem;
-         }
+        background-color: rgba(0, 0, 0, .5);
+        border-bottom: 1px solid #fff;
 
-         .today {
-             font-size: 2rem;
-         }
+    }
+
+        .day {
+            cursor: pointer;
+            border: 1rem black;
+            border-radius: 1rem;
+
+            }
+
+
+        .day-hidden {
+            opacity: .4;
+        }
 </style>
