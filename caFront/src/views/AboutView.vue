@@ -1,13 +1,11 @@
 <template>
-    <article id="calendar">
-        <header>
-            <div class="current-date">
-                <div class="current-day">
+    <div class="container">
+        <div class="calendar">
+            <div class="front">
+                <div class="current-date">
                     {{ weekdayNames[currentDay] }}
-                </div>
-                <div class="today">
                     <div>
-                        <div class="arrow-up" @click="dateUp()"></div>
+                        <div class="arrow-up" @click="dateUp()">Click</div>
                     </div>
                     <div>
                         <div class="arrow-up" @click="monthUp()"></div>
@@ -28,33 +26,113 @@
                         <div class="arrow-down" @click="currentDate.year -= 1"></div>
                     </div>
                 </div>
-            </div>
-        </header>
-        <section>
-            <div class="weekdays">
-                <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
-                    {{ weekday }}
+    
+                <div class="current-month">
+                    <ul class="week-days">
+                        <li>MON</li>
+                        <li>TUE</li>
+                        <li>WED</li>
+                        <li>THU</li>
+                        <li>FRI</li>
+                        <li>SAT</li>
+                        <li>SUN</li>
+                    </ul>
+
+                            
+    
+                    <div class="weeks">
+                        <div class="first">
+                            <span class="last-month">28</span>
+                            <span class="last-month">29</span>
+                            <span class="last-month">30</span>
+                            <span class="last-month">31</span>
+                            <span>01</span>
+                            <span>02</span>
+                            <span>03</span>
+                        </div>
+    
+                        <div class="second">
+                            <span>04</span>
+                            <span>05</span>
+                            <span class="event">06</span>
+                            <span>07</span>
+                            <span>08</span>
+                            <span>09</span>
+                            <span>10</span>
+                        </div>
+    
+                        <div class="third">
+                            <span>11</span>
+                            <span>12</span>
+                            <span>13</span>
+                            <span>14</span>
+                            <span class="active">15</span>
+                            <span>16</span>
+                            <span>17</span>
+                        </div>
+    
+                        <div class="fourth">
+                            <span>18</span>
+                            <span>19</span>
+                            <span>20</span>
+                            <span>21</span>
+                            <span>22</span>
+                            <span>23</span>
+                            <span>24</span>
+                        </div>
+    
+                        <div class="fifth">
+                            <span>25</span>
+                            <span>26</span>
+                            <span>27</span>
+                            <span>28</span>
+                            <span>29</span>
+                            <span>30</span>
+                            <span>31</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="date">
-                <div class="day-hidden" v-for="(n, index) in (firstMonthDay -1)" :key="'prev'+index">
-                    {{ (prevMonthDays +1) - firstMonthDay + n }}
+    
+            <div class="back">
+                <input placeholder="What's the event?">
+                <div class="info">
+                    <div class="date">
+                        <p class="info-date">
+                            Date: <span>Jan 15th, 2016</span>
+                        </p>
+                        <p class="info-time">
+                            Time: <span>6:35 PM</span>
+                        </p>
+                    </div>
+                    <div class="address">
+                        <p>
+                            Address: <span>129 W 81st St, New York, NY</span>
+                        </p>
+                    </div>
+                    <div class="observations">
+                        <p>
+                            Observations: <span>Be there 15 minutes earlier</span>
+                        </p>
+                    </div>
                 </div>
-                <div class="day" :class="{ active: n === currentDate.date}" @click="currentDate.date = n"
-                    v-for="(n, index) in currentMonthDays" :key="'day'+index">
-                    {{ n }}
-                </div>
-                <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))"
-                    :key="'next'+index">
-                    {{ n }}
+    
+                <div class="actions">
+                    <button class="save">
+                        Save <i class="ion-checkmark"></i>
+                    </button>
+                    <button class="dismiss">
+                        Dismiss <i class="ion-android-close"></i>
+                    </button>
                 </div>
             </div>
-        </section>
-    </article>
+    
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
     data: function () {
         return {
@@ -139,92 +217,216 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-
-    div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 30px;
-        color: #fff;
-        border-radius: 5px;
-    }
-
-
-#calendar {
-    width: 460px;
-    height: 730px;
-    background-color: #efefef;
-    font-family: 'Anton';
-    border-radius: 15px;
-    overflow: hidden;
-    background-size: cover;
-    user-select: none;
-    font-size: 8rem;
+<style>
+a {
+    text-decoration: none;
 }
-    header {
-        display: flex;
-        justify-content: center;
-        align-items: top;
-        height: 400px;
-        padding: 20px 0 0;
-        text-align: center;
-        overflow: hidden;
-        color: #efefef;
-        text-shadow: 1px 1px 1px #222,
-            1px -1px 1px #222,
-            -1px 1px 1px #222,
-            -1px -1px 1px #222;
-    }
-        .current-date {
-            width: 300px;
-        }
 
-        .arrow-up {
-            border-bottom: 10px solid #fff;
+body,
+html {
+    height: 100%;
+}
 
-        }
+body {
+    background: #dfebed;
+    font-family: 'Roboto', sans-serif;
+}
 
-        .arrow-down {
-            border-top: 10px solid #fff;
+.container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 100%;
+}
 
-        }
+.calendar {
+    background: #2b4450;
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+    height: 501px;
+    perspective: 1000;
+    transition: .9s;
+    transform-style: preserve-3d;
+    width: 100%;
+}
 
-        .today {
-            display: grid;
-            grid-template-columns: 40px auto 70px;
-            grid-gap: 0;
-        }
+/* Front - Calendar */
+.front {
+    transform: rotateY(0deg);
+}
 
-        .current-day {
-            font-size: 4rem;
-        }
+.current-date {
+    font-size: 3rem;
+    border-bottom: 1px solid rgba(73, 114, 133, .6);
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px;
+}
 
-        .today {
-            font-size: 2rem;
-        }
-        .date{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
+.current-date h1 {
+    color: #dfebed;
+    font-size: 1.4em;
+    font-weight: 300;
+}
 
-    .weekdays {
+.week-days {
+    color: #dfebed;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 30px 40px;
+}
 
-        background-color: rgba(0, 0, 0, .5);
-        border-bottom: 1px solid #fff;
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
-    }
+.weeks {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+}
 
-        .day {
-            cursor: pointer;
-            border: 1rem black;
-            border-radius: 1rem;
+.weeks div {
+    display: flex;
+    font-size: 1.2em;
+    font-weight: 300;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
 
-            }
+.last-month {
+    opacity: .3;
+}
 
+.weeks span {
+    padding: 10px;
+}
 
-        .day-hidden {
-            opacity: .4;
-        }
+.weeks span.active {
+    background: #f78536;
+    border-radius: 50%;
+}
+
+.weeks span:not(.last-month):hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.event {
+    position: relative;
+}
+
+.event:after {
+    content: '•';
+    color: #f78536;
+    font-size: 1.4em;
+    position: absolute;
+    right: -4px;
+    top: -4px;
+}
+
+/* Back - Event form */
+
+.back {
+    height: 100%;
+    transform: rotateY(180deg);
+}
+
+.back input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(73, 114, 133, .6);
+    color: #dfebed;
+    font-size: 1.4em;
+    font-weight: 300;
+    padding: 30px 40px;
+    width: 100%;
+}
+
+.info {
+    color: #dfebed;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: 30px 40px;
+}
+
+.info div:not(.observations) {
+    margin-bottom: 40px;
+}
+
+.info span {
+    font-weight: 300;
+}
+
+.info .date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info .date p {
+    width: 50%;
+}
+
+.info .address p {
+    width: 100%;
+}
+
+.actions {
+    bottom: 0;
+    border-top: 1px solid rgba(73, 114, 133, .6);
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+}
+
+.actions button {
+    background: none;
+    border: 0;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin: 0;
+    padding: 30px 0;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.actions button:first-of-type {
+    border-right: 1px solid rgba(73, 114, 133, .6);
+}
+
+.actions button:hover {
+    background: #497285;
+    cursor: pointer;
+}
+
+.actions button:active {
+    background: #5889a0;
+    outline: none;
+}
+
+/* Flip animation */
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.front,
+.back {
+    backface-visibility: hidden;
+}
+.arrows-up{
+    background-color: white;
+}
 </style>

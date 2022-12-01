@@ -37,14 +37,14 @@
         </div>
       </div>
       <div class="date">
-        <div class="day-hidden" v-for="(n, index) in (firstMonthDay -1)" :key="'prev'+index">
-          {{ (prevMonthDays +1) - firstMonthDay + n }}
+        <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
+          {{ (prevMonthDays + 1) - firstMonthDay + n }}
         </div>
-        <div class="day" :class="{ active: n === currentDate.date}" @click="currentDate.date = n"
-          v-for="(n, index) in currentMonthDays" :key="'day'+index">
+        <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
+          v-for="(n, index) in currentMonthDays" :key="'day' + index">
           {{ n }}
         </div>
-        <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))" :key="'next'+index">
+        <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))" :key="'next' + index">
           {{ n }}
         </div>
       </div>
@@ -53,9 +53,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Calendar',
   data: function () {
     return {
       weekdays: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
@@ -140,8 +139,97 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#calendar{
-  font-size: 10rem;
+div {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+
+#calendar {
+  width: 460px;
+  height: 730px;
+  background-color: #efefef;
+  font-family: 'Anton';
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  user-select: none;
+  font-size: 8rem;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  height: 400px;
+  padding: 20px 0 0;
+  text-align: center;
+  overflow: hidden;
+  color: #efefef;
+  text-shadow: 1px 1px 1px #222,
+    1px -1px 1px #222,
+    -1px 1px 1px #222,
+    -1px -1px 1px #222;
+}
+
+.current-date {
+  width: 300px;
+}
+
+.arrow-up {
+  border-bottom: 10px solid #fff;
+
+}
+
+.arrow-down {
+  border-top: 10px solid #fff;
+
+}
+
+.today {
+  display: grid;
+  grid-template-columns: 40px auto 70px;
+  grid-gap: 0;
+}
+
+.current-day {
+  font-size: 4rem;
+}
+
+.today {
+  font-size: 2rem;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.weekdays {
+
+  background-color: rgba(0, 0, 0, .5);
+  border-bottom: 1px solid #fff;
+
+}
+
+.day {
+  font-size: 5rem;
+  border-radius: 1rem;
+  background-color: black;
+  height: 3rem;
+  width: 3rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+
+.day-hidden {
+  opacity: .4;
 }
 </style>
