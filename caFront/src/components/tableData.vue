@@ -3,18 +3,15 @@
     <div class="table">
         <div v-for="head in headings" :key="head" class="header">{{head}}</div>
 
-        
+
 
             <div v-for="element in theData" :key="element" class="row">
 
-                <div v-for="data in element" :key="data" class="asset">
+                <div v-for="data in element"  :key="data" class="asset">
                     {{data}}
                 </div>
 
             </div>
-
-
-
     </div>
 
 
@@ -45,6 +42,9 @@ import {defineComponent} from "vue";
     display: flex;
     flex-direction: column;
 }
+.header{
+    padding: 1rem;
+}
 .row{
     height: 5rem;
     display: contents;
@@ -55,6 +55,10 @@ import {defineComponent} from "vue";
     padding: 20px;
     font-size: 3rem;
 
+}
+.present .asset{
+    background-color: green;
+    
 }
 
 </style>

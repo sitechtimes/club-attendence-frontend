@@ -1,0 +1,27 @@
+[
+    {
+        "data": {
+            "student":[    "821928999", "Steven", "12", "23Z" ],
+            "status":"present" 
+        }
+    },
+    {
+        "data": {
+            "student":[    "821928999", "Steven", "12", "23Z" ],
+            "status":"absent" 
+        }
+    },
+    {
+        "data": {
+            "student":[    "821928999", "Steven", "12", "23Z" ],
+            "status":"present" 
+        }
+    },
+    {
+        "data": {
+            "student":[    "821928999", "Steven", "12", "23Z" ],
+            "status":"absent" 
+        }
+    }
+    
+]

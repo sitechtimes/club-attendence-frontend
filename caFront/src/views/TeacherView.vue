@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import fakeData from "../assets/fakedata.json";
-import studentData from "../assets/clubData.json"
+import studentData from "../assets/fakeData2.json"
 import clubBox from "../components/ClubBox.vue";
 import tableData from "../components/tableData.vue";
 
