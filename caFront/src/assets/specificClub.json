@@ -1,0 +1,82 @@
+[
+    {
+        "clubName": "Name",
+        "advisor": "OSIS",
+        "president": "Posisiton",
+        "roomNumber": "Grade",
+        "memberCount": "Email",
+        "nextMeeting": "Offical Class",
+        "qrCode": "# of Attendence",
+        "clubSpreadsheetId": "# of Adsences "
+    },
+    {
+        "clubName": "Hao Ran Chen",
+        "advisor": "223113580",
+        "president": "President",
+        "roomNumber": "12",
+        "memberCount": "haoranc3@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "12",
+        "clubSpreadsheetId": "0"
+    },
+    {
+        "clubName": "Jian Hong Li",
+        "advisor": "735586256",
+        "president": "Co-Vice President",
+        "roomNumber": "12",
+        "memberCount": "jianhong9@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "11",
+        "clubSpreadsheetId": "1"
+    },
+    {
+        "clubName": "Edison Jiang",
+        "advisor": "856342758",
+        "president": "Co-Vice President",
+        "roomNumber": "11",
+        "memberCount": "edisonj8@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "5",
+        "clubSpreadsheetId": "4"
+    },
+    {
+        "clubName": "Bin Ni",
+        "advisor": "856315377",
+        "president": "Advisor",
+        "roomNumber": "12",
+        "memberCount": "binn8@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "7",
+        "clubSpreadsheetId": "6"
+    },
+    {
+        "clubName": "Eric Weng",
+        "advisor": "343224667",
+        "president": "Member",
+        "roomNumber": "10",
+        "memberCount": "ericw9@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "5",
+        "clubSpreadsheetId": "10"
+    },
+    {
+        "clubName": "Hao Ran Chen",
+        "advisor": "223113580",
+        "president": "member",
+        "roomNumber": "12",
+        "memberCount": "haoranc3@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "0",
+        "clubSpreadsheetId": "0"
+    },
+    {
+        "clubName": "Hao Ran Chen",
+        "advisor": "223113580",
+        "president": "member",
+        "roomNumber": "12",
+        "memberCount": "haoranc3@nycstudents.net",
+        "nextMeeting": "23B",
+        "qrCode": "0",
+        "clubSpreadsheetId": "0"
+    }
+]

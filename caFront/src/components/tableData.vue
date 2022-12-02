@@ -3,15 +3,63 @@
     <div class="table">
         <div v-for="head in headings" :key="head" class="header">{{head}}</div>
 
+        <div v-for="student in theData"  :key="student.studentName" class="row"  >
+            <div class="present test" v-if="(student.present == true)" >
 
-
-            <div v-for="element in theData" :key="element" class="row">
-
-                <div v-for="data in element"  :key="data" class="asset">
-                    {{data}}
+                <div class="asset osis">
+                    {{student.osis}}
                 </div>
 
+                <div class="asset name">
+                    {{student.studentName}}
+                </div>
+
+                <div class="asset grade">
+                    {{student.grade}}
+                </div>
+                <div class="asset offClass">
+                    {{(student.offClass)}}
+                </div>
             </div>
+            <div class="absent test" v-if="(student.present == false)" >
+
+                <div class="asset osis">
+                    {{student.osis}}
+                </div>
+
+                <div class="asset name">
+                    {{student.studentName}}
+                </div>
+
+                <div class="asset grade">
+                    {{student.grade}}
+                </div>
+                <div class="asset offClass">
+                    {{(student.offClass)}}
+                </div>
+            </div>
+            <div class="null test" v-if="(student.present == null)" >
+
+                <div class="asset osis">
+                    {{student.osis}}
+                </div>
+
+                <div class="asset name">
+                    {{student.studentName}}
+                </div>
+
+                <div class="asset grade">
+                    {{student.grade}}
+                </div>
+                <div class="asset offClass">
+                    {{(student.offClass)}}
+                </div>
+            </div>
+
+        </div>
+
+        
+
     </div>
 
 
@@ -26,8 +74,19 @@ import {defineComponent} from "vue";
 
 
 
+        },
+
+        methods:{
+            color(value:boolean){
+                if(value == true){
+                    
+                }
+            }
         }
     })
+    
+
+
 </script>
 
 <style scoped>
@@ -50,6 +109,9 @@ import {defineComponent} from "vue";
     display: contents;
 
 }
+.test{
+    display: inherit;
+}
 .asset{
     border-radius: 5px;
     padding: 20px;
@@ -57,7 +119,15 @@ import {defineComponent} from "vue";
 
 }
 .present .asset{
-    background-color: green;
+    background-color: rgb(130, 255, 130);
+    
+}
+.absent .asset{
+    background-color: rgb(255, 135, 135);
+    
+}
+.null .asset{
+    background-color: inherit;
     
 }
 
