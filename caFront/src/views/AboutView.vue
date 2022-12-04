@@ -3,21 +3,24 @@
         <div class="calendar">
             <div class="front">
                 <div class="current-date">
-                    {{ weekdayNames[currentDay] }}
-                    <div>
+                    <div class="current-weekday">
+                        {{ weekdayNames[currentDay] }}
+                    </div>
+                    
+                    <div class="current-day">
                                                  
                          <div class="arrow-down" @click="dateDown()">Click</div>
                           <div class="font">{{ currentDate.date }}</div> 
                          <div class="arrow-up" @click="dateUp()">Click</div>
                     </div>
-                    <div>
+                    <div class="current-month">
                        
                            
                            <div class="arrow-down" @click="monthDown()">Click</div> 
                            <div class="font">{{ month[currentDate.month] }}</div>
                            <div class="arrow-up" @click="monthUp()">Click</div>
                     </div>
-                    <div>
+                    <div class="current-year">
                         <div class="arrow-down" @click="currentDate.year -= 1">Click</div>
                         <div class="font">{{ currentDate.year }}</div>
                         <div class="arrow-up" @click="currentDate.year += 1">Click</div>
@@ -264,7 +267,6 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 30px 40px;
-    position: relative;
 }
 
 .current-date h1 {
@@ -439,5 +441,10 @@ body {
 }
 .font{
     font-size: 4rem;
+    position: fixed;
+}
+
+.current-weekday{
+position: fixed;
 }
 </style>
