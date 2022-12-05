@@ -3,7 +3,7 @@
         <div class="top"></div>
         <div class="bottom">
             <section class="left">
-                <clubBox v-for="club in data" key="club" :ClubName="club[0]" :Advisor="club[1]" :Room="club[4]" ></clubBox>
+                <clubBox v-for="club in data" key="club" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
 
 
             </section>
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import fakeData from "../assets/fakeData2.json";
+import specificClub from "../assets/specificClub.json";
 import studentData from "../assets/fakeData2.json"
 import clubBox from "../components/ClubBox.vue";
 import tableData from "../components/tableData.vue";
@@ -28,7 +28,7 @@ export default defineComponent({
         clubBox, tableData
     },
     setup(){
-        const data = fakeData
+        const data = specificClub
         const headings = [
             "Osis",
             "Name",
@@ -62,12 +62,15 @@ export default defineComponent({
     width: 100%;
     height: 80vh;
     background-color: wheat;
+
 }
 .left{
     width: 30%;
+    overflow-y: auto;
 }
 .right{
     width: 70%;
+    overflow-y: auto;
 
 }
 table{

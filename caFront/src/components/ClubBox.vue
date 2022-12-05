@@ -29,7 +29,7 @@ import { defineComponent } from "vue";
 
 <style scoped>
 .clubBox{
-    height: 10%;
+    height: 15%;
     width:100%;
     background-color: grey;
     margin-top: 0.1rem;

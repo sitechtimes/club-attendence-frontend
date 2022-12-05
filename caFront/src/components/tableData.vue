@@ -76,13 +76,6 @@ import {defineComponent} from "vue";
 
         },
 
-        methods:{
-            color(value:boolean){
-                if(value == true){
-                    
-                }
-            }
-        }
     })
     
 
