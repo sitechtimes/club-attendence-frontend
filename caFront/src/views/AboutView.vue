@@ -2,28 +2,49 @@
     <div class="container">
         <div class="calendar">
             <div class="front">
-                <div class="current-date">
-                    <div class="current-weekday">
+                
+                
+                 <div class="current-weekday">
                         {{ weekdayNames[currentDay] }}
                     </div>
+                
+                <div class="current-date">
+                   
                     
                     <div class="current-day">
                                                  
-                         <div class="arrow-down" @click="dateDown()">Click</div>
-                          <div class="font">{{ currentDate.date }}</div> 
-                         <div class="arrow-up" @click="dateUp()">Click</div>
+                        
+                          <div class="font">
+                        <div class="arrow-down" @click="dateDown()">Click</div>     
+                            
+                            {{ currentDate.date }}
+                        
+                        <div class="arrow-up" @click="dateUp()">Click</div>
+                        </div> 
+                         
                     </div>
                     <div class="current-month">
                        
                            
-                           <div class="arrow-down" @click="monthDown()">Click</div> 
-                           <div class="font">{{ month[currentDate.month] }}</div>
-                           <div class="arrow-up" @click="monthUp()">Click</div>
+                           
+                           <div class="font">
+                            
+                            <div class="arrow-down" @click="monthDown()">Click</div> 
+                            {{ month[currentDate.month] }}
+                        
+                        <div class="arrow-up" @click="monthUp()">Click</div>
+                        </div>
+                           
                     </div>
                     <div class="current-year">
-                        <div class="arrow-down" @click="currentDate.year -= 1">Click</div>
-                        <div class="font">{{ currentDate.year }}</div>
-                        <div class="arrow-up" @click="currentDate.year += 1">Click</div>
+                       
+                        <div class="font">
+                             <div class="arrow-down" @click="currentDate.year -= 1">Click</div>
+                            {{ currentDate.year }}
+                         <div class="arrow-up" @click="currentDate.year += 1">Click</div>
+                        
+                        </div>
+                       
                     </div>
                    
                  
@@ -238,18 +259,19 @@ body {
 .container {
     align-items: center;
     display: flex;
-    height: 100%;
+    
     justify-content: center;
     margin: 0 auto;
-    max-width: 600px;
-    width: 100%;
+    max-width: 80rem;
+   
+    
 }
 
 .calendar {
     background: #2b4450;
     border-radius: 4px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-    height: 501px;
+    height: 60rem;
     perspective: 1000;
     transition: .9s;
     transform-style: preserve-3d;
@@ -264,9 +286,10 @@ body {
 .current-date {
     font-size: 3rem;
     border-bottom: 1px solid rgba(73, 114, 133, .6);
-    display: flex;
-    justify-content: space-between;
-    padding: 30px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+    height: 12rem;
 }
 
 .current-date h1 {
@@ -442,9 +465,12 @@ body {
 .font{
     font-size: 4rem;
     position: fixed;
+    color: white;
 }
 
 .current-weekday{
-position: fixed;
+color:white;
+font-size: 5rem;
+margin: 2rem;
 }
 </style>
