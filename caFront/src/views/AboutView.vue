@@ -11,37 +11,39 @@
                 <div class="current-date">
                    
                     
-                    <div class="current-day">
+                    <div class="day">
                                                  
                         
                           <div class="font">
-                        <div class="arrow-down" @click="dateDown()">Click</div>     
-                            
-                            {{ currentDate.date }}
+                        <div class="triangle-up" @click="dateDown()"></div>     
+            
+                                {{ currentDate.date }}
                         
-                        <div class="arrow-up" @click="dateUp()">Click</div>
+                            
+                        
+                        <div class="triangle-down" @click="dateUp()"></div>
                         </div> 
                          
                     </div>
-                    <div class="current-month">
+                    <div class="month">
                        
                            
                            
                            <div class="font">
                             
-                            <div class="arrow-down" @click="monthDown()">Click</div> 
+                            <div class="triangle-up" @click="monthDown()"></div> 
                             {{ month[currentDate.month] }}
                         
-                        <div class="arrow-up" @click="monthUp()">Click</div>
+                        <div class="triangle-down" @click="monthUp()"></div>
                         </div>
                            
                     </div>
-                    <div class="current-year">
+                    <div class="year">
                        
                         <div class="font">
-                             <div class="arrow-down" @click="currentDate.year -= 1">Click</div>
+                             <div class="triangle-up" @click="currentDate.year -= 1"></div>
                             {{ currentDate.year }}
-                         <div class="arrow-up" @click="currentDate.year += 1">Click</div>
+                         <div class="triangle-down" @click="currentDate.year += 1"></div>
                         
                         </div>
                        
@@ -471,6 +473,24 @@ body {
 .current-weekday{
 color:white;
 font-size: 5rem;
-margin: 2rem;
+margin: 3rem;
+}
+.triangle-up {
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-bottom: 2rem solid white;
+    height: 1rem;
+        width: 1rem;
+        display: flex;
+       align-items: center;
+}
+.triangle-down {
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-top: 2rem solid white;
+    height: 1rem;
+    width: 1rem;
+    display: flex;
+      align-items: center;
 }
 </style>
