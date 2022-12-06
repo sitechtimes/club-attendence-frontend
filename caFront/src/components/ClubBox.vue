@@ -31,11 +31,13 @@ import { defineComponent } from "vue";
 .clubBox{
     height: 15%;
     width:100%;
-    background-color: grey;
-    margin-top: 0.1rem;
+    background-color: rgb(240, 240, 240);
+    margin-top: 0.7rem;
+
     border-radius: 0.4rem;
-    padding: 00.1rem;
+    padding: 1rem;
     font-size: 3rem;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .bot{
     display: flex;

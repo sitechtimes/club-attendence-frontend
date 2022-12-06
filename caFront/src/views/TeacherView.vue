@@ -2,7 +2,7 @@
     <div class="page">
         <div class="top"></div>
         <div class="bottom">
-            <section class="left">
+            <section class="left"  >
                 <clubBox v-for="club in data" key="club" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
 
 
@@ -67,17 +67,28 @@ export default defineComponent({
 .left{
     width: 30%;
     overflow-y: auto;
+    position: relative;
+    padding: 1rem;
+}
+
+.left::-webkit-scrollbar{
+    display: none;
 }
 .right{
     width: 70%;
     overflow-y: auto;
 
 }
-table{
-    height: 100%;
-    width: 100%;
+
+.right::-webkit-scrollbar{
+    display: none;
 }
+
 .head{
     font-size: 5rem;
 }
+
+
+
+
 </style>
