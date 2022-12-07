@@ -42,14 +42,13 @@ export default defineComponent({
     function clickGoogle() {
       googleBtn.value?.firstChild?.firstElementChild?.firstElementChild.click();
     }
-    function handleCredentialResponse(response: any) {
-      console.log(response);
-    }
+    // function handleCredentialResponse(response: any) {
+    //   console.log(response);
+    // }
     return {
       state,
       googleBtn,
       clickGoogle,
-      handleCredentialResponse,
     };
   },
 
