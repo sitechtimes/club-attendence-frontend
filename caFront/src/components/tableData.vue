@@ -3,7 +3,7 @@
     <div class="table">
         <div v-for="head in headings" :key="head" class="header">{{head}}</div>
 
-        <div v-for="student in theData"  :key="student.studentName" class="row"  >
+        <div v-for="student in theData"  :key="student.present" class="row"  >
             <div class="present test" v-if="(student.present == true)" >
 
                 <div class="asset osis">
@@ -70,9 +70,9 @@ import {defineComponent} from "vue";
     export default defineComponent({
         props:{
             headings:Array,
-            theData: Array,
+            theData: Array
 
-
+// http://localhost:3000/getClubdata/key
 
         },
 

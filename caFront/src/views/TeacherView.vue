@@ -7,8 +7,8 @@
 
 
             </section>
-            <section class="right">
-                <tableData :headings="headings" :theData="studentData"></tableData>
+            <section class="right"  >
+                <tableData v-if="(click==true)" :headings="headings" :theData="studentData"></tableData>
             </section>
 
         </div>
@@ -24,20 +24,28 @@ import tableData from "../components/tableData.vue";
 
 
 export default defineComponent({
-    components:{
+    components:{    
         clubBox, tableData
     },
     setup(){
         const data = specificClub
+        let click:boolean = true
+    
+
         const headings = [
             "Osis",
             "Name",
             "Grade",
             "Class",]
 
-        const asdf = []
+        
         return{
-            data,headings, studentData, asdf,
+            data,headings, studentData, click,
+        }
+    },
+    methods:{
+        getData(param:String){
+            
         }
     }
 
