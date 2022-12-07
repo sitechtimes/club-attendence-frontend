@@ -4,7 +4,7 @@
       <div
         id="g_id_onload"
         data-client_id="696624175161-fjet2s1pbefuqnmn42o65p33b5tqa5p1.apps.googleusercontent.com"
-        data-login_uri="https://localhost:5173"
+        data-login_uri="http://localhost:3000/login"
         data-auto_prompt="true"
       ></div>
       <div
