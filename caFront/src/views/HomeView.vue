@@ -2,32 +2,29 @@
   <div class="page">
     <div class="googleButton">
       <div
-      id="g_id_onload"
-      data-client_id="696624175161-fjet2s1pbefuqnmn42o65p33b5tqa5p1.apps.googleusercontent.com"
-      data-login_uri="https://localhost:5173"
-      data-auto_prompt="true"
-    ></div>
-    <div
-      class="g_id_signin google"
-      data-type="standard"
-      data-size="large"
-      data-theme="outline"
-      data-text="sign_in_with"
-      data-shape="pill"
-      data-width="400"
-      data-logo_alignment="left"
-      ref="googleBtn"
-    ></div>
+        id="g_id_onload"
+        data-client_id="696624175161-fjet2s1pbefuqnmn42o65p33b5tqa5p1.apps.googleusercontent.com"
+        data-login_uri="http://localhost:3000/login"
+        data-auto_prompt="false"
+      ></div>
+      <div
+        class="g_id_signin google"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="pill"
+        data-width="400"
+        data-logo_alignment="left"
+        ref="googleBtn"
+      ></div>
     </div>
-  
+
     <h1 class="title">Staten Island Technical High School Club Attendance</h1>
-
-
 
     <button class="OAuth" @click="clickGoogle">
       <h2>Sign In With Google</h2>
-      <img class="g-logo" src="../assets/logos/google-logo.png" alt="">
-    
+      <img class="g-logo" src="../assets/logos/google-logo.png" alt="" />
     </button>
   </div>
 </template>
@@ -60,20 +57,19 @@ export default defineComponent({
 .google {
   display: none;
 }
-.page{
+.page {
   background-color: black;
   height: 100vh;
   padding: 5rem;
   text-align: center;
 }
 
-.title{
+.title {
   font-size: 4rem;
   color: rgb(255, 255, 255);
   font-weight: 400;
-
 }
-.OAuth{
+.OAuth {
   margin-top: 5rem;
   height: 50rem;
   border-radius: 5rem;
@@ -81,17 +77,14 @@ export default defineComponent({
   background-color: rgb(34, 34, 34);
   color: rgb(255, 255, 255);
   animation: float 3s ease-in-out infinite;
-
 }
-.OAuth h2{
+.OAuth h2 {
   position: relative;
   width: 77%;
   margin: auto;
-
-
 }
 
-.OAuth h2:before{
+.OAuth h2:before {
   content: "";
   position: absolute;
   width: 0%;
@@ -103,25 +96,30 @@ export default defineComponent({
   transition: all 0.5s;
 }
 
-
-.OAuth h2{
+.OAuth h2 {
   font-size: 3rem;
   font-weight: 400;
 }
-.g-logo{
+.g-logo {
   height: 50%;
 }
 
-.OAuth:hover{
+.OAuth:hover {
   background-color: rgba(88, 88, 88, 0.444);
 }
-.OAuth:hover h2:before{
+.OAuth:hover h2:before {
   width: 100%;
 }
 
-@keyframes float{
-  0% { transform: translate(0,  0px);}
-    50%  { transform: translate(0, 20px); }
-    100%   { transform: translate(0, 0px); }   
+@keyframes float {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 20px);
+  }
+  100% {
+    transform: translate(0, 0px);
+  }
 }
 </style>
