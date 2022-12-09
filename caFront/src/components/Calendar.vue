@@ -32,8 +32,8 @@
     </header>
     <section>
       <div class="weekdays">
-        <div class="weekday" v-for="x in days" :key="x">
-          {{x}}
+        <div class="weekday" v-for="weekday in weekdays" :key="weekday">
+          {{ weekday }}
         </div>
       </div>
       <div class="date">
@@ -56,24 +56,11 @@
 import { defineComponent } from 'vue'
 export default defineComponent({
   data: function () {
-    const days: Array<String> =[
-        "Mon",
-      "Mon",
-      "Mon",
-      "Mon",
-      "Mon",
-      "Mon",
-      "Mon",
-      "Mon"
-
-      ]
+   
 
     return {
-      
 
-      days,
-
-      
+      weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       weekdayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       month: [
         'January', 'February', 'March', 'April', 'May', 'June', 'July',

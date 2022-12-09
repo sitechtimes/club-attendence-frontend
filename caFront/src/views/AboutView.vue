@@ -81,7 +81,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     data: function () {
         return {
-            weekdays: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+            weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             weekdayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             month: [
                 'January', 'February', 'March', 'April', 'May', 'June', 'July',
@@ -211,6 +211,7 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
     height: 12rem;
+    position: static;
 }
 
 .current-date h1 {
