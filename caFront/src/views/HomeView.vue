@@ -4,8 +4,8 @@
       <div
         id="g_id_onload"
         data-client_id="696624175161-fjet2s1pbefuqnmn42o65p33b5tqa5p1.apps.googleusercontent.com"
-        data-login_uri="http://localhost:3000/login"
-        data-auto_prompt="true"
+        data-callback="handleCredentialResponse"
+        data-auto_prompt="false"
       ></div>
       <div
         class="g_id_signin google"
@@ -42,9 +42,6 @@ export default defineComponent({
     function clickGoogle() {
       googleBtn.value?.firstChild?.firstElementChild?.firstElementChild.click();
     }
-    // function handleCredentialResponse(response: any) {
-    //   console.log(response);
-    // }
     return {
       state,
       googleBtn,
