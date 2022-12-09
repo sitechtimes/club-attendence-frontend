@@ -1,6 +1,9 @@
 <template>
     <div class="page">
-        <div class="top"></div>
+        <div class="top">
+            <input @input="getInput(input)" v-model="input" type="text"  >
+
+        </div>
         <div class="bottom">
             <section class="left"  >
                 <clubBox v-for="club in data" key="club" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
@@ -30,7 +33,8 @@ export default defineComponent({
     setup(){
         const data = specificClub
         let click:boolean = true
-    
+
+        
 
         const headings = [
             "Osis",
@@ -40,12 +44,15 @@ export default defineComponent({
 
         
         return{
-            data,headings, studentData, click,
+            data,headings, studentData, click, input:"",
         }
     },
     methods:{
-        getData(param:String){
-            
+        getInput(input:string|number){
+            console.log(input)
+            const result = this.data.filter((club)=>{
+                input in club.clubName;
+            })
         }
     }
 
@@ -54,6 +61,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
+
 .page{
     height: 100vh;
     width: 100vw;
@@ -69,7 +79,7 @@ export default defineComponent({
     display: flex;
     width: 100%;
     height: 80vh;
-    background-color: wheat;
+
 
 }
 .left{

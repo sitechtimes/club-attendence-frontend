@@ -72,7 +72,7 @@ import {defineComponent} from "vue";
             headings:Array,
             theData: Array
 
-// http://localhost:3000/getClubdata/key
+
 
         },
 
@@ -88,7 +88,7 @@ import {defineComponent} from "vue";
     display: grid;
     grid-template-columns: repeat(4,auto);
     font-size: 7rem;
-    background-color: antiquewhite;
+
 }
 .card{
     display: flex;
@@ -106,7 +106,7 @@ import {defineComponent} from "vue";
     display: inherit;
 }
 .asset{
-    border-radius: 5px;
+
     padding: 20px;
     font-size: 3rem;
 
