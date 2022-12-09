@@ -30,25 +30,23 @@
         </div>
       </div>
     </header>
-    <section>
-      <div class="weekdays">
+    <div class="showcalendar">
+     
         <div class="weekday" v-for="weekday in weekdays" :key="weekday">
-          {{ weekday }}
+          <span>  {{ weekday }}  </span>
         </div>
-      </div>
-      <div class="date">
+     
         <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
           {{ (prevMonthDays + 1) - firstMonthDay + n }}
         </div>
         <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
           v-for="(n, index) in currentMonthDays" :key="'day' + index">
-          {{ n }}
+          <button>  {{ n }}  </button>
         </div>
         <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))" :key="'next' + index">
           {{ n }}
         </div>
-      </div>
-    </section>
+    </div>
   </article>
 </template>
 
@@ -142,16 +140,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  color: #fff;
-  border-radius: 5px;
-}
-
-
 #calendar {
   width: 460px;
   height: 730px;
@@ -173,10 +161,6 @@ header {
   text-align: center;
   overflow: hidden;
   color: #efefef;
-  text-shadow: 1px 1px 1px #222,
-    1px -1px 1px #222,
-    -1px 1px 1px #222,
-    -1px -1px 1px #222;
 }
 
 .current-date {
@@ -207,32 +191,55 @@ header {
   font-size: 2rem;
 }
 
-.date {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.day-hidden {
+  opacity: .4;
 }
 
-.weekdays {
-
-  background-color: rgba(0, 0, 0, .5);
-  border-bottom: 1px solid #fff;
-
-}
-
-.day {
-  font-size: 5rem;
+.showcalendar{
+font-size: 5rem;
   border-radius: 1rem;
   background-color: black;
   height: 3rem;
   width: 3rem;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: auto auto auto auto auto auto auto;
   text-align: center;
+  grid-gap: 50px;
 }
+.weekday {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  color: #999;
+  font-weight: 600;
+  margin-bottom: 15px;
 
+ 
+} .span {
+    width: 50px;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+  }
 
-.day-hidden {
-  opacity: .4;
-}
+     .dates {
+       display: grid;
+       grid-template-columns: repeat(7, 1fr);
+  
+       
+       }button {
+         cursor: pointer;
+         outline: 0;
+         border: 0;
+         background: transparent;
+         font-family: 'Montserrat', sans-serif;
+         font-size: 16px;
+         justify-self: center;
+         align-self: center;
+         width: 50px;
+         height: 50px;
+         border-radius: 50px;
+         margin: 2px;
+         transition-duration: .2s;}
 </style>

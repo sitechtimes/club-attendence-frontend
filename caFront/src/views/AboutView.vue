@@ -52,24 +52,26 @@
                  
             
                 </div>
-    
-            <div class="weekdays">
+    <div class="showcalendar">
+      
                 <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
-                    {{ weekday }}
+                    <span>{{ weekday }} </span>
                 </div>
-            </div>
-            <div class="date">
+           
+         
                 <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
                     {{ (prevMonthDays + 1) - firstMonthDay + n }}
                 </div>
                 <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
                     v-for="(n, index) in currentMonthDays" :key="'day' + index">
-                    {{ n }}
+                    <button>{{ n }} </button>
                 </div>
                 <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))" :key="'next' + index">
                     {{ n }}
                 </div>
-            </div>
+           
+    </div>
+            
             </div>
     
         </div>
@@ -228,11 +230,6 @@ body {
     padding: 30px 40px;
 }
 
-.days {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 
 .weeks {
     color: #fff;
@@ -413,19 +410,11 @@ margin: 3rem;
     width: 1rem;
       align-items: center;
 }
-.weekdays{
-    color: white;
-    font-size: 5rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-.date{
-    color:white;
-    font-size: 3rem;
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-   grid-gap: 3rem;
+
+.showcalendar {
+display: grid;
+    grid-template-columns: auto auto auto;
+ font-size: 6rem;
+
 }
 </style>
