@@ -1,17 +1,17 @@
 <template>
     <div class="page">
         <div class="top">
-            <input @input="getInput(input)" v-model="input" type="text"  >
+            <input v-model="input" type="text"  >
 
         </div>
         <div class="bottom">
             <section class="left"  >
-                <clubBox v-for="club in data" key="club" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
+                <clubBox v-for="club in clubData" :key="club.clubName" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
 
 
             </section>
             <section class="right"  >
-                <tableData v-if="(click==true)" :headings="headings" :theData="studentData"></tableData>
+                <tableData :headings="headings" :theData="studentData"></tableData>
             </section>
 
         </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import specificClub from "../assets/specificClub.json";
 import studentData from "../assets/fakeData2.json"
 import clubBox from "../components/ClubBox.vue";
@@ -32,7 +32,7 @@ export default defineComponent({
     },
     setup(){
         const data = specificClub
-        let click:boolean = true
+        const input = ref<string>("")
 
         
 
@@ -44,15 +44,13 @@ export default defineComponent({
 
         
         return{
-            data,headings, studentData, click, input:"",
+            data,headings, studentData, input,
         }
     },
-    methods:{
-        getInput(input:string|number){
-            console.log(input)
-            const result = this.data.filter((club)=>{
-                input in club.clubName;
-            })
+    
+    computed:{
+        clubData():Array<object>{
+            return this.data.filter(club => club.clubName.toLowerCase().includes(this.input.toLowerCase()))
         }
     }
 
