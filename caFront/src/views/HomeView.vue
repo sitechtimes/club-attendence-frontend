@@ -43,6 +43,18 @@ export default defineComponent({
       googleBtn.value?.firstChild?.firstElementChild?.firstElementChild.click();
     }
 
+    async function getData() {
+      // Default options are marked with *
+      const response = await fetch("http://localhost:3000/")
+        .then((returnData) => {
+          return returnData.json();
+        })
+        .then((data) => {
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        });
+    }
+
     async function postData(data: any) {
       // Default options are marked with *
       const response = await fetch("http://localhost:3000/login", {
@@ -63,6 +75,7 @@ export default defineComponent({
 
     window.handleCredentialResponse = (response: any) => {
       console.log(response);
+      // postData(response);
       postData(response);
     };
 
