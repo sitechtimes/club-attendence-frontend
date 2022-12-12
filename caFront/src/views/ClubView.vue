@@ -15,9 +15,11 @@ v-for="club in clubs"
 :date="club.date"
 
 >
-
 </Card>
-<Modal v-show="isModalVisible" @close="closeModal" />
+<div class="overlap">
+  <Modal v-show="isModalVisible" @close="closeModal" />
+</div>
+
 </div>
 
   </div>
@@ -85,7 +87,7 @@ export default defineComponent( {
 
   
 <style scoped>
-  .home{
+.home{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,7 +110,13 @@ export default defineComponent( {
     display: grid;
   align-content: center;
     grid-template-columns: auto auto auto;
-   
   }
+.overlap{
 
-  </style>
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
+}
+</style>

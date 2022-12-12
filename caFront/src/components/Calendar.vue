@@ -1,63 +1,85 @@
 <template>
-  <article id="calendar">
-    <header>
-      <div class="current-date">
-        <div class="current-day">
+  <div class="container">
+    <div class="calendar">
+
+
+
+        <div class="current-weekday">
           {{ weekdayNames[currentDay] }}
         </div>
-        <div class="today">
-          <div>
-            <div class="arrow-up" @click="dateUp()"></div>
+
+        <div class="current-date">
+
+
+          <div class="day">
+
+
+            <div class="font">
+              <div class="triangle-up" @click="dateDown()"></div>
+
+              {{ currentDate.date }}
+
+
+
+              <div class="triangle-down" @click="dateUp()"></div>
+            </div>
+
           </div>
-          <div>
-            <div class="arrow-up" @click="monthUp()"></div>
+          <div class="month">
+
+
+
+            <div class="font">
+
+              <div class="triangle-up" @click="monthDown()"></div>
+              {{ month[currentDate.month] }}
+
+              <div class="triangle-down" @click="monthUp()"></div>
+            </div>
+
           </div>
-          <div>
-            <div class="arrow-up" @click="currentDate.year += 1"></div>
+          <div class="year">
+
+            <div class="font">
+              <div class="triangle-up" @click="currentDate.year -= 1"></div>
+              {{ currentDate.year }}
+              <div class="triangle-down" @click="currentDate.year += 1"></div>
+
+            </div>
+
           </div>
-          <div>{{ currentDate.date }}</div>
-          <div>{{ month[currentDate.month] }}</div>
-          <div>{{ currentDate.year }}</div>
-          <div>
-            <div class="arrow-down" @click="dateDown()"></div>
-          </div>
-          <div>
-            <div class="arrow-down" @click="monthDown()"></div>
-          </div>
-          <div>
-            <div class="arrow-down" @click="currentDate.year -= 1"></div>
-          </div>
+
+
+
         </div>
-      </div>
-    </header>
-    <div class="showcalendar">
-     
-        <div class="weekday" v-for="weekday in weekdays" :key="weekday">
-          <span>  {{ weekday }}  </span>
+        <div class="showcalendar">
+
+          <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
+            <span>{{ weekday }} </span>
+          </div>
+
+
+          <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
+            {{ (prevMonthDays + 1) - firstMonthDay + n }}
+          </div>
+          <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
+            v-for="(n, index) in currentMonthDays" :key="'day' + index">
+            {{ n }}
+          </div>
+
         </div>
-     
-        <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
-          {{ (prevMonthDays + 1) - firstMonthDay + n }}
-        </div>
-        <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
-          v-for="(n, index) in currentMonthDays" :key="'day' + index">
-          <button>  {{ n }}  </button>
-        </div>
-        <div class="day-hidden" v-for="(n, index) in (43 - (currentMonthDays + firstMonthDay))" :key="'next' + index">
-          {{ n }}
-        </div>
+
+   
+
     </div>
-  </article>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
   data: function () {
-   
-
     return {
-
       weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       weekdayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       month: [
@@ -139,107 +161,109 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-#calendar {
-  width: 460px;
-  height: 730px;
-  background-color: #efefef;
-  font-family: 'Anton';
-  border-radius: 15px;
-  overflow: hidden;
-  background-size: cover;
-  user-select: none;
-  font-size: 8rem;
+<style>
+a {
+  text-decoration: none;
 }
 
-header {
-  display: flex;
-  justify-content: center;
-  align-items: top;
-  height: 400px;
-  padding: 20px 0 0;
-  text-align: center;
-  overflow: hidden;
-  color: #efefef;
+body,
+html {
+  height: 100%;
 }
+
+body {
+  background: #dfebed;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+.calendar {
+  background: #2b4450;
+  border-radius: 4px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+  perspective: 1000;
+  transition: .9s;
+  transform-style: preserve-3d;
+  height: 60rem;
+  width: 100rem;
+}
+
 
 .current-date {
-  width: 300px;
+  font-size: 3rem;
+  border-bottom: 1px solid rgba(73, 114, 133, .6);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 12rem;
+  position: static;
 }
 
-.arrow-up {
-  border-bottom: 10px solid #fff;
 
+
+
+
+
+
+
+
+.current-month {
+  font-size: 3rem;
 }
 
-.arrow-down {
-  border-top: 10px solid #fff;
-
-}
-
-.today {
-  display: grid;
-  grid-template-columns: 40px auto 70px;
-  grid-gap: 0;
-}
-
-.current-day {
+.font {
   font-size: 4rem;
+  position: static;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.today {
-  font-size: 2rem;
+.current-weekday {
+  color: white;
+  font-size: 5rem;
+}
+
+.triangle-up {
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-bottom: 2rem solid white;
+  height: 1rem;
+  width: 1rem;
+}
+
+.triangle-down {
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-top: 2rem solid white;
+  height: 1rem;
+  width: 1rem;
+  align-items: center;
+}
+
+.showcalendar {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  font-size: 4rem;
+  color: white;
+}
+
+.weekday {
+  font-size: 6rem;
+}
+
+.weekday,
+.day-hidden,
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .day-hidden {
-  opacity: .4;
+  opacity: 0.5;
 }
-
-.showcalendar{
-font-size: 5rem;
-  border-radius: 1rem;
-  background-color: black;
-  height: 3rem;
-  width: 3rem;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
-  text-align: center;
-  grid-gap: 50px;
-}
-.weekday {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(7, 1fr);
-  color: #999;
-  font-weight: 600;
-  margin-bottom: 15px;
-
- 
-} .span {
-    width: 50px;
-    justify-self: center;
-    align-self: center;
-    text-align: center;
-  }
-
-     .dates {
-       display: grid;
-       grid-template-columns: repeat(7, 1fr);
-  
-       
-       }button {
-         cursor: pointer;
-         outline: 0;
-         border: 0;
-         background: transparent;
-         font-family: 'Montserrat', sans-serif;
-         font-size: 16px;
-         justify-self: center;
-         align-self: center;
-         width: 50px;
-         height: 50px;
-         border-radius: 50px;
-         margin: 2px;
-         transition-duration: .2s;}
 </style>
