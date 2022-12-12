@@ -112,11 +112,7 @@ export default defineComponent( {
     grid-template-columns: auto auto auto;
   }
 .overlap{
-
   position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -150px;
-  margin-top: -150px;
+  align-content: center;
 }
 </style>
