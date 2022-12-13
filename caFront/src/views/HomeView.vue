@@ -59,7 +59,7 @@ export default defineComponent({
       // Default options are marked with *
       const response = await fetch("http://localhost:3000/login", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "no-cors", // no-cors, *cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
         headers: {
@@ -74,9 +74,9 @@ export default defineComponent({
     }
 
     window.handleCredentialResponse = (response: any) => {
-      console.log(response);
-      // postData(response);
+      console.log(response.g_csrf_token);
       postData(response);
+      // getData();
     };
 
     return {
