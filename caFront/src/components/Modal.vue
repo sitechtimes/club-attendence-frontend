@@ -1,8 +1,12 @@
 <template>
   <div class="modal-backdrop">
-    
+    <div class="calendar">
+      <Button @click="close">Close></Button>
 <Calendar></Calendar>
-    <Button @click="close">Close Modal></Button>
+   
+    </div>
+ 
+
 
   </div>
 </template>
@@ -27,30 +31,20 @@ import Button from '../components/Button.vue'
 </script>
 
 <style>
-
 .modal{
   height: 10rem;
   width: 10rem;
 }
 
-
-.btn-close {
+.calendar {
+  background: #2b4450;
+  height: 60rem;
+  width: 100rem;
+  border-radius: 4px;
   position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  font-size: 20px;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4AAE9B;
-  background: transparent;
-}
-
-.btn-green {
-  color: white;
-  background: #4AAE9B;
-  border: 1px solid #4AAE9B;
-  border-radius: 2px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 </style>

@@ -2,14 +2,25 @@
   <div class="container">
     <div class="calendar">
 
-
-
         <div class="current-weekday">
           {{ weekdayNames[currentDay] }}
         </div>
 
         <div class="current-date">
 
+          <div class="month">
+          
+          
+          
+            <div class="font">
+          
+              <div class="triangle-up" @click="monthDown()"></div>
+              {{ month[currentDate.month] }}
+          
+              <div class="triangle-down" @click="monthUp()"></div>
+            </div>
+          
+          </div>
 
           <div class="day">
 
@@ -25,19 +36,7 @@
             </div>
 
           </div>
-          <div class="month">
-
-
-
-            <div class="font">
-
-              <div class="triangle-up" @click="monthDown()"></div>
-              {{ month[currentDate.month] }}
-
-              <div class="triangle-down" @click="monthUp()"></div>
-            </div>
-
-          </div>
+          
           <div class="year">
 
             <div class="font">
@@ -162,33 +161,6 @@ export default defineComponent({
 </script>
 
 <style>
-a {
-  text-decoration: none;
-}
-
-body,
-html {
-  height: 100%;
-}
-
-body {
-  background: #dfebed;
-  font-family: 'Roboto', sans-serif;
-}
-
-
-
-.calendar {
-  background: #2b4450;
-  border-radius: 4px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-  perspective: 1000;
-  transition: .9s;
-  transform-style: preserve-3d;
-  height: 60rem;
-  width: 100rem;
-}
-
 
 .current-date {
   font-size: 3rem;
@@ -196,16 +168,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 12rem;
+  height: 15rem;
   position: static;
 }
-
-
-
-
-
-
-
 
 
 .current-month {

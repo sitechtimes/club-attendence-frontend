@@ -17,7 +17,8 @@ v-for="club in clubs"
 >
 </Card>
 <div class="overlap">
-  <Modal v-show="isModalVisible" @close="closeModal" />
+  <Modal v-show="isModalVisible" @close="closeModal">
+  </Modal>
 </div>
 
 </div>
@@ -29,13 +30,15 @@ v-for="club in clubs"
 import Card from '../components/Card.vue'
 import Button from '../components/Button.vue'
 import Modal from '../components/Modal.vue';
+import Calendar from '../components/Calendar.vue'
 import { defineComponent } from 'vue';
 export default defineComponent( {
   name: 'ClubView',
   components: {
     Card,
     Button,
-    Modal
+    Modal,
+    Calendar
   },
   methods: {
     showModal() {
@@ -111,8 +114,4 @@ export default defineComponent( {
   align-content: center;
     grid-template-columns: auto auto auto;
   }
-.overlap{
-  position: absolute;
-  align-content: center;
-}
 </style>
