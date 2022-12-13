@@ -74,7 +74,7 @@ export default defineComponent({
     }
 
     window.handleCredentialResponse = (response: any) => {
-      console.log(response.g_csrf_token);
+      console.log(response);
       postData(response);
       // getData();
     };
