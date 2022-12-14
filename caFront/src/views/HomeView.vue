@@ -5,7 +5,11 @@
       <GoogleLogin :callback="callback" popup-type="TOKEN">
         <button class="OAuth">
           <h2>Sign In With Google</h2>
-          <img class="g-logo" src="../assets/logos/google-logo.png" alt="" />
+          <img
+            class="g-logo"
+            src="../components/icons/google-logo.png"
+            alt=""
+          />
         </button>
       </GoogleLogin>
     </div>
