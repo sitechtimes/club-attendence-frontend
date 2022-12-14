@@ -1,7 +1,12 @@
 <template>
     <div class="page">
         <div class="top">
-            <input v-model="input" type="text"  >
+            <div class="left">
+                <input  v-model="input" type="text"  >
+            </div>
+            <div class="right">
+                
+            </div>
 
         </div>
         <div class="bottom">
@@ -61,7 +66,13 @@ export default defineComponent({
 <style scoped>
 
 
-
+input{
+    font-size: 2rem;
+    border-radius: 0.4rem;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+}
 .page{
     height: 100vh;
     width: 100vw;
@@ -71,7 +82,6 @@ export default defineComponent({
 }
 .top{
     height: 20vh;
-    background-color: rgb(163, 163, 163);
 }
 .bottom{
     display: flex;
