@@ -2,13 +2,13 @@
   <div class="page">
     <h1 class="title">Staten Island Technical High School Club Attendance</h1>
     <div class="googleButton">
-      <GoogleLogin :callback="callback" popup-type="TOKEN">
-        <button class="OAuth">
+      <GoogleLogin :callback="callback">
+        <button class="OAuth" popup-type="TOKEN">
           <h2>Sign In With Google</h2>
           <img
             class="g-logo"
             src="../components/icons/google-logo.png"
-            alt=""
+            alt="g-logo"
           />
         </button>
       </GoogleLogin>
@@ -40,25 +40,23 @@ export default defineComponent({
           console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
         });
     }
-
     async function postData(data: object) {
       // Default options are marked with *
       const response = await fetch("http://localhost:3000/login", {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       });
       return response.json(); // parses JSON response into native JavaScript objects
     }
-
     return {
       state,
       callback,
