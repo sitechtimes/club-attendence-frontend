@@ -161,7 +161,6 @@ export default defineComponent({
 </script>
 
 <style>
-
 .current-date {
   font-size: 3rem;
   border-bottom: 1px solid rgba(73, 114, 133, .6);
@@ -169,8 +168,10 @@ export default defineComponent({
   flex-direction: row;
   justify-content: space-evenly;
   height: 15rem;
-  position: static;
+ 
 }
+
+
 
 
 .current-month {
@@ -179,11 +180,12 @@ export default defineComponent({
 
 .font {
   font-size: 4rem;
-  position: static;
+
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
 }
 
 .current-weekday {
@@ -213,6 +215,8 @@ export default defineComponent({
   grid-template-columns: auto auto auto auto auto auto auto;
   font-size: 4rem;
   color: white;
+    column-gap: 5rem;
+    row-gap: 2rem;
 }
 
 .weekday {
@@ -223,9 +227,8 @@ export default defineComponent({
 .day-hidden,
 .day {
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-top: 2rem;
+
 }
 
 .day-hidden {
