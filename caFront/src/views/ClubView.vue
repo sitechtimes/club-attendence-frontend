@@ -17,8 +17,7 @@ v-for="club in clubs"
 >
 </Card>
 <div class="overlap">
-  <Modal v-show="isModalVisible" @close="closeModal">
-  </Modal>
+  <Modal v-show="isModalVisible" @close="closeModal"></Modal>
 </div>
 
 </div>

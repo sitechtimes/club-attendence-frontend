@@ -1,11 +1,11 @@
 <template>
   <div class="modal-backdrop">
     <div class="calendar">
-      <Button @click="close">Close></Button>
+      
 <Calendar></Calendar>
    
     </div>
- 
+ <Button @click="close">Close></Button>
 
 
   </div>
@@ -31,10 +31,6 @@ import Button from '../components/Button.vue'
 </script>
 
 <style>
-.modal{
-  height: 10rem;
-  width: 10rem;
-}
 
 .calendar {
   background: #2b4450;

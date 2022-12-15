@@ -1,15 +1,16 @@
 <template>
+  
   <div class="container">
     <div class="calendar">
 
         <div class="current-weekday">
           {{ weekdayNames[currentDay] }}
+     
         </div>
 
         <div class="current-date">
 
           <div class="month">
-          
           
           
             <div class="font">
@@ -76,7 +77,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Modal from '../components/Modal.vue';
 export default defineComponent({
+  name: 'Calendar',
+ 
   data: function () {
     return {
       weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -87,11 +91,13 @@ export default defineComponent({
       ],
       currentDate: {
         date: 0,
-        month: 0,
+        month: 1,
         year: 0
       }
     }
   },
+
+
   computed: {
     prevMonthDays() {
       let year = this.currentDate.month === 0 ? this.currentDate.year - 1 : this.currentDate.year;
@@ -152,7 +158,8 @@ export default defineComponent({
       else {
         this.currentDate.month -= 1;
       }
-    }
+    },
+      
   },
   created() {
     this.getCurrentDate();
@@ -170,10 +177,6 @@ export default defineComponent({
   height: 15rem;
  
 }
-
-
-
-
 .current-month {
   font-size: 3rem;
 }
@@ -217,6 +220,7 @@ export default defineComponent({
   color: white;
     column-gap: 5rem;
     row-gap: 2rem;
+    position: static;
 }
 
 .weekday {
@@ -228,7 +232,6 @@ export default defineComponent({
 .day {
   display: flex;
   justify-content: center;
-
 }
 
 .day-hidden {
