@@ -2,36 +2,39 @@
   <div class="page">
     <h1 class="title">Staten Island Technical High School Club Attendance</h1>
     <div class="googleButton">
-      <GoogleLogin :callback="callback">
-        <button class="OAuth" popup-type="TOKEN">
-          <h2>Sign In With Google</h2>
-          <img
-            class="g-logo"
-            src="../components/icons/google-logo.png"
-            alt="g-logo"
-          />
-        </button>
-      </GoogleLogin>
+      <button class="OAuth" @click="login">
+        <h2>Sign In With Google</h2>
+        <img
+          class="g-logo"
+          src="../components/icons/google-logo.png"
+          alt="g-logo"
+        />
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
-import { CallbackTypes } from "vue3-google-login";
+import { defineComponent } from "vue";
+import { googleTokenLogin } from "vue3-google-login";
+import { useRouter } from "vue-router";
+import { useUserDataStore } from "../stores/userData";
 
 export default defineComponent({
   setup() {
-    const state = reactive({});
+    const router = useRouter();
+    const userDataStore = useUserDataStore();
 
-    const callback: CallbackTypes.CodeResponseCallback = (response) => {
-      console.log("Authorization code", response);
-      postData({ response });
+    const login = () => {
+      googleTokenLogin().then((userCredential) => {
+        console.log("Handle the response", userCredential);
+        postData({ userCredential });
+      });
     };
 
     async function getData() {
       // Default options are marked with *
-      const response = await fetch("http://localhost:3000/")
+      const response = await fetch("http://localhost:3000/studentOrTeacher")
         .then((returnData) => {
           return returnData.json();
         })
@@ -40,9 +43,11 @@ export default defineComponent({
           console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
         });
     }
+
     async function postData(data: object) {
       // Default options are marked with *
-      const response = await fetch("http://localhost:3000/login", {
+      console.log("ths is post data");
+      await fetch("http://localhost:3000/login", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -54,12 +59,22 @@ export default defineComponent({
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(data), // body data type must match "Content-Type" header
-      });
-      return response.json(); // parses JSON response into native JavaScript objects
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          if (data.type === "student") {
+            userDataStore.addUserData(data);
+            router.push("/club");
+          } else if (data.type === "teacher") {
+            router.push("/teacher");
+          }
+        });
+      // return response.json(); // parses JSON response into native JavaScript objects
     }
+
     return {
-      state,
-      callback,
+      login,
     };
   },
   methods: {},
