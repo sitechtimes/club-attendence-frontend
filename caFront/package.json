@@ -16,6 +16,7 @@
     "@fullcalendar/timegrid": "^5.11.3",
     "@fullcalendar/vue3": "^5.11.3",
     "pinia": "^2.0.23",
+    "pinia-plugin-persistedstate": "^3.0.1",
     "vue": "^3.2.41",
     "vue-router": "^4.1.5",
     "vue3-google-login": "^2.0.12"

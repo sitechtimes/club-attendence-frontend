@@ -67,6 +67,7 @@ export default defineComponent({
             userDataStore.addUserData(data);
             router.push("/club");
           } else if (data.type === "teacher") {
+            userDataStore.addUserData(data);
             router.push("/teacher");
           }
         });
