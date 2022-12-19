@@ -1,43 +1,44 @@
 <template>
   <div class="home">
-      <div class="nav">
-          <img id="cpic" src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png" alt="">
-          <Button  @click="showModal">
-            <h3>12/03/2022</h3>
-          </Button>
+    <div class="nav">
+      <img
+        id="cpic"
+        src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png"
+        alt=""
+      />
+      <Button @click="showModal">
+        <h3>12/03/2022</h3>
+      </Button>
+    </div>
+
+    <div class="clublist">
+      <Card
+        v-for="club in clubs"
+        :key="club.name"
+        :name="club.name"
+        :date="club.date"
+      >
+      </Card>
+      <div class="overlap">
+        <Modal v-show="isModalVisible" @close="closeModal"></Modal>
       </div>
-
-<div class="clublist">
-  <Card
-v-for="club in clubs"
-:key="club.name"
-:name="club.name"
-:date="club.date"
-
->
-</Card>
-<div class="overlap">
-  <Modal v-show="isModalVisible" @close="closeModal"></Modal>
-</div>
-
-</div>
-
+    </div>
   </div>
 </template>
-  
+
 <script lang="ts">
-import Card from '../components/Card.vue'
-import Button from '../components/Button.vue'
-import Modal from '../components/Modal.vue';
-import Calendar from '../components/Calendar.vue'
-import { defineComponent } from 'vue';
-export default defineComponent( {
-  name: 'ClubView',
+import Card from "../components/Card.vue";
+import Button from "../components/Button.vue";
+import Modal from "../components/Modal.vue";
+import Calendar from "../components/Calendar.vue";
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "ClubView",
   components: {
     Card,
     Button,
     Modal,
-    Calendar
+    Calendar,
   },
   methods: {
     showModal() {
@@ -45,7 +46,7 @@ export default defineComponent( {
     },
     closeModal() {
       this.isModalVisible = false;
-    }
+    },
   },
   data: () => {
     return {
@@ -53,63 +54,77 @@ export default defineComponent( {
       clubs: [
         {
           name: "Key Club",
-          date: "Next Meeting Date: 12/3/2022"
+          date: "Next Meeting Date: 12/3/2022",
         },
         {
           name: "Self Defense Club",
-          date: "Next Meeting Date: 12/3/2022"
+          date: "Next Meeting Date: 12/3/2022",
         },
         {
           name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022"
+          date: "Next Meeting Date: 12/3/2022",
         },
         {
           name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022"
-        }, {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022"
-        }, {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022"
+          date: "Next Meeting Date: 12/3/2022",
         },
         {
           name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022"
+          date: "Next Meeting Date: 12/3/2022",
         },
-
-      ]
-    }
+        {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022",
+        },
+        {
+          name: "Chinese Culture Club",
+          date: "Next Meeting Date: 12/3/2022",
+        },
+      ],
+    };
   },
-
-    })
+  onMount() {
+    this.getData();
+  },
+  setup() {
+    async function getData() {
+      // Default options are marked with *
+      await fetch("http://localhost:3000/")
+        .then((returnData) => {
+          return returnData.json();
+        })
+        .then((data) => {
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        });
+    }
+    return { getData };
+  },
+});
 </script>
- 
 
-
-  
 <style scoped>
-.home{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  }
-  .nav{
-    display: flex;
-    justify-content: space-around;
-   align-items: center;
-    background-color: #F3C87C;
-    height: 10rem;
-    width: 100%;
-  }
-  #cpic{
-    height: 50px;
-    width: 50px;
-  }
-  .clublist{
-    display: grid;
+}
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f3c87c;
+  height: 10rem;
+  width: 100%;
+}
+#cpic {
+  height: 50px;
+  width: 50px;
+}
+.clublist {
+  display: grid;
   align-content: center;
-    grid-template-columns: auto auto auto;
-  }
+  grid-template-columns: auto auto auto;
+}
 </style>
