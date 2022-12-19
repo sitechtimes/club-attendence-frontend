@@ -34,7 +34,7 @@ export default defineComponent({
 
     async function getData() {
       // Default options are marked with *
-      const response = await fetch("http://localhost:3000/studentOrTeacher")
+      await fetch("http://localhost:3000/studentOrTeacher")
         .then((returnData) => {
           return returnData.json();
         })
@@ -71,7 +71,6 @@ export default defineComponent({
             router.push("/teacher");
           }
         });
-      // return response.json(); // parses JSON response into native JavaScript objects
     }
 
     return {
