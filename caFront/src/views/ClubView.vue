@@ -107,7 +107,6 @@ export default defineComponent( {
     height: 50px;
     width: 50px;
   }
-
   .clublist{
     display: grid;
   align-content: center;

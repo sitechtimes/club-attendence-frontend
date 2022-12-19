@@ -188,7 +188,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
+  position: static;
 }
 
 .current-weekday {
