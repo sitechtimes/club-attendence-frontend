@@ -16,14 +16,18 @@
             <div class="font">
           
               <div class="triangle-up" @click="monthDown()"></div>
+
+            
               {{ month[currentDate.month] }}
+            
+              
           
               <div class="triangle-down" @click="monthUp()"></div>
             </div>
           
           </div>
 
-          <div class="day">
+          <div class="date">
 
 
             <div class="font">
@@ -188,7 +192,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: static;
+  
 }
 
 .current-weekday {
@@ -237,4 +241,9 @@ export default defineComponent({
 .day-hidden {
   opacity: 0.5;
 }
+.month, .date{
+  position: fixed;
+  font-size: 4rem;
+}
+
 </style>
