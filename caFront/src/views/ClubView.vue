@@ -83,9 +83,7 @@ export default defineComponent({
       ],
     };
   },
-  onMount() {
-    this.getData();
-  },
+
   setup() {
     async function getData() {
       // Default options are marked with *
