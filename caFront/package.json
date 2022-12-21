@@ -9,14 +9,6 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@fullcalendar/core": "^5.11.3",
-    "@fullcalendar/daygrid": "^5.11.3",
-    "@fullcalendar/interaction": "^5.11.3",
-    "@fullcalendar/list": "^5.11.3",
-    "@fullcalendar/timegrid": "^5.11.3",
-    "@fullcalendar/vue3": "^5.11.3",
-    "@types/js-cookie": "^3.0.2",
-    "js-cookie": "^3.0.1",
     "pinia": "^2.0.23",
     "pinia-plugin-persistedstate": "^3.0.1",
     "vue": "^3.2.41",
