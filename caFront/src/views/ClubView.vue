@@ -9,6 +9,12 @@
       <Button @click="showModal">
         <h3>12/03/2022</h3>
       </Button>
+      <form action="" method="POST">
+        <div>
+        <label for="clubcode">Club Code</label>
+        <input type="text" id="clubcode" name="clubcode" />
+      </div>
+      </form>
     </div>
 
     <div class="clublist">

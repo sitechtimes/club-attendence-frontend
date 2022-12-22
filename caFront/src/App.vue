@@ -2,6 +2,7 @@
   <nav>
     <RouterLink to="/club">Club</RouterLink>
     <RouterLink to="/qrcode">About</RouterLink>
+    <RouterLink to="/code">Code</RouterLink>
   </nav>
   <router-view></router-view>
 </template>
