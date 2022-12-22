@@ -1,9 +1,10 @@
 <template>
-  <div class="modal-backdrop">
+  <div class="modal-backdrop">  
+    <Button @click="close">Close></Button>
     <div class="calendar">
       <Calendar></Calendar>
     </div>
-    <Button @click="close">Close></Button>
+  
   </div>
 </template>
 
