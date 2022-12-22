@@ -17,25 +17,43 @@ import { defineComponent, ref } from 'vue';
             prop:{
                 type: Object,
                 required: true
+            },
+            currentFilter:{
+                type: String,
+                required: true
+            },
+            changeFilter:{
+                type: Function,
+                required: true
+                
+            },
+            changeStatus:{
+                type:Function,
+                required: true,
+            },
+            status:{
+                type:Boolean,
+                required:true,
             }
 
         },
         setup(){
-            const status = ref<boolean>(false)
-            const currentFilter = ref<string>("All")
+            // const status = ref<boolean>(false)
+             
             
             return{
-                status, currentFilter,
+                // status,
             }
         },
         methods:{
-            changeStatus(){
-                this.status = !this.status
-            },
-            changeFilter(param:string){
-                this.currentFilter = param
-                this.changeStatus()
-            }
+            // changeStatus(){
+            //     this.status = !this.status
+            // },
+            // changeFilter(param:string){
+            //     this.currentFilter = param
+            //     this.changeStatus()
+                
+            // }
         }
     })
 </script>

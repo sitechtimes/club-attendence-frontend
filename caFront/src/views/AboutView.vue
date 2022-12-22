@@ -1,36 +1,33 @@
 <template>
     <div class="page">
-        <button @click="changeStatus" >{{current}}</button>
-
-        <div v-if="status">
-            <button @click="current = 'name'" >name</button>
-            <button @click="current = 'date'" >date</button>
-            <button @click="current = 'time'" >time</button>
-
-        </div>
+        <dropdown :prop="filter" ></dropdown>        
 
     </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-
+import dropdown from '../components/absentDropdown.vue'
 export default defineComponent({
-    setup(){
-        const status = ref<boolean>(true)
-        const current = ref<string>("name")
+    components:{
+        dropdown, 
+    },
 
+    setup(){
+        const status = ref<boolean>(false)
+        const current = ref<string>("name")
+        const filter = ["Absent","Present"]
 
         return{
-            status,current
+            status,current, filter
 
         }
     },
     methods:{
         changeStatus: function(){
             this.status = !this.status
-            console.log(this.status)
         }
+
 
     },
     

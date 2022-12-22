@@ -2,13 +2,17 @@
     <div class="page">
         <div class="top">
             <div class="left">
-                <input  v-model="input" type="text"  >
+                <input  v-model="input" type="text" >
             </div>
             <div class="right">
+                <h2>Filter By:</h2>
+                <dropdown class="drop" :changeStatus="changeStatus" :changeFilter="changeFilter" :currentFilter="currentFilter" :status="status" :prop="filters" ></dropdown>
                 
             </div>
 
         </div>
+
+
         <div class="bottom">
             <section class="left"  >
                 <clubBox v-for="club in clubData" :key="club.clubName" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
@@ -16,7 +20,7 @@
 
             </section>
             <section class="right"  >
-                <tableData :headings="headings" :theData="studentData"></tableData>
+                <tableData :headings="headings" :theData="returnStudentData"></tableData>
             </section>
 
         </div>
@@ -29,18 +33,18 @@ import specificClub from "../assets/specificClub.json";
 import studentData from "../assets/fakeData2.json"
 import clubBox from "../components/ClubBox.vue";
 import tableData from "../components/tableData.vue";
-
+import dropdown from "../components/absentDropdown.vue"
 
 export default defineComponent({
     components:{    
-        clubBox, tableData
+        clubBox, tableData, dropdown
     },
     setup(){
         const data = specificClub
         const input = ref<string>("")
-
-        
-
+        const filters:Array<string> = ["Absent", "Present"]
+        const currentFilter = ref<string>("All")
+        const status = ref<boolean>(false)
         const headings = [
             "Osis",
             "Name",
@@ -49,18 +53,51 @@ export default defineComponent({
 
         
         return{
-            data,headings, studentData, input,
+            data,headings, studentData, input, filters, currentFilter, status
         }
     },
     
+    methods:{
+        changeFilter(param:string){
+            this.currentFilter = param
+            this.changeStatus()
+
+           
+        },
+        changeStatus(){
+            this.status = !this.status
+        }
+    },
+
+
     computed:{
         clubData():Array<object>{
             return this.data.filter(club => club.clubName.toLowerCase().includes(this.input.toLowerCase()))
+            
+        },
+
+        returnStudentData():Array<object>{
+            if(this.currentFilter == "Present"){
+                console.log( this.studentData.filter(student => student.present == true))
+                 
+                const newlist = this.studentData.filter(student => student.present == true)
+                return newlist
+            }
+            else if(this.currentFilter == "Absent"){
+                console.log( this.studentData.filter(student => student.present == false))
+                const newlist =this.studentData.filter(student => student.present == false)
+                return newlist
+            } 
+            else if(this.currentFilter == "All"){
+                console.log(this.studentData)
+                return this.studentData
+            } 
         }
+            
+        }
+
     }
-
-
-})
+)
 </script>
 
 <style scoped>
@@ -82,6 +119,8 @@ input{
 }
 .top{
     height: 20vh;
+    display: flex;
+    font-size: 4rem;
 }
 .bottom{
     display: flex;
@@ -113,8 +152,10 @@ input{
 .head{
     font-size: 5rem;
 }
-
-
+.drop{
+    position: absolute;
+    z-index: 2;
+}
 
 
 </style>

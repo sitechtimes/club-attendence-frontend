@@ -3,56 +3,22 @@
     <div class="table">
         <div v-for="head in headings" :key="head" class="header">{{head}}</div>
 
-        <div v-for="student in theData"  :key="student.present" class="row"  >
-            <div class="present test" v-if="(student.present == true)" >
+        <div v-for="data in theData"  :key="data.present" class="row"  >
+            <div class="test" :class="{present: data.present == true,  absent: data.present == false, null: data.present == null}"  >
 
                 <div class="asset osis">
-                    {{student.osis}}
+                    {{data.osis}}
                 </div>
 
                 <div class="asset name">
-                    {{student.studentName}}
+                    {{data.studentName}}
                 </div>
 
                 <div class="asset grade">
-                    {{student.grade}}
+                    {{data.grade}}
                 </div>
                 <div class="asset offClass">
-                    {{(student.offClass)}}
-                </div>
-            </div>
-            <div class="absent test" v-if="(student.present == false)" >
-
-                <div class="asset osis">
-                    {{student.osis}}
-                </div>
-
-                <div class="asset name">
-                    {{student.studentName}}
-                </div>
-
-                <div class="asset grade">
-                    {{student.grade}}
-                </div>
-                <div class="asset offClass">
-                    {{(student.offClass)}}
-                </div>
-            </div>
-            <div class="null test" v-if="(student.present == null)" >
-
-                <div class="asset osis">
-                    {{student.osis}}
-                </div>
-
-                <div class="asset name">
-                    {{student.studentName}}
-                </div>
-
-                <div class="asset grade">
-                    {{student.grade}}
-                </div>
-                <div class="asset offClass">
-                    {{(student.offClass)}}
+                    {{(data.offClass)}}
                 </div>
             </div>
 
