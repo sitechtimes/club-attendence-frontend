@@ -41,7 +41,7 @@ export default {
   border-radius: 10rem;
   height: 7rem;
   width: 7rem;
-  font-size: 6rem;
+  font-size: 7rem;
   display: flex;
   justify-content: center;
 }
