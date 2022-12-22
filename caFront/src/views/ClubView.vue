@@ -22,6 +22,18 @@
       <div class="overlap">
         <Modal v-show="isModalVisible" @close="closeModal"></Modal>
       </div>
+
+
+      <div class="dropdown">
+        <button class="open-panel">+</button> 
+        
+        <ul class="dropdown">
+            <li><button>Add Club</button></li>
+            <li><button>Input Admin Code</button></li>
+            <li><button>Login</button></li>
+          </ul>
+      </div>
+     
     </div>
   </div>
 </template>
@@ -125,4 +137,29 @@ export default defineComponent({
   align-content: center;
   grid-template-columns: auto auto auto;
 }
+.open-panel{
+  border: 2px black solid;
+  border-radius: 10rem;
+  height: 7rem;
+  width:7rem;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+    bottom: 5rem;
+    right: 5rem; 
+}
+li {
+   list-style: none;
+   font-size: 18px;
+}
+li button {
+    font-size: inherit;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 100%;
+}
+
+
 </style>

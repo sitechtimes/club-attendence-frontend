@@ -241,9 +241,12 @@ export default defineComponent({
 .day-hidden {
   opacity: 0.5;
 }
-.month, .date{
+.month{
   position: fixed;
   font-size: 4rem;
+}
+.current-weekday{
+  margin-left: 2rem;
 }
 
 </style>
