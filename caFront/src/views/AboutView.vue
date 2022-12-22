@@ -151,8 +151,7 @@ export default defineComponent({
                 this.currentDate.year -= 1;
             }
             else {
-                this.currentDate.month -= 1;
-            }
+                this.currentDate.month -= 1;}
         }
     },
     created() {
