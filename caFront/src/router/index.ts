@@ -11,13 +11,13 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: "/about",
-      name: "about",
+      path: "/qrcode",
+      name: "qrcode",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: function () {
-        return import("../views/AboutView.vue");
+        return import("../views/QRCode.vue");
       },
     },
     {

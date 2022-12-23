@@ -1,28 +1,26 @@
 <template>
-
-    <nav>
-    <RouterLink to="/club" >Club</RouterLink>
-    <RouterLink to="/about" >About</RouterLink>
+  <nav>
+    <RouterLink to="/club">Club</RouterLink>
+    <RouterLink to="/qrcode">About</RouterLink>
   </nav>
   <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
+import { useUserDataStore } from "./stores/userData";
 
-
-export default defineComponent( {
-  name: 'App',
-  components:{},
-  methods:{
-} 
-
-    })
-
+export default defineComponent({
+  name: "App",
+  components: {},
+  methods: {},
+  setup() {
+    const userDataStore = useUserDataStore();
+  },
+});
 </script>
 
 <style scoped>
-
 nav a.router-link-exact-active {
   color: var(--color-text);
 }
@@ -57,7 +55,5 @@ nav a:first-of-type {
     place-items: flex-start;
     flex-wrap: wrap;
   }
-
-
 }
 </style>
