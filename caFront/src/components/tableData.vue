@@ -3,7 +3,7 @@
     <div class="table">
         <div v-for="head in headings" :key="head" class="header">{{head}}</div>
 
-        <div v-for="data in theData"  :key="data.present" class="row"  >
+        <div v-for="data in theData"  :key="data.osis" class="row"  >
             <div class="test" :class="{present: data.present == true,  absent: data.present == false, null: data.present == null}"  >
 
                 <div class="asset osis">

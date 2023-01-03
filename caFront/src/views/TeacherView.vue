@@ -76,17 +76,17 @@ export default defineComponent({
             
         },
 
-        returnStudentData():Array<object>{
+        returnStudentData(currentList:object){
             if(this.currentFilter == "Present"){
                 console.log( this.studentData.filter(student => student.present == true))
                  
-                const newlist = this.studentData.filter(student => student.present == true)
-                return newlist
+                
+                return this.studentData.filter(student => student.present == true)
             }
             else if(this.currentFilter == "Absent"){
                 console.log( this.studentData.filter(student => student.present == false))
-                const newlist =this.studentData.filter(student => student.present == false)
-                return newlist
+                return this.studentData.filter(student => student.present == false)
+                
             } 
             else if(this.currentFilter == "All"){
                 console.log(this.studentData)
