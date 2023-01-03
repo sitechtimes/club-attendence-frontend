@@ -41,16 +41,14 @@ export default {
   border-radius: 10rem;
   height: 7rem;
   width: 7rem;
-  font-size: 7rem;
-  display: flex;
-  justify-content: center;
+  font-size: 6rem;
 }
 
 li {
   list-style: none;
   font-size: 2rem;
   width: 18rem;
-  height: 5rem;
+  height: 3rem;
   border: 3px solid black;
   border-radius: 1rem;
   background-color: #f3c87c;
