@@ -2,19 +2,34 @@
   <div class="dropdown">
     <div class="container">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
-        <li><button>Add Club</button></li>
-        <li><button>Input Admin Code</button></li>
-        <li><button>Login</button></li>
+        <li><button @click="showModal">Add Club</button></li>
+        <li><button>Scan QR Code</button></li>
       </ul>
       <button class="open-panel" @click="showPanel">+</button>
+    </div>
+    <div>
+      <AddClub v-show="isModalVisible" @close="closeModal"></AddClub>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-export default {
+import AddClub from "../components/AddClub.vue"
+export default defineComponent({
   name: "ClubActivity",
+  components: {
+    AddClub
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+     
+    }, closeModal() {
+        this.isModalVisible = false;
+      },
+  },
   setup() {
     const clubActivity = useClubActivity();
 
@@ -27,7 +42,12 @@ export default {
     }
     return { clubActivity, showPanel };
   },
-};
+  data: () => {
+    return {
+      isModalVisible: false,
+    };
+  },
+});
 </script>
 
 <style scoped>
@@ -67,3 +87,5 @@ li button {
   right: -6rem;
 }
 </style>
+
+
