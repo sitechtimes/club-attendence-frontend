@@ -2,11 +2,17 @@
     <div class="page">
         <div class="top">
             <div class="left">
+
                 <input  v-model="input" type="text" >
+                <h2>Filter By Date:</h2>
+                <dropdown :changeStatus="changeDate" :status="date" :changeFilter="changeFilterDate"   :currentFilter="currentFilterDate" ></dropdown>
+
             </div>
             <div class="right">
                 <h2>Filter By:</h2>
-                <dropdown class="drop" :changeStatus="changeStatus" :changeFilter="changeFilter" :currentFilter="currentFilter" :status="status" :prop="filters" ></dropdown>
+                <dropdown class="drop" :changeStatus="changeAttendance" :changeFilter="changeFilterAttendance" :currentFilter="currentFilterAttendance" :status="attendance" :prop="filtersAttendance" ></dropdown>
+ 
+                
                 
             </div>
 
@@ -42,9 +48,11 @@ export default defineComponent({
     setup(){
         const data = specificClub
         const input = ref<string>("")
-        const filters:Array<string> = ["Absent", "Present"]
-        const currentFilter = ref<string>("All")
-        const status = ref<boolean>(false)
+        const filtersAttendance:Array<string> = ["Absent", "Present"]
+        const currentFilterAttendance = ref<string>("All")
+        const currentFilterDate = ref<string>("1/4")
+        const attendance = ref<boolean>(false)
+        const date = ref<boolean>(false)
         const headings = [
             "Osis",
             "Name",
@@ -53,19 +61,24 @@ export default defineComponent({
 
         
         return{
-            data,headings, studentData, input, filters, currentFilter, status
+            data,headings, studentData, input, filtersAttendance, currentFilterAttendance, attendance, date, currentFilterDate
         }
     },
     
     methods:{
-        changeFilter(param:string){
-            this.currentFilter = param
-            this.changeStatus()
-
-           
+        changeFilterAttendance(param:string){
+            this.currentFilterAttendance = param
+            this.changeAttendance()
         },
-        changeStatus(){
-            this.status = !this.status
+        changeFilterDate(param:string){
+            this.currentFilterDate = param
+            this.changeAttendance()
+        },
+        changeAttendance(){
+            this.attendance = !this.attendance
+        },
+        changeDate(){
+            this.date = !this.date
         }
     },
 
@@ -77,18 +90,18 @@ export default defineComponent({
         },
 
         returnStudentData(currentList:object){
-            if(this.currentFilter == "Present"){
+            if(this.currentFilterAttendance == "Present"){
                 console.log( this.studentData.filter(student => student.present == true))
                  
                 
                 return this.studentData.filter(student => student.present == true)
             }
-            else if(this.currentFilter == "Absent"){
+            else if(this.currentFilterAttendance == "Absent"){
                 console.log( this.studentData.filter(student => student.present == false))
                 return this.studentData.filter(student => student.present == false)
                 
             } 
-            else if(this.currentFilter == "All"){
+            else if(this.currentFilterAttendance == "All"){
                 console.log(this.studentData)
                 return this.studentData
             } 
