@@ -26,21 +26,6 @@
             </div>
           
           </div>
-
-          <div class="date">
-
-
-            <div class="font">
-              <div class="triangle-up" @click="dateDown()"></div>
-
-              {{ currentDate.date }}
-
-
-
-              <div class="triangle-down" @click="dateUp()"></div>
-            </div>
-
-          </div>
           
           <div class="year">
 
@@ -126,24 +111,6 @@ export default defineComponent({
       this.currentDate.date = today.getDate();
       this.currentDate.month = today.getMonth();
       this.currentDate.year = today.getFullYear();
-    },
-    dateUp() {
-      if (this.currentDate.date === this.currentMonthDays) {
-        this.currentDate.date = 1;
-        this.monthUp();
-      }
-      else {
-        this.currentDate.date += 1;
-      }
-    },
-    dateDown() {
-      if (this.currentDate.date === 1) {
-        this.currentDate.date = this.prevMonthDays;
-        this.monthDown();
-      }
-      else {
-        this.currentDate.date -= 1;
-      }
     },
     monthUp() {
       if (this.currentDate.month === 11) {
@@ -247,6 +214,12 @@ export default defineComponent({
 }
 .current-weekday{
   margin-left: 2rem;
+}
+
+.current-date{
+display: flex;
+flex-direction: column;
+
 }
 
 </style>
