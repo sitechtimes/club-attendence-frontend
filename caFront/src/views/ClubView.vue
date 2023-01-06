@@ -128,4 +128,5 @@ export default defineComponent({
   align-content: center;
   grid-template-columns: auto auto auto;
 }
+
 </style>
