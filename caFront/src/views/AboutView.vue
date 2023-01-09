@@ -1,42 +1,35 @@
 <template>
-    <div class="page">
-        <dropdown :prop="filter" ></dropdown>        
+    <div>
 
     </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
-import dropdown from '../components/absentDropdown.vue'
-export default defineComponent({
-    components:{
-        dropdown, 
-    },
+import { defineComponent } from 'vue';
+    export default defineComponent({
+        setup(){
 
-    setup(){
-        const status = ref<boolean>(false)
-        const current = ref<string>("name")
-        const filter = ["Absent","Present"]
+            const d = async function getData (){
+                try {
+                    const data = await fetch(url)
+                    
+                } catch (error) {
+                    
+                }
 
-        return{
-            status,current, filter
-
-        }
-    },
-    methods:{
-        changeStatus: function(){
-            this.status = !this.status
-        }
+            }   
 
 
-    },
-    
-})
+            return{
+
+            }
+        },
+
+        
+
+    })
 </script>
 
-<style  scoped>
+<style lang="scss" scoped>
 
-.page{
-    font-size: 4rem;
-}
 </style>

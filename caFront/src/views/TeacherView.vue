@@ -5,7 +5,7 @@
 
                 <input  v-model="input" type="text" >
                 <h2>Filter By Date:</h2>
-                <dropdown :changeStatus="changeDate" :status="date" :changeFilter="changeFilterDate"   :currentFilter="currentFilterDate" ></dropdown>
+                <dropdown :changeStatus="changeDate" :status="date" :changeFilter="changeFilterDate"   :currentFilter="currentFilterDate" :prop="filtersDate"   ></dropdown>
 
             </div>
             <div class="right">
@@ -49,6 +49,7 @@ export default defineComponent({
         const data = specificClub
         const input = ref<string>("")
         const filtersAttendance:Array<string> = ["Absent", "Present"]
+        const filtersDate:Array<string> = ["1/4", "1.2"]
         const currentFilterAttendance = ref<string>("All")
         const currentFilterDate = ref<string>("1/4")
         const attendance = ref<boolean>(false)
@@ -61,7 +62,7 @@ export default defineComponent({
 
         
         return{
-            data,headings, studentData, input, filtersAttendance, currentFilterAttendance, attendance, date, currentFilterDate
+            data,headings, studentData, input, filtersAttendance, currentFilterAttendance, attendance, date, currentFilterDate, filtersDate
         }
     },
     
@@ -72,7 +73,7 @@ export default defineComponent({
         },
         changeFilterDate(param:string){
             this.currentFilterDate = param
-            this.changeAttendance()
+            this.changeDate()
         },
         changeAttendance(){
             this.attendance = !this.attendance
