@@ -4,6 +4,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import AddCard from "../components/Card.vue";
+
 export default defineComponent({
   name: "AdditionalInformation",
   components: {},
