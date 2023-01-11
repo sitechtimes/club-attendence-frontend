@@ -32,18 +32,6 @@ export default defineComponent({
       });
     };
 
-    async function getData() {
-      // Default options are marked with *
-      await fetch("http://localhost:3000/studentOrTeacher")
-        .then((returnData) => {
-          return returnData.json();
-        })
-        .then((data) => {
-          // `data` is the parsed version of the JSON returned from the above endpoint.
-          console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-        });
-    }
-
     async function postData(data: object) {
       // Default options are marked with *
       console.log("ths is post data");
@@ -65,10 +53,17 @@ export default defineComponent({
           console.log("Success:", data);
           if (data.type === "student") {
             userDataStore.addUserData(data);
-            router.push("/club");
+            if (
+              data.osis === "none" ||
+              data.grade === "none" ||
+              data.officalClass === "none"
+            ) {
+              return router.push("/additional-information");
+            }
+            return router.push("/club");
           } else if (data.type === "admin") {
             userDataStore.addUserData(data);
-            router.push("/admin");
+            return router.push("/admin");
           }
         });
     }

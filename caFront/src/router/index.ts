@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ClubView from "../views/ClubView.vue";
 import Home from "../views/HomeView.vue";
 
 const router = createRouter({
@@ -16,14 +15,28 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: function () {
-        return import("../views/QRCode.vue");
+      component: () => {
+        return import(/*webpackChunkName: "qrcode" */ "@/views/QRCode.vue");
       },
     },
     {
       path: "/club",
       name: "club",
-      component: ClubView,
+
+      component: () => {
+        return import(
+          /*webpackChunkName: "club-view" */ "../views/ClubView.vue"
+        );
+      },
+    },
+    {
+      path: "/additional-information",
+      name: "additional-information",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation.vue"
+        );
+      },
     },
   ],
 });
