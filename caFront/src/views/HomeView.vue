@@ -53,17 +53,20 @@ export default defineComponent({
           console.log("Success:", data);
           if (data.type === "student") {
             userDataStore.addUserData(data);
-            if (
-              data.osis === "none" ||
-              data.grade === "none" ||
-              data.officalClass === "none"
-            ) {
-              return router.push("/additional-information");
+            if (data.osis === "none") {
+              return router.push("/additional-information/osis");
+            }
+            if (data.grade === "none") {
+              return router.push("/additional-information/grade");
+            }
+            if (data.officalClass === "none") {
+              return router.push("/additional-information/offical-class");
             }
             return router.push("/club");
           } else if (data.type === "admin") {
             userDataStore.addUserData(data);
             return router.push("/admin");
+            //  data.grade === "none" || data.officalClass === "none"
           }
         });
     }

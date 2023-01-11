@@ -1,9 +1,10 @@
 <template>
   <div class="container">
-    <ul class="dropdown-item">
-      <li><button>Add Club</button></li>
-      <li><button>Scan QR Code</button></li>
-    </ul>
+    <form id="form">
+      <label for="name"><slot slot name="name"></slot>:</label>
+      <input type="text" required id="name" />
+      <h3 class="context"><slot name="context"></slot></h3>
+    </form>
   </div>
 </template>
 
@@ -19,24 +20,21 @@ export default defineComponent({
 
 <style scoped>
 .container {
-  position: fixed;
-  bottom: 5rem;
-  right: 5rem;
-}
-li {
-  list-style: none;
-  font-size: 2rem;
-  width: 18rem;
-  height: 3rem;
-  border: 3px solid black;
+  background: white;
+  height: 30rem;
+  width: 50rem;
   border-radius: 1rem;
-  background-color: #f3c87c;
+  border: 1px solid black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
-li button {
-  font-size: inherit;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  width: 100%;
+#form {
+  font-size: 4rem;
 }
 </style>

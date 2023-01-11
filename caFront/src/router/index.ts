@@ -30,11 +30,29 @@ const router = createRouter({
       },
     },
     {
-      path: "/additional-information",
-      name: "additional-information",
+      path: "/additional-information/osis",
+      name: "osis",
       component: () => {
         return import(
-          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation.vue"
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OsisView.vue"
+        );
+      },
+    },
+    {
+      path: "/additional-information/grade",
+      name: "grade",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/GradeView.vue"
+        );
+      },
+    },
+    {
+      path: "/additional-information/offical-class",
+      name: "officalClass",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OfficalClassView.vue"
         );
       },
     },
