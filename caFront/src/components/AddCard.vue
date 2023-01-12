@@ -1,19 +1,56 @@
 <template>
   <div class="container">
-    <form id="form">
+    <form id="form" @submit.prevent="sendAdditionalUserInfo">
       <label for="name"><slot slot name="name"></slot>:</label>
-      <input type="text" required id="name" />
+      <input v-model="form.userValue" type="text" required id="name" />
+      <h3>{{ form.userValue }}</h3>
       <h3 class="context"><slot name="context"></slot></h3>
+      <div>{{ osisGradeOfficalClass }}</div>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
+import { useUserDataStore } from "../stores/userData";
+
 export default defineComponent({
   name: "AddCard",
-  setup() {
-    return {};
+  props: {
+    osisGradeOfficalClass: String || Number,
+  },
+
+  setup(props) {
+    const userDataStore = useUserDataStore();
+    async function postData(userData: object) {
+      // Default options are marked with *
+      console.log("ths is post data");
+      await fetch("http://localhost:3000/addOsisGradeOfficalClass", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(userData), // body data type must match "Content-Type" header
+      });
+    }
+    const form = reactive({ userValue: "" });
+    const bundle = {
+      user: userDataStore.user,
+      additionalInfoType: props.osisGradeOfficalClass,
+      additionalInfoValue: "",
+    };
+
+    const sendAdditionalUserInfo = () => {
+      bundle.additionalInfoValue = form.userValue;
+      postData(bundle);
+    };
+    return { form, postData, sendAdditionalUserInfo };
   },
 });
 </script>

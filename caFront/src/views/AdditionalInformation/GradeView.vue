@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <AddCard
+    <AddCard osisGradeOfficalClass="grade"
       ><template v-slot:name>Grade</template>
       <template v-slot:context>
         Please enter your correct grade in order to better identify you!

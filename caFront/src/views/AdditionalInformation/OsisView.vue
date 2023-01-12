@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <AddCard
+    <AddCard osisGradeOfficalClass="osis"
       ><template v-slot:name>OSIS Number</template>
       <template v-slot:context>
         Please enter your correct OSIS number or else it will be hard to
