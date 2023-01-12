@@ -37,7 +37,11 @@ export default defineComponent({
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(userData), // body data type must match "Content-Type" header
-      });
+      })
+        .then((response) => response.json())
+        .then((ifSuccessful) => {
+          console.log(ifSuccessful);
+        });
     }
     const form = reactive({ userValue: "" });
     const bundle = {
