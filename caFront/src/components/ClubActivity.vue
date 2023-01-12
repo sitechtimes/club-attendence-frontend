@@ -5,7 +5,7 @@
         <li><button @click="showModal">Add Club</button></li>
         <li><button>Scan QR Code</button></li>
       </ul>
-      <button class="open-panel" @click="showPanel">+</button>
+      <button class="open-panel" @click="showPanel"><h2>+</h2></button>
     </div>
     <div>
       <AddClub v-show="isModalVisible" @close="closeModal"></AddClub>
@@ -16,19 +16,19 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import AddClub from "../components/AddClub.vue"
+import AddClub from "../components/AddClub.vue";
 export default defineComponent({
   name: "ClubActivity",
   components: {
-    AddClub
+    AddClub,
   },
   methods: {
     showModal() {
       this.isModalVisible = true;
-     
-    }, closeModal() {
-        this.isModalVisible = false;
-      },
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
   setup() {
     const clubActivity = useClubActivity();
@@ -61,7 +61,7 @@ export default defineComponent({
   border-radius: 10rem;
   height: 7rem;
   width: 7rem;
-  font-size: 6rem;
+  text-align: center;
 }
 
 li {
@@ -86,6 +86,9 @@ li button {
   bottom: 7.5rem;
   right: -6rem;
 }
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
-
-

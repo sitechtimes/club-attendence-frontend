@@ -1,109 +1,132 @@
 <template>
-  
   <div class="container">
     <div class="calendar">
+      <div class="current-weekday">
+        <span>{{ weekdayNames[currentDay] }}</span>
+        <span>
+          {{ month[currentDate.month] }}/{{ currentDate.date }}/{{
+            currentDate.year
+          }}
+        </span>
+      </div>
 
-        <div class="current-weekday">
-          {{ weekdayNames[currentDay] }}
-     
+      <div class="current-date">
+        <div class="month">
+          <div class="font">
+            <div class="triangle-up" @click="monthDown()"></div>
+
+            {{ month[currentDate.month] }}
+
+            <div class="triangle-down" @click="monthUp()"></div>
+          </div>
         </div>
 
-        <div class="current-date">
-
-          <div class="month">
-          
-          
-            <div class="font">
-          
-              <div class="triangle-up" @click="monthDown()"></div>
-
-            
-              {{ month[currentDate.month] }}
-            
-              
-          
-              <div class="triangle-down" @click="monthUp()"></div>
-            </div>
-          
+        <div class="year">
+          <div class="font">
+            <div class="triangle-up" @click="currentDate.year -= 1"></div>
+            {{ currentDate.year }}
+            <div class="triangle-down" @click="currentDate.year += 1"></div>
           </div>
-          
-          <div class="year">
-
-            <div class="font">
-              <div class="triangle-up" @click="currentDate.year -= 1"></div>
-              {{ currentDate.year }}
-              <div class="triangle-down" @click="currentDate.year += 1"></div>
-
-            </div>
-
-          </div>
-
-
-
         </div>
-        <div class="showcalendar">
-
-          <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
-            <span>{{ weekday }} </span>
-          </div>
-
-
-          <div class="day-hidden" v-for="(n, index) in (firstMonthDay - 1)" :key="'prev' + index">
-            {{ (prevMonthDays + 1) - firstMonthDay + n }}
-          </div>
-          <div class="day" :class="{ active: n === currentDate.date }" @click="currentDate.date = n"
-            v-for="(n, index) in currentMonthDays" :key="'day' + index">
-            {{ n }}
-          </div>
-
+      </div>
+      <div class="showcalendar">
+        <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
+          <span>{{ weekday }} </span>
         </div>
 
-   
-
+        <div
+          class="day-hidden"
+          v-for="(n, index) in firstMonthDay - 1"
+          :key="'prev' + index"
+        >
+          {{ prevMonthDays + 1 - firstMonthDay + n }}
+        </div>
+        <div
+          class="day"
+          :class="{ active: n === currentDate.date }"
+          @click="currentDate.date = n"
+          v-for="(n, index) in currentMonthDays"
+          :key="'day' + index"
+        >
+          {{ n }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import Modal from '../components/Modal.vue';
+import { defineComponent } from "vue";
+import Modal from "../components/Modal.vue";
 export default defineComponent({
-  name: 'Calendar',
- 
+  name: "Calendar",
+
   data: function () {
     return {
-      weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      weekdayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      weekdayNames: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
       month: [
-        'January', 'February', 'March', 'April', 'May', 'June', 'July',
-        'August', 'September', 'October', 'November', 'December'
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ],
       currentDate: {
         date: 0,
         month: 1,
-        year: 0
-      }
-    }
+        year: 0,
+      },
+    };
   },
-
 
   computed: {
     prevMonthDays() {
-      let year = this.currentDate.month === 0 ? this.currentDate.year - 1 : this.currentDate.year;
+      let year =
+        this.currentDate.month === 0
+          ? this.currentDate.year - 1
+          : this.currentDate.year;
       let month = this.currentDate.month === 0 ? 12 : this.currentDate.month;
       return new Date(year, month, 0).getDate();
     },
     firstMonthDay() {
-      let firstDay = new Date(this.currentDate.year, this.currentDate.month, 1).getDay();
+      let firstDay = new Date(
+        this.currentDate.year,
+        this.currentDate.month,
+        1
+      ).getDay();
       if (firstDay === 0) firstDay = 7;
       return firstDay;
     },
     currentDay() {
-      return new Date(this.currentDate.year, this.currentDate.month, this.currentDate.date).getDay();
+      return new Date(
+        this.currentDate.year,
+        this.currentDate.month,
+        this.currentDate.date
+      ).getDay();
     },
     currentMonthDays() {
-      return new Date(this.currentDate.year, this.currentDate.month + 1, 0).getDate();
-    }
+      return new Date(
+        this.currentDate.year,
+        this.currentDate.month + 1,
+        0
+      ).getDate();
+    },
   },
   methods: {
     getCurrentDate() {
@@ -116,8 +139,7 @@ export default defineComponent({
       if (this.currentDate.month === 11) {
         this.currentDate.month = 0;
         this.currentDate.year += 1;
-      }
-      else {
+      } else {
         this.currentDate.month += 1;
       }
     },
@@ -125,28 +147,25 @@ export default defineComponent({
       if (this.currentDate.month === 0) {
         this.currentDate.month = 11;
         this.currentDate.year -= 1;
-      }
-      else {
+      } else {
         this.currentDate.month -= 1;
       }
     },
-      
   },
   created() {
     this.getCurrentDate();
-  }
-})
+  },
+});
 </script>
 
 <style>
 .current-date {
   font-size: 3rem;
-  border-bottom: 1px solid rgba(73, 114, 133, .6);
+  border-bottom: 1px solid rgba(73, 114, 133, 0.6);
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   height: 15rem;
- 
 }
 .current-month {
   font-size: 3rem;
@@ -159,7 +178,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .current-weekday {
@@ -189,9 +207,9 @@ export default defineComponent({
   grid-template-columns: auto auto auto auto auto auto auto;
   font-size: 4rem;
   color: white;
-    column-gap: 5rem;
-    row-gap: 2rem;
-    position: static;
+  column-gap: 5rem;
+  row-gap: 2rem;
+  position: static;
 }
 
 .weekday {
@@ -208,18 +226,19 @@ export default defineComponent({
 .day-hidden {
   opacity: 0.5;
 }
-.month{
+.month {
   position: fixed;
   font-size: 4rem;
 }
-.current-weekday{
-  margin-left: 2rem;
+.current-weekday {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 8rem;
 }
 
-.current-date{
-display: flex;
-flex-direction: column;
-
+.current-date {
+  display: flex;
+  flex-direction: row;
 }
-
 </style>

@@ -1,10 +1,9 @@
 <template>
-  <div class="modal-backdrop">  
+  <div class="modal-backdrop">
     <Button @click="close">Close></Button>
     <div class="calendar">
       <Calendar></Calendar>
     </div>
-  
   </div>
 </template>
 
@@ -32,7 +31,7 @@ export default defineComponent({
   background: #2b4450;
   height: 60rem;
   width: 100rem;
-  border-radius: 4px;
+  border-radius: 3rem;
   position: absolute;
   top: 50%;
   left: 50%;
