@@ -1,6 +1,9 @@
 <template>
     <div class="page">
         <div class="top">
+            
+
+
             <div class="left">
 
                 <input  v-model="input" type="text" >
@@ -20,6 +23,10 @@
 
 
         <div class="bottom">
+            <section v-if="store.loading" class="left">
+                <h1>Loading...</h1>
+            </section>
+
             <section class="left"  >
                 <clubBox v-for="club in clubData" :key="club.clubName" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
 
@@ -35,6 +42,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useStore } from "@/stores/counter";
 import specificClub from "../assets/specificClub.json";
 import studentData from "../assets/fakeData2.json"
 import clubBox from "../components/ClubBox.vue";
@@ -46,7 +54,12 @@ export default defineComponent({
         clubBox, tableData, dropdown
     },
     setup(){
-        const data = specificClub
+
+        
+        const store = useStore()
+        store.getData()
+   
+      
         const input = ref<string>("")
         const filtersAttendance:Array<string> = ["Absent", "Present"]
         const filtersDate:Array<string> = ["1/4", "1.2"]
@@ -62,7 +75,7 @@ export default defineComponent({
 
         
         return{
-            data,headings, studentData, input, filtersAttendance, currentFilterAttendance, attendance, date, currentFilterDate, filtersDate
+            headings, studentData, input, filtersAttendance, currentFilterAttendance, attendance, date, currentFilterDate, filtersDate, store
         }
     },
     
@@ -86,7 +99,7 @@ export default defineComponent({
 
     computed:{
         clubData():Array<object>{
-            return this.data.filter(club => club.clubName.toLowerCase().includes(this.input.toLowerCase()))
+            return this.store.clubList.filter(club => club.clubName.toLowerCase().includes(this.input.toLowerCase()))
             
         },
 

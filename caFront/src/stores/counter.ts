@@ -1,12 +1,23 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+export const useStore = defineStore('global', {
+  state: () => ({
+    fetchURL: "http://localhost:3000",
+    clubList: [],
+    loading: false,
 
-  return { count, doubleCount, increment }
+  }),
+  actions:{
+    async getData(){
+      this.loading = true
+      const res = await fetch(this.fetchURL)
+      const data = await res.json()
+
+      this.clubList = data
+      this.loading = false
+
+    }
+
+  }
 })

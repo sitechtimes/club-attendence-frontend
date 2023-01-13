@@ -1,14 +1,4 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 
-const url:string = "http://localhost:3000/"
-
-return{
-  url
-}
-
-</script>
 
 <template>
   <nav>
@@ -27,3 +17,18 @@ nav{
 }
 
 </style>
+<script lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import { useStore } from './stores/counter';
+import { defineComponent } from 'vue';
+
+// export default defineComponent({
+//   setup(){
+//     const store = useStore()
+//     store.getData()
+
+//     return {store,   }
+//   }
+  
+// })
+</script>
