@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ClubView from "../views/ClubView.vue";
-import Home from "../views/HomeView.vue";
+import ClubView from "../views/ClubView.vue"
+import HomeView from '../views/HomeView.vue'
+import TeacherView from '../views/TeacherView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,8 +9,9 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: Home,
+      component: HomeView,
     },
+
     {
       path: "/qrcode",
       name: "qrcode",
@@ -25,7 +27,15 @@ const router = createRouter({
       name: "club",
       component: ClubView,
     },
+    {
+      
+        path:'/teacher',
+        name:'teacher',
+        component: TeacherView
+      
+    }
   ],
 });
+      
 
 export default router;

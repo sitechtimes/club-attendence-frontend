@@ -1,0 +1,126 @@
+[    {
+    "studentName": "Name",
+    "osis": "OSIS",
+    "position": "Posisiton",
+    "grade": "Grade",
+    "studentEmail": "Email",
+    "offClass": "Offical Class",
+    "attended": "# of Attendence",
+    "absence": "# of Adsences ",
+    "present": true
+},
+{
+    "studentName": "Hao Ran Cchen",
+    "osis": "2231135c80",
+    "position": "position",
+    "grade": "12",
+    "studentEmail": "haoranc3@nycstudents.net",
+    "offClass": "23B",
+    "attended": "12",
+    "absence": "0",
+    "present": false
+    
+},
+{
+    "studentName": "Hao Ran Chen",
+    "osis": "223113580",
+    "position": "position",
+    "grade": "12",
+    "studentEmail": "haoranc3@nycstudents.net",
+    "offClass": "23B",
+    "attended": "12",
+    "absence": "0",
+    "present": false
+    
+},
+{
+    "studentName": "Hao Ran bChen",
+    "osis": "22311b3580",
+    "position": "position",
+    "grade": "12",
+    "studentEmail": "haoranc3@nycstudents.net",
+    "offClass": "23B",
+    "attended": "12",
+    "absence": "0",
+    "present": false
+    
+},
+{
+    "studentName": "Hao ARan Chen",
+    "osis": "22311358a0",
+    "position": "position",
+    "grade": "12",
+    "studentEmail": "haoranc3@nycstudents.net",
+    "offClass": "23B",
+    "attended": "12",
+    "absence": "0",
+    "present": false
+    
+},
+{
+    "studentName": "Jian Hong Li",
+    "osis": "735586256",
+    "position": "Co-Vice position",
+    "grade": "12",
+    "studentEmail": "jianhong9@nycstudents.net",
+    "offClass": "23B",
+    "attended": "11",
+    "absence": "1",
+    "present": null
+},
+{
+    "studentName": "Edison Jiang",
+    "osis": "856342758",
+    "position": "Co-Vice position",
+    "grade": "11",
+    "studentEmail": "edisonj8@nycstudents.net",
+    "offClass": "23B",
+    "attended": "5",
+    "absence": "4",
+    "present": null
+},
+{
+    "studentName": "Bin Ni",
+    "osis": "856315377",
+    "position": "osis",
+    "grade": "12",
+    "studentEmail": "binn8@nycstudents.net",
+    "offClass": "23B",
+    "attended": "7",
+    "absence": "6",
+    "present": true
+},
+{
+    "studentName": "Eric Weng",
+    "osis": "343224667",
+    "position": "Member",
+    "grade": "10",
+    "studentEmail": "ericw9@nycstudents.net",
+    "offClass": "23B",
+    "attended": "5",
+    "absence": "10",
+    "present": false
+},
+{
+    "studentName": "Haao Ran Chen",
+    "osis": "223113580",
+    "position": "member",
+    "grade": "12",
+    "studentEmail": "haoranc3@nycstudents.net",
+    "offClass": "23B",
+    "attended": "0",
+    "absence": "0",
+    "present": true
+},
+{
+    "studentName": "Hac Ran Chen",
+    "osis": "223113580",
+    "position": "member",
+    "grade": "12",
+    "studentEmail": "haoranc3@nycstudents.net",
+    "offClass": "23B",
+    "attended": "0",
+    "absence": "0",
+    "present": false
+}
+]
