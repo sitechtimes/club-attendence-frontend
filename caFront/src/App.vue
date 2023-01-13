@@ -56,18 +56,3 @@ nav a:first-of-type {
   }
 }
 </style>
-<script lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { useStore } from './stores/counter';
-import { defineComponent } from 'vue';
-
-// export default defineComponent({
-//   setup(){
-//     const store = useStore()
-//     store.getData()
-
-//     return {store,   }
-//   }
-  
-// })
-</script>
