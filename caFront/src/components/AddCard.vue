@@ -11,17 +11,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, onBeforeMount } from "vue";
 import { useUserDataStore } from "../stores/userData";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "AddCard",
   props: {
-    osisGradeOfficalClass: String || Number,
+    osisGradeOfficalClass: String,
   },
 
   setup(props) {
+    const router = useRouter();
     const userDataStore = useUserDataStore();
+
+    onBeforeMount(() => {
+      if (
+        userDataStore.user!.osis !== "none" &&
+        userDataStore.user!.grade !== "none" &&
+        userDataStore.user!.officalClass !== "none"
+      ) {
+        return router.push("/club");
+      }
+    });
+
+    function checker() {
+      if (
+        userDataStore.user!.osis !== "none" &&
+        userDataStore.user!.grade !== "none" &&
+        userDataStore.user!.officalClass !== "none"
+      ) {
+        return router.push("/club");
+      }
+    }
+
     async function postData(userData: object) {
       // Default options are marked with *
       console.log("ths is post data");
@@ -39,8 +62,42 @@ export default defineComponent({
         body: JSON.stringify(userData), // body data type must match "Content-Type" header
       })
         .then((response) => response.json())
-        .then((ifSuccessful) => {
-          console.log(ifSuccessful);
+        .then((response) => {
+          console.log(response);
+          if (response.status) {
+            if (response.type === "osis") {
+              userDataStore.addOsis(response.value);
+              if (userDataStore.user!.grade === "none") {
+                return router.push("/additional-information/grade");
+              } else if (userDataStore.user!.officalClass === "none") {
+                return router.push("/additional-information/offical-class");
+              } else if (
+                userDataStore.user!.grade !== "none" &&
+                userDataStore.user!.officalClass !== "none"
+              )
+                checker();
+            }
+
+            if (response.type === "grade") {
+              userDataStore.addGrade(response.value);
+              if (userDataStore.user!.osis === "none") {
+                return router.push("/additional-information/osis");
+              } else if (userDataStore.user!.officalClass === "none") {
+                return router.push("/additional-information/offical-class");
+              }
+              checker();
+            }
+
+            if (response.type === "officalClass") {
+              userDataStore.addOficallClass(response.value);
+              if (userDataStore.user!.osis === "none") {
+                return router.push("/additional-information/osis");
+              } else if (userDataStore.user!.grade === "none") {
+                return router.push("/additional-information/grade");
+              }
+              checker();
+            }
+          }
         });
     }
     const form = reactive({ userValue: "" });
