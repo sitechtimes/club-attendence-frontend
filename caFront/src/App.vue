@@ -10,15 +10,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useUserDataStore } from "./stores/userData";
 
 export default defineComponent({
   name: "App",
   components: {},
   methods: {},
-  setup() {
-    const userDataStore = useUserDataStore();
-  },
+  setup() {},
 });
 </script>
 

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import ClubView from "../views/ClubView.vue"
 import HomeView from '../views/HomeView.vue'
 import TeacherView from '../views/TeacherView.vue'
+import Home from "../views/HomeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,14 +19,46 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: function () {
-        return import("../views/QRCode.vue");
+      component: () => {
+        return import(/*webpackChunkName: "qrcode" */ "@/views/QRCode.vue");
       },
     },
     {
       path: "/club",
       name: "club",
-      component: ClubView,
+
+      component: () => {
+        return import(
+          /*webpackChunkName: "club-view" */ "../views/ClubView.vue"
+        );
+      },
+    },
+    {
+      path: "/additional-information/osis",
+      name: "osis",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OsisView.vue"
+        );
+      },
+    },
+    {
+      path: "/additional-information/grade",
+      name: "grade",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/GradeView.vue"
+        );
+      },
+    },
+    {
+      path: "/additional-information/offical-class",
+      name: "officalClass",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OfficalClassView.vue"
+        );
+      },
     },
     {
       
