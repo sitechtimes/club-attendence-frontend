@@ -29,6 +29,7 @@ import Card from "../components/Card.vue";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { defineComponent } from "vue";
+import { useUserDataStore } from "../stores/userData";
 
 export default defineComponent({
   name: "ClubView",
@@ -79,6 +80,9 @@ export default defineComponent({
         },
       ],
     };
+  },
+  setup() {
+    const userDataStore = useUserDataStore();
   },
 });
 </script>
