@@ -1,35 +1,9 @@
-<template>
-    <div>
-
-    </div>
-</template>
+<template></template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-    export default defineComponent({
-        setup(){
-
-            const d = async function getData (){
-                try {
-                    const data = await fetch(url)
-                    
-                } catch (error) {
-                    
-                }
-
-            }   
-
-
-            return{
-
-            }
-        },
-
-        
-
-    })
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "Modal",
+  components: {},
+});
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -19,8 +19,11 @@
         :date="club.date"
       >
       </Card>
-      <Modal v-show="isModalVisible" @close="closeModal" />
+      <div class="overlap">
+        <Modal v-show="isModalVisible" @close="closeModal"></Modal>
+      </div>
     </div>
+    <ClubActivity />
   </div>
 </template>
 
@@ -30,6 +33,8 @@ import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
+import Calendar from "../components/Calendar.vue";
+import ClubActivity from "../components/ClubActivity.vue";
 
 export default defineComponent({
   name: "ClubView",
@@ -37,6 +42,8 @@ export default defineComponent({
     Card,
     Button,
     Modal,
+    Calendar,
+    ClubActivity,
   },
   methods: {
     showModal() {
@@ -81,8 +88,21 @@ export default defineComponent({
       ],
     };
   },
+
   setup() {
     const userDataStore = useUserDataStore();
+    async function getData() {
+      // Default options are marked with *
+      await fetch("http://localhost:3000/")
+        .then((returnData) => {
+          return returnData.json();
+        })
+        .then((data) => {
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        });
+    }
+    return { getData };
   },
 });
 </script>
@@ -106,7 +126,6 @@ export default defineComponent({
   height: 50px;
   width: 50px;
 }
-
 .clublist {
   display: grid;
   align-content: center;
