@@ -17,7 +17,9 @@ export const useStore = defineStore('global', {
       this.clubList = data
       this.loading = false
 
-    }
+    },
+
+
 
   }
 })

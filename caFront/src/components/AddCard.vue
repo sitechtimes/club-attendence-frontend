@@ -107,6 +107,8 @@ export default defineComponent({
       additionalInfoValue: "",
     };
 
+
+
     const sendAdditionalUserInfo = () => {
       bundle.additionalInfoValue = form.userValue;
       postData(bundle);

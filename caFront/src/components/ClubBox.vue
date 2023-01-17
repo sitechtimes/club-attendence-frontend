@@ -1,5 +1,5 @@
 <template>
-    <div class="clubBox">
+    <div @click="getClubData()" class="clubBox">
         <h2 class="clubName">{{ClubName}}</h2>
 
         <div class="bot">
@@ -11,20 +11,45 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStore } from "@/stores/counter";
 
     export default defineComponent({
         props:{
             ClubName: String,
             Advisor: String,
             Room: String || Number,
+            clubCode: String,
         },
         setup(){
+            const store = useStore()
+
+            
 
             return{
-
+                store
             }
-        }
-    })
+        },
+        methods:{
+            async getClubData(){
+                console.log(this.clubCode)
+
+                await fetch(this.store.fetchURL + "/readClub", {
+                    method: "POST",
+                    mode: "cors",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: "follow",
+                    referrerPolicy: "no-referrer",
+                    body: JSON.stringify(this.clubCode), // body data type must match "Content-Type" header
+                    }).then((res) => res.json()).then((res)=> console.log(res))
+      }
+      
+    }
+        })
 </script>
 
 <style scoped>

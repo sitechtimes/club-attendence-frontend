@@ -28,7 +28,7 @@
             </section>
 
             <section class="left"  >
-                <clubBox v-for="club in clubData" :key="club.clubName" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber"  ></clubBox>
+                <clubBox v-for="club in clubData" :key="club.clubName" :ClubName="club.clubName" :Advisor="club.advisor" :Room="club.roomNumber" :clubCode ="club.clubCode" ></clubBox>
 
 
             </section>
