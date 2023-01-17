@@ -14,7 +14,7 @@
     <div class="clublist">
       <Card
         v-for="positionOfClub in userDataStore.user"
-        :key="positionOfClub.clubName"
+        :key="positionOfClub.clubCode"
       >
       </Card>
       <div class="overlap">
@@ -59,6 +59,25 @@ export default defineComponent({
 
   setup() {
     const userDataStore = useUserDataStore();
+    
+    type UserObject = {
+      email: string;
+      emailDomain: string;
+      firstName: string;
+      grade: string;
+      lastName: string;
+      officalClass: string;
+      osis: string;
+      positionOfClub: [
+        {
+          clubCode: string;
+          clubName: string;
+          postion: string;
+        }
+      ];
+      type: string;
+      uid: string;
+    };
 
     return { userDataStore };
   },
