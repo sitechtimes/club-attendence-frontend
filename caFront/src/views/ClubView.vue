@@ -13,10 +13,8 @@
 
     <div class="clublist">
       <Card
-        v-for="club in clubs"
-        :key="club.name"
-        :name="club.name"
-        :date="club.date"
+        v-for="positionOfClub in userDataStore.user"
+        :key="positionOfClub.clubName"
       >
       </Card>
       <div class="overlap">
@@ -56,53 +54,13 @@ export default defineComponent({
   data: () => {
     return {
       isModalVisible: false,
-      clubs: [
-        {
-          name: "Key Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-        {
-          name: "Self Defense Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-        {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-        {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-        {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-        {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-        {
-          name: "Chinese Culture Club",
-          date: "Next Meeting Date: 12/3/2022",
-        },
-      ],
     };
   },
 
   setup() {
     const userDataStore = useUserDataStore();
-    async function getData() {
-      // Default options are marked with *
-      await fetch("http://localhost:3000/")
-        .then((returnData) => {
-          return returnData.json();
-        })
-        .then((data) => {
-          // `data` is the parsed version of the JSON returned from the above endpoint.
-          console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-        });
-    }
-    return { getData };
+
+    return { userDataStore };
   },
 });
 </script>

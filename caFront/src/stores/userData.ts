@@ -11,6 +11,7 @@ type UserObject = {
   positionOfClub: [
     {
       clubCode: string;
+      clubName: string;
       postion: string;
     }
   ];
@@ -37,8 +38,13 @@ export const useUserDataStore = defineStore("userData", {
     addGrade(grade: string) {
       this.user!.grade = grade;
     },
-    addOficallClass(officalClass: string) {
+    addOfficallClass(officalClass: string) {
       this.user!.officalClass = officalClass;
+    },
+    async getData() {
+      const res = await fetch("http://localhost:3000");
+      const data = await res.json();
+      this.user = data;
     },
   },
   persist: true,
