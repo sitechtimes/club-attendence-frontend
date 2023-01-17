@@ -1,5 +1,3 @@
-
-
 <template>
   <nav>
     <RouterLink to="/club">Club</RouterLink>
