@@ -9,4 +9,44 @@ html, body, *{
 
 }
 
+:root {
+    --black: #000;
+    --white: #ffffff;
+    --blue: #07549C;
+    --dark-blue: #2d7ef8;
+    --light-red: #fd9797;
+    --dark-red: #ff2929;
+    --d-red: #fd7272;
+    --d-blue: #77aefc;
 
+    --primary: var(--light-red);
+    --secondary: var(--dark-red);
+
+    --h1: 9.594rem;
+    --h2: 3.663rem;
+    --h3: 2.375rem;
+    --h4: 1.25rem;
+}
+
+h1 {
+    font-size: var(--h1);
+}
+
+h2 {
+    font-size: var(--h2);
+}
+
+h3 {
+    font-size: var(--h3);
+}
+
+h4 {
+    font-size: var(--h4);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-align: center;
+}
