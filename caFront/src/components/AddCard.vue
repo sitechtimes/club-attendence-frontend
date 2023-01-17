@@ -89,7 +89,7 @@ export default defineComponent({
             }
 
             if (response.type === "officalClass") {
-              userDataStore.addOficallClass(response.value);
+              userDataStore.addOfficallClass(response.value);
               if (userDataStore.user!.osis === "none") {
                 return router.push("/additional-information/osis");
               } else if (userDataStore.user!.grade === "none") {
@@ -106,8 +106,6 @@ export default defineComponent({
       additionalInfoType: props.osisGradeOfficalClass,
       additionalInfoValue: "",
     };
-
-
 
     const sendAdditionalUserInfo = () => {
       bundle.additionalInfoValue = form.userValue;
