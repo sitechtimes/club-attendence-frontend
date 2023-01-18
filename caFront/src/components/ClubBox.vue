@@ -47,9 +47,13 @@ export default defineComponent({
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(postData), // body data type must match "Content-Type" header
-      })
-        .then((res) => res.json())
-        .then((res) => console.log(res));
+      }).then((res) => res.json()).then((res) => this.store.pushCurrentAttendance(res.values))
+      
+  
+      
+
+
+
     },
   },
 });
