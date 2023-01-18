@@ -30,7 +30,7 @@ export default defineComponent({
   methods: {
     async getClubData() {
       console.log(this.clubCode);
-
+      this.store.selectedClub = true;
       const postData = {
         clubCode: this.clubCode,
       };
@@ -47,13 +47,9 @@ export default defineComponent({
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(postData), // body data type must match "Content-Type" header
-      }).then((res) => res.json()).then((res) => this.store.pushCurrentAttendance(res.values))
-      
-  
-      
-
-
-
+      })
+        .then((res) => res.json())
+        .then((res) => this.store.pushCurrentAttendance(res));
     },
   },
 });

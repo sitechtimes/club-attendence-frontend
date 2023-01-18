@@ -41,10 +41,14 @@
         ></clubBox>
       </section>
       <section class="right">
-        <tableData
+        <tableData v-if="(store.selectedClub = true)">
+          :headings="headings" :theData="showAllStudents"
+        </tableData>
+
+        <!-- <tableData
           :headings="headings"
           :theData="returnStudentData"
-        ></tableData>
+        ></tableData> -->
       </section>
     </div>
   </div>
@@ -114,6 +118,10 @@ export default defineComponent({
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
+    },
+
+    showAllStudents() {
+      return this.store.currentAttendance;
     },
 
     returnStudentData(currentList: object) {

@@ -1,57 +1,50 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { ref, computed } from "vue";
+import { defineStore } from "pinia";
 
 type clubData = {
-  name: string
-  osis: number | string
-  positon: string
-  grade: number | string
-  email: string
-  numAttendance: string | number
-  numAbsence: string | number 
-
-}
+  firstName: string;
+  lastName: string;
+  uid: string;
+  osis: string;
+  position: string;
+  grade: string;
+  email: string;
+  officalClass: string;
+  numbOfAttendence: string;
+  numbOfAbsent: string;
+};
 
 interface dataRes {
-  data : null | clubData
-  fetchURL : string
-  clubList: Array<string>
-  loading: boolean
-  currentAttendance: clubData
-
- 
+  fetchURL: string;
+  clubList: Array<string> | null;
+  loading: boolean;
+  currentAttendance: clubData | null;
+  selectedClub: boolean;
 }
 
-
-export const useStore = defineStore('global', {
-  state: () : dataRes => ({
+export const useStore = defineStore("global", {
+  state: (): dataRes => ({
     fetchURL: "http://localhost:3000",
-    clubList: [],
+    clubList: null,
     loading: false,
-    currentAttendance: []
-
+    currentAttendance: null,
+    selectedClub: false,
   }),
-  getters: {
+  getters: {},
+  actions: {
+    async getData() {
+      this.loading = true;
+      const res = await fetch(this.fetchURL);
+      const data = await res.json();
 
-  },
-  actions:{
-    async getData(){
-      this.loading = true
-      const res = await fetch(this.fetchURL)
-      const data = await res.json()
-
-      this.clubList = data
-      this.loading = false
-
+      this.clubList = data;
+      this.loading = false;
     },
 
     pushCurrentAttendance(param: clubData) {
-      this.currentAttendance = param
-      console.log((this.currentAttendance))
-
-    }
-
-
-
-  }
-})
+      console.log(this.currentAttendance);
+      this.currentAttendance = param;
+      console.log(this.currentAttendance);
+    },
+  },
+});
