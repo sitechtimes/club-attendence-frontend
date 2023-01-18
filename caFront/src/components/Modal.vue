@@ -1,6 +1,5 @@
 <template>
   <div class="modal-backdrop">
-    <Button @click="close">Close></Button>
     <div class="calendar">
       <Calendar></Calendar>
     </div>
@@ -9,6 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useClubActivity } from "../stores/clubActivity";
 import Calendar from "../components/Calendar.vue";
 import Button from "../components/Button.vue";
 export default defineComponent({
@@ -17,11 +17,10 @@ export default defineComponent({
     Button,
     Calendar,
   },
-  props: [],
-  methods: {
-    close() {
-      this.$emit("close");
-    },
+  setup() {
+    const clubActivity = useClubActivity();
+
+    return { clubActivity };
   },
 });
 </script>
