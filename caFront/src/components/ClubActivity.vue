@@ -2,13 +2,13 @@
   <div class="dropdown">
     <div class="container">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
-        <li><button @click="showModal">Add Club</button></li>
+        <li><button @click="clubActivity.showPanel()">Add Club</button></li>
         <li><button>Scan QR Code</button></li>
       </ul>
       <button class="open-panel" @click="showPanel"><h2>+</h2></button>
     </div>
     <div>
-      <AddClub v-show="isModalVisible" @close="closeModal"></AddClub>
+      <AddClub v-show="clubActivity.isPanelVisible"></AddClub>
     </div>
   </div>
 </template>
@@ -21,14 +21,6 @@ export default defineComponent({
   name: "ClubActivity",
   components: {
     AddClub,
-  },
-  methods: {
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    },
   },
   setup() {
     const clubActivity = useClubActivity();

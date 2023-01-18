@@ -6,7 +6,7 @@
         src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png"
         alt=""
       />
-      <Button @click="showModal">
+      <Button @click="clubActivity.showModal()">
         <h3>12/03/2022</h3>
       </Button>
     </div>
@@ -15,7 +15,7 @@
       <Card v-for="club in clubs" :name="club.clubName" :key="club.clubCode">
       </Card>
       <div class="overlap">
-        <Modal v-show="isModalVisible" @close="closeModal"></Modal>
+        <Modal v-show="clubActivity.isModalVisible"></Modal>
       </div>
     </div>
     <ClubActivity />
@@ -28,6 +28,7 @@ import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
+import { useClubActivity } from "../stores/clubActivity";
 import Calendar from "../components/Calendar.vue";
 import ClubActivity from "../components/ClubActivity.vue";
 
@@ -40,25 +41,13 @@ export default defineComponent({
     Calendar,
     ClubActivity,
   },
-  methods: {
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    },
-  },
-  data: () => {
-    return {
-      isModalVisible: false,
-    };
-  },
 
   setup() {
     const userDataStore = useUserDataStore();
+    const clubActivity = useClubActivity();
     const clubs = userDataStore.user!.positionOfClub;
 
-    return { userDataStore, clubs };
+    return { userDataStore, clubs, clubActivity };
   },
 });
 </script>

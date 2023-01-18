@@ -8,6 +8,7 @@
             currentDate.year
           }}
         </span>
+        <Button @click="clubActivity.closeModal()">Close></Button>
       </div>
 
       <div class="current-date">
@@ -57,10 +58,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Modal from "../components/Modal.vue";
+import { useClubActivity } from "../stores/clubActivity";
+import Button from "../components/Button.vue";
 export default defineComponent({
   name: "Calendar",
-
+  components: {
+    Button,
+  },
   data: function () {
     return {
       weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -94,7 +98,11 @@ export default defineComponent({
       },
     };
   },
+  setup() {
+    const clubActivity = useClubActivity();
 
+    return { clubActivity };
+  },
   computed: {
     prevMonthDays() {
       let year =
