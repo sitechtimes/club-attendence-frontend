@@ -106,9 +106,9 @@ export default defineComponent({
       const bundle = {
         user: userDataStore.user,
         additionalInfoType: props.osisGradeOfficalClass,
-        additionalInfoValue: "",
+        additionalInfoValue: form.userValue,
       };
-      bundle.additionalInfoValue = form.userValue;
+      console.log(bundle);
       postData(bundle);
     };
     return { form, sendAdditionalUserInfo };

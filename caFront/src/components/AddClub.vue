@@ -41,7 +41,11 @@ export default defineComponent({
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(userData), // body data type must match "Content-Type" header
-      }).then((response) => response.json());
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+        });
     }
     const addClub = () => {
       const bundle = {
@@ -49,6 +53,8 @@ export default defineComponent({
         clubCode: form.userValue,
       };
       console.log(bundle);
+      console.log("jumping into postData");
+
       postData(bundle);
     };
     return { form, addClub };
