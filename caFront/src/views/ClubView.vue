@@ -12,7 +12,12 @@
     </div>
 
     <div class="clublist">
-      <Card v-for="club in clubs" :name="club.clubName" :key="club.clubCode">
+      <Card
+        v-for="club in clubs"
+        :name="club.clubName"
+        :postion="club.postion"
+        :key="club.clubCode"
+      >
       </Card>
       <div class="overlap">
         <Modal v-show="isModalVisible" @close="closeModal"></Modal>
