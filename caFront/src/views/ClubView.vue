@@ -7,7 +7,7 @@
         alt=""
       />
       <Button @click="clubActivity.showModal()">
-        <h3>12/03/2022</h3>
+        <h3>{{currentDate()}}</h3>
       </Button>
     </div>
 
@@ -41,7 +41,13 @@ export default defineComponent({
     Calendar,
     ClubActivity,
   },
-
+  methods: {
+    currentDate() {
+      const current = new Date();
+      const date = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+      return date;
+    }
+},
   setup() {
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();

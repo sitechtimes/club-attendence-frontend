@@ -24,6 +24,7 @@ export const useClubActivity = defineStore("clubActivity", {
     showPanel() {
       this.isPanelVisible = true;
       this.isModalVisible = false;
+      this.isOpen = false;
     },
     closePanel() {
       this.isPanelVisible = false;

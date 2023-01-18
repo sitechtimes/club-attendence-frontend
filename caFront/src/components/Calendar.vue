@@ -4,7 +4,7 @@
       <div class="current-weekday">
         <span>{{ weekdayNames[currentDay] }}</span>
         <span>
-          {{ month[currentDate.month] }}/{{ currentDate.date }}/{{
+          {{ currentDate.month + 1}}/{{ currentDate.date }}/{{
             currentDate.year
           }}
         </span>
@@ -191,6 +191,7 @@ export default defineComponent({
 .current-weekday {
   color: white;
   font-size: 5rem;
+  position: static;
 }
 
 .triangle-up {
