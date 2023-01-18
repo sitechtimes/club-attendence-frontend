@@ -101,17 +101,17 @@ export default defineComponent({
         });
     }
     const form = reactive({ userValue: "" });
-    const bundle = {
-      user: userDataStore.user,
-      additionalInfoType: props.osisGradeOfficalClass,
-      additionalInfoValue: "",
-    };
 
     const sendAdditionalUserInfo = () => {
+      const bundle = {
+        user: userDataStore.user,
+        additionalInfoType: props.osisGradeOfficalClass,
+        additionalInfoValue: "",
+      };
       bundle.additionalInfoValue = form.userValue;
       postData(bundle);
     };
-    return { form, postData, sendAdditionalUserInfo };
+    return { form, sendAdditionalUserInfo };
   },
 });
 </script>
