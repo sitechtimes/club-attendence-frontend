@@ -4,11 +4,13 @@
       <div class="current-weekday">
         <span>{{ weekdayNames[currentDay] }}</span>
         <span>
-          {{ currentDate.month + 1}}/{{ currentDate.date }}/{{
+          {{ currentDate.month + 1 }}/{{ currentDate.date }}/{{
             currentDate.year
           }}
         </span>
-        <Button @click="clubActivity.closeModal()">Close></Button>
+        <miniButton class="static" @click="clubActivity.closeModal()">
+          x
+        </miniButton>
       </div>
 
       <div class="current-date">
@@ -59,11 +61,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import Button from "../components/Button.vue";
+import miniButton from "../components/miniButton.vue";
 export default defineComponent({
   name: "Calendar",
   components: {
-    Button,
+    miniButton,
   },
   data: function () {
     return {
@@ -171,9 +173,9 @@ export default defineComponent({
   font-size: 3rem;
   border-bottom: 1px solid rgba(73, 114, 133, 0.6);
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 15rem;
+  position: relative;
 }
 .current-month {
   font-size: 3rem;
@@ -181,7 +183,6 @@ export default defineComponent({
 
 .font {
   font-size: 4rem;
-
   color: white;
   display: flex;
   flex-direction: column;
@@ -218,7 +219,6 @@ export default defineComponent({
   color: white;
   column-gap: 5rem;
   row-gap: 2rem;
-  position: static;
 }
 
 .weekday {
@@ -235,19 +235,16 @@ export default defineComponent({
 .day-hidden {
   opacity: 0.5;
 }
-.month {
-  position: fixed;
-  font-size: 4rem;
-}
+
 .current-weekday {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   font-size: 8rem;
 }
-
-.current-date {
-  display: flex;
-  flex-direction: row;
+.static {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
 }
 </style>

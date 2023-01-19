@@ -7,16 +7,16 @@
         alt=""
       />
       <Button @click="clubActivity.showModal()">
-        <h3>{{currentDate()}}</h3>
+        <h3>{{ currentDate() }}</h3>
       </Button>
     </div>
 
     <div class="clublist">
       <Card v-for="club in clubs" :name="club.clubName" :key="club.clubCode">
       </Card>
-      <div class="overlap">
-        <Modal v-show="clubActivity.isModalVisible"></Modal>
-      </div>
+    </div>
+    <div class="overlap">
+      <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
     <ClubActivity />
   </div>
@@ -44,10 +44,12 @@ export default defineComponent({
   methods: {
     currentDate() {
       const current = new Date();
-      const date = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+      const date = `${
+        current.getMonth() + 1
+      }/${current.getDate()}/${current.getFullYear()}`;
       return date;
-    }
-},
+    },
+  },
   setup() {
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
@@ -59,12 +61,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 .nav {
   display: flex;
   justify-content: space-around;
@@ -78,8 +74,8 @@ export default defineComponent({
   width: 50px;
 }
 .clublist {
-  display: grid;
-  align-content: center;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
 }
 </style>

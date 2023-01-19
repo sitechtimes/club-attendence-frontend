@@ -2,11 +2,11 @@
   <div class="modal-backdrop">
     <div class="add">
       <form id="form">
-        <Button class="position" @click="clubActivity.closePanel()"
-          >Close></Button
+        <miniButton class="position" @click="clubActivity.closePanel()"
+          >x</miniButton
         >
         <span></span>
-        <label for="name">Input Code:</label>
+        <label for="name">Input Code: </label>
         <input type="text" required id="name" />
       </form>
     </div>
@@ -16,11 +16,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import Button from "../components/Button.vue";
+import miniButton from "../components/miniButton.vue";
 export default defineComponent({
   name: "AddClub",
   components: {
-    Button,
+    miniButton,
   },
   props: [],
   methods: {
@@ -54,5 +54,10 @@ export default defineComponent({
 }
 #form {
   font-size: 4rem;
+}
+.position {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
 }
 </style>
