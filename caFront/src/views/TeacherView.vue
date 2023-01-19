@@ -41,9 +41,9 @@
         ></clubBox>
       </section>
       <section class="right">
-        <tableData v-if="(store.selectedClub = true)">
-          :headings="headings" :theData="showAllStudents"
-        </tableData>
+        <div v-if="store.selectedClub" >{{ store.currentAttendance }}</div>
+
+        <tableData :headings="headings" :theData="showAllStudents" ></tableData>
 
         <!-- <tableData
           :headings="headings"
@@ -159,6 +159,7 @@ input {
   display: flex;
   flex-direction: column;
   padding: 4rem;
+  font-size: 4rem;
 }
 .top {
   height: 20vh;

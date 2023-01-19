@@ -30,7 +30,7 @@ export default defineComponent({
   methods: {
     async getClubData() {
       console.log(this.clubCode);
-      this.store.selectedClub = true;
+
       const postData = {
         clubCode: this.clubCode,
       };

@@ -42,9 +42,11 @@ export const useStore = defineStore("global", {
     },
 
     pushCurrentAttendance(param: clubData) {
-      console.log(this.currentAttendance);
+
       this.currentAttendance = param;
-      console.log(this.currentAttendance);
+      console.log(this.currentAttendance)
+      this.selectedClub = true;
+
     },
   },
 });

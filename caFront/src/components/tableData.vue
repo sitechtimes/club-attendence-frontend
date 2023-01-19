@@ -16,14 +16,14 @@
         </div>
 
         <div class="asset name">
-          {{ data.firstName }}
+          {{ data.firstName + " "+  data.lastName }}
         </div>
 
         <div class="asset grade">
           {{ data.grade }}
         </div>
         <div class="asset offClass">
-          {{ data.offClass }}
+          {{ data.officalClass }}
         </div>
       </div>
     </div>
