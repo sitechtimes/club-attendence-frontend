@@ -2,8 +2,8 @@
   <div class="container">
     <div class="calendar">
       <div class="current-weekday">
-        <span>{{ weekdayNames[currentDay] }}</span>
-        <span>
+        <span class="text">{{ weekdayNames[currentDay] }}</span>
+        <span class="text">
           {{ currentDate.month + 1 }}/{{ currentDate.date }}/{{
             currentDate.year
           }}
@@ -241,5 +241,16 @@ export default defineComponent({
   position: fixed;
   top: 2rem;
   right: 2rem;
+}
+.month,
+.year,
+.text {
+  max-width: 8rem;
+  align-content: center;
+}
+.text {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
 }
 </style>
