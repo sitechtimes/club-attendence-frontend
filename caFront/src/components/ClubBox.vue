@@ -29,8 +29,12 @@ export default defineComponent({
   },
   methods: {
     async getClubData() {
-      console.log(this.clubCode);
 
+      this.store.clearData()
+
+
+      console.log(this.clubCode);
+      this.store.pushClubCode(this.clubCode)
       const postData = {
         clubCode: this.clubCode,
       };
@@ -50,7 +54,24 @@ export default defineComponent({
       })
         .then((res) => res.json())
         .then((res) => this.store.pushCurrentAttendance(res));
+
+      await fetch(this.store.fetchURL + "/attendence-date", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(postData),
+      } ).then((dates) => dates.json()).then((dates)=> this.store.pushListOfDates(dates))
+      
     },
+
+    
   },
 });
 </script>

@@ -12,7 +12,15 @@ type clubData = {
   officalClass: string;
   numbOfAttendence: string;
   numbOfAbsent: string;
+
 };
+
+type studentsAtDate = {
+  firstName: string;
+  lastName: string;
+  status: string,
+  uid: string,
+}
 
 interface dataRes {
   fetchURL: string;
@@ -20,6 +28,11 @@ interface dataRes {
   loading: boolean;
   currentAttendance: clubData | null;
   selectedClub: boolean;
+  getDates: boolean;
+  listOfDates: Array<number|string>;
+  currentClubCode: string | null,
+  attendanceAtDate: studentsAtDate | Array<object>,
+  filterDate: string | null,
 }
 
 export const useStore = defineStore("global", {
@@ -29,6 +42,11 @@ export const useStore = defineStore("global", {
     loading: false,
     currentAttendance: null,
     selectedClub: false,
+    getDates: false,
+    listOfDates: [],
+    currentClubCode: null, 
+    attendanceAtDate: [],
+    filterDate:null,
   }),
   getters: {},
   actions: {
@@ -47,6 +65,35 @@ export const useStore = defineStore("global", {
       console.log(this.currentAttendance)
       this.selectedClub = true;
 
+    },
+    pushListOfDates(param: Array<number|string>){
+      this.listOfDates = param
+      console.log(this.listOfDates)
+      this.getDates = true
+    },
+    pushClubCode( param:any){
+      this.currentClubCode = param
+      console.log(this.currentClubCode)
+    },
+    pushFilterDate( param: string | null){
+      this.filterDate = param
+    },
+
+    pushAttendanceAtDate(param: studentsAtDate ){
+      this.attendanceAtDate = param
+      console.log(this.attendanceAtDate)
+    },
+
+    clearData(){
+      this.clubList = null
+      this.loading = false
+      this.currentAttendance = null
+
+      this.getDates = false
+      this.listOfDates = []
+      this.currentClubCode = null
+      this.attendanceAtDate = []
+      this.filterDate = null
     },
   },
 });

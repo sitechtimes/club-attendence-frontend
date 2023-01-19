@@ -35,7 +35,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     headings: Array,
-    theData: Array,
+    theData: Array<object>,
   },
 });
 </script>
