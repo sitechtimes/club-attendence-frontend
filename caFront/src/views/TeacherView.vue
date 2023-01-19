@@ -4,33 +4,33 @@
       <div class="left">
         <input v-model="input" type="text" />
         <h2>Filter By Date:</h2>
-        <dropdown
+        <absentDropdown
           :changeStatus="changeDate"
           :status="date"
           :changeFilter="changeFilterDate"
           :currentFilter="currentFilterDate"
-          :prop="filtersDate"
-        ></dropdown>
+          :prop="store.listOfDates"
+          :getAttendanceAtDate="true"
+        ></absentDropdown>
       </div>
       <div class="right">
         <h2>Filter By:</h2>
-        <dropdown
+        <absentDropdown
           class="drop"
           :changeStatus="changeAttendance"
           :changeFilter="changeFilterAttendance"
           :currentFilter="currentFilterAttendance"
           :status="attendance"
           :prop="filtersAttendance"
-        ></dropdown>
+
+        ></absentDropdown>
       </div>
     </div>
 
     <div class="bottom">
-      <section v-if="store.loading" class="left">
-        <h1>Loading...</h1>
-      </section>
 
-      <section class="left">
+      <section v-if="store.loading = false" >Loading...</section>
+      <section v-if="clubData" class="left">
         <clubBox
           v-for="club in clubData"
           :key="club.clubName"
@@ -41,7 +41,11 @@
         ></clubBox>
       </section>
       <section class="right">
-        <tableData
+        <div v-if="store.selectedClub" >{{ store.currentAttendance }}</div>
+
+        <tableData v-if="store.filterDate == null"  :headings="headings" :theData="showAllStudents" ></tableData>
+
+        <tableData v-if="store.filterDate"
           :headings="headings"
           :theData="returnStudentData"
         ></tableData>
@@ -57,23 +61,23 @@ import specificClub from "../assets/specificClub.json";
 import studentData from "../assets/fakeData2.json";
 import clubBox from "../components/ClubBox.vue";
 import tableData from "../components/tableData.vue";
-import dropdown from "../components/absentDropdown.vue";
+import absentDropdown from "../components/absentDropdown.vue";
 
 export default defineComponent({
   components: {
     clubBox,
     tableData,
-    dropdown,
+    absentDropdown,
   },
   setup() {
     const store = useStore();
     store.getData();
 
     const input = ref<string>("");
-    const filtersAttendance: Array<string> = ["Absent", "Present"];
+    const filtersAttendance: Array<string> = ["All","Absent", "Present"];
     const filtersDate: Array<string> = ["1/4", "1.2"];
-    const currentFilterAttendance = ref<string>("All");
-    const currentFilterDate = ref<string>("1/4");
+    const currentFilterAttendance = ref<string>("Select Filter");
+    const currentFilterDate = ref<string>("Select Date");
     const attendance = ref<boolean>(false);
     const date = ref<boolean>(false);
     const headings = ["Osis", "Name", "Grade", "Class"];
@@ -97,9 +101,11 @@ export default defineComponent({
       this.currentFilterAttendance = param;
       this.changeAttendance();
     },
-    changeFilterDate(param: string) {
-      this.currentFilterDate = param;
-      this.changeDate();
+     changeFilterDate(param: string) {
+       this.currentFilterDate = param;
+       this.store.pushFilterDate(param)
+       this.changeDate();
+
     },
     changeAttendance() {
       this.attendance = !this.attendance;
@@ -107,6 +113,9 @@ export default defineComponent({
     changeDate() {
       this.date = !this.date;
     },
+    
+
+
   },
 
   computed: {
@@ -116,21 +125,22 @@ export default defineComponent({
       );
     },
 
-    returnStudentData(currentList: object) {
-      if (this.currentFilterAttendance == "Present") {
-        console.log(
-          this.studentData.filter((student) => student.present == true)
-        );
+    showAllStudents() {
+      return this.store.currentAttendance;
+    },
 
-        return this.studentData.filter((student) => student.present == true);
+    returnStudentData(currentList: object) {
+
+
+
+      if (this.currentFilterAttendance == "Present") {
+        return this.store.attendanceAtDate.filter((student) => student.status == this.currentFilterAttendance);
       } else if (this.currentFilterAttendance == "Absent") {
-        console.log(
-          this.studentData.filter((student) => student.present == false)
-        );
-        return this.studentData.filter((student) => student.present == false);
+
+        return this.store.attendanceAtDate.filter((student) => student.status == this.currentFilterAttendance);
       } else if (this.currentFilterAttendance == "All") {
-        console.log(this.studentData);
-        return this.studentData;
+
+        return this.store.attendanceAtDate;
       }
     },
   },
@@ -151,6 +161,7 @@ input {
   display: flex;
   flex-direction: column;
   padding: 4rem;
+  font-size: 4rem;
 }
 .top {
   height: 20vh;
