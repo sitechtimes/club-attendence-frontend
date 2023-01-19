@@ -26,11 +26,9 @@
     </div>
 
     <div class="bottom">
-      <section v-if="store.loading" class="left">
-        <h1>Loading...</h1>
-      </section>
 
-      <section class="left">
+      <section v-if="store.loading = false" >Loading...</section>
+      <section v-if="clubData" class="left">
         <clubBox
           v-for="club in clubData"
           :key="club.clubName"
