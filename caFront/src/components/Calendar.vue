@@ -33,25 +33,20 @@
         </div>
       </div>
       <div class="showcalendar">
-        <div class="weekday" v-for="(weekday, index) in weekdays" :key="index">
+        <div class="weekday" v-for="weekday in weekdays" :key="weekday">
           <span>{{ weekday }} </span>
         </div>
 
-        <div
-          class="day-hidden"
-          v-for="(n, index) in firstMonthDay - 1"
-          :key="'prev' + index"
-        >
-          {{ prevMonthDays + 1 - firstMonthDay + n }}
+        <div class="day-hidden" v-for="day in firstMonthDay - 1" :key="day">
+          {{ prevMonthDays + 1 - firstMonthDay + day }}
         </div>
         <div
           class="day"
-          :class="{ active: n === currentDate.date }"
-          @click="currentDate.date = n"
-          v-for="(n, index) in currentMonthDays"
-          :key="'day' + index"
+          @click="currentDate.date = day"
+          v-for="day in currentMonthDays"
+          :key="day"
         >
-          {{ n }}
+          {{ day }}
         </div>
       </div>
     </div>
