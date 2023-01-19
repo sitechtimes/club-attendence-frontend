@@ -22,14 +22,12 @@
           :currentFilter="currentFilterAttendance"
           :status="attendance"
           :prop="filtersAttendance"
-
         ></absentDropdown>
       </div>
     </div>
 
     <div class="bottom">
-
-      <section v-if="store.loading = false" >Loading...</section>
+      <section v-if="(store.loading = false)">Loading...</section>
       <section v-if="clubData" class="left">
         <clubBox
           v-for="club in clubData"
@@ -41,11 +39,16 @@
         ></clubBox>
       </section>
       <section class="right">
-        <div v-if="store.selectedClub" >{{ store.currentAttendance }}</div>
+        <div v-if="store.selectedClub">{{ store.currentAttendance }}</div>
 
-        <tableData v-if="store.filterDate == null"  :headings="headings" :theData="showAllStudents" ></tableData>
+        <tableData
+          v-if="store.filterDate == null"
+          :headings="headings"
+          :theData="showAllStudents"
+        ></tableData>
 
-        <tableData v-if="store.filterDate"
+        <tableData
+          v-if="store.filterDate"
           :headings="headings"
           :theData="returnStudentData"
         ></tableData>
@@ -74,7 +77,7 @@ export default defineComponent({
     store.getData();
 
     const input = ref<string>("");
-    const filtersAttendance: Array<string> = ["All","Absent", "Present"];
+    const filtersAttendance: Array<string> = ["All", "Absent", "Present"];
     const filtersDate: Array<string> = ["1/4", "1.2"];
     const currentFilterAttendance = ref<string>("Select Filter");
     const currentFilterDate = ref<string>("Select Date");
@@ -101,11 +104,10 @@ export default defineComponent({
       this.currentFilterAttendance = param;
       this.changeAttendance();
     },
-     changeFilterDate(param: string) {
-       this.currentFilterDate = param;
-       this.store.pushFilterDate(param)
-       this.changeDate();
-
+    changeFilterDate(param: string) {
+      this.currentFilterDate = param;
+      this.store.pushFilterDate(param);
+      this.changeDate();
     },
     changeAttendance() {
       this.attendance = !this.attendance;
@@ -113,9 +115,6 @@ export default defineComponent({
     changeDate() {
       this.date = !this.date;
     },
-    
-
-
   },
 
   computed: {
@@ -130,16 +129,15 @@ export default defineComponent({
     },
 
     returnStudentData(currentList: object) {
-
-
-
       if (this.currentFilterAttendance == "Present") {
-        return this.store.attendanceAtDate.filter((student) => student.status == this.currentFilterAttendance);
+        return this.store.attendanceAtDate.filter(
+          (student) => student.status == this.currentFilterAttendance
+        );
       } else if (this.currentFilterAttendance == "Absent") {
-
-        return this.store.attendanceAtDate.filter((student) => student.status == this.currentFilterAttendance);
+        return this.store.attendanceAtDate.filter(
+          (student) => student.status == this.currentFilterAttendance
+        );
       } else if (this.currentFilterAttendance == "All") {
-
         return this.store.attendanceAtDate;
       }
     },

@@ -12,15 +12,14 @@ type clubData = {
   officalClass: string;
   numbOfAttendence: string;
   numbOfAbsent: string;
-
 };
 
 type studentsAtDate = {
   firstName: string;
   lastName: string;
-  status: string,
-  uid: string,
-}
+  status: string;
+  uid: string;
+};
 
 interface dataRes {
   fetchURL: string;
@@ -29,10 +28,10 @@ interface dataRes {
   currentAttendance: clubData | null;
   selectedClub: boolean;
   getDates: boolean;
-  listOfDates: Array<number|string>;
-  currentClubCode: string | null,
-  attendanceAtDate: studentsAtDate | Array<object>,
-  filterDate: string | null,
+  listOfDates: Array<number | string>;
+  currentClubCode: string | null;
+  attendanceAtDate: studentsAtDate | Array<object>;
+  filterDate: string | null;
 }
 
 export const useStore = defineStore("global", {
@@ -44,9 +43,9 @@ export const useStore = defineStore("global", {
     selectedClub: false,
     getDates: false,
     listOfDates: [],
-    currentClubCode: null, 
+    currentClubCode: null,
     attendanceAtDate: [],
-    filterDate:null,
+    filterDate: null,
   }),
   getters: {},
   actions: {
@@ -60,40 +59,38 @@ export const useStore = defineStore("global", {
     },
 
     pushCurrentAttendance(param: clubData) {
-
       this.currentAttendance = param;
-      console.log(this.currentAttendance)
+      console.log(this.currentAttendance);
       this.selectedClub = true;
-
     },
-    pushListOfDates(param: Array<number|string>){
-      this.listOfDates = param
-      console.log(this.listOfDates)
-      this.getDates = true
+    pushListOfDates(param: Array<number | string>) {
+      this.listOfDates = param;
+      console.log(this.listOfDates);
+      this.getDates = true;
     },
-    pushClubCode( param:any){
-      this.currentClubCode = param
-      console.log(this.currentClubCode)
+    pushClubCode(param: any) {
+      this.currentClubCode = param;
+      console.log(this.currentClubCode);
     },
-    pushFilterDate( param: string | null){
-      this.filterDate = param
-    },
-
-    pushAttendanceAtDate(param: studentsAtDate ){
-      this.attendanceAtDate = param
-      console.log(this.attendanceAtDate)
+    pushFilterDate(param: string | null) {
+      this.filterDate = param;
     },
 
-    clearData(){
-      this.clubList = null
-      this.loading = false
-      this.currentAttendance = null
+    pushAttendanceAtDate(param: studentsAtDate) {
+      this.attendanceAtDate = param;
+      console.log(this.attendanceAtDate);
+    },
 
-      this.getDates = false
-      this.listOfDates = []
-      this.currentClubCode = null
-      this.attendanceAtDate = []
-      this.filterDate = null
+    clearData() {
+      this.clubList = null;
+      this.loading = false;
+      this.currentAttendance = null;
+
+      this.getDates = false;
+      this.listOfDates = [];
+      this.currentClubCode = null;
+      this.attendanceAtDate = [];
+      this.filterDate = null;
     },
   },
 });
