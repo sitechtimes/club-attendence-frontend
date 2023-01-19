@@ -1,104 +1,41 @@
 <template>
   <div class="modal-backdrop">
-    <div modal>
-      <slot name="header"> 
-      </slot>
-
-      <slot name="body">
-<Choice></Choice>
-      </slot>
-
-      <slot name="footer">
-
-      </slot>
+    <div class="calendar">
+      <Calendar></Calendar>
     </div>
-
-    <Button @click="close">Close Modal></Button>
-
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Choice from '../components/Choice.vue'
-import Button from '../components/Button.vue'
-  export default defineComponent( {
-    name:'Modal',
-    components: {
-      Button,
-      Choice
-    },
-    props: [],
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-    },
-  })
+import { defineComponent } from "vue";
+import { useClubActivity } from "../stores/clubActivity";
+import Calendar from "../components/Calendar.vue";
+import Button from "../components/Button.vue";
+export default defineComponent({
+  name: "Modal",
+  components: {
+    Button,
+    Calendar,
+  },
+  setup() {
+    const clubActivity = useClubActivity();
+
+    return { clubActivity };
+  },
+});
 </script>
 
 <style>
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal {
-  background: #FFFFFF;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header,
-.modal-footer {
-  padding: 15px;
-  display: flex;
-}
-
-.modal-header {
-  position: relative;
-  border-bottom: 1px solid #eeeeee;
-  color: #4AAE9B;
-  justify-content: space-between;
-}
-
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.modal-body {
-  position: relative;
-  padding: 20px 10px;
-}
-
-.btn-close {
+.calendar {
+  background: #2b4450;
+  height: 60rem;
+  width: 100rem;
+  border-radius: 3rem;
   position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  font-size: 20px;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4AAE9B;
-  background: transparent;
-}
-
-.btn-green {
-  color: white;
-  background: #4AAE9B;
-  border: 1px solid #4AAE9B;
-  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
 }
 </style>
