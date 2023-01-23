@@ -3,7 +3,7 @@
         <button @click=" changeStatus() " >{{currentFilter}}</button>
         <div v-if="status" class="filters">
 
-            <button v-if="getAttendanceAtDate" v-for="param in prop" :key="param" @click="changeFilter(param), fetchAttendance()" >{{ param }}</button>
+            <button v-if="getAttendanceAtDate" v-for="param in prop" :key="param" @click="changeFilter(param), store.fetchAttendance()" >{{ param }}</button>
 
             
             <button v-if="getAttendanceAtDate == false" v-for="param in prop" :key="param" @click="changeFilter(param)" >{{ param }}</button>
@@ -53,25 +53,7 @@ import {useStore} from "@/stores/counter"
             }
         },
         methods:{
-            async fetchAttendance() {
-                console.log('hi')
-                const postData = { clubCode: this.store.currentClubCode, attendenceDate: this.store.filterDate};
 
-                await fetch(this.store.fetchURL + "/getClubAttendence", {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    credentials: "same-origin",
-                    headers: {
-                    "Content-Type": "application/json",
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    redirect: "follow",
-                    referrerPolicy: "no-referrer",
-                    body: JSON.stringify(postData), // body data type must match "Content-Type" header
-                })
-                    .then((res) => res.json())
-                    .then((res) => this.store.pushAttendanceAtDate(res) )}
                     }
     })
 </script>

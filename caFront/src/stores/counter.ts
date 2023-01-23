@@ -40,11 +40,13 @@ interface dataRes {
   currentClubCode: string | null;
   attendanceAtDate: studentsAtDate | Array<studentsAtDate>;
   filterDate: string | null;
+  currentFilterDate: string,
 }
 
 export const useStore = defineStore("global", {
   state: (): dataRes => ({
     fetchURL: "http://localhost:3000",
+    
     clubList: [],
     loading: false,
     currentAttendance: [],
@@ -54,6 +56,7 @@ export const useStore = defineStore("global", {
     currentClubCode: null,
     attendanceAtDate: [],
     filterDate: null,
+    currentFilterDate: "Select Date",
   }),
   getters: {},
   actions: {
@@ -100,5 +103,71 @@ export const useStore = defineStore("global", {
       this.attendanceAtDate = [];
       this.filterDate = null;
     },
+    
+    async getClubData(clubCode: string | undefined,  ) {
+
+
+
+      this.pushClubCode(clubCode)
+      const postData = {
+        clubCode: clubCode,
+      };
+
+      await fetch(this.fetchURL + "/readClub", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(postData), // body data type must match "Content-Type" header
+      })
+        .then((res) => res.json())
+        .then((res) => this.pushCurrentAttendance(res));
+
+      await fetch(this.fetchURL + "/attendence-date", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(postData),
+      } ).then((dates) => dates.json()).then((dates)=> this.pushListOfDates(dates))
+      
+    },
+
+    async fetchAttendance() {
+      console.log('hi')
+      const postData = { clubCode: this.currentClubCode, attendenceDate: this.filterDate};
+
+      await fetch(this.fetchURL + "/getClubAttendence", {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(postData), // body data type must match "Content-Type" header
+      })
+          .then((res) => res.json())
+          .then((res) => this.pushAttendanceAtDate(res) )}
+
+    
+    
+
+
   },
 });
