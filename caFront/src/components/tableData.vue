@@ -6,9 +6,9 @@
       <div
         class="test"
         :class="{
-          present: data.present == true,
-          absent: data.present == false,
-          null: data.present == null,
+          present: data.status === present,
+          absent: data.status === absent,
+          null: data.status == null,
         }"
       >
         <div class="asset osis">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="asset name">
-          {{ data.firstName + " "+  data.lastName }}
+          {{ data.firstName + " " + data.lastName }}
         </div>
 
         <div class="asset grade">
@@ -36,6 +36,12 @@ export default defineComponent({
   props: {
     headings: Array,
     theData: Array<object>,
+  },
+  setup(props) {
+    const present = "present";
+    const absent = "absent";
+
+    return { present, absent };
   },
 });
 </script>
@@ -72,5 +78,8 @@ export default defineComponent({
 }
 .null .asset {
   background-color: inherit;
+}
+.here {
+  background-color: rgb(130, 255, 130);
 }
 </style>

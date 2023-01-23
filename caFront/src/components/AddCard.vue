@@ -65,7 +65,7 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           if (response.status) {
-            if (response.type === "osis") {
+            if (response.type === "OSIS") {
               userDataStore.addOsis(response.value);
               if (userDataStore.user!.grade === "none") {
                 return router.push("/additional-information/grade");
@@ -78,7 +78,7 @@ export default defineComponent({
                 checker();
             }
 
-            if (response.type === "grade") {
+            if (response.type === "Grade") {
               userDataStore.addGrade(response.value);
               if (userDataStore.user!.osis === "none") {
                 return router.push("/additional-information/osis");
@@ -88,7 +88,7 @@ export default defineComponent({
               checker();
             }
 
-            if (response.type === "officalClass") {
+            if (response.type === "Official Class") {
               userDataStore.addOfficallClass(response.value);
               if (userDataStore.user!.osis === "none") {
                 return router.push("/additional-information/osis");
