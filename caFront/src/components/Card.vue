@@ -15,11 +15,12 @@ export default {
   name: "Card",
   props: {
     name: String,
-    postion: String,
+    position: String,
     date: String,
   },
   setup(props) {
-    const ifPresident = props.postion === "president";
+    const ifPresident = props.position === "president";
+
     return { ifPresident };
   },
 };

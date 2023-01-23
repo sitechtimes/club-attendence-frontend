@@ -12,7 +12,7 @@ type UserObject = {
     {
       clubCode: string;
       clubName: string;
-      postion: string;
+      position: string;
     }
   ];
   type: string;

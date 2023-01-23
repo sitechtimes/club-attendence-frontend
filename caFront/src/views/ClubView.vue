@@ -15,7 +15,7 @@
       <Card
         v-for="club in clubs"
         :name="club.clubName"
-        :postion="club.postion"
+        :position="club.position"
         :key="club.clubCode"
       >
       </Card>
