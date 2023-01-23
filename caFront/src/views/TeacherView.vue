@@ -44,7 +44,7 @@
         <tableData
           v-if="store.filterDate == null"
           :headings="headings"
-          :theData="showAllStudents"
+          :theData="store.currentAttendance"
         ></tableData>
 
         <tableData
@@ -79,7 +79,7 @@ export default defineComponent({
     const input = ref<string>("");
     const filtersAttendance: Array<string> = ["All", "Absent", "Present"];
     const filtersDate: Array<string> = ["1/4", "1.2"];
-    const currentFilterAttendance = ref<string>("Select Filter");
+    const currentFilterAttendance = ref<string>("All");
     const currentFilterDate = ref<string>("Select Date");
     const attendance = ref<boolean>(false);
     const date = ref<boolean>(false);
@@ -119,23 +119,21 @@ export default defineComponent({
 
   computed: {
     clubData(): Array<object> {
+      console.log(this.store.clubList)
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
     },
 
-    showAllStudents() {
-      return this.store.currentAttendance;
-    },
 
-    returnStudentData(currentList: object) {
+    returnStudentData(): Array<object> | undefined {
       if (this.currentFilterAttendance == "Present") {
         return this.store.attendanceAtDate.filter(
-          (student) => student.status == this.currentFilterAttendance
+          (student) => student.status == "present"
         );
       } else if (this.currentFilterAttendance == "Absent") {
         return this.store.attendanceAtDate.filter(
-          (student) => student.status == this.currentFilterAttendance
+          (student) => student.status == "absent"
         );
       } else if (this.currentFilterAttendance == "All") {
         return this.store.attendanceAtDate;

@@ -14,32 +14,40 @@ type clubData = {
   numbOfAbsent: string;
 };
 
-type studentsAtDate = {
+interface eachClub {
+  clubName: string;
+  advisor: string;
+  advisorEmail: string;
+}
+
+interface studentsAtDate  {
   firstName: string;
   lastName: string;
   status: string;
   uid: string;
 };
 
+interface studentsAtDate extends Array<studentsAtDate>{}
+
 interface dataRes {
   fetchURL: string;
-  clubList: Array<string> | null;
+  clubList: Array<eachClub> ;
   loading: boolean;
-  currentAttendance: clubData | null;
+  currentAttendance: clubData | Array<clubData>;
   selectedClub: boolean;
   getDates: boolean;
   listOfDates: Array<number | string>;
   currentClubCode: string | null;
-  attendanceAtDate: studentsAtDate | Array<object>;
+  attendanceAtDate: studentsAtDate | Array<studentsAtDate>;
   filterDate: string | null;
 }
 
 export const useStore = defineStore("global", {
   state: (): dataRes => ({
     fetchURL: "http://localhost:3000",
-    clubList: null,
+    clubList: [],
     loading: false,
-    currentAttendance: null,
+    currentAttendance: [],
     selectedClub: false,
     getDates: false,
     listOfDates: [],
@@ -82,9 +90,9 @@ export const useStore = defineStore("global", {
     },
 
     clearData() {
-      this.clubList = null;
+      this.clubList = [];
       this.loading = false;
-      this.currentAttendance = null;
+      this.currentAttendance = [];
 
       this.getDates = false;
       this.listOfDates = [];
