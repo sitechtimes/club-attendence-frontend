@@ -1,22 +1,27 @@
 <template>
   <div class="modal-backdrop">
-    <button @click="close">Close></button>
     <div class="add">
-      <form id="form" @submit.prevent="addClub">
-        <label for="name">Input Code:</label>
-        <input v-model="form.userValue" type="text" required id="name" />
-        <h3>{{ form.userValue }}</h3>
+      <form id="form">
+        <miniButton class="position" @click="clubActivity.closePanel()"
+          >x</miniButton
+        >
+        <span></span>
+        <label for="name">Input Code: </label>
+        <input type="text" required id="name" />
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { useUserDataStore } from "@/stores/userData";
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
+import { useClubActivity } from "../stores/clubActivity";
+import miniButton from "../components/miniButton.vue";
 export default defineComponent({
   name: "AddClub",
-  components: {},
+  components: {
+    miniButton,
+  },
   props: [],
   methods: {
     close() {
@@ -24,40 +29,9 @@ export default defineComponent({
     },
   },
   setup() {
-    const userDataStore = useUserDataStore();
-    const form = reactive({ userValue: "" });
-    async function postData(userData: object) {
-      // Default options are marked with *
-      console.log("ths is post data");
-      await fetch("http://localhost:3000/addclub", {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(userData), // body data type must match "Content-Type" header
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response);
-        });
-    }
-    const addClub = () => {
-      const bundle = {
-        user: userDataStore.user,
-        clubCode: form.userValue,
-      };
-      console.log(bundle);
-      console.log("jumping into postData");
+    const clubActivity = useClubActivity();
 
-      postData(bundle);
-    };
-    return { form, addClub };
+    return { clubActivity };
   },
 });
 </script>
@@ -80,5 +54,10 @@ export default defineComponent({
 }
 #form {
   font-size: 4rem;
+}
+.position {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
 }
 </style>

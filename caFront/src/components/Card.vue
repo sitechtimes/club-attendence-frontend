@@ -1,10 +1,12 @@
 <template>
   <div class="card">
     <div class="half">
-      <h2>{{ name }}</h2>
+      <h3>{{ name }}</h3>
     </div>
-
     <div class="bottom"></div>
+    <div class="container" v-if="ifPresident">
+      <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
+    </div>
   </div>
 </template>
 
@@ -13,7 +15,13 @@ export default {
   name: "Card",
   props: {
     name: String,
+    position: String,
     date: String,
+  },
+  setup(props) {
+    const ifPresident = props.position === "president";
+
+    return { ifPresident };
   },
 };
 </script>
@@ -45,7 +53,11 @@ export default {
   background-color: rgb(252, 66, 66);
 }
 
-.bottom {
+.qrcode {
   position: absolute;
+  width: 5rem;
+  top: 23.5rem;
+  left: 34rem;
+  cursor: pointer;
 }
 </style>

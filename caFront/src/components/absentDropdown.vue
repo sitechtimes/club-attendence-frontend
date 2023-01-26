@@ -1,10 +1,12 @@
 <template>
     <div class="dropdown" >
-        <button @click="changeStatus" >{{currentFilter}}</button>
+        <button @click=" changeStatus() " >{{currentFilter}}</button>
         <div v-if="status" class="filters">
-            <button @click="changeFilter('All')" >All</button>
-            <button @click="changeFilter(prop[0])" >{{prop[0]}}</button>
-            <button @click="changeFilter(prop[1])" >{{prop[1]}}</button>
+
+            <button v-if="getAttendanceAtDate" v-for="param in prop" :key="param" @click="changeFilter(param), store.fetchAttendance()" >{{ param }}</button>
+
+            
+            <button v-if="getAttendanceAtDate == false" v-for="param in prop" :key="param" @click="changeFilter(param)" >{{ param }}</button>
         </div>
 
     </div>
@@ -12,10 +14,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import {useStore} from "@/stores/counter"
     export default defineComponent({
         props:{
             prop:{
-                type: Object,
+                type: Array<string|number>,
                 required: true
             },
             currentFilter:{
@@ -34,27 +37,24 @@ import { defineComponent, ref } from 'vue';
             status:{
                 type:Boolean,
                 required:true,
+            },
+            getAttendanceAtDate: {
+                type: Boolean,
+                required: false,
             }
 
         },
         setup(){
-            // const status = ref<boolean>(false)
-             
+           const store = useStore()
+            
             
             return{
-                // status,
+                store
             }
         },
         methods:{
-            // changeStatus(){
-            //     this.status = !this.status
-            // },
-            // changeFilter(param:string){
-            //     this.currentFilter = param
-            //     this.changeStatus()
-                
-            // }
-        }
+
+                    }
     })
 </script>
 

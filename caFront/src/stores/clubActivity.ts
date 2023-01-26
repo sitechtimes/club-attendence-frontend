@@ -4,6 +4,8 @@ import { defineStore } from "pinia";
 export const useClubActivity = defineStore("clubActivity", {
   state: () => ({
     isOpen: false,
+    isModalVisible: false,
+    isPanelVisible: false,
   }),
   actions: {
     openMenu() {
@@ -11,6 +13,21 @@ export const useClubActivity = defineStore("clubActivity", {
     },
     closeMenu() {
       this.isOpen = false;
+    },
+    showModal() {
+      this.isModalVisible = true;
+      this.isPanelVisible = false;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
+    showPanel() {
+      this.isPanelVisible = true;
+      this.isModalVisible = false;
+      this.isOpen = false;
+    },
+    closePanel() {
+      this.isPanelVisible = false;
     },
   },
 });
