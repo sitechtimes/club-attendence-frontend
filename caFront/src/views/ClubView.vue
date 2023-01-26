@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import Card from "../components/Card.vue";
+import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { defineComponent } from "vue";

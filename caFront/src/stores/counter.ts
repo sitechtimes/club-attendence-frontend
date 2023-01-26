@@ -1,4 +1,3 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 type clubData = {
@@ -126,7 +125,7 @@ export const useStore = defineStore("global", {
         .then((res) => res.json())
         .then((res) => this.pushCurrentAttendance(res));
 
-      await fetch(this.fetchURL + "/attendence-date", {
+      await fetch(this.fetchURL + "get-club-attendence-date", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -150,7 +149,7 @@ export const useStore = defineStore("global", {
         attendenceDate: this.filterDate,
       };
 
-      await fetch(this.fetchURL + "get-club-attendence", {
+      await fetch(this.fetchURL + "get-club-attendence-data", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
