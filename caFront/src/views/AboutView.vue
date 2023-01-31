@@ -4,6 +4,7 @@
     <section class="right" >
       <h2 class="title" > Staten Island Technical High School Club Attendance </h2>  
       <div class="circle"></div>
+      <div class="circle2"></div>
     </section>
 
 
@@ -39,13 +40,25 @@ export default defineComponent({
 }
 .circle{
   position: absolute;
-  z-index: -1;
-
-  width: 1000.27px;
-  height: 400.45px;
+  z-index: 1;
+  width: 1200px;
+height: 900.45px;
+left: -656px;
+top: 438px;
   border-radius: 50%;
   background-color: black;
-  left: -45.6px;
-top: -43.8px;
+
+}
+
+.circle2{
+  position: absolute;
+  background-color: black;
+  border-radius: 100%;
+  z-index: 1;
+  width: 1000px;
+  height: 500px;
+  top: -300px;
+  right: -850px;
+
 }
 </style>
