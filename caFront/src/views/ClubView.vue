@@ -31,6 +31,7 @@
 import Card from "../components/Card.vue";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
+import Camera from "../components/Camera.vue";
 import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
@@ -45,6 +46,7 @@ export default defineComponent({
     Modal,
     Calendar,
     ClubActivity,
+    Camera,
   },
   methods: {
     currentDate() {
