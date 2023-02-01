@@ -1,4 +1,3 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 type clubData = {
@@ -20,18 +19,18 @@ interface eachClub {
   advisorEmail: string;
 }
 
-interface studentsAtDate  {
+interface studentsAtDate {
   firstName: string;
   lastName: string;
   status: string;
   uid: string;
-};
+}
 
-interface studentsAtDate extends Array<studentsAtDate>{}
+interface studentsAtDate extends Array<studentsAtDate> {}
 
 interface dataRes {
   fetchURL: string;
-  clubList: Array<eachClub> ;
+  clubList: Array<eachClub>;
   loading: boolean;
   currentAttendance: clubData | Array<clubData>;
   selectedClub: boolean;
@@ -40,13 +39,13 @@ interface dataRes {
   currentClubCode: string | null;
   attendanceAtDate: studentsAtDate | Array<studentsAtDate>;
   filterDate: string | null;
-  currentFilterDate: string,
+  currentFilterDate: string;
 }
 
 export const useStore = defineStore("global", {
   state: (): dataRes => ({
     fetchURL: "http://localhost:3000",
-    
+
     clubList: [],
     loading: false,
     currentAttendance: [],
@@ -103,12 +102,9 @@ export const useStore = defineStore("global", {
       this.attendanceAtDate = [];
       this.filterDate = null;
     },
-    
-    async getClubData(clubCode: string | undefined,  ) {
 
-
-
-      this.pushClubCode(clubCode)
+    async getClubData(clubCode: string | undefined) {
+      this.pushClubCode(clubCode);
       const postData = {
         clubCode: clubCode,
       };
@@ -141,33 +137,33 @@ export const useStore = defineStore("global", {
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(postData),
-      } ).then((dates) => dates.json()).then((dates)=> this.pushListOfDates(dates))
-      
+      })
+        .then((dates) => dates.json())
+        .then((dates) => this.pushListOfDates(dates));
     },
 
     async fetchAttendance() {
-      console.log('hi')
-      const postData = { clubCode: this.currentClubCode, attendenceDate: this.filterDate};
+      console.log("hi");
+      const postData = {
+        clubCode: this.currentClubCode,
+        attendenceDate: this.filterDate,
+      };
 
       await fetch(this.fetchURL + "/getClubAttendence", {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: JSON.stringify(postData), // body data type must match "Content-Type" header
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(postData), // body data type must match "Content-Type" header
       })
-          .then((res) => res.json())
-          .then((res) => this.pushAttendanceAtDate(res) )}
-
-    
-    
-
-
+        .then((res) => res.json())
+        .then((res) => this.pushAttendanceAtDate(res));
+    },
   },
 });
