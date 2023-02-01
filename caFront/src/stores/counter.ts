@@ -44,7 +44,7 @@ interface dataRes {
 
 export const useStore = defineStore("global", {
   state: (): dataRes => ({
-    fetchURL: "http://localhost:3000",
+    fetchURL: "http://localhost:3000/",
 
     clubList: [],
     loading: false,
@@ -61,7 +61,7 @@ export const useStore = defineStore("global", {
   actions: {
     async getData() {
       this.loading = true;
-      const res = await fetch(this.fetchURL);
+      const res = await fetch(this.fetchURL + "all-club-data");
       const data = await res.json();
 
       this.clubList = data;
@@ -109,7 +109,7 @@ export const useStore = defineStore("global", {
         clubCode: clubCode,
       };
 
-      await fetch(this.fetchURL + "/readClub", {
+      await fetch(this.fetchURL + "one-club-data", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -125,7 +125,7 @@ export const useStore = defineStore("global", {
         .then((res) => res.json())
         .then((res) => this.pushCurrentAttendance(res));
 
-      await fetch(this.fetchURL + "/attendence-date", {
+      await fetch(this.fetchURL + "get-club-attendence-date", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -149,7 +149,7 @@ export const useStore = defineStore("global", {
         attendenceDate: this.filterDate,
       };
 
-      await fetch(this.fetchURL + "/getClubAttendence", {
+      await fetch(this.fetchURL + "get-club-attendence-data", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",

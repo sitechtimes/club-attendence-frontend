@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AddCard from "../../components/AddCard.vue";
+import AddCard from "../../components/InformationCard.vue";
 
 export default defineComponent({
   name: "AdditionalInformation",
