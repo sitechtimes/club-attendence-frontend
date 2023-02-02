@@ -20,7 +20,10 @@
       >
       </Card>
     </div>
-    <Camera v-show="clubActivity.isCameraVisible"></Camera>
+    <div class="scan">
+      <Camera v-show="clubActivity.isCameraVisible"></Camera>
+    </div>
+
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
