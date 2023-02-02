@@ -18,6 +18,7 @@ export const useClubActivity = defineStore("clubActivity", {
     showModal() {
       this.isModalVisible = true;
       this.isPanelVisible = false;
+      this.isCameraVisible = false;
     },
     closeModal() {
       this.isModalVisible = false;
@@ -26,12 +27,16 @@ export const useClubActivity = defineStore("clubActivity", {
       this.isPanelVisible = true;
       this.isModalVisible = false;
       this.isOpen = false;
+      this.isCameraVisible = false;
+
     },
     closePanel() {
       this.isPanelVisible = false;
     },
     openCamera() {
       this.isCameraVisible = true;
+      this.isModalVisible = false;
+      this.isPanelVisible = false;
     },
     closeCamera() {
       this.isCameraVisible = false;
