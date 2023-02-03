@@ -5,7 +5,7 @@
     </div>
     <div class="bottom"></div>
     <div class="container" v-if="ifPresident">
-      <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
+      <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
     </div>
   </div>
 </template>

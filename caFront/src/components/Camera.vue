@@ -9,7 +9,9 @@
     <miniButton
       class="position"
       @click="clubActivity.closeCamera()"
-    ></miniButton>
+    >
+
+  </miniButton>
   </div>
 </template>
 
