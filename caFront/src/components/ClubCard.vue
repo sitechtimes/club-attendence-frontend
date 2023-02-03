@@ -1,27 +1,38 @@
 <template>
   <div class="card">
     <div class="half">
-      <h3>{{ name }}</h3>
+      <h3>{{ name }}{{ clubCode }}</h3>
     </div>
     <div class="bottom"></div>
-    <div class="container" v-if="ifPresident">
+    <div class="container" v-if="ifPresident" @click="qrCode.openMenu">
       <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
     </div>
+  </div>
+  <div class="overlap">
+    <QRScanner :clubCode="clubCode" v-show="qrCode.isQrCodeOpen"></QRScanner>
   </div>
 </template>
 
 <script lang="ts">
+import QRScanner from "@/components/QRScanner.vue";
+import { useQrCode } from "../stores/qrCode";
+
 export default {
   name: "Card",
+  components: {
+    QRScanner,
+  },
   props: {
     name: String,
     position: String,
     date: String,
+    clubCode: String,
   },
   setup(props) {
     const ifPresident = props.position === "president";
-
-    return { ifPresident };
+    const qrCode = useQrCode();
+    const clubCode = props.clubCode;
+    return { ifPresident, clubCode, qrCode };
   },
 };
 </script>

@@ -16,6 +16,7 @@
         v-for="club in clubs"
         :name="club.clubName"
         :position="club.position"
+        :clubCode="club.clubCode"
         :key="club.clubCode"
       >
       </Card>
@@ -23,6 +24,7 @@
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
+
     <ClubActivity />
   </div>
 </template>
