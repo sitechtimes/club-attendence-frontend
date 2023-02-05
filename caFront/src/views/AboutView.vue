@@ -1,7 +1,10 @@
 <template>
   <div class="stevenHomePagePOG">
     <section class="left" > 
-      <img class="see"  src="../assets/logos/Seegal.png" alt="">
+      <div class="square">
+        <img class="see"  src="../assets/logos/Seegal.png" alt="">
+
+      </div>
 
     </section>
     <section class="right" >
@@ -96,10 +99,19 @@ export default defineComponent({
 <style scoped>
 
 
+.left{
+  background-color: #F3C87C;
+  padding: 5rem;
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+
+}
 .see{
   position: relative;
   z-index: 2;
 }
+
 .box{
   width: 40vw;
   text-align: center;
@@ -126,13 +138,7 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
 }
-.left{
-  background-color: #F3C87C;
-  height: 100vh;
-  width: 40vw;
-  display: flex;
-  justify-content: center;
-}
+
 .right{
   height: 100vh;
   width: 60vw;
