@@ -1,16 +1,33 @@
 <template>
-  <div class="page">
-    <h1 class="title">Staten Island Technical High School Club Attendance</h1>
-    <div class="googleButton">
-      <button class="OAuth" @click="login">
-        <h2>Sign In With Google</h2>
-        <img
-          class="g-logo"
-          src="../components/icons/google-logo.png"
-          alt="g-logo"
-        />
-      </button>
+  <div class="stevenHomePagePOG">
+    <div class="left" > 
+ 
+        <img class="see"  src="../assets/logos/saegal.svg" alt="">
+
+
+
     </div>
+    <section class="right" >
+      <div class="box">
+        <div class="title">Staten Island Technical High School Club Attendance</div>
+
+          <button class="OAuth" @click="login">
+            <img
+              class="g-logo"
+              src="../components/icons/google-logo.png"
+              alt="g-logo"
+            />
+            <h3>Sign In With Google</h3>
+
+          </button>
+  
+      </div>
+      
+      <div class="circle"></div>
+      <div class="circle2"></div>
+    </section>
+
+
   </div>
 </template>
 
@@ -80,18 +97,89 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.page {
-  background-color: black;
-  height: 100vh;
+
+
+.left{
+  background-color: #F3C87C;
+
   padding: 5rem;
-  text-align: center;
+  width: 40vw;
+  justify-content: space-around;
+  display: flex;
+  overflow: hidden;
+
+
+
+}
+.see{
+  position: relative;
+  z-index: 2;
+  filter:drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) brightness(190%);
+  
+
+  
+
+
 }
 
-.title {
-  font-size: 4rem;
-  color: rgb(255, 255, 255);
-  font-weight: 400;
+.box{
+  width: 40vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+  font-size: 5vw;
 }
+/* .OAuth{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 0.5rem;
+  border-width: 0.1rem;
+  background-color: white;
+  box-shadow:  7px 10px 10px grey ;
+}
+.g-logo{
+  height: 5rem;
+} */
+.stevenHomePagePOG{
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.right{
+ 
+  height: 100vh;
+  width: 60vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+.circle{
+  position: absolute;
+  z-index: 1;
+  width: 65%;
+height: 100%;
+left: -30%;
+top: 50%;
+  border-radius: 50%;
+ background-color: #000000 ;
+}
+
+.circle2{
+  position: absolute;
+  background-color:#000000 ;
+  border-radius: 100%;
+  z-index: 1;
+  width: 60%;
+  height: 40%;
+  top: -20%;
+  right: -50%;
+
+}
+
+
 .OAuth {
   margin-top: 5rem;
   height: 50rem;
@@ -99,7 +187,7 @@ export default defineComponent({
   width: 40rem;
   background-color: rgb(34, 34, 34);
   color: rgb(255, 255, 255);
-  animation: float 3s ease-in-out infinite;
+
 }
 .OAuth h2 {
   position: relative;
@@ -128,21 +216,17 @@ export default defineComponent({
 }
 
 .OAuth:hover {
-  background-color: rgba(88, 88, 88, 0.444);
+  background-color: rgb(22, 22, 22);
 }
 .OAuth:hover h2:before {
   width: 100%;
 }
 
-@keyframes float {
-  0% {
-    transform: translate(0, 0px);
-  }
-  50% {
-    transform: translate(0, 20px);
-  }
-  100% {
-    transform: translate(0, 0px);
-  }
-}
-</style>
+
+
+
+
+
+
+
+</style>  
