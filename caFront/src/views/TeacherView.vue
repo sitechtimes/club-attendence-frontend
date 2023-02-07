@@ -77,10 +77,17 @@ export default defineComponent({
     store.getData();
 
     const input = ref<string>("");
-    const filtersAttendance: Array<string> = ["All", "Absent", "Present"];
-    const filtersDate: Array<string> = ["1/4", "1.2"];
-    const currentFilterAttendance = ref<string>("All");
-    const currentFilterDate = ref<string>("Select Date");
+
+    // const filtersAttendance: Array<string> = ["All", "Absent", "Present"];
+ 
+    // const currentFilterAttendance = ref<string>("All");
+    // const currentFilterDate = ref<string>("Select Date");
+
+    const filtersAttendance = ref(store.filtersAttendance);
+  
+    const currentFilterAttendance = ref(store.currentFilterAttendance);
+    const currentFilterDate = ref(store.currentFilterDate)
+
     const attendance = ref<boolean>(false);
     const date = ref<boolean>(false);
     const headings = ["Osis", "Name", "Grade", "Class"];
@@ -94,7 +101,7 @@ export default defineComponent({
       attendance,
       date,
       currentFilterDate,
-      filtersDate,
+   
       store,
     };
   },
