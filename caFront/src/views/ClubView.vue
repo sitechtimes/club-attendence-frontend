@@ -16,6 +16,7 @@
         v-for="club in clubs"
         :name="club.clubName"
         :position="club.position"
+        :clubCode="club.clubCode"
         :key="club.clubCode"
       >
       </Card>
@@ -23,12 +24,13 @@
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
+
     <ClubActivity />
   </div>
 </template>
 
 <script lang="ts">
-import Card from "../components/Card.vue";
+import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import { defineComponent } from "vue";
