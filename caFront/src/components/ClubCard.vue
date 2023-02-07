@@ -1,15 +1,19 @@
 <template>
   <div class="card">
     <div class="half">
-      <h3>{{ name }}{{ clubCode }}</h3>
+      <h3>{{ clubName }} {{ clubCode }}</h3>
     </div>
     <div class="bottom"></div>
-    <div class="container" v-if="ifPresident" @click="qrCode.openMenu">
+    <div
+      class="container"
+      v-if="ifPresident"
+      @click="qrCode.openMenu(clubCode, clubName)"
+    >
       <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
     </div>
   </div>
   <div class="overlap">
-    <QRScanner :clubCode="clubCode" v-show="qrCode.isQrCodeOpen"></QRScanner>
+    <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
   </div>
 </template>
 
@@ -23,7 +27,7 @@ export default {
     QRScanner,
   },
   props: {
-    name: String,
+    clubName: String,
     position: String,
     date: String,
     clubCode: String,
@@ -31,8 +35,8 @@ export default {
   setup(props) {
     const ifPresident = props.position === "president";
     const qrCode = useQrCode();
-    const clubCode = props.clubCode;
-    return { ifPresident, clubCode, qrCode };
+
+    return { ifPresident, qrCode };
   },
 };
 </script>

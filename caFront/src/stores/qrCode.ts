@@ -3,35 +3,35 @@ import { defineStore } from "pinia";
 interface QrCode {
   base64QrCode: string | null;
   isQrCodeOpen: boolean;
-  clubData: ClubData;
+  clubName: string | null;
+  clubCode: string | null;
 }
 type ClubData = {
   clubCode: string | null;
-  dateOfToday: string | null;
+  dateOfToday: string;
 };
 
 export const useQrCode = defineStore("qrCode", {
   state: (): QrCode => ({
     base64QrCode: null,
-    clubData: { clubCode: null, dateOfToday: null },
     isQrCodeOpen: false,
+    clubName: null,
+    clubCode: null,
   }),
   getters: {},
   actions: {
-    openMenu() {
+    openMenu(clubCode: string, clubName: string) {
       this.isQrCodeOpen = true;
+      this.clubName = clubName;
+      this.clubCode = clubCode;
     },
     closeMenu() {
       this.isQrCodeOpen = false;
       this.base64QrCode = null;
+      this.clubName = null;
+      this.clubCode = null;
     },
-    defineClubCode(clubCode: string) {
-      this.clubData.clubCode = clubCode;
-    },
-    defineDateOfToday(clubCode: string) {
-      this.clubData.dateOfToday = clubCode;
-    },
-    async getQrCode() {
+    async getQrCode(clubData: ClubData) {
       await fetch("http://localhost:3000/get-qrcode", {
         method: "POST",
         mode: "cors",
@@ -43,7 +43,7 @@ export const useQrCode = defineStore("qrCode", {
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(this.clubData), // body data type must match "Content-Type" header
+        body: JSON.stringify(clubData), // body data type must match "Content-Type" header
       })
         .then((res) => res.json())
         .then((res) => (this.base64QrCode = res));
