@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { QrcodeStream } from "vue-qrcode-reader";
+import { QrcodeStream } from "vue3-qrcode-reader";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
