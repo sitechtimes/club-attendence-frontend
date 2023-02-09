@@ -27,15 +27,15 @@ export default defineComponent({
     };
   },
   methods: {
-    onDecode(result) {
     onDecode(result: string) {
       this.result = result;
     },
-  },
-    async onInit(promise) {
+
+    async onInit(promise: any) {
+      kckc;
       try {
         await promise;
-      } catch (error) {
+      } catch (error: any) {
         if (error.name === "NotAllowedError") {
           this.error = "ERROR: you need to grant camera access permission";
         } else if (error.name === "NotFoundError") {
