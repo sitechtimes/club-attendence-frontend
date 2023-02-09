@@ -1,30 +1,30 @@
 <template>
-  <section>
-    <GlobalCard>
-      <div class="half">
-        <h3>{{ clubName }}{{ clubCode }}</h3>
-      </div>
-      <div class="bottom"></div>
-      <div class="container" v-if="ifPresident" @click="qrCode.openMenu">
-        <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
-      </div>
-    </GlobalCard>
-  </section>
-
+  <div class="card">
+    <div class="half">
+      <h3>{{ clubName }} {{ clubCode }}</h3>
+    </div>
+    <div class="bottom"></div>
+    <div
+      class="container"
+      v-if="ifPresident"
+      @click="qrCode.openMenu(clubCode, clubName)"
+    >
+      <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
+    </div>
+  </div>
   <div class="overlap">
     <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
   </div>
 </template>
 
 <script lang="ts">
-import QRScanner from "../components/QRScanner.vue";
+import QRScanner from "@/components/QRScanner.vue";
 import { useQrCode } from "../stores/qrCode";
-import GlobalCard from "../components/GlobalCard.vue";
+
 export default {
   name: "Card",
   components: {
     QRScanner,
-    GlobalCard,
   },
   props: {
     clubName: String,

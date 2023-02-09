@@ -1,15 +1,15 @@
 <template>
   <div class="modal-backdrop">
-   
-<GlobalCard>
-  <form id="form">
-    <miniButton class="position" @click="clubActivity.closePanel()">x</miniButton>
-    <span></span>
-    <label for="name">Input Code: </label>
-    <input type="text" required id="name" />
-  </form>
-</GlobalCard>
-
+    <div class="add">
+      <form id="form">
+        <miniButton class="position" @click="clubActivity.closePanel()"
+          >x</miniButton
+        >
+        <span></span>
+        <label for="name">Input Code: </label>
+        <input type="text" required id="name" />
+      </form>
+    </div>
   </div>
 </template>
 
@@ -17,12 +17,10 @@
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
-import GlobalCard from "../components/GlobalCard.vue"
 export default defineComponent({
   name: "AddClub",
   components: {
     miniButton,
-    GlobalCard
   },
   props: [],
   methods: {
@@ -39,10 +37,23 @@ export default defineComponent({
 </script>
 
 <style>
-
+.add {
+  background: white;
+  height: 30rem;
+  width: 50rem;
+  border-radius: 1rem;
+  border: 1px solid black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 #form {
-  font-size: 3.25rem;
-
+  font-size: 4rem;
 }
 .position {
   position: fixed;
