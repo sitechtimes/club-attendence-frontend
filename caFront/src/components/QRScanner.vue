@@ -3,12 +3,10 @@
     <div class="create-attendence">
       <miniButton class="position" @click="qrCode.closeMenu()">x</miniButton>
       <div>
-        <h3>
-          You want to record attendance for {{ qrCode.clubName }} for today?
-        </h3>
+        <h3>You want to create Attendance for today?</h3>
         <h3>{{ currentDate }}</h3>
         <button @click="getQrCode" v-if="qrCode.base64QrCode === null">
-          <h3>Yes {{ qrCode.clubCode }}</h3>
+          <h3>Yes {{ clubCode }}</h3>
         </button>
         <img
           v-if="qrCode.base64QrCode !== null"
@@ -25,29 +23,30 @@ import { defineComponent } from "vue";
 import { useQrCode } from "../stores/qrCode";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
-  name: "qrcode",
+  name: "AddClub",
   components: {
     miniButton,
   },
-  props: {},
+  props: { clubCode: String },
   methods: {
     close() {
       this.$emit("close");
     },
   },
-  setup() {
+  setup(props) {
     const qrCode = useQrCode();
     const date = new Date();
 
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-    let currentDate = `${month}/${day}/${year}`;
+    let currentDate = `${day}/${month}/${year}`;
 
-    const bundle = { clubCode: qrCode.clubCode, dateOfToday: currentDate };
+    const bundle = { clubCode: props.clubCode, dateOfToday: currentDate };
 
     function getQrCode() {
       qrCode.getQrCode(bundle);
+      console.log(props.clubCode);
       console.log(currentDate);
     }
 

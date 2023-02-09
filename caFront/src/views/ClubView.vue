@@ -14,7 +14,7 @@
     <div class="clublist">
       <Card
         v-for="club in clubs"
-        :clubName="club.clubName"
+        :name="club.clubName"
         :position="club.position"
         :clubCode="club.clubCode"
         :key="club.clubCode"
