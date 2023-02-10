@@ -60,7 +60,7 @@ export default defineComponent({
   setup() {
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
-    const clubs = userDataStore.user!.positionOfClub;
+    const clubs = userDataStore.user!.clubData;
 
     return { userDataStore, clubs, clubActivity };
   },
