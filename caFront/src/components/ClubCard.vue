@@ -1,15 +1,19 @@
 <template>
   <div class="card">
     <div class="half">
-      <h3>{{ name }}{{ clubCode }}</h3>
+      <h3>{{ clubName }}</h3>
     </div>
     <div class="bottom"></div>
-    <div class="container" v-if="ifPresident" @click="qrCode.openMenu">
+    <div
+      class="container"
+      v-if="ifPresident"
+      @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+    >
       <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
     </div>
   </div>
   <div class="overlap">
-    <QRScanner :clubCode="clubCode" v-show="qrCode.isQrCodeOpen"></QRScanner>
+    <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
   </div>
 </template>
 
@@ -18,12 +22,12 @@ import QRScanner from "@/components/QRScanner.vue";
 import { useQrCode } from "../stores/qrCode";
 
 export default {
-  name: "Card",
+  name: "ClubCard",
   components: {
     QRScanner,
   },
   props: {
-    name: String,
+    clubName: String,
     position: String,
     date: String,
     clubCode: String,
@@ -31,8 +35,8 @@ export default {
   setup(props) {
     const ifPresident = props.position === "president";
     const qrCode = useQrCode();
-    const clubCode = props.clubCode;
-    return { ifPresident, clubCode, qrCode };
+    let dateOfToday = new Date().toLocaleDateString();
+    return { ifPresident, qrCode, dateOfToday };
   },
 };
 </script>

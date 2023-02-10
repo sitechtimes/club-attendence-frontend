@@ -27,11 +27,7 @@ export default defineComponent({
       store,
     };
   },
-  methods: {
-
-
-    
-  },
+  methods: {},
 });
 </script>
 
