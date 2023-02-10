@@ -60,12 +60,12 @@ li {
   list-style: none;
   font-size: 2rem;
   width: 18rem;
-  height: 3rem;
   border: 3px solid black;
   border-radius: 1rem;
   background-color: #f3c87c;
 }
 li button {
+  height: 4rem;
   font-size: inherit;
   border: none;
   background-color: transparent;
