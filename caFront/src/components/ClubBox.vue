@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useStore } from "@/stores/counter";
+import { teacherStore } from '@/stores/teacherVueStore'
 
 export default defineComponent({
   props: {
@@ -21,7 +21,7 @@ export default defineComponent({
     clubCode: String,
   },
   setup() {
-    const store = useStore();
+    const store = teacherStore();
 
     return {
       store,

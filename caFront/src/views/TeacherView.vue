@@ -17,6 +17,22 @@
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
+      <div class="right">
+        <div v-if="store.selectedClub">{{ store.currentAttendance }}</div>
+
+        <tableData
+          v-if="store.filterDate == null"
+          :headings="headings"
+          :theData="store.currentAttendance"
+        ></tableData>
+
+        <tableData
+          v-if="store.filterDate"
+          :headings="headings"
+          :theData="returnStudentData"
+        ></tableData>
+      </div>
+
     </section>
 
   </div>
@@ -24,14 +40,19 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import teacherStore from "../stores/teacherVueStore"
+import { teacherStore } from '@/stores/teacherVueStore'
+import clubBox from '@/components/ClubBox.vue'
 
 export default defineComponent({
+  components:{
+    clubBox
+  },
   setup () {
     const store = teacherStore()
     const input = ref<string>("")
-
-    return {store, input }
+    store.getData()
+    const headings = ["Osis", "Name", "Grade", "Class"];
+    return {store, input, headings }
   },
   computed:{
     clubData(): Array<object> {
