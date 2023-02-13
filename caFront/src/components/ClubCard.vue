@@ -10,8 +10,6 @@
       @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
     >
       <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-
-      <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
     </div>
   </div>
   <div class="overlap">
