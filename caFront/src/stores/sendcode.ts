@@ -1,23 +1,22 @@
 import { defineStore } from "pinia";
 
-interface dataRes {
+interface ClubState {
   fetchURL: string;
-  loading: boolean;
-  selectedClub: boolean;
-  getDates: boolean;
   currentClubCode: string | null;
 }
 
-export const useStore = defineStore("global", {
-  state: (): dataRes => ({
+export const useClubStore = defineStore("clubData", {
+  state: (): ClubState => ({
     fetchURL: "http://localhost:3000/",
-    clubList: [],
-    loading: false,
     currentClubCode: null,
   }),
-
- actions: {
-   async getClubData(clubCode: string | undefined) {
+  getters: {},
+  actions: {
+    pushClubCode(param: any) {
+      this.currentClubCode = param;
+      console.log(this.currentClubCode);
+    },
+    async getClubData(clubCode: string | undefined) {
       this.pushClubCode(clubCode);
       const postData = {
         clubCode: clubCode,
@@ -35,8 +34,7 @@ export const useStore = defineStore("global", {
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(postData), // body data type must match "Content-Type" header
-      })
-        .then((res) => res.json())
-        .then((res) => this.pushCurrentAttendance(res));
+      });
     },
-  })
+  },
+});

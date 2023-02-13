@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="clubstore.getClubData(clubCode)">
     <div class="half">
       <h3>{{ name }}{{ clubCode }}</h3>
     </div>
@@ -8,20 +8,15 @@
       <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
     </div>
   </div>
-  <div class="overlap">
-    <QRScanner :clubCode="clubCode" v-show="qrCode.isQrCodeOpen"></QRScanner>
-  </div>
 </template>
 
 <script lang="ts">
-import QRScanner from "@/components/QRScanner.vue";
+import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 
 export default {
   name: "Card",
-  components: {
-    QRScanner,
-  },
+  components: {},
   props: {
     name: String,
     position: String,
@@ -30,9 +25,10 @@ export default {
   },
   setup(props) {
     const ifPresident = props.position === "president";
+    const clubstore = useClubStore();
     const qrCode = useQrCode();
     const clubCode = props.clubCode;
-    return { ifPresident, clubCode, qrCode };
+    return { ifPresident, clubCode, qrCode, clubstore };
   },
 };
 </script>

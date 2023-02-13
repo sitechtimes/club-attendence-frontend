@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useStore } from "@/stores/counter";
+import { useStore } from "../stores/counter";
 
 export default defineComponent({
   props: {
@@ -27,11 +27,7 @@ export default defineComponent({
       store,
     };
   },
-  methods: {
-
-
-    
-  },
+  methods: {},
 });
 </script>
 
