@@ -119,12 +119,11 @@ export default defineComponent({
 
   computed: {
     clubData(): Array<object> {
-      console.log(this.store.clubList)
+      console.log(this.store.clubList);
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
     },
-
 
     returnStudentData(): Array<object> | undefined {
       if (this.currentFilterAttendance == "Present") {

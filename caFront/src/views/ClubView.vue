@@ -14,8 +14,9 @@
     <div class="clublist">
       <Card
         v-for="club in clubs"
-        :name="club.clubName"
+        :clubName="club.clubName"
         :position="club.position"
+        :clubCode="club.clubCode"
         :key="club.clubCode"
       >
       </Card>
@@ -27,12 +28,13 @@
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
+
     <ClubActivity />
   </div>
 </template>
 
 <script lang="ts">
-import Card from "../components/Card.vue";
+import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 import Modal from "../components/Modal.vue";
 import Camera from "../components/Camera.vue";
@@ -64,7 +66,7 @@ export default defineComponent({
   setup() {
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
-    const clubs = userDataStore.user!.positionOfClub;
+    const clubs = userDataStore.user!.clubData;
 
     return { userDataStore, clubs, clubActivity };
   },

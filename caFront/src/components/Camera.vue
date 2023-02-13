@@ -32,7 +32,6 @@ export default defineComponent({
     },
 
     async onInit(promise: any) {
-      kckc;
       try {
         await promise;
       } catch (error: any) {
@@ -66,5 +65,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped></style>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import AboutView from "../views/AboutView.vue"
 import ClubView from "../views/ClubView.vue"
 import HomeView from '../views/HomeView.vue'
 import TeacherView from '../views/TeacherView.vue'
@@ -12,6 +13,13 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    {
+      path: "/about",
+      name: "about",
+      component: AboutView,
+    
+    },
+
 
     {
       path: "/qrcode",
