@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="clubstore.getClubData(clubCode)">
     <div class="half">
       <h3>{{ clubName }}</h3>
     </div>
@@ -9,7 +9,7 @@
       v-if="ifPresident"
       @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
     >
-      <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
+      <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
     </div>
   </div>
   <div class="overlap">
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import QRScanner from "@/components/QRScanner.vue";
+import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 
 export default {
@@ -34,6 +34,7 @@ export default {
   },
   setup(props) {
     const ifPresident = props.position === "president";
+    const clubstore = useClubStore();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
     return { ifPresident, qrCode, dateOfToday };
