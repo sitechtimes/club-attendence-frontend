@@ -1,12 +1,19 @@
 <template>
   <div class="card" @click="clubstore.getClubData(clubCode)">
     <div class="half">
-      <h3>{{ name }}{{ clubCode }}</h3>
+      <h3>{{ clubName }}</h3>
     </div>
     <div class="bottom"></div>
-    <div class="container" v-if="ifPresident" @click="qrCode.openMenu">
-      <img class="qrcode" src="../assets/logos/scanqrcode.svg" alt="" />
+    <div
+      class="container"
+      v-if="ifPresident"
+      @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+    >
+      <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
     </div>
+  </div>
+  <div class="overlap">
+    <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
   </div>
 </template>
 
@@ -15,10 +22,12 @@ import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 
 export default {
-  name: "Card",
-  components: {},
+  name: "ClubCard",
+  components: {
+    QRScanner,
+  },
   props: {
-    name: String,
+    clubName: String,
     position: String,
     date: String,
     clubCode: String,
@@ -27,8 +36,8 @@ export default {
     const ifPresident = props.position === "president";
     const clubstore = useClubStore();
     const qrCode = useQrCode();
-    const clubCode = props.clubCode;
-    return { ifPresident, clubCode, qrCode, clubstore };
+    let dateOfToday = new Date().toLocaleDateString();
+    return { ifPresident, qrCode, dateOfToday };
   },
 };
 </script>

@@ -3,12 +3,17 @@
     <div class="container">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
         <li><button @click="clubActivity.showPanel()">Add Club</button></li>
-        <li><button>Scan QR Code</button></li>
+        <li>
+          <button @click="clubActivity.openCamera()">Scan QR Code</button>
+        </li>
       </ul>
       <button class="open-panel" @click="show"><h2>+</h2></button>
     </div>
     <div>
       <AddClub v-show="clubActivity.isPanelVisible"></AddClub>
+    </div>
+    <div>
+      <Camera v-show="clubActivity.isCameraVisible"></Camera>
     </div>
   </div>
 </template>
@@ -17,10 +22,12 @@
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import AddClub from "../components/AddClub.vue";
+import Camera from "../components/Camera.vue";
 export default defineComponent({
   name: "ClubActivity",
   components: {
     AddClub,
+    Camera,
   },
   setup() {
     const clubActivity = useClubActivity();
@@ -32,7 +39,7 @@ export default defineComponent({
         clubActivity.openMenu();
       }
     }
-    return { clubActivity, show};
+    return { clubActivity, show };
   },
   data: () => {
     return {

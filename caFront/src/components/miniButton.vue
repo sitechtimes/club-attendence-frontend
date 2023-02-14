@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
 .staticbutton {
-  background-color: red;
+  background-color: white;
   font-size: 4rem;
   height: 6rem;
   width: 6rem;
