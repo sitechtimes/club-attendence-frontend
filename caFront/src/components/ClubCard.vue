@@ -20,7 +20,7 @@
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
-
+import QRScanner from "./QRScanner.vue";
 export default {
   name: "ClubCard",
   components: {
