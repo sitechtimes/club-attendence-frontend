@@ -36,9 +36,13 @@ type clubData = {
     selectedClub: boolean,
     currentClubCode: string | null,
     currentAttendance: clubData | Array<clubData>;
+    filteredAttendance: clubData | Array<clubData>
     filterDate: string | null;
-    listOfDates: Array<number|string>
+    listOfDates: Array<string>
     getDates: boolean,
+    datesButton: boolean,
+    datesCurrent: string,
+
     
 
   }
@@ -51,9 +55,12 @@ export const teacherStore = defineStore("teacher", {
         selectedClub: false,
         currentClubCode: null,
         currentAttendance: [],
+        filteredAttendance: [],
         filterDate: null,
         listOfDates: [],
         getDates: false,
+        datesButton: false,
+        datesCurrent: "Select Date"
 
     }),
     actions:{
@@ -71,6 +78,8 @@ export const teacherStore = defineStore("teacher", {
         console.log(this.listOfDates);
         this.getDates = true;
       },
+
+
 
       async getData() {
         this.loading = true;
@@ -121,6 +130,29 @@ export const teacherStore = defineStore("teacher", {
           .then((dates) => this.pushListOfDates(dates));
       },
 
+      async fetchAttendance() {
+        console.log("hi");
+        const postData = {
+          clubCode: this.currentClubCode,
+          attendenceDate: this.filterDate,
+        };
+  
+        await fetch(this.fetchURL + "get-club-attendence-data", {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(postData), // body data type must match "Content-Type" header
+        })
+          .then((res) => res.json())
+          .then((res) => this.pushAttendanceAtDate(res));
+      },
       
 
     }

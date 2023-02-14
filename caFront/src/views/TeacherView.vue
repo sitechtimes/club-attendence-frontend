@@ -3,7 +3,8 @@
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
-
+        
+        <dateDropdown></dateDropdown>
         
       </div>
 
@@ -23,16 +24,11 @@
         <div v-if="store.selectedClub">{{ store.currentAttendance }}</div>
 
         <tableData
-          v-if="store.filterDate == null"
           :headings="headings"
           :theData="store.currentAttendance"
         ></tableData>
 
-        <tableData
-          v-if="store.filterDate"
-          :headings="headings"
-          :theData="returnStudentData"
-        ></tableData>
+
       </div>
 
     </section>
@@ -45,10 +41,11 @@ import { defineComponent, ref } from 'vue'
 import { teacherStore } from '@/stores/teacherVueStore'
 import clubBox from '@/components/ClubBox.vue'
 import tableData from '@/components/tableData.vue'
+import dateDropdown from '@/components/dateDropdown.vue'
 
 export default defineComponent({
   components:{
-    clubBox, tableData
+    clubBox, tableData, dateDropdown
   },
   setup () {
     const store = teacherStore()
