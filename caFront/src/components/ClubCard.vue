@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="card" @click="clubstore.getClubData(clubCode)">
     <div class="half">
       <h3>{{ clubName }}</h3>
@@ -9,18 +10,27 @@
       v-if="ifPresident"
       @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
     >
-      <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+
+    <div class="icon">
+       <img class="human" src="../assets/logos/human-icon.svg"/>
+       <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+    </div>
+   
+   
     </div>
   </div>
   <div class="overlap">
-    <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
+    <QRScanner v-show="qrCode.isQrCodeOpen">
+    </QRScanner>
   </div>
+</div>
+  
 </template>
 
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
-
+import  QRScanner  from '../components/QRScanner.vue'
 export default {
   name: "ClubCard",
   components: {
@@ -37,7 +47,7 @@ export default {
     const clubstore = useClubStore();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday };
+    return { ifPresident, qrCode, dateOfToday, clubstore };
   },
 };
 </script>
@@ -72,8 +82,18 @@ export default {
 .qrcode {
   position: absolute;
   width: 5rem;
+  height: 5rem;
   top: 23.5rem;
   left: 34rem;
   cursor: pointer;
+} 
+.human{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 27rem;
+  cursor: pointer;
 }
+
 </style>
