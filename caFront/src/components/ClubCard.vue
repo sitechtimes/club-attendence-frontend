@@ -1,23 +1,31 @@
 <template>
 <div>
-  <div class="card" @click="clubstore.getClubData(clubCode)">
+  <div class="card">
     <div class="half">
       <h3>{{ clubName }}</h3>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom"></div> 
+
+
+    <div>
+      <img class="calendarpic" src="../assets/logos/calendar.svg"/>
+    </div>
+
+    <div class="member" @click="clubstore.getClubData(clubCode)">
+      <img class="human" src="../assets/logos/human.svg"/>
+    </div>
+    
     <div
       class="container"
       v-if="ifPresident"
       @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
     >
-
-    <div class="icon">
-       <img class="human" src="../assets/logos/human-icon.svg"/>
+ 
+   
        <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-    </div>
    
-   
-    </div>
+    </div> 
+
   </div>
   <div class="overlap">
     <QRScanner v-show="qrCode.isQrCodeOpen">
@@ -93,6 +101,15 @@ export default {
   height: 5rem;
   top: 23.5rem;
   left: 27rem;
+  cursor: pointer;
+}
+
+.calendarpic{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 20rem;
   cursor: pointer;
 }
 

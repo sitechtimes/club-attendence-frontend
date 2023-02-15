@@ -1,11 +1,6 @@
 <template>
   <div class="home">
     <div class="nav">
-      <img
-        id="cpic"
-        src="https://cdn-icons-png.flaticon.com/512/4320/4320241.png"
-        alt=""
-      />
       <Button @click="clubActivity.showModal()">
         <h3>{{ currentDate() }}</h3>
       </Button>
@@ -76,7 +71,8 @@ export default defineComponent({
 <style scoped>
 .nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: end;
+  padding-right: 5rem;
   align-items: center;
   background-color: #f3c87c;
   height: 10rem;
