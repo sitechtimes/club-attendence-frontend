@@ -2,7 +2,7 @@
     <div class="dropdown" >
         <button @click="store.datesButton = !store.datesButton" >{{ store.datesCurrent }}</button>
         <div v-if="store.datesButton == true"  class="dates">
-            <button @click="store.filterDate = dates" v-for="dates in store.listOfDates" >{{ dates }}</button>
+            <button @click="store.fetchAttendance(dates)" v-for="dates in store.listOfDates" >{{ dates }}</button>
         </div>
     </div>
 </template>

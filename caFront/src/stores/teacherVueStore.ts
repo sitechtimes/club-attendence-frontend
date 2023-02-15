@@ -78,6 +78,10 @@ export const teacherStore = defineStore("teacher", {
         console.log(this.listOfDates);
         this.getDates = true;
       },
+      pushFilteredAttendance(param: clubData){
+        this.filteredAttendance = param
+        console.log(this.filteredAttendance)
+      },
 
 
 
@@ -130,8 +134,9 @@ export const teacherStore = defineStore("teacher", {
           .then((dates) => this.pushListOfDates(dates));
       },
 
-      async fetchAttendance() {
-        console.log("hi");
+      async fetchAttendance(dates) {
+        this.filterDate = dates
+        console.log(this.filterDate, this.currentClubCode);
         const postData = {
           clubCode: this.currentClubCode,
           attendenceDate: this.filterDate,
@@ -151,7 +156,7 @@ export const teacherStore = defineStore("teacher", {
           body: JSON.stringify(postData), // body data type must match "Content-Type" header
         })
           .then((res) => res.json())
-          .then((res) => this.pushAttendanceAtDate(res));
+          .then((res) => this.pushFilteredAttendance(res));
       },
       
 

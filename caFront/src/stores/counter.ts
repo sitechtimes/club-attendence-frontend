@@ -154,6 +154,8 @@ export const useStore = defineStore("global", {
     },
 
     async fetchAttendance() {
+
+
       console.log("hi");
       const postData = {
         clubCode: this.currentClubCode,
