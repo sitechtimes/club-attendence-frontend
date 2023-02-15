@@ -11,8 +11,13 @@
       <img class="calendarpic" src="../assets/logos/calendar.svg"/>
     </div>
 
-    <div class="member" @click="clubstore.getClubData(clubCode)">
-      <img class="human" src="../assets/logos/human.svg"/>
+  
+    <div class="member" @click="clubstore.getClubData(clubCode)">  
+      <router-link to="/member">
+
+         <img class="human" src="../assets/logos/human.svg"/>
+      </router-link>
+     
     </div>
     
     <div
@@ -38,11 +43,13 @@
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
-import  QRScanner  from '../components/QRScanner.vue'
+import QRScanner from '../components/QRScanner.vue'
+import { RouterLink } from 'vue-router'
 export default {
   name: "ClubCard",
   components: {
     QRScanner,
+    RouterLink
   },
   props: {
     clubName: String,
