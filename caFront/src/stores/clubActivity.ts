@@ -1,4 +1,3 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useClubActivity = defineStore("clubActivity", {
@@ -28,7 +27,6 @@ export const useClubActivity = defineStore("clubActivity", {
       this.isModalVisible = false;
       this.isOpen = false;
       this.isCameraVisible = false;
-
     },
     closePanel() {
       this.isPanelVisible = false;
