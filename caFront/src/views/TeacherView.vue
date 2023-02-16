@@ -3,9 +3,11 @@
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
-        
+      </div>
+
+      <div class="top-left left">
         <dateDropdown></dateDropdown>
-        
+        <statusDropdown></statusDropdown>
       </div>
 
     </section>
@@ -23,10 +25,15 @@
       <div class="right">
         <div v-if="store.selectedClub">{{ store.currentAttendance }}</div>
 
-        <tableData
+        <tableData v-if="store.selectedStatus"
+          :headings="headings"
+          :theData="store.filteredAttendance"
+        ></tableData>
+        <tableData v-if="!store.selectedStatus"
           :headings="headings"
           :theData="store.currentAttendance"
         ></tableData>
+
 
 
       </div>
@@ -42,10 +49,26 @@ import { teacherStore } from '@/stores/teacherVueStore'
 import clubBox from '@/components/ClubBox.vue'
 import tableData from '@/components/tableData.vue'
 import dateDropdown from '@/components/dateDropdown.vue'
+import statusDropdown from '@/components/statusDropdown.vue'
+
+interface Club {
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName:string;
+  clubSpreadsheetId:string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  roomNumber: string;
+}
 
 export default defineComponent({
   components:{
-    clubBox, tableData, dateDropdown
+    clubBox, tableData, dateDropdown, statusDropdown,
   },
   setup () {
     const store = teacherStore()
@@ -53,9 +76,11 @@ export default defineComponent({
     store.getData()
     const headings = ["Osis", "Name", "Grade", "Class"];
     return {store, input, headings }
+
+    
   },
   computed:{
-    clubData(): Array<object> {
+    clubData(): Array<Club> {
       console.log(this.store.clubList);
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
@@ -97,6 +122,9 @@ input {
   position: relative;
   padding: 1rem;
 }
+.top-left{
+  display: flex;
+}
 
 .left::-webkit-scrollbar {
   display: none;
@@ -104,6 +132,7 @@ input {
 .right {
   width: 70%;
   overflow-y: auto;
+
 }
 
 .right::-webkit-scrollbar {

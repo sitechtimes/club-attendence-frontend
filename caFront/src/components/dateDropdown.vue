@@ -13,9 +13,7 @@ import { teacherStore } from '@/stores/teacherVueStore';
 
 export default defineComponent({
     setup () {
-        props:{
-            
-        }
+
         const store = teacherStore()
 
         return {store, }
