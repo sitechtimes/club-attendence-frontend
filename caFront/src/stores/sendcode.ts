@@ -13,7 +13,7 @@ interface ClubState {
   fetchURL: string;
   currentClubCode: string | null;
   selectedClub: boolean;
-  memberlist: eachMember | Array<eachMember>;
+  memberlist: any | Array<eachMember>;
 }
 
 export const useClubStore = defineStore("clubData", {
