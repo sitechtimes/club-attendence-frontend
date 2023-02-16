@@ -25,6 +25,9 @@
         <div class="asset offClass">
           {{ data.officalClass }}
         </div>
+        <div class="asset email">
+          {{ data.email }}
+        </div>
       </div>
     </div>
   </div>
@@ -49,8 +52,9 @@ export default defineComponent({
 <style scoped>
 .table {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(5, auto);
   font-size: 7rem;
+  background-color: antiquewhite;
 }
 .card {
   display: flex;
@@ -58,6 +62,10 @@ export default defineComponent({
 }
 .header {
   padding: 1rem;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  background-color: white;
 }
 .row {
   height: 5rem;

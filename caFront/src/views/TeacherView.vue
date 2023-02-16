@@ -23,7 +23,7 @@
         ></clubBox>
       </div>
       <div class="right">
-        <div v-if="store.selectedClub">{{ store.currentAttendance }}</div>
+
 
         <tableData v-if="store.selectedStatus"
           :headings="headings"
@@ -74,7 +74,7 @@ export default defineComponent({
     const store = teacherStore()
     const input = ref<string>("")
     store.getData()
-    const headings = ["Osis", "Name", "Grade", "Class"];
+    const headings = ["Osis", "Name", "Grade", "Class", "Email"];
     return {store, input, headings }
 
     
