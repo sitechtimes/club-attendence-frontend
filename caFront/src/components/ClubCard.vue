@@ -1,55 +1,45 @@
 <template>
-<div>
-  <div class="card">
-    <div class="half">
-      <h3>{{ clubName }}</h3>
+  <div>
+    <div class="card">
+      <div class="half">
+        <h3>{{ clubName }}</h3>
+      </div>
+      <div class="bottom"></div>
+
+      <div>
+        <img class="calendarpic" src="../assets/logos/calendar.svg" />
+      </div>
+
+      <div class="member" @click="clubstore.getClubData(clubCode)">
+        <router-link to="/member">
+          <img class="human" src="../assets/logos/human.svg" />
+        </router-link>
+      </div>
+
+      <div
+        class="container"
+        v-if="ifPresident"
+        @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+      >
+        <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+      </div>
     </div>
-    <div class="bottom"></div> 
-
-
-    <div>
-      <img class="calendarpic" src="../assets/logos/calendar.svg"/>
+    <div class="overlap">
+      <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
     </div>
-
-  
-    <div class="member" @click="clubstore.getClubData(clubCode)">  
-      <router-link to="/member">
-
-         <img class="human" src="../assets/logos/human.svg"/>
-      </router-link>
-     
-    </div>
-    
-    <div
-      class="container"
-      v-if="ifPresident"
-      @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
-    >
- 
-   
-       <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-   
-    </div> 
-
   </div>
-  <div class="overlap">
-    <QRScanner v-show="qrCode.isQrCodeOpen">
-    </QRScanner>
-  </div>
-</div>
-  
 </template>
 
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
-import QRScanner from '../components/QRScanner.vue'
-import { RouterLink } from 'vue-router'
+import QRScanner from "../components/QRScanner.vue";
+import { RouterLink } from "vue-router";
 export default {
   name: "ClubCard",
   components: {
     QRScanner,
-    RouterLink
+    RouterLink,
   },
   props: {
     clubName: String,
@@ -101,8 +91,8 @@ export default {
   top: 23.5rem;
   left: 34rem;
   cursor: pointer;
-} 
-.human{
+}
+.human {
   position: absolute;
   width: 5rem;
   height: 5rem;
@@ -111,7 +101,7 @@ export default {
   cursor: pointer;
 }
 
-.calendarpic{
+.calendarpic {
   position: absolute;
   width: 5rem;
   height: 5rem;
@@ -119,5 +109,4 @@ export default {
   left: 20rem;
   cursor: pointer;
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="(clubActivity.isCameraAllowed = true)">
     <qrcode-stream @decode="onDecode" @init="onInit" />
     <h2 class="decode-result">
       Last result: <b>{{ result }}</b>

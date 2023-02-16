@@ -34,7 +34,11 @@ export const useClubStore = defineStore("clubData", {
       console.log(this.memberlist);
       this.selectedClub = true;
     },
+    clear() {
+      this.memberlist.splice(0);
+    },
     async getClubData(clubCode: string | undefined) {
+      this.clear();
       this.pushClubCode(clubCode);
       const postData = {
         clubCode: clubCode,
