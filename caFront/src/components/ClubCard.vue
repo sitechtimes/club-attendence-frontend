@@ -1,33 +1,55 @@
 <template>
-  <div class="card" @click="clubstore.getClubData(clubCode)">
+<div>
+  <div class="card">
     <div class="half">
       <h3>{{ clubName }}</h3>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom"></div> 
+
+
+    <div>
+      <img class="calendarpic" src="../assets/logos/calendar.svg"/>
+    </div>
+
+  
+    <div class="member" @click="clubstore.getClubData(clubCode)">  
+      <router-link to="/member">
+
+         <img class="human" src="../assets/logos/human.svg"/>
+      </router-link>
+     
+    </div>
+    
     <div
       class="container"
       v-if="ifPresident"
       @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
     >
-      <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-    </div>
-    <div>
-      <button class="newMeet">hey</button>
-    </div>
+ 
+   
+       <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+   
+    </div> 
+
   </div>
   <div class="overlap">
-    <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
+    <QRScanner v-show="qrCode.isQrCodeOpen">
+    </QRScanner>
   </div>
+</div>
+  
 </template>
 
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
-import QRScanner from "./QRScanner.vue";
+import QRScanner from '../components/QRScanner.vue'
+import { RouterLink } from 'vue-router'
 export default {
   name: "ClubCard",
   components: {
     QRScanner,
+    RouterLink
   },
   props: {
     clubName: String,
@@ -40,7 +62,7 @@ export default {
     const clubstore = useClubStore();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday };
+    return { ifPresident, qrCode, dateOfToday, clubstore };
   },
 };
 </script>
@@ -79,8 +101,27 @@ export default {
 .qrcode {
   position: absolute;
   width: 5rem;
+  height: 5rem;
   top: 23.5rem;
   left: 34rem;
   cursor: pointer;
+} 
+.human{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 27rem;
+  cursor: pointer;
 }
+
+.calendarpic{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 20rem;
+  cursor: pointer;
+}
+
 </style>
