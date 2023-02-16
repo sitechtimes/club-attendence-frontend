@@ -11,6 +11,9 @@
     >
       <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
     </div>
+    <div>
+      <button class="newMeet">hey</button>
+    </div>
   </div>
   <div class="overlap">
     <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
@@ -43,6 +46,10 @@ export default {
 </script>
 
 <style scoped>
+
+.newMeet {
+  border: .0625rem solid lightgreen;
+}
 .card {
   position: relative;
   overflow: hidden;
