@@ -41,10 +41,7 @@ export default defineComponent({
     const present = "present";
     const absent = "absent";
 
-    function showlist() {
-      console.log(clubstore.memberlist);
-    }
-    return { clubstore, showlist, present, absent };
+    return { clubstore,  present, absent };
   },
 });
 </script>
