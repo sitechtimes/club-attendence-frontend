@@ -66,7 +66,7 @@
       const qrCode = useQrCode();
       let dateOfToday = new Date().toLocaleDateString();
       let showNewMeeting = false;
-      const openNewMeeting = () =&gt; (showNewMeeting = true);
+      const openNewMeeting = (); (showNewMeeting = true);
       return { ifPresident, qrCode, dateOfToday, clubstore, showNewMeeting, openNewMeeting };
     },
   };
