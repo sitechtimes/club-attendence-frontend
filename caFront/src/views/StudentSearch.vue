@@ -3,6 +3,12 @@
         <h2>
             Student Search
         </h2>
+
+        <section class="top">
+            <input type="text">
+        </section>
+
+
     </div>
 </template>
 
