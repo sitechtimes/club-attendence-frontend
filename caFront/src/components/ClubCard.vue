@@ -45,6 +45,8 @@ import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import QRScanner from '../components/QRScanner.vue'
 import { RouterLink } from 'vue-router'
+import NewMeeeting from '../components/NewMeeting.vue'
+import {userNewMeeting} from "../stores/"
 export default {
   name: "ClubCard",
   components: {
