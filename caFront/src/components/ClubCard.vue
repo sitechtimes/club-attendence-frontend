@@ -5,24 +5,28 @@
         <h3>{{ clubName }}</h3>
       </div>
       <div class="bottom"></div>
-
-      <div>
+<ul  v-if="clubActivity.isMenuVisible">
+  <li>
         <img class="calendarpic" src="../assets/logos/calendar.svg" />
-      </div>
+      </li>
 
-      <div class="member" @click="clubstore.getClubData(clubCode)">
+      <li class="member" @click="clubstore.getClubData(clubCode)">
         <router-link to="/member">
           <img class="human" src="../assets/logos/human.svg" />
         </router-link>
-      </div>
+      </li>
 
-      <div
+      <li
         class="container"
         v-if="ifPresident"
         @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
       >
         <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-      </div>
+      </li>
+</ul>
+
+  <button class="open-icon" @click="display"><h2>Menu</h2></button>
+      
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
@@ -33,6 +37,7 @@
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
+import {useClubActivity} from "../stores/clubActivity"
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 export default {
@@ -48,11 +53,20 @@ export default {
     clubCode: String,
   },
   setup(props) {
+
+     function display() {
+      if (clubActivity.isMenuVisible === true) {
+        clubActivity.closeIcon();
+      } else if (clubActivity.isMenuVisible === false) {
+        clubActivity.openIcon();
+      }
+    }
     const ifPresident = props.position === "president";
     const clubstore = useClubStore();
+    const clubActivity = useClubActivity();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore };
+    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display };
   },
 };
 </script>
@@ -89,7 +103,7 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 34rem;
+  left: 27rem;
   cursor: pointer;
 }
 .human {
@@ -97,7 +111,7 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 27rem;
+  left: 20rem;
   cursor: pointer;
 }
 
@@ -106,7 +120,15 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 20rem;
+  left: 13rem;
+  cursor: pointer;
+}
+.open-icon{
+   position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 34rem;
   cursor: pointer;
 }
 </style>
