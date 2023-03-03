@@ -5,30 +5,41 @@
         <h3>{{ clubName }}</h3>
       </div>
       <div class="bottom"></div>
-<button class="menu" @click="clubActivity.showMenu()">Menu</button>
-<Icon></Icon>
- 
+
+      <div>
+        <img class="calendarpic" src="../assets/logos/calendar.svg" />
+      </div>
+
+      <div class="member" @click="clubstore.getClubData(clubCode)">
+        <router-link to="/member">
+          <img class="human" src="../assets/logos/human.svg" />
+        </router-link>
+      </div>
+
+      <div
+        class="container"
+        v-if="ifPresident"
+        @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+      >
+        <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+      </div>
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
-      <Icon v-show="clubActivity.isMenuVisible"></Icon>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { useClubStore } from "../stores/sendcode";
-import { useClubActivity } from "../stores/clubActivity";
 import { useQrCode } from "../stores/qrCode";
 import QRScanner from "../components/QRScanner.vue";
-import Icon from "../components/Icon.vue"
 import { RouterLink } from "vue-router";
 export default {
   name: "ClubCard",
   components: {
     QRScanner,
     RouterLink,
-    Icon
   },
   props: {
     clubName: String,
@@ -39,10 +50,9 @@ export default {
   setup(props) {
     const ifPresident = props.position === "president";
     const clubstore = useClubStore();
-    const clubActivity = useClubActivity();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity };
+    return { ifPresident, qrCode, dateOfToday, clubstore };
   },
 };
 </script>
@@ -74,14 +84,29 @@ export default {
   background-color: rgb(252, 66, 66);
 }
 
-.menu{
-  width: 5rem;
-  height: 5rem;
-    position: absolute;
+.qrcode {
+  position: absolute;
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
   left: 34rem;
+  cursor: pointer;
+}
+.human {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 27rem;
+  cursor: pointer;
+}
+
+.calendarpic {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 20rem;
   cursor: pointer;
 }
 </style>
