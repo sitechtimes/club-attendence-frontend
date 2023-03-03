@@ -15,7 +15,7 @@
   import { useUserDataStore } from "@/stores/userData";
   import { defineComponent, reactive } from "vue";
   export default defineComponent({
-    name: "AddMeeting",
+    name: "NewMeeting",
     components: {},
     props: [],
     methods: {
