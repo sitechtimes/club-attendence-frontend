@@ -47,7 +47,7 @@ type clubData = {
     currentAttendance: clubData | Array<clubData>;
     filteredAttendance: clubData | Array<clubData>;
     filterDate: string | null;
-    listOfDates: Array<string>;
+    listOfDates: Array<string | number>;
     getDates: boolean;
     datesButton: boolean;
     statusButton: boolean;
