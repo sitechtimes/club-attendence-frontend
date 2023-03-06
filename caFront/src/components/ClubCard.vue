@@ -131,4 +131,11 @@ export default {
   left: 34rem;
   cursor: pointer;
 }
+@media (min-width: 768px) {
+ .card{
+  font-size: 2rem;
+  width: 30rem;
+  height: 20rem;
+ }
+}
 </style>

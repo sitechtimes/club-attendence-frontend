@@ -87,4 +87,7 @@ export default defineComponent({
   justify-content: start;
   flex-wrap: wrap;
 }
+
+
+
 </style>
