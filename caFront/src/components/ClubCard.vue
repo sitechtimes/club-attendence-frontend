@@ -5,7 +5,10 @@
         <h3>{{ clubName }}</h3>
       </div>
       <div class="bottom"></div>
-<ul  v-if="clubActivity.isMenuVisible">
+
+
+
+<ul  v-if="status">
   <li>
         <img class="calendarpic" src="../assets/logos/calendar.svg" />
       </li>
@@ -25,7 +28,7 @@
       </li>
 </ul>
 
-  <button class="open-icon" @click="display"><h2>Menu</h2></button>
+  <button class="open-icon" @click="status = !status"><h2>Menu</h2></button>
       
     </div>
     <div class="overlap">
@@ -40,10 +43,13 @@ import { useQrCode } from "../stores/qrCode";
 import {useClubActivity} from "../stores/clubActivity"
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
+
+import { ref } from "vue";
 export default {
   name: "ClubCard",
   components: {
     QRScanner,
+    
     RouterLink,
   },
   props: {
@@ -53,6 +59,7 @@ export default {
     clubCode: String,
   },
   setup(props) {
+    const status = ref(false)
 
      function display() {
       if (clubActivity.isMenuVisible === true) {
@@ -66,7 +73,7 @@ export default {
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display };
+    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display, status };
   },
 };
 </script>
