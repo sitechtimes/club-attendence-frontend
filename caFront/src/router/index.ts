@@ -3,6 +3,7 @@ import AboutView from "../views/AboutView.vue"
 import ClubView from "../views/ClubView.vue"
 import HomeView from '../views/HomeView.vue'
 import TeacherView from '../views/TeacherView.vue'
+import Scanner from '../views/OpenScanner.vue'
 import Member from '../views/Member.vue'
 import Home from "../views/HomeView.vue";
 
@@ -76,6 +77,15 @@ const router = createRouter({
       component: () => {
         return import(
           /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OfficalClassView.vue"
+        );
+      },
+    },
+     {
+      path: "/scanner",
+      name: "scanner",
+      component: () => {
+        return import(
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OpenScanner.vue"
         );
       },
     },
