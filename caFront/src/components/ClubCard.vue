@@ -28,7 +28,9 @@
       </li>
 </ul>
 
-  <button class="open-icon" @click="status = !status"><h2>Menu</h2></button>
+  <button  @click="status = !status">
+    <img class="open-icon" src="../assets/logos/pointing-left.svg" alt="">
+  </button>
       
     </div>
     <div class="overlap">
