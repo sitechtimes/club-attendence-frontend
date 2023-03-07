@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 
 interface studentInterface {
     fetchURL: string,
+    
 }
 
 export const studentStore = defineStore("studentStore",{
@@ -11,7 +12,7 @@ export const studentStore = defineStore("studentStore",{
     }),
     actions:{
         async getAllStudentData(){
-            await fetch(this.fetchURL + 'get-all-user-data').then((res) => {console.log(res)})
+            await fetch(this.fetchURL + 'get-all-user-data').then((res) => res.json()).then((res) => console.log(res))
         }
     }
 

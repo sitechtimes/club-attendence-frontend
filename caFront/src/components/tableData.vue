@@ -43,8 +43,8 @@ export default defineComponent({
   setup(props) {
     const present = "present";
     const absent = "absent";
-
-    return { present, absent };
+    const numColumn = props.headings.length
+    return { present, absent, numColumn };
   },
 });
 </script>
@@ -52,7 +52,7 @@ export default defineComponent({
 <style scoped>
 .table {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(v-bind(numColumn), auto);
   font-size: 7rem;
   background-color: antiquewhite;
 }
