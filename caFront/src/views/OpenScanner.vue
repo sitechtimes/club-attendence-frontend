@@ -15,7 +15,6 @@ export default defineComponent({
     name: "Scanner",
     components: {
         QRScanner,
-
         RouterLink,
     },
     setup() {

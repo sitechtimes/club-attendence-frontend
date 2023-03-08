@@ -21,6 +21,11 @@ const router = createRouter({
       component: AboutView,
     
     },
+    {
+      path: "/scanner",
+      name: "scanner",
+      component: Scanner,
+    },
 
 
     {
@@ -80,15 +85,7 @@ const router = createRouter({
         );
       },
     },
-     {
-      path: "/scanner",
-      name: "scanner",
-      component: () => {
-        return import(
-          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OpenScanner.vue"
-        );
-      },
-    },
+     
 
     {
       
