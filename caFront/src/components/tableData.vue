@@ -37,7 +37,11 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   props: {
-    headings: Array<string>,
+    headings:{
+      type: Array<string>,
+      required: true,
+
+    } ,
     theData: Object,
   },
   setup(props) {
