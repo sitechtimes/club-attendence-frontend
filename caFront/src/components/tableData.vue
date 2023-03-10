@@ -42,7 +42,10 @@ export default defineComponent({
       required: true,
 
     } ,
-    theData: Object,
+    theData: {
+      type: Object,
+      required: false
+    }
   },
   setup(props) {
     const present = "present";
