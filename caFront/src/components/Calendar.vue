@@ -185,6 +185,7 @@ export default defineComponent({
 }
 
 .current-weekday {
+  margin-top: 2rem;
   color: white;
   font-size: 5rem;
   position: static;
@@ -252,5 +253,97 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   font-weight: bold;
+}
+@media (max-width: 1150px){
+.current-date {
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(73, 114, 133, 0.6);
+  display: flex;
+  justify-content: space-around;
+  height: 5rem;
+  position: relative;
+}
+.current-month {
+  font-size: 1rem;
+}
+
+.font {
+  font-size: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.current-weekday {
+  margin-top: 2rem;
+  color: white;
+ font-size: 10rem;
+  position: static;
+}
+
+.triangle-up {
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-bottom: 2rem solid white;
+  height: 1rem;
+  width: 1rem;
+}
+
+.triangle-down {
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-top: 2rem solid white;
+  height: 1rem;
+  width: 1rem;
+  align-items: center;
+}
+
+.showcalendar {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  font-size: 1rem;
+  color: white;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+
+.weekday {
+font-size: 10rem;
+}
+
+.weekday,
+.day-hidden,
+.day {
+  display: flex;
+  justify-content: center;
+}
+
+.day-hidden {
+  opacity: 0.5;
+}
+
+.current-weekday {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+font-size: 1rem;
+}
+.static {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+}
+.month,
+.year,
+.text {
+  max-width: 1rem;
+  align-content: center;
+}
+.text {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
 }
 </style>

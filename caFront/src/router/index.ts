@@ -3,6 +3,7 @@ import AboutView from "../views/AboutView.vue"
 import ClubView from "../views/ClubView.vue"
 import HomeView from '../views/HomeView.vue'
 import TeacherView from '../views/TeacherView.vue'
+import Scanner from '../views/OpenScanner.vue'
 import Member from '../views/Member.vue'
 import Home from "../views/HomeView.vue";
 
@@ -19,6 +20,11 @@ const router = createRouter({
       name: "about",
       component: AboutView,
     
+    },
+    {
+      path: "/scanner",
+      name: "scanner",
+      component: Scanner,
     },
 
 
@@ -79,6 +85,7 @@ const router = createRouter({
         );
       },
     },
+     
 
     {
       

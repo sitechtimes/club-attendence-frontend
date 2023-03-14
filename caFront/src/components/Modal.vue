@@ -37,4 +37,10 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   position: fixed;
 }
+@media (max-width: 1150px){
+  .calendar{
+    height: 50rem;
+  width: 30rem;
+  }
+}
 </style>
