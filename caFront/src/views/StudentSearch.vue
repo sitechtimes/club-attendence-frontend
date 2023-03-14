@@ -7,9 +7,7 @@
         <section class="top">
             <input type="text">
         </section>
-        <div>
-            {{store.allStudentData }}
-        </div>
+       <studentSearchTable :theData="store.allStudentData" :headings="head" ></studentSearchTable>
 
 
 
@@ -22,12 +20,12 @@ import {studentStore} from "../stores/studentSearch"
 import studentSearchTable from '@/components/studentSearchTable.vue'
 export default defineComponent({
     components:{
-        
+        studentSearchTable
     },
     setup () {
         const store = studentStore()
         store.getAllStudentData()
-        const head = ["Name","Email","Grade","Official Class","Osis"]
+        const head = ["Osis","Name","Email","Grade","Official Class"]
      
         return {
             store, head

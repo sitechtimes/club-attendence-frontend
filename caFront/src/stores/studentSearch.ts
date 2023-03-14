@@ -43,10 +43,6 @@ export const studentStore = defineStore("studentStore",{
         async getAllStudentData(){
             await fetch(this.fetchURL + 'get-all-user-data').then((res) => res.json()).then((res) => this.allStudentData = res).then(()=> console.log(this.allStudentData))
 
-            for(const key in this.allStudentData[0]){
-                console.log(key)
-            }
-
 
         }
     }
