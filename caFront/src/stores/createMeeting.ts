@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const NewMeeting = defineStore("NewMeeting", {
+export const useCreateMeeting = defineStore("createMeeting", {
   state: () => ({
     isOpen: false,
     isModalVisible: false,

@@ -7,7 +7,7 @@
     <div class="bottom"></div> 
 
 
-    <div @click=NewMeeting.openpanel()>
+    <div @click=createMeeting.showPanel()>
       <img class="calendarpic" src="../assets/logos/calendar.svg"/>
     </div>
 
@@ -36,6 +36,9 @@
     <QRScanner v-show="qrCode.isQrCodeOpen">
     </QRScanner>
   </div>
+  <div>
+    <NewMeeting v-show="createMeeting.isPanelVisible"></NewMeeting>
+  </div>
 </div>
   
 </template>
@@ -46,10 +49,11 @@ import { useQrCode } from "../stores/qrCode";
 import QRScanner from '../components/QRScanner.vue'
 import { RouterLink } from 'vue-router'
 import NewMeeting from '../components/NewMeeting.vue'
-import {useNewMeeting} from "../stores/NewMeeting"
+import {useCreateMeeting} from "../stores/createMeeting"
 export default {
   name: "ClubCard",
   components: {
+    NewMeeting,
     QRScanner,
     RouterLink
   },
@@ -63,16 +67,16 @@ export default {
     const ifPresident = props.position === "president";
     const clubstore = useClubStore();
     const qrCode = useQrCode();
-    const NewMeeting = useNewMeeting ();
+    const createMeeting = useCreateMeeting ();
     function show() {
-      if (NewMeeting.isOpen === true) {
-        NewMeeting.closeMenu();
-      } else if (NewMeeting.isOpen === false) {
-        NewMeeting.openMenu();
+      if (createMeeting.isOpen === true) {
+        createMeeting.closeMenu();
+      } else if (createMeeting.isOpen === false) {
+        createMeeting.openMenu();
       }
     }
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore };
+    return { ifPresident, qrCode, dateOfToday, clubstore, createMeeting, show };
   },
 };
 </script>
