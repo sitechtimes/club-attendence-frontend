@@ -6,8 +6,6 @@
       </div>
       <div class="bottom"></div>
 
-
-
 <ul  v-if="status">
   <li>
         <img class="calendarpic" src="../assets/logos/calendar.svg" />
@@ -112,7 +110,7 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 27rem;
+  left: 13rem;
   cursor: pointer;
 }
 .human {
@@ -120,7 +118,7 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 20rem;
+  left: 27rem;
   cursor: pointer;
 }
 
@@ -129,7 +127,7 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 13rem;
+  left: 20  rem;
   cursor: pointer;
 }
 .open-icon{
