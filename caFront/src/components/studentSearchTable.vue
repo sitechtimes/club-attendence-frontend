@@ -6,9 +6,8 @@
         <div
           class="test"
           :class="{
-            present: data.status === present,
-            absent: data.status === absent,
-            null: data.status == null,
+            present: data.presentLocation.inClubToday == true,
+ 
           }"
         >
 
