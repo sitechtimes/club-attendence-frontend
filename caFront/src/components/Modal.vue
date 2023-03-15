@@ -39,8 +39,9 @@ export default defineComponent({
 }
 @media (max-width: 1150px){
   .calendar{
+   
     height: 50rem;
-  width: 30rem;
+  width: 38rem;
   }
 }
 </style>

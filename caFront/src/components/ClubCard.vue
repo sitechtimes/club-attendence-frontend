@@ -127,7 +127,7 @@ export default {
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
-  left: 20  rem;
+  left: 20rem;
   cursor: pointer;
 }
 .open-icon{
@@ -138,4 +138,5 @@ export default {
   left: 34rem;
   cursor: pointer;
 }
+
 </style>
