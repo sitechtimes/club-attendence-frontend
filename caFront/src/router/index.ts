@@ -20,8 +20,6 @@ const router = createRouter({
       component: AboutView,
     
     },
-
-
     {
       path: "/qrcode",
       name: "qrcode",
