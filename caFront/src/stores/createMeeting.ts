@@ -1,23 +1,29 @@
 import { defineStore } from "pinia";
 
+interface CreateMeeting {
+  isMeetingOpen: boolean;
+  isModalVisible: boolean;
+  isPanelVisible: boolean;
+  clubName: string | null | undefined;
+}
+
 export const useCreateMeeting = defineStore("createMeeting", {
-  state: () => ({
-    isOpen: false,
+  state: (): CreateMeeting => ({
+    isMeetingOpen: false,
     isModalVisible: false,
     isPanelVisible: false,
-    isCameraVisible: false,
+    clubName: null,
   }),
   actions: {
     openMenu() {
-      this.isOpen = true;
+      this.isMeetingOpen = true;
     },
     closeMenu() {
-      this.isOpen = false;
+      this.isMeetingOpen = false;
     },
     showModal() {
       this.isModalVisible = true;
       this.isPanelVisible = false;
-      this.isCameraVisible = false;
     },
     closeModal() {
       this.isModalVisible = false;
@@ -25,19 +31,10 @@ export const useCreateMeeting = defineStore("createMeeting", {
     showPanel() {
       this.isPanelVisible = true;
       this.isModalVisible = false;
-      this.isOpen = false;
-      this.isCameraVisible = false;
+      this.isMeetingOpen = false;
     },
     closePanel() {
       this.isPanelVisible = false;
-    },
-    openCamera() {
-      this.isCameraVisible = true;
-      this.isModalVisible = false;
-      this.isPanelVisible = false;
-    },
-    closeCamera() {
-      this.isCameraVisible = false;
     },
   },
 });
