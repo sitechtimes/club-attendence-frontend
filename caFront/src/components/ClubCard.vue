@@ -139,4 +139,42 @@ export default {
   cursor: pointer;
 }
 
+@media (max-width: 1150px){
+.card {
+  position: relative;
+  overflow: hidden;
+  margin: 2rem;
+  width: 35rem;
+  height: 30rem;
+  border: 0.0625rem solid lightgray;
+  border-radius: 1rem;
+  border-color: rgb(35, 35, 35);
+  transition: 0.5s;
+}
+.open-icon{
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 28rem;
+}
+
+.human{
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 21rem;
+}.calendarpic{
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 14rem;
+}
+.qrcode{
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 7rem;
+}
+}
+
 </style>

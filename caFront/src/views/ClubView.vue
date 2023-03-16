@@ -70,6 +70,7 @@ export default defineComponent({
 
 <style scoped>
 .nav {
+  display: block;
   display: flex;
   justify-content: end;
   padding-right: 5rem;
@@ -86,5 +87,12 @@ export default defineComponent({
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
+}
+@media (max-width:1150px){
+  .nav{
+    display: flex;
+    justify-content: center;
+
+  }
 }
 </style>
