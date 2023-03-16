@@ -29,14 +29,17 @@ interface studentData {
 
 interface studentInterface {
     fetchURL: string,
-    allStudentData: Array<studentData> | []
+    allStudentData: Array<studentData> | [],
+    currentFilter: string,
+
 }
 
 export const studentStore = defineStore("studentStore",{
     state:(): studentInterface => ({
         fetchURL: "http://localhost:3000/",
         allStudentData: [],
-
+        currentFilter: "Name",
+        
     }),
     actions:{
 

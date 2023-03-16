@@ -26,9 +26,15 @@ export default defineComponent({
         const store = studentStore()
         store.getAllStudentData()
         const head = ["Osis","Name","Email","Grade","Official Class"]
-     
+        
         return {
             store, head
+        }
+    },
+    computed:{
+        allData(){
+            const data = this.store.allStudentData
+            
         }
     }
 })
