@@ -13,6 +13,7 @@
   
   <script lang="ts">
   import { useUserDataStore } from "@/stores/userData";
+  import {useNewMeeting} from "../stores/newMeeting"
   import { defineComponent, reactive } from "vue";
   export default defineComponent({
     name: "NewMeeting",
@@ -24,6 +25,7 @@
       },
     },
     setup() {
+      const meetingDataStore = useNewMeeting();
       const userDataStore = useUserDataStore();
       const form = reactive({ userValue: "" });
       async function postData(userData: object) {
@@ -51,6 +53,7 @@
         const bundle = {
           user: userDataStore.user,
           newMeeting: form.userValue,
+          clubName: meetingDataStore.clubName,
         };
         console.log(bundle);
         console.log("jumping into postData");

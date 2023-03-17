@@ -15,32 +15,19 @@ export const useNewMeeting = defineStore("NewMeeting", {
     clubName: null,
   }),
   actions: {
-    openMenu(
-      clubName: string | undefined
+    showPanel(
+      clubName: string | null | undefined
     ) {
-      this.isMeetingOpen = true;
-      this.clubName = clubName;
-    },
-    closeMenu() {
-      this.isMeetingOpen = false;
-      this.clubName = null;
-    },
-    showModal() {
-      this.isModalVisible = true;
-      this.isPanelVisible = false;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    },
-    showPanel() {
       this.isPanelVisible = true;
       this.isModalVisible = false;
       this.isMeetingOpen = false;
+      this.clubName = clubName;
     },
     closePanel() {
       this.isPanelVisible = false;
     },
     async getMeeting() {
+      console.log(this.clubName);
       await fetch("http://localhost:3000/newMeeting", {
         method: "POST",
         mode: "cors",

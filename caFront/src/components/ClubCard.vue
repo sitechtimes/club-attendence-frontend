@@ -7,7 +7,7 @@
     <div class="bottom"></div> 
 
 
-    <div @click=createMeeting.showPanel()>
+    <div @click=createMeeting.showPanel(clubName)>
       <img class="calendarpic" src="../assets/logos/calendar.svg"/>
     </div>
 
@@ -49,7 +49,7 @@ import { useQrCode } from "../stores/qrCode";
 import QRScanner from '../components/QRScanner.vue'
 import { RouterLink } from 'vue-router'
 import NewMeeting from '../components/NewMeeting.vue'
-import {useCreateMeeting} from "../stores/createMeeting"
+import {useNewMeeting} from "../stores/newMeeting"
 export default {
   name: "ClubCard",
   components: {
@@ -67,12 +67,12 @@ export default {
     const ifPresident = props.position === "president";
     const clubstore = useClubStore();
     const qrCode = useQrCode();
-    const createMeeting = useCreateMeeting ();
+    const createMeeting = useNewMeeting ();
     function show() {
-      if (createMeeting.isOpen === true) {
-        createMeeting.closeMenu();
-      } else if (createMeeting.isOpen === false) {
-        createMeeting.openMenu();
+      if (createMeeting.isMeetingOpen === true) {
+        createMeeting.closePanel();
+      } else if (createMeeting.isMeetingOpen === false) {
+        createMeeting.showPanel(null);
       }
     }
     let dateOfToday = new Date().toLocaleDateString();
