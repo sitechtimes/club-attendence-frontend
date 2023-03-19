@@ -62,16 +62,15 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-
           if (data.clientAuthority === "student") {
             userDataStore.addUserData(data);
-            if (data.osis === "none") {
+            if (data.osis === null) {
               return router.push("/additional-information/osis");
             }
-            if (data.grade === "none") {
+            if (data.grade === null) {
               return router.push("/additional-information/grade");
             }
-            if (data.officalClass === "none") {
+            if (data.officalClass === null) {
               return router.push("/additional-information/offical-class");
             }
             return router.push("/club");

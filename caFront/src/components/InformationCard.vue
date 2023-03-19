@@ -27,9 +27,9 @@ export default defineComponent({
 
     onBeforeMount(() => {
       if (
-        userDataStore.user!.osis !== "none" &&
-        userDataStore.user!.grade !== "none" &&
-        userDataStore.user!.officalClass !== "none"
+        userDataStore.user!.osis !== null &&
+        userDataStore.user!.grade !== null &&
+        userDataStore.user!.officalClass !== null
       ) {
         return router.push("/club");
       }
@@ -37,9 +37,9 @@ export default defineComponent({
 
     function checker() {
       if (
-        userDataStore.user!.osis !== "none" &&
-        userDataStore.user!.grade !== "none" &&
-        userDataStore.user!.officalClass !== "none"
+        userDataStore.user!.osis !== null &&
+        userDataStore.user!.grade !== null &&
+        userDataStore.user!.officalClass !== null
       ) {
         return router.push("/club");
       }
@@ -67,22 +67,22 @@ export default defineComponent({
           if (response.status) {
             if (response.type === "OSIS") {
               userDataStore.addOsis(response.value);
-              if (userDataStore.user!.grade === "none") {
+              if (userDataStore.user!.grade === null) {
                 return router.push("/additional-information/grade");
-              } else if (userDataStore.user!.officalClass === "none") {
+              } else if (userDataStore.user!.officalClass === null) {
                 return router.push("/additional-information/offical-class");
               } else if (
-                userDataStore.user!.grade !== "none" &&
-                userDataStore.user!.officalClass !== "none"
+                userDataStore.user!.grade !== null &&
+                userDataStore.user!.officalClass !== null
               )
                 checker();
             }
 
             if (response.type === "Grade") {
               userDataStore.addGrade(response.value);
-              if (userDataStore.user!.osis === "none") {
+              if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
-              } else if (userDataStore.user!.officalClass === "none") {
+              } else if (userDataStore.user!.officalClass === null) {
                 return router.push("/additional-information/offical-class");
               }
               checker();
@@ -90,9 +90,9 @@ export default defineComponent({
 
             if (response.type === "Official Class") {
               userDataStore.addOfficallClass(response.value);
-              if (userDataStore.user!.osis === "none") {
+              if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
-              } else if (userDataStore.user!.grade === "none") {
+              } else if (userDataStore.user!.grade === null) {
                 return router.push("/additional-information/grade");
               }
               checker();
