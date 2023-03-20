@@ -2,9 +2,18 @@
   <div>
     <div class="card">
       <div class="half">
-        <h3>{{ clubName }}</h3>
+        <h3>{{ clubName }}</h3>   
+
       </div>
-      <div class="bottom"></div>
+      <div class="bottom">
+        <ul class="nextdates" v-for="date in meetingDates" :key="date.clubCode">
+          <li>
+            {{ date }}
+          </li> 
+        </ul>
+       
+     
+      </div>
 
 <ul  v-if="status">
   <li>
@@ -46,7 +55,7 @@ import { RouterLink } from "vue-router";
 
 import { ref } from "vue";
 export default {
-  name: "ClubCard",
+  name: "Card",
   components: {
     QRScanner,
     
@@ -54,6 +63,7 @@ export default {
   },
   props: {
     clubName: String,
+    meetingDates: Array,
     position: String,
     date: String,
     clubCode: String,
@@ -69,6 +79,7 @@ export default {
       }
     }
     const ifPresident = props.position === "president";
+    
     const clubstore = useClubStore();
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
@@ -104,6 +115,22 @@ export default {
   top: 0;
   background-color: rgb(252, 66, 66);
 }
+
+.bottom{
+  display: flex;
+    flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  bottom:0;
+}
+
+li{
+  font-size: 2rem;
+}
+
 
 .qrcode {
   position: absolute;

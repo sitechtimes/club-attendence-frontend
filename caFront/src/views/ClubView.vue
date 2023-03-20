@@ -12,6 +12,7 @@
         :clubName="club.clubName"
         :position="club.position"
         :clubCode="club.clubCode"
+        :meetingDates="club.meetingDates"
         :key="club.clubCode"
       >
       </Card>
