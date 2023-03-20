@@ -5,7 +5,8 @@
         </h2>
 
         <section class="top">
-            <input type="text">
+            <input v-model="searchBy" class="input" type="text">
+            <button @click="changeFilter" class="dropdown">filter</button>
         </section>
        <studentSearchTable :theData="store.allStudentData" :headings="head" ></studentSearchTable>
 
@@ -15,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent , ref } from 'vue'
 import {studentStore} from "../stores/studentSearch"
 import studentSearchTable from '@/components/studentSearchTable.vue'
 export default defineComponent({
@@ -26,9 +27,18 @@ export default defineComponent({
         const store = studentStore()
         store.getAllStudentData()
         const head = ["Osis","Name","Email","Grade","Official Class"]
-        
+        const searchBy = ref("")
+        const filterStatus = false
+        console.log(filterStatus)
+
         return {
-            store, head
+            store, head, searchBy, filterStatus
+        }
+    },
+    methods:{
+        changeFilter(){
+            this.filterStatus = !this.filterStatus
+            console.log(this.filterStatus, this.searchBy)
         }
     },
     computed:{
@@ -41,5 +51,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.top{
+    width: 100%;
+
+}
+.input{
+    width: 50%;
+    height: 3rem;
+    font-size: 2.5rem;
+}
 
 </style>
