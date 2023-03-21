@@ -15,6 +15,7 @@
      
       </div>
 
+      
 <ul  v-if="status">
   <li>
         <img class="calendarpic" src="../assets/logos/calendar.svg" />
@@ -35,9 +36,9 @@
       </li>
 </ul>
 
-  <button  @click="status = !status">
-    <img class="open-icon" src="../assets/logos/pointing-left.svg" alt="">
-  </button>
+ 
+    <img @click="status = !status" class="open-icon" src="../assets/logos/pointing-left.svg" alt="">
+
       
     </div>
     <div class="overlap">
@@ -119,16 +120,17 @@ export default {
 .bottom{
   display: flex;
     flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  list-style-type: circle;
   height: 50%;
   width: 100%;
   position: absolute;
   bottom:0;
 }
 
+
 li{
   font-size: 2rem;
+  margin-left: 3rem;
 }
 
 
