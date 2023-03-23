@@ -7,6 +7,7 @@
         <section class="top">
             <input v-model="searchBy" class="input" type="text">
             <button @click="changeFilter" class="dropdown">filter</button>
+                <li v-if="filterStatus == true" class="choices" @click="fun()" v-for="heading in head" >{{ heading }}</li>
         </section>
        <studentSearchTable :theData="store.allStudentData" :headings="head" ></studentSearchTable>
 
@@ -28,7 +29,8 @@ export default defineComponent({
         store.getAllStudentData()
         const head = ["Osis","Name","Email","Grade","Official Class"]
         const searchBy = ref("")
-        const filterStatus = false
+        const filterStatus = ref(false)
+        const currentFilter = ref("name")
         console.log(filterStatus)
 
         return {
