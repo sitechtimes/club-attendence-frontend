@@ -6,7 +6,7 @@
 
       </div>
       <div class="bottom">
-        <ul class="nextdates" v-for="date in meetingDates" :key="date.clubCode">
+        <ul class="nextdates" v-for="date in clubData?.meetingDates" :key="date.clubCode">
           <li>
             {{ date }}
           </li> 
@@ -45,6 +45,7 @@
 </template>
 
 <script lang="ts">
+import {useUserDataStore} from "../stores/userData"
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import {useClubActivity} from "../stores/clubActivity"
@@ -53,7 +54,6 @@ import { RouterLink } from "vue-router";
 
 import { ref } from "vue";
 
-interface dates
 export default {
   name: "Card",
   components: {
@@ -79,12 +79,14 @@ export default {
       }
     }
     const ifPresident = props.position === "president";
-    
+    const objectData = useUserDataStore();
+    const user = objectData.user;
+   const clubMeeting = user?.clubData.meetingDates;
     const clubstore = useClubStore();
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display, status };
+    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display, status, clubData };
   },
 };
 </script>
