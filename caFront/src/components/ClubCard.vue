@@ -11,11 +11,8 @@
             {{ date }}
           </li> 
         </ul>
-       
-     
       </div>
 
-      
 <ul  v-if="status">
   <li>
         <img class="calendarpic" src="../assets/logos/calendar.svg" />
@@ -55,6 +52,8 @@ import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 
 import { ref } from "vue";
+
+interface dates
 export default {
   name: "Card",
   components: {
