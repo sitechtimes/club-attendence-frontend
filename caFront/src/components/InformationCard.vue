@@ -5,7 +5,7 @@
       <input v-model="form.userValue" type="text" required id="name" />
       <h3>{{ form.userValue }}</h3>
       <h3 class="context"><slot name="context"></slot></h3>
-      <div>{{ osisGradeOfficalClass }}</div>
+      <div>{{ osisGradeOfficialClass }}</div>
     </form>
   </div>
 </template>
@@ -18,7 +18,7 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   name: "AddCard",
   props: {
-    osisGradeOfficalClass: String,
+    osisGradeOfficialClass: String,
   },
 
   setup(props) {
@@ -29,7 +29,7 @@ export default defineComponent({
       if (
         userDataStore.user!.osis !== null &&
         userDataStore.user!.grade !== null &&
-        userDataStore.user!.officalClass !== null
+        userDataStore.user!.officialClass !== null
       ) {
         return router.push("/club");
       }
@@ -39,7 +39,7 @@ export default defineComponent({
       if (
         userDataStore.user!.osis !== null &&
         userDataStore.user!.grade !== null &&
-        userDataStore.user!.officalClass !== null
+        userDataStore.user!.officialClass !== null
       ) {
         return router.push("/club");
       }
@@ -48,7 +48,7 @@ export default defineComponent({
     async function postData(userData: object) {
       // Default options are marked with *
       console.log("ths is post data");
-      await fetch("http://localhost:3000/addOsisGradeOfficalClass", {
+      await fetch("http://localhost:3000/addOsisGradeOfficialClass", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -69,11 +69,11 @@ export default defineComponent({
               userDataStore.addOsis(response.value);
               if (userDataStore.user!.grade === null) {
                 return router.push("/additional-information/grade");
-              } else if (userDataStore.user!.officalClass === null) {
-                return router.push("/additional-information/offical-class");
+              } else if (userDataStore.user!.officialClass === null) {
+                return router.push("/additional-information/official-class");
               } else if (
                 userDataStore.user!.grade !== null &&
-                userDataStore.user!.officalClass !== null
+                userDataStore.user!.officialClass !== null
               )
                 checker();
             }
@@ -82,14 +82,17 @@ export default defineComponent({
               userDataStore.addGrade(response.value);
               if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
-              } else if (userDataStore.user!.officalClass === null) {
-                return router.push("/additional-information/offical-class");
-              }
-              checker();
+              } else if (userDataStore.user!.officialClass === null) {
+                return router.push("/additional-information/official-class");
+              } else if (
+                userDataStore.user!.grade !== null &&
+                userDataStore.user!.officialClass !== null
+              )
+                checker();
             }
 
             if (response.type === "Official Class") {
-              userDataStore.addOfficallClass(response.value);
+              userDataStore.addOfficialClass(response.value);
               if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
               } else if (userDataStore.user!.grade === null) {
@@ -105,7 +108,7 @@ export default defineComponent({
     const sendAdditionalUserInfo = () => {
       const bundle = {
         user: userDataStore.user,
-        additionalInfoType: props.osisGradeOfficalClass,
+        additionalInfoType: props.osisGradeOfficialClass,
         additionalInfoValue: form.userValue,
       };
       console.log(bundle);

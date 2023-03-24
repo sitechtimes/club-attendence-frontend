@@ -1,7 +1,7 @@
 <template>
   <div class="box">
-    <AddCard osisGradeOfficalClass="Official Class"
-      ><template v-slot:name>Offical Class</template>
+    <AddCard osisGradeOfficialClass="Official Class"
+      ><template v-slot:name>Official Class</template>
       <template v-slot:context>
         Please enter your correct grade in order to better identify you!
       </template></AddCard

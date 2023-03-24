@@ -6,7 +6,7 @@ type UserObject = {
   firstName: string;
   grade: string;
   lastName: string;
-  officalClass: string;
+  officialClass: string;
   osis: string;
   clubData: [
     {
@@ -17,6 +17,7 @@ type UserObject = {
   ];
   clientAuthority: string;
   uid: string;
+  rowNumber: string;
 };
 
 interface UserState {
@@ -38,8 +39,8 @@ export const useUserDataStore = defineStore("userData", {
     addGrade(grade: string) {
       this.user!.grade = grade;
     },
-    addOfficallClass(officalClass: string) {
-      this.user!.officalClass = officalClass;
+    addOfficialClass(officialClass: string) {
+      this.user!.officialClass = officialClass;
     },
     async getData() {
       const res = await fetch("http://localhost:3000");

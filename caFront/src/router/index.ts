@@ -1,10 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AboutView from "../views/AboutView.vue"
-import ClubView from "../views/ClubView.vue"
-import HomeView from '../views/HomeView.vue'
-import TeacherView from '../views/TeacherView.vue'
-import Member from '../views/Member.vue'
-import Home from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
+import HomeView from "../views/HomeView.vue";
+import TeacherView from "../views/TeacherView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +15,6 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
-    
     },
     {
       path: "/qrcode",
@@ -33,7 +29,6 @@ const router = createRouter({
     {
       path: "/club",
       name: "club",
-
       component: () => {
         return import(
           /*webpackChunkName: "club-view" */ "../views/ClubView.vue"
@@ -43,11 +38,8 @@ const router = createRouter({
     {
       path: "/member",
       name: "member",
-
       component: () => {
-        return import(
-          /*webpackChunkName: "club-view" */ "../views/Member.vue"
-        );
+        return import(/*webpackChunkName: "club-view" */ "../views/Member.vue");
       },
     },
     {
@@ -69,24 +61,21 @@ const router = createRouter({
       },
     },
     {
-      path: "/additional-information/offical-class",
-      name: "officalClass",
+      path: "/additional-information/official-class",
+      name: "officialClass",
       component: () => {
         return import(
-          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/OfficalClassView.vue"
+          /*webpackChunkName: "additional-information" */ "@/views/AdditionalInformation/officialClassView.vue"
         );
       },
     },
 
     {
-      
-        path:'/teacher',
-        name:'teacher',
-        component: TeacherView
-      
-    }
+      path: "/teacher",
+      name: "teacher",
+      component: TeacherView,
+    },
   ],
 });
-      
 
 export default router;
