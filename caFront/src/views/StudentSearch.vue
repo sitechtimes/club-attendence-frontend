@@ -5,9 +5,9 @@
         </h2>
 
         <section class="top">
-            <input v-model="searchBy" class="input" type="text">
+            <input v-model="searchBy" class="input" type="text" @input="logValue">
             <button @click="changeFilter" class="dropdown">filter</button>
-                <li v-if="filterStatus == true" class="choices" @click="fun()" v-for="heading in head" >{{ heading }}</li>
+                <li v-if="filterStatus == true" class="choices" @click="selectFilter(heading)" v-for="heading in head" >{{ heading }}</li>
         </section>
        <studentSearchTable :theData="store.allStudentData" :headings="head" ></studentSearchTable>
 
@@ -34,13 +34,22 @@ export default defineComponent({
         console.log(filterStatus)
 
         return {
-            store, head, searchBy, filterStatus
+            store, head, searchBy, filterStatus, currentFilter
         }
     },
     methods:{
         changeFilter(){
             this.filterStatus = !this.filterStatus
             console.log(this.filterStatus, this.searchBy)
+        },
+
+        logValue(){
+            console.log(this.searchBy)
+        },
+
+        selectFilter(param: string){
+            this.currentFilter = param
+            console.log(this.currentFilter)
         }
     },
     computed:{
