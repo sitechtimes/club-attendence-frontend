@@ -6,7 +6,7 @@
 
       </div>
       <div class="bottom">
-        <ul class="nextdates" v-for="date in clubData?.meetingDates" :key="date.clubCode">
+        <ul class="nextdates" v-for="date in clubData?.meetingDates" :key="date.clubCode"> 
           <li>
             {{ date }}
           </li> 
@@ -81,7 +81,7 @@ export default {
     const ifPresident = props.position === "president";
     const objectData = useUserDataStore();
     const user = objectData.user;
-   const clubMeeting = user?.clubData.meetingDates;
+    const clubData = user?.clubData;
     const clubstore = useClubStore();
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
