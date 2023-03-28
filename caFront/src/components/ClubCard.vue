@@ -8,7 +8,7 @@
       <div class="bottom">
         <ul class="nextdates" v-for="date in clubData?.meetingDates" :key="date.clubCode"> 
           <li>
-            {{ date }}
+            {{ date}}
           </li> 
         </ul>
       </div>
@@ -54,6 +54,16 @@ import { RouterLink } from "vue-router";
 
 import { ref } from "vue";
 
+
+interface clubinformation {
+  clubCode: string;
+  clubName: string;
+  position: string;
+  meetingDates: Array<dates>;
+}
+interface dates {
+  date: string,
+}
 export default {
   name: "Card",
   components: {
@@ -86,7 +96,7 @@ export default {
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display, status, clubData };
+    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display, status, user, clubData};
   },
 };
 </script>
