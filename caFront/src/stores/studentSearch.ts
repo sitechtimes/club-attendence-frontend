@@ -39,15 +39,23 @@ export const studentStore = defineStore("studentStore",{
         fetchURL: "http://localhost:3000/",
         allStudentData: [],
         currentFilter: "Name",
+    
         
     }),
     actions:{
+        updateCurrentFilter(newFilter: string){
+            this.currentFilter = newFilter
+        },
 
         async getAllStudentData(){
             await fetch(this.fetchURL + 'get-all-user-data').then((res) => res.json()).then((res) => this.allStudentData = res).then(()=> console.log(this.allStudentData))
                
 
-        }
+        },
+   
+
+
+
     }
 
 } )

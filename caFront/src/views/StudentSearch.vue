@@ -6,10 +6,10 @@
 
         <section class="top">
             <input v-model="searchBy" class="input" type="text" @input="logValue">
-            <button @click="changeFilter" class="dropdown">filter</button>
+            <button @click="changeFilter" class="dropdown">{{ store.currentFilter }}</button>
                 <li v-if="filterStatus == true" class="choices" @click="selectFilter(heading)" v-for="heading in head" >{{ heading }}</li>
         </section>
-       <studentSearchTable :theData="store.allStudentData" :headings="head" ></studentSearchTable>
+       <studentSearchTable :theData="returnFilteredData(store.currentFilter)" :headings="head" ></studentSearchTable>
 
 
 
@@ -30,11 +30,11 @@ export default defineComponent({
         const head = ["Osis","Name","Email","Grade","Official Class"]
         const searchBy = ref("")
         const filterStatus = ref(false)
-        const currentFilter = ref("name")
+
         console.log(filterStatus)
 
         return {
-            store, head, searchBy, filterStatus, currentFilter
+            store, head, searchBy, filterStatus, 
         }
     },
     methods:{
@@ -48,15 +48,18 @@ export default defineComponent({
         },
 
         selectFilter(param: string){
-            this.currentFilter = param
-            console.log(this.currentFilter)
+            this.store.updateCurrentFilter(param)
+            console.log(this.store.currentFilter)
         }
     },
     computed:{
         allData(){
             const data = this.store.allStudentData
             
-        }
+        },
+        returnFilteredData(filter:string){
+            return this.store.allStudentData.filter((student) => (student.firstName + student.lastName).toLowerCase().includes(this.searchBy.toLowerCase()))
+        },
     }
 })
 </script>
