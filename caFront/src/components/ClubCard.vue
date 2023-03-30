@@ -54,13 +54,6 @@ import { RouterLink } from "vue-router";
 
 import { ref } from "vue";
 
-
-interface clubinformation {
-  clubCode: string;
-  clubName: string;
-  position: string;
-  meetingDates: Array<dates>;
-}
 interface dates {
   date: string,
 }
@@ -78,6 +71,7 @@ export default {
     date: String,
     clubCode: String,
   },
+
   setup(props) {
     const status = ref(false)
 
