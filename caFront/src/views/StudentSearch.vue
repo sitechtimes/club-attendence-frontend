@@ -46,14 +46,28 @@ export default defineComponent({
 
         logValue(){
             console.log(this.searchBy)
-    
-
-            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => (student.firstName + student.lastName).toLowerCase().includes(this.searchBy.toLowerCase())))
+            
+            if(this.store.currentFilter == "Name"){
+                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => (student.firstName + student.lastName).replace(/ /g,"").toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
+            }
+            if(this.store.currentFilter == "Osis"){
+                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.osis.toLowerCase().includes(this.searchBy.replace(/ /g,""))))
+            }
+            if(this.store.currentFilter == "Email"){
+                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.email.toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
+            }
+            if(this.store.currentFilter == "Official Class"){
+                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.officialClass.toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
+            }
+            if(this.store.currentFilter == "Grade"){
+                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.grade.includes(this.searchBy.toLowerCase().replace(/ /g,""))))
+            }
       
         },
 
         selectFilter(param: string){
             this.store.updateCurrentFilter(param)
+            this.filterStatus = !this.filterStatus
             console.log(this.store.currentFilter)
         }
     },
@@ -61,9 +75,6 @@ export default defineComponent({
         allData(){
             const data = this.store.allStudentData
             
-        },
-        returnFilteredData(filter:string){
-            return this.store.allStudentData.filter((student) => (student.firstName + ""+ student.lastName).toLowerCase().includes(this.searchBy.toLowerCase()))
         },
     }
 })
@@ -79,6 +90,10 @@ export default defineComponent({
     width: 50%;
     height: 3rem;
     font-size: 2.5rem;
+}
+
+li{
+    font-size: 3rem;
 }
 
 </style>
