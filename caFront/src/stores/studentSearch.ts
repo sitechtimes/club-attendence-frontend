@@ -28,16 +28,20 @@ interface studentData {
 }
 
 interface studentInterface {
+    didYouSelectFilter: boolean,
     fetchURL: string,
     allStudentData: Array<studentData> | [],
+    filteredStudentData: Array<studentData> | [],
     currentFilter: string,
 
 }
 
 export const studentStore = defineStore("studentStore",{
     state:(): studentInterface => ({
+        didYouSelectFilter: false,
         fetchURL: "http://localhost:3000/",
         allStudentData: [],
+        filteredStudentData: [],
         currentFilter: "Name",
     
         
@@ -47,11 +51,17 @@ export const studentStore = defineStore("studentStore",{
             this.currentFilter = newFilter
         },
 
+
+
         async getAllStudentData(){
-            await fetch(this.fetchURL + 'get-all-user-data').then((res) => res.json()).then((res) => this.allStudentData = res).then(()=> console.log(this.allStudentData))
+            await fetch(this.fetchURL + 'get-all-user-data').then((res) => res.json()).then((res) => this.allStudentData = res).then((res) => this.filteredStudentData = res).then(()=> console.log(this.allStudentData))
                
 
         },
+
+        updateFilteredStudentData(updatedAllStudentData: Array<studentData>){
+            this.filteredStudentData = updatedAllStudentData
+        }
    
 
 

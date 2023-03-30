@@ -9,7 +9,8 @@
             <button @click="changeFilter" class="dropdown">{{ store.currentFilter }}</button>
                 <li v-if="filterStatus == true" class="choices" @click="selectFilter(heading)" v-for="heading in head" >{{ heading }}</li>
         </section>
-       <studentSearchTable :theData="returnFilteredData(store.currentFilter)" :headings="head" ></studentSearchTable>
+       <studentSearchTable :theData="store.filteredStudentData" :headings="head" ></studentSearchTable>
+
 
 
 
@@ -45,6 +46,10 @@ export default defineComponent({
 
         logValue(){
             console.log(this.searchBy)
+    
+
+            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => (student.firstName + student.lastName).toLowerCase().includes(this.searchBy.toLowerCase())))
+      
         },
 
         selectFilter(param: string){
@@ -58,7 +63,7 @@ export default defineComponent({
             
         },
         returnFilteredData(filter:string){
-            return this.store.allStudentData.filter((student) => (student.firstName + student.lastName).toLowerCase().includes(this.searchBy.toLowerCase()))
+            return this.store.allStudentData.filter((student) => (student.firstName + ""+ student.lastName).toLowerCase().includes(this.searchBy.toLowerCase()))
         },
     }
 })
