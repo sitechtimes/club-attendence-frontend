@@ -95,7 +95,19 @@ export default defineComponent({
       },
     };
   },
-  setup() {
+  props: {
+    meetingDates: {
+      type: Array<string>,
+      required: false,
+    },
+    date: {
+      type: String,
+      required: false,
+    },
+  },
+  setup(props) {
+
+    const ifdatesMatch = props.meetingDates
     const clubActivity = useClubActivity();
 
     return { clubActivity };

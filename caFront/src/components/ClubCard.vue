@@ -6,7 +6,7 @@
 
       </div>
       <div class="bottom">
-        <ul class="nextdates" v-for="date in clubData?.meetingDates" :key="date.clubCode"> 
+        <ul class="nextdates" v-for="date in meetingDates" :key="date"> 
           <li>
             {{ date}}
           </li> 
@@ -54,9 +54,6 @@ import { RouterLink } from "vue-router";
 
 import { ref } from "vue";
 
-interface dates {
-  date: string,
-}
 export default {
   name: "Card",
   components: {
@@ -65,11 +62,26 @@ export default {
     RouterLink,
   },
   props: {
-    clubName: String,
-    meetingDates: Array,
-    position: String,
-    date: String,
-    clubCode: String,
+    clubName: {
+      type: String,
+      required: true,
+    },
+    meetingDates: {
+      type: Array <string>,
+      required:false,
+    },
+    position: {
+      type: String,
+      required: false,
+    },
+    date: {
+      type: String,
+      required: false,
+    },
+    clubCode: {
+      type: String,
+      required: true,
+    }
   },
 
   setup(props) {
