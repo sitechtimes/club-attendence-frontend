@@ -99,5 +99,25 @@
   .here {
     background-color: rgb(130, 255, 130);
   }
+
+  @media (max-width: 1300px){
+    .header{
+      font-size: 2rem
+
+    }
+    .asset{
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 855px){
+    .header{
+      font-size: 1.5rem;
+
+    }
+    .asset{
+      font-size: 1rem;
+    }
+  }
   </style>
   
