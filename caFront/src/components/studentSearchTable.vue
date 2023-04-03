@@ -6,6 +6,7 @@
         <div
           class="test"
           :class="{
+            absent: data.presentLocation.inClubToday == false,
             present: data.presentLocation.inClubToday == true,
  
           }"
@@ -63,7 +64,8 @@
     display: grid;
     grid-template-columns: repeat(v-bind(numColumn), auto);
     font-size: 7rem;
-    background-color: antiquewhite;
+
+    padding: 1rem ;
   }
   .card {
     display: flex;

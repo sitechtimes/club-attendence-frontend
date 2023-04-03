@@ -86,8 +86,6 @@
     justify-content: left;
     align-items: center;
     height: 50px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     margin-left: 1rem;
   }
   
@@ -141,6 +139,9 @@
     background-color: #f2f2f2;
   }
   
+  
+
+
   @media (max-width: 768px) {
   /* Styles for screens smaller than 768px */
   .top {
