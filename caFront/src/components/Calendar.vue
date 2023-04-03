@@ -45,6 +45,7 @@
           @click="currentDate.date = day"
           v-for="day in currentMonthDays"
           :key="day"
+           :class="{ color: meetingDates.date == day }"
         >
           {{ day }}
         </div>
@@ -57,6 +58,9 @@
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
+interface dates {
+  date: string,
+}
 export default defineComponent({
   name: "Calendar",
   components: {
@@ -97,20 +101,20 @@ export default defineComponent({
   },
   props: {
     meetingDates: {
-      type: Array<string>,
-      required: false,
+      type: Array<dates>,
+      required: true,
     },
     date: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   setup(props) {
 
-    const ifdatesMatch = props.meetingDates
+const meetingDates = props.meetingDates
     const clubActivity = useClubActivity();
 
-    return { clubActivity };
+    return { clubActivity, meetingDates};
   },
   computed: {
     prevMonthDays() {
@@ -188,6 +192,9 @@ export default defineComponent({
   font-size: 3rem;
 }
 
+.color{
+background-color: red;
+}
 .font {
   font-size: 4rem;
   color: white;
