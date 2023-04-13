@@ -45,7 +45,12 @@
           @click="currentDate.date = day"
           v-for="day in currentMonthDays"
           :key="day"
-           :class="{ color: meetingDates.date == day }"
+          :class="{
+            color: meetingDates.forEach(
+              date ===
+                `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
+            ),
+          }"
         >
           {{ day }}
         </div>
@@ -55,18 +60,19 @@
 </template>
 
 <script lang="ts">
+import { useUserDataStore } from "../stores/userData";
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
-interface dates {
-  date: string,
+interface MeetingDate {
+  date: string;
 }
 export default defineComponent({
   name: "Calendar",
   components: {
     miniButton,
   },
-  data: function () {
+  data() {
     return {
       weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       weekdayNames: [
@@ -101,20 +107,16 @@ export default defineComponent({
   },
   props: {
     meetingDates: {
-      type: Array<dates>,
-      required: true,
-    },
-    date: {
-      type: String,
+      type: Array<MeetingDate>,
       required: true,
     },
   },
   setup(props) {
-
-const meetingDates = props.meetingDates
+    const meetingDates = props.meetingDates;
+    const objectData = useUserDataStore();
     const clubActivity = useClubActivity();
 
-    return { clubActivity, meetingDates};
+    return { clubActivity, meetingDates, objectData };
   },
   computed: {
     prevMonthDays() {
@@ -192,8 +194,8 @@ const meetingDates = props.meetingDates
   font-size: 3rem;
 }
 
-.color{
-background-color: red;
+.color {
+  background-color: red;
 }
 .font {
   font-size: 4rem;
@@ -274,40 +276,39 @@ background-color: red;
   font-weight: bold;
 }
 
-@media (max-width: 1150px){
-  .current-weekday{
-    font-size:5rem;
+@media (max-width: 1150px) {
+  .current-weekday {
+    font-size: 5rem;
     display: flex;
     margin-top: 2rem;
     margin-bottom: 2rem;
     justify-content: space-around;
   }
   .showcalendar {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
-  font-size: 2rem;
-  color: white;
-  column-gap: 2rem;
-  row-gap: 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    font-size: 2rem;
+    color: white;
+    column-gap: 2rem;
+    row-gap: 2rem;
+  }
+  .font {
+    font-size: 3rem;
+  }
+  .current-date {
+    height: 11rem;
+  }
+  .weekday {
+    font-size: 3rem;
+  }
+  .showcalendar {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    font-size: 3rem;
+    color: white;
+    column-gap: 1rem;
+    row-gap: 2rem;
+  }
 }
-.font{
-  font-size: 3rem;
-}
-.current-date{
-  height: 11rem;
-}
-.weekday{
-  font-size: 3rem;
-}
-.showcalendar {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
-  font-size: 3rem;
-  color: white;
-  column-gap: 1rem;
-  row-gap: 2rem;
-}
-}
-
 </style>

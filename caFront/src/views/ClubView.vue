@@ -63,7 +63,6 @@ export default defineComponent({
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
     const clubs = userDataStore.user!.clubData;
-
     return { userDataStore, clubs, clubActivity };
   },
 });
@@ -89,11 +88,10 @@ export default defineComponent({
   justify-content: start;
   flex-wrap: wrap;
 }
-@media (max-width:1150px){
-  .nav{
+@media (max-width: 1150px) {
+  .nav {
     display: flex;
     justify-content: center;
-
   }
 }
 </style>
