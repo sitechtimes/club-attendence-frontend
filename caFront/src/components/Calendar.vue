@@ -46,10 +46,7 @@
           v-for="day in currentMonthDays"
           :key="day"
           :class="{
-            color: meetingDates.forEach(
-              date ===
-                `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
-            ),
+            color: isMeetingDate(day),
           }"
         >
           {{ day }}
@@ -173,6 +170,13 @@ export default defineComponent({
       } else {
         this.currentDate.month -= 1;
       }
+    },
+    isMeetingDate(day: number) {
+      return this.meetingDates.some(
+        (date) =>
+          date.date ===
+          `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
+      );
     },
   },
   created() {
