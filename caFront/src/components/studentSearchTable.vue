@@ -12,24 +12,24 @@
           }"
         >
 
-        <div class="asset osis">
+        <h2 class="asset osis">
             {{ data.osis }}
-          </div>
-        <div class="asset name">
+          </h2>
+        <h2 class="asset name">
           {{ data.firstName + " " + data.lastName }}
-        </div>
+        </h2>
 
    
-          <div class="asset email">
+          <h2 class="asset email">
             {{ data.email }}
-          </div>
+          </h2>
   
-          <div class="asset grade">
+          <h2 class="asset grade">
             {{ data.grade }}
-          </div>
-          <div class="asset offClass">
+          </h2>
+          <h2 class="asset offClass">
             {{ data.officialClass }}
-          </div>
+          </h2>
   
         </div>
       </div>
@@ -60,12 +60,15 @@
   </script>
   
   <style scoped>
+
+  h2{
+    font-weight: 400;
+  }
   .table {
     display: grid;
     grid-template-columns: repeat(v-bind(numColumn), auto);
     font-size: 7rem;
 
-    padding: 1rem ;
   }
   .card {
     display: flex;

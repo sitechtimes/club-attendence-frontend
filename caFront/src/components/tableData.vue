@@ -11,23 +11,23 @@
           null: data.status == null,
         }"
       >
-        <div class="asset osis">
+        <h3 class="asset osis">
           {{ data.osis }}
-        </div>
+        </h3>
 
-        <div class="asset name">
+        <h3 class="asset name">
           {{ data.firstName + " " + data.lastName }}
-        </div>
+        </h3>
 
-        <div class="asset grade">
+        <h3 class="asset grade">
           {{ data.grade }}
-        </div>
-        <div class="asset offClass">
+        </h3>
+        <h3 class="asset offClass">
           {{ data.officalClass }}
-        </div>
-        <div class="asset email">
+        </h3>
+        <h3 class="asset email">
           {{ data.email }}
-        </div>
+        </h3>
       </div>
     </div>
   </div>
@@ -57,6 +57,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+h3{
+  font-weight: 400;
+}
 .table {
   display: grid;
   grid-template-columns: repeat(v-bind(numColumn), auto);

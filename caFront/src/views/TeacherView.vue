@@ -6,8 +6,8 @@
       </div>
 
       <div class="top-left left">
-        <dateDropdown></dateDropdown>
         <statusDropdown></statusDropdown>
+        <dateDropdown></dateDropdown>
       </div>
 
     </section>
@@ -107,9 +107,10 @@ input {
   font-size: 4rem;
 }
 .top {
-  height: 20vh;
+  height: 10vh;
   display: flex;
   font-size: 4rem;
+  align-items: center;
 }
 .bottom {
   display: flex;
