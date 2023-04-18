@@ -46,7 +46,11 @@
           v-for="day in currentMonthDays"
           :key="day"
           :class="{
-            color: isMeetingDate(day),
+            color: meetingDates.forEach(
+              (date) =>
+                date ===
+                `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
+            ),
           }"
         >
           {{ day }}
@@ -61,9 +65,7 @@ import { useUserDataStore } from "../stores/userData";
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
-interface MeetingDate {
-  date: string;
-}
+
 export default defineComponent({
   name: "Calendar",
   components: {
@@ -104,7 +106,7 @@ export default defineComponent({
   },
   props: {
     meetingDates: {
-      type: Array<MeetingDate>,
+      type: Array<string>,
       required: true,
     },
   },
@@ -170,13 +172,6 @@ export default defineComponent({
       } else {
         this.currentDate.month -= 1;
       }
-    },
-    isMeetingDate(day: number) {
-      return this.meetingDates.some(
-        (date) =>
-          date.date ===
-          `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
-      );
     },
   },
   created() {
