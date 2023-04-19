@@ -60,124 +60,132 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useUserDataStore } from "../stores/userData";
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 
-export default defineComponent({
-  name: "Calendar",
-  components: {
-    miniButton,
-  },
-  data() {
-    return {
-      weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      weekdayNames: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      month: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ],
-      currentDate: {
-        date: 0,
-        month: 1,
-        year: 0,
-      },
-    };
-  },
-  props: {
-    meetingDates: {
-      type: Array<string>,
-      required: true,
-    },
-  },
-  setup(props) {
-    const meetingDates = props.meetingDates;
-    const objectData = useUserDataStore();
-    const clubActivity = useClubActivity();
+interface CalendarType {
+  date: number;
+  month: number;
+  year: number;
+}
 
-    return { clubActivity, meetingDates, objectData };
-  },
-  computed: {
-    prevMonthDays() {
-      let year =
-        this.currentDate.month === 0
-          ? this.currentDate.year - 1
-          : this.currentDate.year;
-      let month = this.currentDate.month === 0 ? 12 : this.currentDate.month;
-      return new Date(year, month, 0).getDate();
-    },
-    firstMonthDay() {
-      let firstDay = new Date(
-        this.currentDate.year,
-        this.currentDate.month,
-        1
-      ).getDay();
-      if (firstDay === 0) firstDay = 7;
-      return firstDay;
-    },
-    currentDay() {
-      return new Date(
-        this.currentDate.year,
-        this.currentDate.month,
-        this.currentDate.date
-      ).getDay();
-    },
-    currentMonthDays() {
-      return new Date(
-        this.currentDate.year,
-        this.currentDate.month + 1,
-        0
-      ).getDate();
-    },
-  },
-  methods: {
-    getCurrentDate() {
-      let today = new Date();
-      this.currentDate.date = today.getDate();
-      this.currentDate.month = today.getMonth();
-      this.currentDate.year = today.getFullYear();
-    },
-    monthUp() {
-      if (this.currentDate.month === 11) {
-        this.currentDate.month = 0;
-        this.currentDate.year += 1;
-      } else {
-        this.currentDate.month += 1;
-      }
-    },
-    monthDown() {
-      if (this.currentDate.month === 0) {
-        this.currentDate.month = 11;
-        this.currentDate.year -= 1;
-      } else {
-        this.currentDate.month -= 1;
-      }
-    },
-  },
-  created() {
-    this.getCurrentDate();
-  },
-});
+const calendar: CalendarType[] = [{ date: 0, month: 1, year: 0 }];
+
+// export default defineComponent({
+//   name: "Calendar",
+//   components: {
+//     miniButton,
+//   },
+//   data() {
+//     return {
+//       weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+//       weekdayNames: [
+//         "Sunday",
+//         "Monday",
+//         "Tuesday",
+//         "Wednesday",
+//         "Thursday",
+//         "Friday",
+//         "Saturday",
+//       ],
+//       month: [
+//         "January",
+//         "February",
+//         "March",
+//         "April",
+//         "May",
+//         "June",
+//         "July",
+//         "August",
+//         "September",
+//         "October",
+//         "November",
+//         "December",
+//       ],
+//       currentDate: {
+//         date: 0,
+//         month: 1,
+//         year: 0,
+//       } as CalendarType,
+//     };
+//   },
+//   props: {
+//     meetingDates: {
+//       type: Array<string>,
+//       required: true,
+//     },
+//   },
+//   setup(props) {
+//     const meetingDates = props.meetingDates;
+//     const objectData = useUserDataStore();
+//     const clubActivity = useClubActivity();
+
+//     return { clubActivity, meetingDates, objectData };
+//   },
+//   computed: {
+//     prevMonthDays() {
+//       let year =
+//         this.currentDate.month === 0
+//           ? this.currentDate.year - 1
+//           : this.currentDate.year;
+//       let month = this.currentDate.month === 0 ? 12 : this.currentDate.month;
+//       return new Date(year, month, 0).getDate();
+//     },
+//     firstMonthDay() {
+//       let firstDay = new Date(
+//         this.currentDate.year,
+//         this.currentDate.month,
+//         1
+//       ).getDay();
+//       if (firstDay === 0) firstDay = 7;
+//       return firstDay;
+//     },
+//     currentDay() {
+//       return new Date(
+//         this.currentDate.year,
+//         this.currentDate.month,
+//         this.currentDate.date
+//       ).getDay();
+//     },
+//     currentMonthDays() {
+//       return new Date(
+//         this.currentDate.year,
+//         this.currentDate.month + 1,
+//         0
+//       ).getDate();
+//     },
+//   },
+//   methods: {
+//     getCurrentDate() {
+//       let today = new Date();
+//       this.currentDate.date = today.getDate();
+//       this.currentDate.month = today.getMonth();
+//       this.currentDate.year = today.getFullYear();
+//     },
+//     monthUp() {
+//       if (this.currentDate.month === 11) {
+//         this.currentDate.month = 0;
+//         this.currentDate.year += 1;
+//       } else {
+//         this.currentDate.month += 1;
+//       }
+//     },
+//     monthDown() {
+//       if (this.currentDate.month === 0) {
+//         this.currentDate.month = 11;
+//         this.currentDate.year -= 1;
+//       } else {
+//         this.currentDate.month -= 1;
+//       }
+//     },
+//   },
+//   created() {
+//     this.getCurrentDate();
+//   },
+// });
 </script>
 
 <style>
