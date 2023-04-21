@@ -62,7 +62,6 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-
           if (data.clientAuthority === "student") {
             userDataStore.addUserData(data);
             if (data.osis === "none") {
