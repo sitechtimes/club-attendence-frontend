@@ -41,14 +41,8 @@ export default defineComponent({
   setup() {
     const qrCode = useQrCode();
 
-    const bundle = {
-      clubCode: qrCode.clubData.clubCode,
-      dateOfToday: qrCode.clubData.dateOfToday,
-    };
-
     function getQrCode() {
       qrCode.getQrCode();
-      console.log(bundle.clubCode, bundle.dateOfToday);
     }
 
     return { qrCode, getQrCode };
