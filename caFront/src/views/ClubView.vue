@@ -14,8 +14,9 @@
     <div class="clublist">
       <Card
         v-for="club in clubs"
-        :name="club.clubName"
+        :clubName="club.clubName"
         :position="club.position"
+        :clubCode="club.clubCode"
         :key="club.clubCode"
       >
       </Card>
@@ -23,6 +24,7 @@
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
+
     <ClubActivity />
   </div>
 </template>
@@ -58,7 +60,7 @@ export default defineComponent({
   setup() {
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
-    const clubs = userDataStore.user!.positionOfClub;
+    const clubs = userDataStore.user!.clubData;
 
     return { userDataStore, clubs, clubActivity };
   },
