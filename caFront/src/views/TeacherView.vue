@@ -118,7 +118,7 @@ input {
   height: 80vh;
 }
 .left {
-  width: 30%;
+  width: 25%;
   overflow-y: auto;
   position: relative;
   padding: 1rem;

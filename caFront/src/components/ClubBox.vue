@@ -1,14 +1,17 @@
 <template>
   <div @click="store.getClubData(clubCode)" class="clubBox">
-    <div class="top">
+    <div class="app">
 
-      <h2 class="clubName">{{ ClubName }}</h2>
-    </div>
-
-
-    <div class="bot">
-      <h3 class="advisor">Advisor: {{ Advisor }}</h3>
-      <h3 class="room">Room #: {{ Room }}</h3>
+      <div class="top">
+  
+        <h2 class="clubName">{{ ClubName }}</h2>
+      </div>
+  
+  
+      <div class="bot">
+        <h3 class="advisor">Advisor: {{ Advisor }}</h3>
+        <h3 class="room">Room #: {{ Room }}</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -53,13 +56,17 @@ export default defineComponent({
 border: 1px solid #D0D0D0;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
+display: flex;
+align-items: center;
+
+
  
 }
 .bot {
   display: flex;
   text-align: left;
+  font-size: 3rem;
 
-  font-size: 2rem;
 }
 .advisor {
   margin-right: 4rem;
@@ -68,11 +75,23 @@ border-radius: 10px;
 }
 .room{
   font-weight: 300;
+ 
 }
 .clubName{
   text-align: left;
   font-weight: 400;
-  font-size: 4rem;
+  font-size: 3rem;
 }
+
+@media (max-width:1700px){
+  .clubName{
+    font-size: 2rem;
+
+  }
+  .bot{
+    font-size:  2   rem;
+  }
+}
+
 
 </style>
