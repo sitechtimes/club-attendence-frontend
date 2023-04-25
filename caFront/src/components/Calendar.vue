@@ -2,33 +2,36 @@
   <div class="container">
     <div class="calendar">
       <div class="current-weekday">
-        <span class="text">{{ weekdayNames[currentDay] }}</span>
+        <span class="text">{{ weekdayNames[currentDay.value] }}</span>
         <span class="text">
-          {{ currentDate.month + 1 }}/{{ currentDate.date }}/{{
-            currentDate.year
+          {{ currentDate.value.month + 1 }}/{{ currentDate.value.date }}/{{
+            currentDate.value.year
           }}
         </span>
         <miniButton class="static" @click="clubActivity.closeModal()">
           x
         </miniButton>
       </div>
-
+      php Copy code
       <div class="current-date">
         <div class="month">
           <div class="font">
-            <div class="triangle-up" @click="monthDown()"></div>
+            <div class="triangle-up" @click="monthDown"></div>
 
-            {{ month[currentDate.month] }}
+            {{ month[currentDate.value.month] }}
 
-            <div class="triangle-down" @click="monthUp()"></div>
+            <div class="triangle-down" @click="monthUp"></div>
           </div>
         </div>
 
         <div class="year">
           <div class="font">
-            <div class="triangle-up" @click="currentDate.year -= 1"></div>
-            {{ currentDate.year }}
-            <div class="triangle-down" @click="currentDate.year += 1"></div>
+            <div class="triangle-up" @click="currentDate.value.year -= 1"></div>
+            {{ currentDate.value.year }}
+            <div
+              class="triangle-down"
+              @click="currentDate.value.year += 1"
+            ></div>
           </div>
         </div>
       </div>
@@ -42,14 +45,16 @@
         </div>
         <div
           class="day"
-          @click="currentDate.date = day"
+          @click="currentDate.value.date = day"
           v-for="day in currentMonthDays"
           :key="day"
           :class="{
-            color: meetingDates.forEach(
+            color: meetingDates.value.forEach(
               (date) =>
                 date ===
-                `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
+                `${currentDate.value.month + 1}/${day}/${
+                  currentDate.value.year
+                }`
             ),
           }"
         >
