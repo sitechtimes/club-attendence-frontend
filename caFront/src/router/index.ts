@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AboutView from "../views/AboutView.vue"
-import ClubView from "../views/ClubView.vue"
-import HomeView from '../views/HomeView.vue'
-import TeacherView from '../views/TeacherView.vue'
-import Home from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
+import HomeView from "../views/HomeView.vue";
+import TeacherView from "../views/TeacherView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,9 +15,7 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
-    
     },
-
 
     {
       path: "/qrcode",
@@ -69,14 +65,11 @@ const router = createRouter({
       },
     },
     {
-      
-        path:'/teacher',
-        name:'teacher',
-        component: TeacherView
-      
-    }
+      path: "/teacher",
+      name: "teacher",
+      component: TeacherView,
+    },
   ],
 });
-      
 
 export default router;
