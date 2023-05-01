@@ -1,10 +1,13 @@
 <template  >
 
+<div class="dropdown">
 
-    <button class="dropdown" @click="store.statusButton = !store.statusButton" >{{ store.statusFilterCurrent }}</button>
-    <div v-if="store.statusButton" class="status">
-        <li class="choices" v-for="stat in status" @click="store.filterStatus(stat)" >{{ stat }}</li>
-    </div>
+  <button class="button" @click="store.statusButton = !store.statusButton" >{{ store.statusFilterCurrent }}</button>
+  <div v-if="store.statusButton" class="status">
+      <li class="choices" v-for="stat in status" @click="store.filterStatus(stat)" >{{ stat }}</li>
+  </div>
+
+</div>
     
 </template>
 
@@ -24,10 +27,14 @@ export default defineComponent({
 
 <style scoped>
 
+.dropdown{
+  position: relative;
+}
 
-.dropdown {
+.button {
   width: 10rem;
   height: 4rem;
+  font-size: 100%;
   padding: 1rem;
   text-align: center;
   background: #FFFFFF;
@@ -37,6 +44,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 display: flex;
 align-items: center;
+position: relative;
 
 
 }
@@ -44,7 +52,20 @@ align-items: center;
 .status{
   text-align: center;
   align-items: center;
+  position: absolute;
+  width: 150%;
+  text-align: center;
+  background: #FFFFFF;
+  margin:auto;
+  z-index: 5;
+border: 1px solid #D0D0D0;
+
 }
+.status li{
+  font-size: 3rem;
+  position: relative;
+}
+
 /* CSS */
 /* button {
   align-items: center;
