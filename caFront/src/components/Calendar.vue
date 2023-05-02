@@ -45,13 +45,6 @@
           @click="currentDate.date = day"
           v-for="day in currentMonthDays"
           :key="day"
-          :class="{
-            color: meetingDates.forEach(
-              (date) =>
-                date ===
-                `${currentDate.month + 1}/${day}/${currentDate.year}`
-            ),
-          }"
         >
           {{ day }}
         </div>
@@ -179,7 +172,6 @@ export default defineComponent({
         this.currentDate.month -= 1;
       }
     },
-    
   },
   created() {
     this.getCurrentDate();

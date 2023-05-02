@@ -2,41 +2,48 @@
   <div>
     <div class="card">
       <div class="half">
-        <h3>{{ clubName }}</h3>   
-
+        <h3>{{ clubName }}</h3>
       </div>
       <div class="bottom">
-        <ul class="nextdates" v-for="date in meetingDates" :key="date"> 
+        <ul class="nextdates" v-for="date in meetingDates" :key="date">
           <li>
-            {{ date}}
-          </li> 
+            {{ date }}
+          </li>
         </ul>
       </div>
 
-<ul  v-if="status">
-  <li>
-        <img class="calendarpic" src="../assets/logos/calendar.svg" />
-      </li>
+      <ul v-if="status">
+        <li v-if="ifPresident">
+          <label for="image">
+            <img class="upload" src="../assets/logos/upload.png" alt="" />
+            <input id="image" type="file" ref="fileInput" accept="image/*"
+          /></label>
+        </li>
+        <li>
+          <img class="calendarpic" src="../assets/logos/calendar.svg" />
+        </li>
 
-      <li class="member" @click="clubstore.getClubData(clubCode)">
-        <router-link to="/member">
-          <img class="human" src="../assets/logos/human.svg" />
-        </router-link>
-      </li>
+        <li class="member" @click="clubstore.getClubData(clubCode)">
+          <router-link to="/member">
+            <img class="human" src="../assets/logos/human.svg" />
+          </router-link>
+        </li>
 
-      <li
-        class="container"
-        v-if="ifPresident"
-        @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
-      >
-        <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-      </li>
-</ul>
+        <li
+          class="container"
+          v-if="ifPresident"
+          @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+        >
+          <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+        </li>
+      </ul>
 
- 
-    <img @click="status = !status" class="open-icon" src="../assets/logos/pointing-left.svg" alt="">
-
-      
+      <img
+        @click="status = !status"
+        class="open-icon"
+        src="../assets/logos/pointing-left.svg"
+        alt=""
+      />
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
@@ -45,10 +52,10 @@
 </template>
 
 <script lang="ts">
-import {useUserDataStore} from "../stores/userData"
+import { useUserDataStore } from "../stores/userData";
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
-import {useClubActivity} from "../stores/clubActivity"
+import { useClubActivity } from "../stores/clubActivity";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 
@@ -58,7 +65,7 @@ export default {
   name: "Card",
   components: {
     QRScanner,
-    
+
     RouterLink,
   },
   props: {
@@ -67,8 +74,8 @@ export default {
       required: true,
     },
     meetingDates: {
-      type: Array <string>,
-      required:false,
+      type: Array<string>,
+      required: false,
     },
     position: {
       type: String,
@@ -81,13 +88,13 @@ export default {
     clubCode: {
       type: String,
       required: true,
-    }
+    },
   },
 
   setup(props) {
-    const status = ref(false)
+    const status = ref(false);
 
-     function display() {
+    function display() {
       if (clubActivity.isMenuVisible === true) {
         clubActivity.closeIcon();
       } else if (clubActivity.isMenuVisible === false) {
@@ -102,7 +109,17 @@ export default {
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    return { ifPresident, qrCode, dateOfToday, clubstore, clubActivity, display, status, user, clubData};
+    return {
+      ifPresident,
+      qrCode,
+      dateOfToday,
+      clubstore,
+      clubActivity,
+      display,
+      status,
+      user,
+      clubData,
+    };
   },
 };
 </script>
@@ -134,23 +151,29 @@ export default {
   background-color: rgb(252, 66, 66);
 }
 
-.bottom{
+.bottom {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   list-style-type: circle;
   height: 50%;
   width: 100%;
   position: absolute;
-  bottom:0;
+  bottom: 0;
 }
 
-
-li{
+li {
   font-size: 2rem;
   margin-left: 3rem;
 }
 
-
+.upload {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 6rem;
+  cursor: pointer;
+}
 .qrcode {
   position: absolute;
   width: 5rem;
@@ -176,8 +199,8 @@ li{
   left: 20rem;
   cursor: pointer;
 }
-.open-icon{
-   position: absolute;
+.open-icon {
+  position: absolute;
   width: 5rem;
   height: 5rem;
   top: 23.5rem;
@@ -185,42 +208,48 @@ li{
   cursor: pointer;
 }
 
-@media (max-width: 1150px){
-.card {
-  position: relative;
-  overflow: hidden;
-  margin: 2rem;
-  width: 35rem;
-  height: 30rem;
-  border: 0.0625rem solid lightgray;
-  border-radius: 1rem;
-  border-color: rgb(35, 35, 35);
-  transition: 0.5s;
-}
-.open-icon{
-  width: 5rem;
-  height: 5rem;
-  top: 23.5rem;
-  left: 28rem;
-}
+@media (max-width: 1150px) {
+  .card {
+    position: relative;
+    overflow: hidden;
+    margin: 2rem;
+    width: 35rem;
+    height: 30rem;
+    border: 0.0625rem solid lightgray;
+    border-radius: 1rem;
+    border-color: rgb(35, 35, 35);
+    transition: 0.5s;
+  }
+  .open-icon {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 28rem;
+  }
 
-.human{
-  width: 5rem;
-  height: 5rem;
-  top: 23.5rem;
-  left: 21rem;
-}.calendarpic{
-  width: 5rem;
-  height: 5rem;
-  top: 23.5rem;
-  left: 14rem;
+  .human {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 21rem;
+  }
+  .calendarpic {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 14rem;
+  }
+  .qrcode {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 7rem;
+  }
+  input {
+    display: none;
+  }
+  label {
+    cursor: pointer;
+  }
 }
-.qrcode{
-  width: 5rem;
-  height: 5rem;
-  top: 23.5rem;
-  left: 7rem;
-}
-}
-
 </style>
