@@ -64,6 +64,10 @@ border: 1px solid #D0D0D0;
 .status li{
   font-size: 3rem;
   position: relative;
+} 
+
+.choices{
+  list-style-type: none;
 }
 
 /* CSS */

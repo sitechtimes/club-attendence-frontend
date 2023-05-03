@@ -5,7 +5,7 @@
         <input v-model="input" type="text" />
       </div>
 
-      <div class="top-left left">
+      <div class="top-right ">
         <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
       </div>
@@ -119,11 +119,11 @@ input {
 }
 .left {
   width: 25%;
-  overflow-y: auto;
+ 
   position: relative;
   padding: 1rem;
 }
-.top-left{
+.top-right{
   display: flex;
 }
 
