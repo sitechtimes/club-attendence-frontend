@@ -14,10 +14,12 @@
 
       <ul v-if="status">
         <li v-if="ifPresident">
-          <label for="image">
-            <img class="upload" src="../assets/logos/upload.png" alt="" />
-            <input id="image" type="file" ref="fileInput" accept="image/*"
-          /></label>
+          <img
+            @click="clubActivity.openUpload()"
+            class="upload"
+            src="../assets/logos/upload.png"
+            alt=""
+          />
         </li>
         <li>
           <img class="calendarpic" src="../assets/logos/calendar.svg" />
@@ -58,6 +60,7 @@ import { useQrCode } from "../stores/qrCode";
 import { useClubActivity } from "../stores/clubActivity";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
+import UploadImage from "../components/uploadImage.vue";
 
 import { ref } from "vue";
 
@@ -65,9 +68,10 @@ export default {
   name: "Card",
   components: {
     QRScanner,
-
+    UploadImage,
     RouterLink,
   },
+
   props: {
     clubName: {
       type: String,
@@ -93,6 +97,7 @@ export default {
 
   setup(props) {
     const status = ref(false);
+    let image: string = "";
 
     function display() {
       if (clubActivity.isMenuVisible === true) {
@@ -100,6 +105,17 @@ export default {
       } else if (clubActivity.isMenuVisible === false) {
         clubActivity.openIcon();
       }
+    }
+    function handleImage(event: any) {
+      const selectedImage = event.target.files[0];
+      createBase64Image(selectedImage);
+    }
+    function createBase64Image(fileObject: any) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        image = event.target.result;
+      };
+      reader.readAsBinaryString(fileObject);
     }
     const ifPresident = props.position === "president";
     const objectData = useUserDataStore();
@@ -119,6 +135,9 @@ export default {
       status,
       user,
       clubData,
+      handleImage,
+      createBase64Image,
+      image,
     };
   },
 };
@@ -207,7 +226,29 @@ li {
   left: 34rem;
   cursor: pointer;
 }
-
+input {
+  display: none;
+}
+label {
+  cursor: pointer;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+}
+.cardbox {
+  position: absolute;
+  z-index: 1;
+  height: 50rem;
+  width: 50rem;
+  border-radius: 2rem;
+  padding: 1rem;
+  text-align: center;
+}
+.showAttendance {
+  width: 15rem;
+}
 @media (max-width: 1150px) {
   .card {
     position: relative;
@@ -244,12 +285,6 @@ li {
     height: 5rem;
     top: 23.5rem;
     left: 7rem;
-  }
-  input {
-    display: none;
-  }
-  label {
-    cursor: pointer;
   }
 }
 </style>

@@ -24,6 +24,9 @@
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
+    <div class="test">
+      <UploadImage v-show="clubActivity.isUploadVisible"> </UploadImage>
+    </div>
 
     <ClubActivity />
   </div>
@@ -39,6 +42,7 @@ import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import Calendar from "../components/Calendar.vue";
 import ClubActivity from "../components/ClubActivity.vue";
+import UploadImage from "../components/uploadImage.vue";
 
 export default defineComponent({
   name: "ClubView",
@@ -49,6 +53,7 @@ export default defineComponent({
     Calendar,
     ClubActivity,
     Camera,
+    UploadImage,
   },
   methods: {
     currentDate() {
