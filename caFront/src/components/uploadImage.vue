@@ -1,7 +1,7 @@
 <template>
   <div class="imagebox">
     <div class="cardbox">
-      <img class="showAttendance" src="image" alt="" />
+      <img class="showAttendance" :src="pickImage" alt="" />
       <input
         @change="handleImage"
         id="image"
@@ -23,26 +23,40 @@ export default defineComponent({
 
   setup() {
     let imageFile: any = null;
-    let imageBinary: any = "";
-    function handleImage(event: any) {
-      console.log(event.target.files);
-      const selectedImage = event.target.files[0];
-      createBase64Image(selectedImage);
-    }
-    function createBase64Image(files: any) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        imageFile = reader.result;
-      };
-      reader.readAsDataURL(files[0]);
-      imageFile = files[0];
+    let pickImage: any = "";
 
-      console.log(imageBinary);
+    function handleImage(event: any) {
+      const files = event.target.files;
+      let filename = files[0].name;
+      if (filename.lastIndexOf(".") <= 0) {
+        return alert("Please add a valid file!");
+      }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        pickImage = fileReader.result;
+        console.log("johsno dunb", pickImage);
+      });
+
+      fileReader.readAsDataURL(files[0]);
+      imageFile = files[0];
+      console.log("base 64", pickImage);
+
+      console.log(imageFile);
     }
+    // function createBase64Image(files: any) {
+    //   const reader = new FileReader();
+    //   reader.onload = () => {
+    //     imageFile = reader.result;
+    //   };
+    //   reader.readAsDataURL(files[0]);
+    //   imageFile = files[0];
+
+    //   console.log(imageBinary);
+    // }
 
     const clubActivity = useClubActivity();
 
-    return { clubActivity, handleImage, createBase64Image, image };
+    return { clubActivity, handleImage, pickImage, imageFile };
   },
 });
 </script>
