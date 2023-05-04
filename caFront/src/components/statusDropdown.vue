@@ -29,6 +29,8 @@ export default defineComponent({
 
 .dropdown{
   position: relative;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .button {
@@ -59,15 +61,19 @@ position: relative;
   margin:auto;
   z-index: 5;
 border: 1px solid #D0D0D0;
-
+border-radius: 5px;
+padding: 10px;
 }
-.status li{
-  font-size: 3rem;
-  position: relative;
-} 
+
 
 .choices{
+  position: relative;
   list-style-type: none;
+  font-weight: 300;
+  
+  margin: auto;
+  text-align: left;
+  font-size: 2rem;
 }
 
 /* CSS */

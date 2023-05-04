@@ -125,13 +125,14 @@ input {
 }
 .top-right{
   display: flex;
+  justify-content: space-around;
 }
 
 .left::-webkit-scrollbar {
   display: none;
 }
 .right {
-  width: 70%;
+  width: 65%;
   overflow-y: auto;
 
 }
