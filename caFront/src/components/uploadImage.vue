@@ -1,14 +1,13 @@
 <template>
   <div class="imagebox">
     <div class="cardbox">
-      <img class="showAttendance" :src="pickImage" alt="" />
       <input
         @change="handleImage"
         id="image"
         type="file"
         ref="fileInput"
         accept="image/*"
-      />
+      /><img class="showAttendance" :src="pickImage" alt="" />
     </div>
   </div>
 </template>
@@ -60,5 +59,14 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   position: fixed;
   margin-right: -50%;
+}
+img {
+  width: 40rem;
+  height: 60rem;
+}
+.cardbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 </style>
