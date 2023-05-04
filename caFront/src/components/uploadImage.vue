@@ -1,7 +1,7 @@
 <template>
   <div class="imagebox">
     <div class="cardbox">
-      <img class="showAttendance" :src="state.pickImage" alt="" />
+      <img class="showAttendance" :src="pickImage" alt="" />
       <input
         @change="handleImage"
         id="image"
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 
 export default defineComponent({
@@ -23,8 +23,7 @@ export default defineComponent({
 
   setup() {
     let imageFile: any = null;
-
-    const state: any = reactive({ pickImage: "" });
+    let pickImage: any = ref("");
 
     async function handleImage(event: any) {
       const files = event.target.files;
@@ -34,8 +33,8 @@ export default defineComponent({
       }
       const fileReader = new FileReader();
       fileReader.addEventListener("load", () => {
-        state.pickImage = fileReader.result;
-        console.log(state.pickImage);
+        pickImage.value = fileReader.result;
+        console.log(pickImage.value);
       });
       fileReader.readAsDataURL(files[0]);
       imageFile = files[0];
@@ -44,7 +43,7 @@ export default defineComponent({
     }
 
     const clubActivity = useClubActivity();
-    return { clubActivity, handleImage, state, imageFile };
+    return { clubActivity, handleImage, pickImage, imageFile };
   },
 });
 </script>
