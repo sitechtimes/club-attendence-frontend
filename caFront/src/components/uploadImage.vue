@@ -1,7 +1,7 @@
 <template>
   <div class="imagebox">
     <div class="cardbox">
-      <img class="showAttendance" :src="pickImage" alt="" />
+      <img class="showAttendance" :src="state.pickImage" alt="" />
       <input
         @change="handleImage"
         id="image"
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 
 export default defineComponent({
@@ -23,9 +23,10 @@ export default defineComponent({
 
   setup() {
     let imageFile: any = null;
-    let pickImage: any = "";
 
-    function handleImage(event: any) {
+    const state: any = reactive({ pickImage: "" });
+
+    async function handleImage(event: any) {
       const files = event.target.files;
       let filename = files[0].name;
       if (filename.lastIndexOf(".") <= 0) {
@@ -33,30 +34,17 @@ export default defineComponent({
       }
       const fileReader = new FileReader();
       fileReader.addEventListener("load", () => {
-        pickImage = fileReader.result;
-        console.log("johsno dunb", pickImage);
+        state.pickImage = fileReader.result;
+        console.log(state.pickImage);
       });
-
       fileReader.readAsDataURL(files[0]);
       imageFile = files[0];
-      console.log("base 64", pickImage);
 
       console.log(imageFile);
     }
-    // function createBase64Image(files: any) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     imageFile = reader.result;
-    //   };
-    //   reader.readAsDataURL(files[0]);
-    //   imageFile = files[0];
-
-    //   console.log(imageBinary);
-    // }
 
     const clubActivity = useClubActivity();
-
-    return { clubActivity, handleImage, pickImage, imageFile };
+    return { clubActivity, handleImage, state, imageFile };
   },
 });
 </script>
