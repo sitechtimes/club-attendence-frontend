@@ -10,6 +10,7 @@ export const useClubActivity = defineStore("clubActivity", {
     isCameraAllowed: false,
     isMenuVisible: false,
     isUploadVisible: false,
+    isImageVisible: false,
   }),
   actions: {
     openMenu() {
@@ -55,6 +56,12 @@ export const useClubActivity = defineStore("clubActivity", {
     },
     closeUpload() {
       this.isUploadVisible = false;
+    },
+    openImage() {
+      this.isImageVisible = true;
+    },
+    closeImage() {
+      this.isImageVisible = false;
     },
   },
 });
