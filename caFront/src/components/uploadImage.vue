@@ -1,7 +1,7 @@
 <template>
   <div class="imagebox">
     <div class="cardbox">
-      <a href="#" class="button button--piyo">
+      <span href="#" class="button button--piyo">
         <label for="image" class="button__wrapper">Upload</label>
 
         <input
@@ -24,7 +24,7 @@
             <div class="character__face"></div>
           </div>
         </div>
-      </a>
+      </span>
 
       <div v-show="clubActivity.isImageVisible" class="showAttendance">
         <img :src="pickImage" alt="" />
@@ -126,11 +126,10 @@ img {
 }
 .button {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 280px;
-  height: 80px;
+  margin-top: 6.5rem;
+  margin-left: 2rem;
+  width: 25rem;
+  height: 8rem;
   box-sizing: border-box;
   text-decoration: none;
   border: solid 3px #000;
@@ -197,6 +196,12 @@ img {
   background: var(--main_color);
   border-radius: var(--border_radius1);
   animation: sleep 1s ease infinite alternate;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 .character::before {
   content: "";
@@ -355,6 +360,7 @@ img {
 .button--piyo .button__wrapper::after {
   content: "";
   position: absolute;
+
   bottom: 0;
   width: 130px;
   height: 38px;
