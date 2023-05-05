@@ -31,12 +31,12 @@ export default defineComponent({
 <style scoped>
 .dropdown{
   position: relative;
-  margin-left: 3rem;
+  margin-left: 2rem;
   margin-right: 2rem;
 }
 
 .button {
-  width: 14rem;
+  width: 10rem;
   height: 4rem;
   font-size: 100%;
   padding: 1rem;
@@ -57,8 +57,6 @@ position: relative;
   text-align: center;
   align-items: center;
   position: absolute;
-  padding: 10px;
-  overflow-y: auto;
   width: 150%;
   text-align: center;
   background: #FFFFFF;
@@ -66,19 +64,24 @@ position: relative;
   z-index: 5;
 border: 1px solid #D0D0D0;
 border-radius: 5px;
-
+padding-top: 10px;
+padding-bottom: 10px;
 }
-.status li{
-  font-size: 2rem;
-  position: relative;
-  margin: auto;
-  font-weight: 300;
-  text-align: left;
-} 
+
 
 .choices{
+  position: relative;
   list-style-type: none;
+  font-weight: 300;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: auto;
+  text-align: left;
+  font-size: 2rem;
 }
 
+.choices:hover{
+  background-color:#dbdbdb;
+}
 
 </style>
