@@ -2,7 +2,7 @@
   <div class="home">
     <div class="nav">
       <Button @click="clubActivity.showModal()">
-        <h3>{{ currentDate() }}</h3>
+        <h2>{{ currentDate() }}</h2>
       </Button>
     </div>
 
