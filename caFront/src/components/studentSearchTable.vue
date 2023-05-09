@@ -105,23 +105,35 @@
     background-color: rgb(130, 255, 130);
   }
 
-  @media (max-width: 1300px){
+  @media (max-width: 1600px){
     .header{
-      font-size: 2rem
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 1300px){
+
+    .asset{
+      font-size: 2.5rem;
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 800px){
+    .header{
+      font-size: 2rem;
 
     }
     .asset{
       font-size: 1.5rem;
     }
   }
-
-  @media (max-width: 855px){
+  @media (max-width: 620px){
     .header{
-      font-size: 1.5rem;
-
+      padding: 0.75rem;
     }
     .asset{
-      font-size: 1rem;
+      padding: 0.5rem;
     }
   }
   </style>

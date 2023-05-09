@@ -57,6 +57,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
 h3{
   font-weight: 400;
 }
@@ -65,6 +67,7 @@ h3{
   grid-template-columns: repeat(v-bind(numColumn), auto);
   font-size: 7rem;
   background-color: antiquewhite;
+
 }
 .card {
   display: flex;

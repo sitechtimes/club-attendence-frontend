@@ -148,6 +148,7 @@
     flex-wrap: wrap;
     height: auto;
     margin: 0.5rem;
+    justify-content: center;
   }
   
   .input {

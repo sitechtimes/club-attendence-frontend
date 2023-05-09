@@ -22,7 +22,7 @@
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
-      <div class="right">
+      <div class="table-right">
 
 
         <tableData v-if="store.selectedStatus"
@@ -131,9 +131,14 @@ input {
 .left::-webkit-scrollbar {
   display: none;
 }
-.right {
+.right{
   width: 65%;
-  overflow-y: auto;
+}
+.table-right {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x:visible;
+
 
 }
 
