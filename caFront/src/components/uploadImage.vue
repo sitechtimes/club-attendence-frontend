@@ -1,7 +1,8 @@
 <template>
   <div class="imagebox">
     <div class="cardbox">
-      <span href="#" class="button button--piyo">
+      <div class="uploadbutton">
+  <span href="#" class="button button--piyo">
         <label for="image" class="button__wrapper">Upload</label>
 
         <input
@@ -25,10 +26,15 @@
           </div>
         </div>
       </span>
-
+      </div>
+    
+<div class="otherhalf">
       <div v-show="clubActivity.isImageVisible" class="showAttendance">
         <img :src="pickImage" alt="" />
       </div>
+
+</div>
+
     </div>
   </div>
 </template>
@@ -69,25 +75,33 @@ export default defineComponent({
 </script>
 
 <style>
-.imagebox {
+.otherhalf{
+      display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: -50%;
+  position: absolute;
+  top: 0;display: inline-block;
+  height: fit-content;
+  aspect-ratio: 1/1;
+  right: 0;
+
+}
+.cardbox {
   background-color: white;
   border-radius: 2rem;
-  border: black solid;
+  border: black solid; display: flex;
+  flex-direction: column;
   height: 60rem;
-  width: 70rem;
+  width: 100rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
   margin-right: -50%;
 }
-.showAttendance {
-  display: inline-block;
-  height: fit-content;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  background-color: #151515;
-}
+
 img {
   width: 100%;
   height: 100%;
@@ -126,8 +140,7 @@ img {
 }
 .button {
   position: relative;
-  margin-top: 6.5rem;
-  margin-left: 2rem;
+
   width: 25rem;
   height: 8rem;
   box-sizing: border-box;
@@ -165,6 +178,16 @@ img {
 .button__wrapper::before,
 .button__wrapper::after {
   transition: all 0.5s ease;
+}
+.uploadbutton{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  border-right: black solid;
 }
 .characterBox {
   position: absolute;
