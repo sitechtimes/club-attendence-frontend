@@ -2,39 +2,37 @@
   <div class="imagebox">
     <div class="cardbox">
       <div class="uploadbutton">
-  <span href="#" class="button button--piyo">
-        <label for="image" class="button__wrapper">Upload</label>
+        <span href="#" class="button button--piyo">
+          <label for="image" class="button__wrapper">Upload</label>
 
-        <input
-          @click="clubActivity.openImage()"
-          @change="handleImage"
-          id="image"
-          type="file"
-          ref="fileInput"
-          accept="image/*"
-        />
+          <input
+            @click="clubActivity.openImage()"
+            @change="handleImage"
+            id="image"
+            type="file"
+            ref="fileInput"
+            accept="image/*"
+          />
 
-        <div class="characterBox">
-          <div class="character wakeup">
-            <div class="character__face"></div>
+          <div class="characterBox">
+            <div class="character wakeup">
+              <div class="character__face"></div>
+            </div>
+            <div class="character wakeup">
+              <div class="character__face"></div>
+            </div>
+            <div class="character">
+              <div class="character__face"></div>
+            </div>
           </div>
-          <div class="character wakeup">
-            <div class="character__face"></div>
-          </div>
-          <div class="character">
-            <div class="character__face"></div>
-          </div>
+        </span>
+      </div>
+
+      <div class="otherhalf">
+        <div v-show="clubActivity.isImageVisible">
+          <img :src="pickImage" alt="" class="uploadedimg" />
         </div>
-      </span>
       </div>
-    
-<div class="otherhalf">
-      <div v-show="clubActivity.isImageVisible" class="showAttendance">
-        <img :src="pickImage" alt="" />
-      </div>
-
-</div>
-
     </div>
   </div>
 </template>
@@ -75,23 +73,39 @@ export default defineComponent({
 </script>
 
 <style>
-.otherhalf{
-      display: flex;
+.uploadedimg {
+  padding: 10%;
+
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: scale-down;
+}
+.otherhalf {
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: -50%;
+  width: 70%;
   position: absolute;
-  top: 0;display: inline-block;
-  height: fit-content;
-  aspect-ratio: 1/1;
+  top: 0;
   right: 0;
-
+}
+.uploadbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+  position: absolute;
+  top: 0;
+  border-right: black solid;
 }
 .cardbox {
   background-color: white;
   border-radius: 2rem;
-  border: black solid; display: flex;
+  border: black solid;
+  display: flex;
   flex-direction: column;
   height: 60rem;
   width: 100rem;
@@ -179,16 +193,7 @@ img {
 .button__wrapper::after {
   transition: all 0.5s ease;
 }
-.uploadbutton{
-    display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 50%;
-  position: absolute;
-  top: 0;
-  border-right: black solid;
-}
+
 .characterBox {
   position: absolute;
   top: -54px;
