@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="calendar_container">
     <div class="calendar">
       <div class="current-weekday">
         <span class="text">{{ weekdayNames[currentDay] }}</span>
