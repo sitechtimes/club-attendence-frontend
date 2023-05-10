@@ -54,9 +54,9 @@ export default {
 }
 .button {
   position: relative;
-  margin-top: 6.5rem;
+  margin-top: 4rem;
   margin-left: 2rem;
-  width: 21rem;
+  width: 30rem;
   height: 6rem;
   box-sizing: border-box;
   text-decoration: none;
@@ -64,6 +64,9 @@ export default {
   border-radius: 40px;
   background: var(--main_color);
   font-family: "Fredoka One", cursive;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 .button::before {
   content: "";

@@ -62,11 +62,14 @@ export default defineComponent({
   right: 5rem;
 }
 .open-panel {
+  position: absolute;
   border: 2px black solid;
   border-radius: 10rem;
   height: 7rem;
   width: 7rem;
   text-align: center;
+  bottom: 5rem;
+  right: 5rem;
 }
 
 li {
@@ -76,6 +79,7 @@ li {
   border: 3px solid black;
   border-radius: 1rem;
   background-color: #f3c87c;
+ 
 }
 li button {
   height: 4rem;
@@ -83,16 +87,18 @@ li button {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  width: 100%;
+  width: 100%; 
+
 }
 .dropdown-item {
   font-size: 2rem;
   position: absolute;
   width: 20rem;
-  bottom: 7.5rem;
-  right: -6rem;
+  bottom: 13rem;
+  right: 2rem;
 }
 .buttonpanel {
+
   display: flex;
   align-items: center;
   justify-content: center;

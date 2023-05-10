@@ -81,7 +81,7 @@ export default defineComponent({
   padding-right: 5rem;
   align-items: center;
   background-color: #f3c87c;
-  height: 10rem;
+  height: 13rem;
   width: 100%;
 }
 #cpic {
