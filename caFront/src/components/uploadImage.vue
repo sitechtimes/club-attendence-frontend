@@ -2,6 +2,7 @@
   <div class="imagebox">
     <div class="cardbox">
       <div class="uploadbutton">
+        <miniButton></miniButton>
         <span href="#" class="button button--piyo">
           <label for="image" class="button__wrapper">Upload</label>
 
@@ -40,10 +41,11 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
+import miniButton from "../components/miniButton.vue"
 
 export default defineComponent({
   name: "UploadImage",
-  components: {},
+  components: {miniButton},
 
   setup() {
     let imageFile: any = null;
