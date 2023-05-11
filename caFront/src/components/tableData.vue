@@ -103,4 +103,14 @@ h3{
 .here {
   background-color: rgb(130, 255, 130);
 }
+
+@media (max-width:1600px){
+  .header{
+    font-size: 3rem;
+  }
+  .asset{
+    padding: 0.75rem;
+    font-size: 2rem;
+  }
+}
 </style>

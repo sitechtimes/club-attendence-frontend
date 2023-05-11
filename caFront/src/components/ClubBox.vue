@@ -89,7 +89,15 @@ align-items: center;
 
   }
   .bot{
-    font-size:  2   rem;
+    font-size:  2rem;
+  }
+}
+
+@media (max-width: 1600px){
+  .clubBox{
+    height: 10rem;
+    width: 33%;
+
   }
 }
 

@@ -154,5 +154,19 @@ input {
   z-index: 2;
 }
 
+@media (max-width: 1600px){
+  
+  .bottom{
+    flex-direction: column;
+   
+  }
+  .left{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  
+  }
+
+}
 
 </style>
