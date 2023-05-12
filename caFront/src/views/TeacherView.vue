@@ -1,34 +1,18 @@
 <template>
   <div class="page">
-    <div class="top">
-      <div class="left">
-        <input v-model="input" type="text" />
-        <h2>Filter By Date:</h2>
-        <absentDropdown
-          :changeStatus="changeDate"
-          :status="date"
-          :changeFilter="changeFilterDate"
-          :currentFilter="currentFilterDate"
-          :prop="store.listOfDates"
-          :getAttendanceAtDate="true"
-        ></absentDropdown>
-      </div>
+    <section class="top">
       <div class="right">
-        <h2>Filter By:</h2>
-        <absentDropdown
-          class="drop"
-          :changeStatus="changeAttendance"
-          :changeFilter="changeFilterAttendance"
-          :currentFilter="currentFilterAttendance"
-          :status="attendance"
-          :prop="filtersAttendance"
-        ></absentDropdown>
+        <input v-model="input" type="text" />
       </div>
-    </div>
 
-    <div class="bottom">
-      <section v-if="(store.loading = false)">Loading...</section>
-      <section v-if="clubData" class="left">
+      <div class="top-right ">
+        <statusDropdown></statusDropdown>
+        <dateDropdown></dateDropdown>
+      </div>
+
+    </section>
+    <section class="bottom">
+      <div v-if="clubData" class="left">
         <clubBox
           v-for="club in clubData"
           :key="club.clubName"
@@ -37,109 +21,73 @@
           :Room="club.roomNumber"
           :clubCode="club.clubCode"
         ></clubBox>
-      </section>
-      <section class="right">
-        <div v-if="store.selectedClub">{{ store.currentAttendance }}</div>
+      </div>
+      <div class="table-right">
 
-        <tableData
-          v-if="store.filterDate == null"
+
+        <tableData v-if="store.selectedStatus"
+          :headings="headings"
+          :theData="store.filteredAttendance"
+        ></tableData>
+        <tableData v-if="!store.selectedStatus"
           :headings="headings"
           :theData="store.currentAttendance"
         ></tableData>
 
-        <tableData
-          v-if="store.filterDate"
-          :headings="headings"
-          :theData="returnStudentData"
-        ></tableData>
-      </section>
-    </div>
+
+
+      </div>
+
+    </section>
+
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { useStore } from "@/stores/counter";
-import specificClub from "../assets/specificClub.json";
-import studentData from "../assets/fakeData2.json";
-import clubBox from "../components/ClubBox.vue";
-import tableData from "../components/tableData.vue";
-import absentDropdown from "../components/absentDropdown.vue";
+import { defineComponent, ref } from 'vue'
+import { teacherStore } from '@/stores/teacherVueStore'
+import clubBox from '@/components/ClubBox.vue'
+import tableData from '@/components/tableData.vue'
+import dateDropdown from '@/components/dateDropdown.vue'
+import statusDropdown from '@/components/statusDropdown.vue'
+
+interface Club {
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName:string;
+  clubSpreadsheetId:string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  roomNumber: string;
+}
 
 export default defineComponent({
-  components: {
-    clubBox,
-    tableData,
-    absentDropdown,
+  components:{
+    clubBox, tableData, dateDropdown, statusDropdown,
   },
-  setup() {
-    const store = useStore();
-    store.getData();
+  setup () {
+    const store = teacherStore()
+    const input = ref<string>("")
+    store.getData()
+    const headings = ["Osis", "Name", "Grade", "Class", "Email"];
+    return {store, input, headings }
 
-    const input = ref<string>("");
-    const filtersAttendance: Array<string> = ["All", "Absent", "Present"];
-    const filtersDate: Array<string> = ["1/4", "1.2"];
-    const currentFilterAttendance = ref<string>("All");
-    const currentFilterDate = ref<string>("Select Date");
-    const attendance = ref<boolean>(false);
-    const date = ref<boolean>(false);
-    const headings = ["Osis", "Name", "Grade", "Class"];
-
-    return {
-      headings,
-      studentData,
-      input,
-      filtersAttendance,
-      currentFilterAttendance,
-      attendance,
-      date,
-      currentFilterDate,
-      filtersDate,
-      store,
-    };
+    
   },
-
-  methods: {
-    changeFilterAttendance(param: string) {
-      this.currentFilterAttendance = param;
-      this.changeAttendance();
-    },
-    changeFilterDate(param: string) {
-      this.currentFilterDate = param;
-      this.store.pushFilterDate(param);
-      this.changeDate();
-    },
-    changeAttendance() {
-      this.attendance = !this.attendance;
-    },
-    changeDate() {
-      this.date = !this.date;
-    },
-  },
-
-  computed: {
-    clubData(): Array<object> {
+  computed:{
+    clubData(): Array<Club> {
       console.log(this.store.clubList);
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
     },
-
-    returnStudentData(): Array<object> | undefined {
-      if (this.currentFilterAttendance == "Present") {
-        return this.store.attendanceAtDate.filter(
-          (student) => student.status == "present"
-        );
-      } else if (this.currentFilterAttendance == "Absent") {
-        return this.store.attendanceAtDate.filter(
-          (student) => student.status == "absent"
-        );
-      } else if (this.currentFilterAttendance == "All") {
-        return this.store.attendanceAtDate;
-      }
-    },
-  },
-});
+  }
+})
 </script>
 
 <style scoped>
@@ -159,9 +107,10 @@ input {
   font-size: 4rem;
 }
 .top {
-  height: 20vh;
+  height: 10vh;
   display: flex;
   font-size: 4rem;
+  align-items: center;
 }
 .bottom {
   display: flex;
@@ -169,18 +118,30 @@ input {
   height: 80vh;
 }
 .left {
-  width: 30%;
-  overflow-y: auto;
+  width: 25%;
+ 
   position: relative;
   padding: 1rem;
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+.top-right{
+  display: flex;
+  justify-content: space-around;
 }
 
 .left::-webkit-scrollbar {
   display: none;
 }
-.right {
-  width: 70%;
-  overflow-y: auto;
+.right{
+  width: 65%;
+}
+.table-right {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x:visible;
+
+
 }
 
 .right::-webkit-scrollbar {
@@ -194,4 +155,20 @@ input {
   position: absolute;
   z-index: 2;
 }
+
+@media (max-width: 1600px){
+  
+  .bottom{
+    flex-direction: column;
+   
+  }
+  .left{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  
+  }
+
+}
+
 </style>

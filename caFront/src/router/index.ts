@@ -6,6 +6,7 @@ import TeacherView from '../views/TeacherView.vue'
 import Scanner from '../views/Scanner.vue'
 import Member from '../views/Member.vue'
 import Home from "../views/HomeView.vue";
+import StudentSearch from "../views/StudentSearch.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -93,7 +94,12 @@ const router = createRouter({
         name:'teacher',
         component: TeacherView
       
-    }
+    },
+    {
+      path:"/student",
+      name:"Student",
+      component: StudentSearch
+    },
   ],
 });
       

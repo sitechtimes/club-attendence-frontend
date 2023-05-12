@@ -11,20 +11,23 @@
           null: data.status == null,
         }"
       >
-        <div class="asset osis">
+        <h3 class="asset osis">
           {{ data.osis }}
-        </div>
+        </h3>
 
-        <div class="asset name">
+        <h3 class="asset name">
           {{ data.firstName + " " + data.lastName }}
-        </div>
+        </h3>
 
-        <div class="asset grade">
+        <h3 class="asset grade">
           {{ data.grade }}
-        </div>
-        <div class="asset offClass">
+        </h3>
+        <h3 class="asset offClass">
           {{ data.officalClass }}
-        </div>
+        </h3>
+        <h3 class="asset email">
+          {{ data.email }}
+        </h3>
       </div>
     </div>
   </div>
@@ -34,23 +37,37 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   props: {
-    headings: Array,
-    theData: Array<object>,
+    headings:{
+      type: Array<string>,
+      required: true,
+
+    } ,
+    theData: {
+      type: Object,
+      required: false
+    }
   },
   setup(props) {
     const present = "present";
     const absent = "absent";
-
-    return { present, absent };
+    const numColumn = props.headings.length
+    return { present, absent, numColumn };
   },
 });
 </script>
 
 <style scoped>
+
+
+h3{
+  font-weight: 400;
+}
 .table {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(v-bind(numColumn), auto);
   font-size: 7rem;
+  background-color: antiquewhite;
+
 }
 .card {
   display: flex;
@@ -58,6 +75,10 @@ export default defineComponent({
 }
 .header {
   padding: 1rem;
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  background-color: white;
 }
 .row {
   height: 5rem;
@@ -81,5 +102,15 @@ export default defineComponent({
 }
 .here {
   background-color: rgb(130, 255, 130);
+}
+
+@media (max-width:1600px){
+  .header{
+    font-size: 3rem;
+  }
+  .asset{
+    padding: 0.75rem;
+    font-size: 2rem;
+  }
 }
 </style>
