@@ -18,7 +18,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
 import { teacherStore } from '@/stores/teacherVueStore'
+
+
 
 export default defineComponent({
   props: {
@@ -34,11 +37,7 @@ export default defineComponent({
       store,
     };
   },
-  methods: {
-
-
-    
-  },
+  methods: {},
 });
 </script>
 

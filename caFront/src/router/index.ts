@@ -3,6 +3,8 @@ import AboutView from "../views/AboutView.vue"
 import ClubView from "../views/ClubView.vue"
 import HomeView from '../views/HomeView.vue'
 import TeacherView from '../views/TeacherView.vue'
+import Scanner from '../views/Scanner.vue'
+import Member from '../views/Member.vue'
 import Home from "../views/HomeView.vue";
 import StudentSearch from "../views/StudentSearch.vue"
 
@@ -19,6 +21,11 @@ const router = createRouter({
       name: "about",
       component: AboutView,
     
+    },
+    {
+      path: "/scanner",
+      name: "scanner",
+      component: Scanner,
     },
 
 
@@ -39,6 +46,16 @@ const router = createRouter({
       component: () => {
         return import(
           /*webpackChunkName: "club-view" */ "../views/ClubView.vue"
+        );
+      },
+    },
+    {
+      path: "/member",
+      name: "member",
+
+      component: () => {
+        return import(
+          /*webpackChunkName: "club-view" */ "../views/Member.vue"
         );
       },
     },
@@ -69,6 +86,8 @@ const router = createRouter({
         );
       },
     },
+     
+
     {
       
         path:'/teacher',

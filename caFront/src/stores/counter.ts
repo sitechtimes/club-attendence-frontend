@@ -180,3 +180,4 @@ export const useStore = defineStore("global", {
     },
   },
 });
+

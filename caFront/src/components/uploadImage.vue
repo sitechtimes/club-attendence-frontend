@@ -1,28 +1,130 @@
 <template>
-  <span href="#" class="button button--piyo">
-    <slot class="date-text"></slot>
+  <div class="imagebox">
+    <div class="cardbox">
+      <div class="uploadbutton">
+        <miniButton @click="clubActivity.closeUpload"></miniButton>
+        <span href="#" class="button button--piyo">
+          <label for="image" class="button__wrapper">Upload</label>
 
-    <div class="characterBox">
-      <div class="character wakeup">
-        <div class="character__face"></div>
+          <input
+            @click="clubActivity.openImage()"
+            @change="handleImage"
+            id="image"
+            type="file"
+            ref="fileInput"
+            accept="image/*"
+          />
+
+          <div class="characterBox">
+            <div class="character wakeup">
+              <div class="character__face"></div>
+            </div>
+            <div class="character wakeup">
+              <div class="character__face"></div>
+            </div>
+            <div class="character">
+              <div class="character__face"></div>
+            </div>
+          </div>
+        </span>
       </div>
-      <div class="character wakeup">
-        <div class="character__face"></div>
-      </div>
-      <div class="character">
-        <div class="character__face"></div>
+
+      <div class="otherhalf">
+        <div v-show="clubActivity.isImageVisible">
+          <img :src="pickImage" alt="" class="uploadedimg" />
+        </div>
       </div>
     </div>
-  </span>
+  </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Button",
-};
+import { defineComponent, ref } from "vue";
+import { useClubActivity } from "../stores/clubActivity";
+import miniButton from "../components/miniButton.vue"
+
+export default defineComponent({
+  name: "UploadImage",
+  components: {miniButton},
+
+  setup() {
+    let imageFile: any = null;
+    let pickImage: any = ref("");
+
+    async function handleImage(event: any) {
+      const files = event.target.files;
+      let filename = files[0].name;
+      if (filename.lastIndexOf(".") <= 0) {
+        return alert("Please add a valid file!");
+      }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        pickImage.value = fileReader.result;
+        console.log(pickImage.value);
+      });
+      fileReader.readAsDataURL(files[0]);
+      imageFile = files[0];
+
+      console.log(imageFile);
+    }
+
+    const clubActivity = useClubActivity();
+    return { clubActivity, handleImage, pickImage, imageFile };
+  },
+});
 </script>
 
-<style scoped>
+<style>
+.uploadedimg {
+  padding: 10%;
+
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: scale-down;
+}
+.otherhalf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.uploadbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+  position: absolute;
+  top: 0;
+  border-right: black solid;
+}
+.cardbox {
+  background-color: white;
+  border-radius: 2rem;
+  border: black solid;
+  display: flex;
+  flex-direction: column;
+  height: 60rem;
+  width: 100rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  margin-right: -50%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+#image {
+  display: none;
+}
 .button--piyo {
   --main_color: white;
   --sub_color1: #f4e19c;
@@ -54,19 +156,15 @@ export default {
 }
 .button {
   position: relative;
-  margin-top: 4rem;
-  margin-left: 2rem;
-  width: 30rem;
-  height: 6rem;
+
+  width: 25rem;
+  height: 8rem;
   box-sizing: border-box;
   text-decoration: none;
   border: solid 3px #000;
   border-radius: 40px;
   background: var(--main_color);
   font-family: "Fredoka One", cursive;
-  display: flex;
-  justify-content: center;
-  align-content: center;
 }
 .button::before {
   content: "";
@@ -97,6 +195,7 @@ export default {
 .button__wrapper::after {
   transition: all 0.5s ease;
 }
+
 .characterBox {
   position: absolute;
   top: -54px;
@@ -291,9 +390,7 @@ export default {
 .button--piyo .button__wrapper::after {
   content: "";
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+
   bottom: 0;
   width: 130px;
   height: 38px;

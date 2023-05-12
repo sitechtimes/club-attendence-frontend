@@ -31,11 +31,16 @@ export default defineComponent({
   height: 60rem;
   width: 100rem;
   border-radius: 3rem;
-  position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
   position: fixed;
+}
+@media (max-width: 1150px) {
+  .calendar {
+    height: 50rem;
+    width: 38rem;
+  }
 }
 </style>

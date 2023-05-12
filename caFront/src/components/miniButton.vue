@@ -1,5 +1,5 @@
 <template>
-  <button class="staticbutton">
+  <button class="closebutton">
     <slot></slot>
   </button>
 </template>
@@ -11,13 +11,27 @@ export default {
 </script>
 
 <style scoped>
-.staticbutton {
-  background-color: red;
-  font-size: 4rem;
-  height: 6rem;
-  width: 6rem;
-  border: none;
-  border-radius: 50%;
-  text-align: center;
+.closebutton {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 32px;
+  height: 32px;
+
 }
+
+.closebutton:before, .closebutton:after {
+  position: absolute;
+  
+  content: ' ';
+  
+  background-color: #333;
+}
+.closebutton:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
 </style>

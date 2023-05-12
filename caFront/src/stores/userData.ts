@@ -8,14 +8,15 @@ type UserObject = {
   lastName: string;
   officalClass: string;
   osis: string;
-  positionOfClub: [
+  clubData: [
     {
       clubCode: string;
       clubName: string;
       position: string;
+      meetingDates: Array<string>;
     }
   ];
-  type: string;
+  clientAuthority: string;
   uid: string;
 };
 

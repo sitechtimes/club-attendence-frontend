@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="calendar_container">
     <div class="calendar">
       <div class="current-weekday">
         <span class="text">{{ weekdayNames[currentDay] }}</span>
@@ -54,15 +54,22 @@
 </template>
 
 <script lang="ts">
+import { useUserDataStore } from "../stores/userData";
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
+
+interface CalendarType {
+  date: number;
+  month: number;
+  year: number;
+}
 export default defineComponent({
   name: "Calendar",
   components: {
     miniButton,
   },
-  data: function () {
+  data() {
     return {
       weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       weekdayNames: [
@@ -95,10 +102,19 @@ export default defineComponent({
       },
     };
   },
-  setup() {
+  props: {
+    meetingDates: {
+      type: Array<string>,
+      required: true,
+    },
+  },
+  setup(props) {
+    const meetingDates = props.meetingDates;
+    const objectData = useUserDataStore();
     const clubActivity = useClubActivity();
+    const currentDate: CalendarType[] = [{ date: 0, month: 1, year: 0 }];
 
-    return { clubActivity };
+    return { clubActivity, meetingDates, objectData, currentDate };
   },
   computed: {
     prevMonthDays() {
@@ -176,6 +192,9 @@ export default defineComponent({
   font-size: 3rem;
 }
 
+.color {
+  background-color: red;
+}
 .font {
   font-size: 4rem;
   color: white;
@@ -185,6 +204,7 @@ export default defineComponent({
 }
 
 .current-weekday {
+  margin-top: 2rem;
   color: white;
   font-size: 5rem;
   position: static;
@@ -252,5 +272,41 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   font-weight: bold;
+}
+
+@media (max-width: 1150px) {
+  .current-weekday {
+    font-size: 5rem;
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    justify-content: space-around;
+  }
+  .showcalendar {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    font-size: 2rem;
+    color: white;
+    column-gap: 2rem;
+    row-gap: 2rem;
+  }
+  .font {
+    font-size: 3rem;
+  }
+  .current-date {
+    height: 11rem;
+  }
+  .weekday {
+    font-size: 3rem;
+  }
+  .showcalendar {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    font-size: 3rem;
+    color: white;
+    column-gap: 1rem;
+    row-gap: 2rem;
+  }
 }
 </style>
