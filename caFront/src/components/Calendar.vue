@@ -42,9 +42,10 @@
         </div>
         <div
           class="day"
-          @click="currentDate.date = day"
+          @click="showMdates"
           v-for="day in currentMonthDays"
           :key="day"
+        
         >
           {{ day }}
         </div>
@@ -150,6 +151,9 @@ export default defineComponent({
     },
   },
   methods: {
+    showMdates() {
+      console.log(this.meetingDates)
+    },
     getCurrentDate() {
       let today = new Date();
       this.currentDate.date = today.getDate();
