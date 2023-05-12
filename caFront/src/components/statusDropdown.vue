@@ -1,10 +1,10 @@
 <template  >
 
-<div class="dropdown">
+<div class="dropdown2">
 
-  <button class="button" @click="store.statusButton = !store.statusButton" >{{ store.statusFilterCurrent }}</button>
-  <div v-if="store.statusButton" class="status">
-      <li class="choices" v-for="stat in status" @click="store.filterStatus(stat)" >{{ stat }}</li>
+  <button class="button2" @click="store.statusButton = !store.statusButton" >{{ store.statusFilterCurrent }}</button>
+  <div v-if="store.statusButton" class="status2">
+      <li class="choices2" v-for="stat in status" @click="store.filterStatus(stat)" >{{ stat }}</li>
   </div>
 
 </div>
@@ -27,13 +27,13 @@ export default defineComponent({
 
 <style scoped>
 
-.dropdown{
+.dropdown2{
   position: relative;
   margin-left: 2rem;
   margin-right: 2rem;
 }
 
-.button {
+.button2 {
   width: 10rem;
   height: 4rem;
   font-size: 100%;
@@ -51,7 +51,7 @@ position: relative;
 
 }
 
-.status{
+.status2{
   text-align: center;
   align-items: center;
   position: absolute;
@@ -67,7 +67,7 @@ padding-bottom: 10px;
 }
 
 
-.choices{
+.choices2{
   position: relative;
   list-style-type: none;
   font-weight: 300;
@@ -78,7 +78,7 @@ padding-bottom: 10px;
   font-size: 2rem;
 }
 
-.choices:hover{
+.choices2:hover{
   background-color:#dbdbdb;
 }
 

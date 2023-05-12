@@ -1,10 +1,10 @@
 <template>
 
-  <div class="dropdown">
+  <div class="dropdown2">
 
-    <button class="button"  @click="store.datesButton = !store.datesButton" >{{ store.datesCurrent }}</button>
+    <button class="button2"  @click="store.datesButton = !store.datesButton" >{{ store.datesCurrent }}</button>
     <div v-if="store.datesButton == true" class="status">
-        <li class="choices" @click="store.fetchAttendance(dates)" v-for="dates in store.listOfDates" >{{ dates }}</li>
+        <li class="choices2" @click="store.fetchAttendance(dates)" v-for="dates in store.listOfDates" >{{ dates }}</li>
     </div>
   </div>
    
@@ -29,13 +29,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.dropdown{
+.dropdown2{
   position: relative;
   margin-left: 2rem;
   margin-right: 2rem;
 }
 
-.button {
+.button2 {
   width: 10rem;
   height: 4rem;
   font-size: 100%;
@@ -69,7 +69,7 @@ padding-bottom: 10px;
 }
 
 
-.choices{
+.choices2{
   position: relative;
   list-style-type: none;
   font-weight: 300;
@@ -80,7 +80,7 @@ padding-bottom: 10px;
   font-size: 2rem;
 }
 
-.choices:hover{
+.choices2:hover{
   background-color:#dbdbdb;
 }
 
