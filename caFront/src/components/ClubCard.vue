@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="half">
-        <h3>{{ clubName }}</h3>
+        <h2>{{ clubName }}</h2>
       </div>
       <div class="bottom">
         <ul class="nextdates" v-for="date in meetingDates" :key="date">
@@ -160,6 +160,7 @@ export default {
   transform: translateY(-7px);
 }
 .half {
+  font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;

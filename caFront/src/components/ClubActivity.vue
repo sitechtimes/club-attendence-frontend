@@ -62,6 +62,7 @@ export default defineComponent({
   right: 5rem;
 }
 .open-panel {
+  font-size: 6rem;
   position: absolute;
   border: 2px black solid;
   border-radius: 10rem;

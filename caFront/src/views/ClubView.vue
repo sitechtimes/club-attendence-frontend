@@ -75,6 +75,7 @@ export default defineComponent({
 
 <style scoped>
 .nav {
+  font-size: 8rem;
   display: block;
   display: flex;
   justify-content: end;
