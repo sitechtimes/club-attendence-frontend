@@ -122,6 +122,8 @@ input {
  
   position: relative;
   padding: 1rem;
+  overflow-y: scroll;
+  max-height: 80vh;
 }
 .top-right{
   display: flex;
