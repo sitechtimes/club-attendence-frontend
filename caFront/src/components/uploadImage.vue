@@ -2,7 +2,7 @@
   <div class="imagebox">
     <div class="cardbox">
       <div class="uploadbutton">
-        <miniButton></miniButton>
+        <miniButton @click="clubActivity.closeUpload"></miniButton>
         <span href="#" class="button button--piyo">
           <label for="image" class="button__wrapper">Upload</label>
 
