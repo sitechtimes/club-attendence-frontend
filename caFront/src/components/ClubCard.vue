@@ -11,8 +11,8 @@
           </li>
         </ul>
       </div>
-
-      <ul v-if="status">
+<div class="menubar">
+   <ul v-if="status">
         <li v-if="ifPresident">
           <img
             @click="clubActivity.openUpload()"
@@ -46,6 +46,8 @@
         src="../assets/logos/pointing-left.svg"
         alt=""
       />
+</div>
+     
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
@@ -175,10 +177,12 @@ export default {
   display: flex;
   flex-direction: column;
   list-style-type: circle;
-  height: 50%;
+  height: 35%;
   width: 100%;
+  bottom: 15%;
   position: absolute;
-  bottom: 0;
+ 
+  overflow: auto;
 }
 
 li {
@@ -190,24 +194,24 @@ li {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 6rem;
+   bottom: 0.5rem;
+     right: 29rem;
   cursor: pointer;
 }
 .qrcode {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 13rem;
+  bottom: 0.5rem;
+     right: 22rem;
   cursor: pointer;
 }
 .human {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 27rem;
+   bottom: 0.5rem;
+     right: 8rem;
   cursor: pointer;
 }
 
@@ -215,16 +219,18 @@ li {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 20rem;
+   bottom: 0.5rem;
+     right: 15rem;
   cursor: pointer;
 }
 .open-icon {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 34rem;
+
+     bottom: 0.5rem;
+     right: 1rem;
+
   cursor: pointer;
 }
 input {
