@@ -1,9 +1,9 @@
 <template>
   <div v-if="(clubActivity.isCameraAllowed = true)">
     <qrcode-stream @decode="onDecode" @init="onInit" />
-    <h2 class="decode-result">
+    <h1 class="decode-result">
       Last result: <b>{{ result }}</b>
-    </h2>
+    </h1>
 
     <miniButton class="position" @click="clubActivity.closeCamera()">
     </miniButton>

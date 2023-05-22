@@ -2,7 +2,7 @@
   <div class="home">
     <div class="nav">
       <Button @click="clubActivity.showModal()">
-        <h2>{{ currentDate() }}</h2>
+        <h1 class="todaydate">{{ currentDate() }}</h1>
       </Button>
     </div>
 
@@ -83,6 +83,9 @@ export default defineComponent({
   background-color: #f3c87c;
   height: 13rem;
   width: 100%;
+}
+.todaydate {
+  font-size: 4rem;
 }
 #cpic {
   height: 50px;

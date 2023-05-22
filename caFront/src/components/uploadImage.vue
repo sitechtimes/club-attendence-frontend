@@ -2,7 +2,10 @@
   <div class="imagebox">
     <div class="cardbox">
       <div class="uploadbutton">
-        <miniButton @click="clubActivity.closeUpload"></miniButton>
+        <miniButton
+          class="closeUpload"
+          @click="clubActivity.closeUpload"
+        ></miniButton>
         <span href="#" class="button button--piyo">
           <label for="image" class="button__wrapper">Upload</label>
 
@@ -27,6 +30,7 @@
             </div>
           </div>
         </span>
+        <button class="submitImage">Submit</button>
       </div>
 
       <div class="otherhalf">
@@ -41,11 +45,11 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import miniButton from "../components/miniButton.vue"
+import miniButton from "../components/miniButton.vue";
 
 export default defineComponent({
   name: "UploadImage",
-  components: {miniButton},
+  components: { miniButton },
 
   setup() {
     let imageFile: any = null;
@@ -74,14 +78,21 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .uploadedimg {
   padding: 10%;
-
   height: 100%;
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: scale-down;
+}
+.submitImage {
+  width: 16rem;
+  height: 7rem;
+  border-radius: 2rem;
+  border: black solid;
+  background-color: white;
+  font-size: 3rem;
 }
 .otherhalf {
   display: flex;
@@ -95,6 +106,7 @@ export default defineComponent({
 }
 .uploadbutton {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -686,5 +698,30 @@ img {
 }
 .button:not(:last-child) {
   margin-bottom: 80px;
+}
+
+@media (max-width: 1150px) {
+  .cardbox {
+    background-color: white;
+    border-radius: 2rem;
+    border: black solid;
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    width: 50rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    margin-right: -50%;
+  }
+  .button--piyo {
+    transform: scale(0.5);
+    top: 7rem;
+  }
+  .submitImage,
+  .closeUpload {
+    transform: scale(0.5);
+  }
 }
 </style>

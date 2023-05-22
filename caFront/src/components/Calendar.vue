@@ -45,7 +45,6 @@
           @click="showMdates"
           v-for="day in currentMonthDays"
           :key="day"
-        
         >
           {{ day }}
         </div>
@@ -106,7 +105,7 @@ export default defineComponent({
   props: {
     meetingDates: {
       type: Array<string>,
-      required: true,
+      required: false,
     },
   },
   setup(props) {
@@ -152,7 +151,7 @@ export default defineComponent({
   },
   methods: {
     showMdates() {
-      console.log(this.meetingDates)
+      console.log(this.meetingDates);
     },
     getCurrentDate() {
       let today = new Date();
@@ -201,7 +200,7 @@ export default defineComponent({
 }
 .font {
   font-size: 4rem;
-  color: white;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -209,7 +208,7 @@ export default defineComponent({
 
 .current-weekday {
   margin-top: 2rem;
-  color: white;
+
   font-size: 5rem;
   position: static;
 }
@@ -217,7 +216,7 @@ export default defineComponent({
 .triangle-up {
   border-left: 1rem solid transparent;
   border-right: 1rem solid transparent;
-  border-bottom: 2rem solid white;
+  border-bottom: 2rem solid;
   height: 1rem;
   width: 1rem;
 }
@@ -225,7 +224,7 @@ export default defineComponent({
 .triangle-down {
   border-left: 1rem solid transparent;
   border-right: 1rem solid transparent;
-  border-top: 2rem solid white;
+  border-top: 2rem solid;
   height: 1rem;
   width: 1rem;
   align-items: center;
@@ -235,7 +234,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto;
   font-size: 4rem;
-  color: white;
+
   column-gap: 5rem;
   row-gap: 2rem;
 }
@@ -290,7 +289,7 @@ export default defineComponent({
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
     font-size: 2rem;
-    color: white;
+
     column-gap: 2rem;
     row-gap: 2rem;
   }
@@ -308,7 +307,7 @@ export default defineComponent({
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
     font-size: 3rem;
-    color: white;
+
     column-gap: 1rem;
     row-gap: 2rem;
   }

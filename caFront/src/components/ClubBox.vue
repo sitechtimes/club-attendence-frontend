@@ -1,10 +1,10 @@
 <template>
   <div @click="store.getClubData(clubCode)" class="clubBox">
-    <h2 class="clubName">{{ ClubName }}</h2>
+    <h1 class="clubName">{{ ClubName }}</h1>
 
     <div class="bot">
-      <h3 class="advisor">Advisor: {{ Advisor }}</h3>
-      <h3 class="room">Room #: {{ Room }}</h3>
+      <h2 class="advisor">Advisor: {{ Advisor }}</h2>
+      <h2 class="room">Room #: {{ Room }}</h2>
     </div>
   </div>
 </template>

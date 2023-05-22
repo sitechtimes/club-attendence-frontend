@@ -3,10 +3,10 @@
     <div class="create-attendence">
       <miniButton class="position" @click="qrCode.closeMenu()">x</miniButton>
       <div>
-        <h3>
+        <h1>
           Create attendance for today({{ qrCode.clubData.dateOfToday }}) for
           {{ qrCode.clubData.clubName }}?
-        </h3>
+        </h1>
 
         <button @click="getQrCode" v-if="qrCode.base64QrCode === null">
           <h3>Yes</h3>

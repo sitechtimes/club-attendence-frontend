@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="half">
-        <h3>{{ clubName }}</h3>
+        <h1 class="clubname">{{ clubName }}</h1>
       </div>
       <div class="bottom">
         <ul class="nextdates" v-for="date in meetingDates" :key="date">
@@ -156,6 +156,10 @@ export default {
   transition: 0.5s;
 }
 
+.clubname {
+  font-size: 3rem;
+}
+
 .card:hover {
   transform: translateY(-7px);
 }
@@ -272,19 +276,36 @@ label {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
-    left: 21rem;
+    left: 23rem;
   }
   .calendarpic {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
-    left: 14rem;
+    left: 18rem;
   }
   .qrcode {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
-    left: 7rem;
+    left: 13rem;
+  }
+  .upload {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 8rem;
+  }
+  .qrcode,
+  .calendarpic,
+  .human,
+  .open-icon,
+  .upload {
+    transform: scale(0.7);
+  }
+  .bottom {
+    right: 3rem;
+    transform: scale(0.8);
   }
 }
 </style>
