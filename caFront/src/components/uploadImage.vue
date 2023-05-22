@@ -728,7 +728,7 @@ img {
   .closeUpload {
     transform: scale(0.5);
     right: -25rem;
-    top: 2rem;
+    top: rem;
   }
 }
 </style>
