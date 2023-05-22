@@ -48,8 +48,10 @@
         </div>
         <div
           class="day"
-          @click="showMdates"
           v-for="day in currentMonthDays"
+          :class="{
+            active: isSameDay,
+          }"
           :key="day"
         >
           {{ day }}
@@ -61,7 +63,7 @@
 
 <script lang="ts">
 import { useUserDataStore } from "../stores/userData";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 
@@ -109,35 +111,45 @@ export default defineComponent({
     };
   },
   props: {
-    clubName: {
-      type: String,
-      required: true,
-    },
     meetingDates: {
       type: Array<string>,
       required: false,
     },
-    position: {
-      type: String,
-      required: false,
-    },
-    date: {
-      type: String,
-      required: false,
-    },
-    clubCode: {
-      type: String,
-      required: true,
-    },
   },
-  setup(props) {
-    const meetingDates = props.meetingDates;
+  setup() {
     const objectData = useUserDataStore();
+    const user = objectData.user;
+    const clubData = user!.clubData;
+    const allDates: Array<string> = [];
+    onMounted(() =>
+      clubData.forEach((element: any) => {
+        for (let i = 0; element.meetingDates.length > i; i++) {
+          console.log(element.meetingDates[i]);
+          allDates.push(element.meetingDates[i]);
+        }
+        console.log(allDates);
+      })
+    );
 
     const clubActivity = useClubActivity();
     const currentDate: CalendarType[] = [{ date: 0, month: 1, year: 0 }];
 
-    return { clubActivity, meetingDates, objectData, currentDate };
+    function isSameDay() {
+      allDates.forEach(
+        (element) =>
+          element ===
+          `${currentDate[0].month + 1}/${day}/${currentDate[0].year}`
+      );
+    }
+
+    return {
+      clubActivity,
+      clubData,
+      allDates,
+      objectData,
+      currentDate,
+      isSameDay,
+    };
   },
   computed: {
     prevMonthDays() {
@@ -173,9 +185,16 @@ export default defineComponent({
     },
   },
   methods: {
-    showMdates() {
-      console.log(this.meetingDates);
+    checkDate(allDates: any, day: any) {
+      allDates.forEach((element: any) => {
+        if (
+          element ===
+          `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
+        )
+          return true;
+      });
     },
+
     getCurrentDate() {
       let today = new Date();
       this.currentDate.date = today.getDate();
@@ -271,6 +290,7 @@ export default defineComponent({
 .day {
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .day-hidden {
