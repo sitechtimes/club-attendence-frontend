@@ -3,6 +3,9 @@
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
+        <button @click="test" >asdfasdf</button>
+
+
       </div>
 
       <div class="top-right ">
@@ -12,9 +15,9 @@
 
     </section>
     <section class="bottom">
-      <div v-if="clubData" class="left">
+      <div  class="left">
         <clubBox
-          v-for="club in clubData"
+          v-for="club in userClubPresident"
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
@@ -39,6 +42,13 @@
       </div>
 
     </section>
+
+    <div>
+        <li v-for="club in userClubPresident" >
+          {{ club.clubName }}
+        </li></div>
+
+    
 
   </div>
 </template>
@@ -97,6 +107,9 @@ export default defineComponent({
     const input = ref<string>("")
     store.getData()
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
+
+ 
+
     return {store, input, headings, userStore }
 
     
@@ -106,6 +119,14 @@ export default defineComponent({
       console.log(this.userStore.user)
 
     },
+
+    test(){
+      console.log(this.userStore.user?.clubData)
+
+      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+
+      console.log(a)
+    }
   },
 
   computed:{
@@ -118,8 +139,15 @@ export default defineComponent({
       );
     },
     userClubPresident(): Array<clubDataInfo>{
+      console.log(this.userStore.user?.clubData)
+      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+
+      let presidentList = this.userStore.user?.clubData.forEach((presidentClub) => {
+        this.store.clubList.filter((allClub) => { allClub.clubCode = presidentClub.clubCode })        
+      });
       
-      return this.userStore.user?.clubData.filter((club) => club.position != "member")
+
+      return a
     }
 
    

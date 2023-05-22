@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 
 type UserObject = {
   email: string;
+  president: boolean;
   emailDomain: string;
   firstName: string;
   grade: string;
