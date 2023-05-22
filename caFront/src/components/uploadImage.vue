@@ -86,6 +86,11 @@ export default defineComponent({
   aspect-ratio: 1/1;
   object-fit: scale-down;
 }
+
+.closeUpload {
+  top: 5rem;
+  left: -50rem;
+}
 .submitImage {
   width: 16rem;
   height: 7rem;
@@ -722,6 +727,8 @@ img {
   .submitImage,
   .closeUpload {
     transform: scale(0.5);
+    right: -25rem;
+    top: 2rem;
   }
 }
 </style>

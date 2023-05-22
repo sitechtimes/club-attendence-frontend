@@ -1,5 +1,7 @@
 <template>
-  <button class="closebutton">x</button>
+  <button class="closebutton">
+    <span>x</span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -21,15 +23,20 @@ export default {
   text-decoration: none;
   font-size: 28px;
   border: 3px solid transparent;
-  text-align: center;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
   border-radius: 50%;
-  text-align: center;
 }
 .closebutton:hover {
   color: red;
   border: 3px solid grey;
   transform: scale(0.8) rotateZ(90deg);
+}
+span:hover {
+  transform: scale(0.8) rotateZ(90deg);
+}
+span {
+  font-size: 4rem;
+  text-align: center;
 }
 </style>

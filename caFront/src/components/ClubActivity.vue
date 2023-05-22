@@ -90,7 +90,7 @@ li button {
 }
 .dropdown-item {
   font-size: 2rem;
-  position: absolute;
+  position: fixed;
   width: 20rem;
   bottom: 13rem;
   right: 2rem;

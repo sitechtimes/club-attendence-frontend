@@ -8,6 +8,12 @@
             currentDate.year
           }}
         </span>
+        <ul class="nextdates" v-for="date in meetingDates" :key="date">
+          <h2>
+            {{ date }}
+          </h2>
+        </ul>
+
         <miniButton class="static" @click="clubActivity.closeModal()">
           x
         </miniButton>
@@ -103,14 +109,31 @@ export default defineComponent({
     };
   },
   props: {
+    clubName: {
+      type: String,
+      required: true,
+    },
     meetingDates: {
       type: Array<string>,
       required: false,
+    },
+    position: {
+      type: String,
+      required: false,
+    },
+    date: {
+      type: String,
+      required: false,
+    },
+    clubCode: {
+      type: String,
+      required: true,
     },
   },
   setup(props) {
     const meetingDates = props.meetingDates;
     const objectData = useUserDataStore();
+
     const clubActivity = useClubActivity();
     const currentDate: CalendarType[] = [{ date: 0, month: 1, year: 0 }];
 
@@ -292,6 +315,9 @@ export default defineComponent({
 
     column-gap: 2rem;
     row-gap: 2rem;
+  }
+  .static {
+    bottom: -38rem;
   }
   .font {
     font-size: 3rem;
