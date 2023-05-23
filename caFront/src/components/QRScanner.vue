@@ -22,7 +22,7 @@
               alt=""
             />
             <h3>Qr-code will only last ten minute before it is gone!</h3>
-            <h3 v-if="qrCode.storeQr === null">
+            <h3 v-if="qrCode.base64QrCode !== null">
               <div>{{ minutes }}:{{ seconds }}</div>
             </h3>
           </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
 import { useQrCode } from "../stores/qrCode";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
@@ -49,6 +49,11 @@ export default defineComponent({
   setup() {
     const qrCode = useQrCode();
 
+    onMounted(() => {
+      qrCode.closeMenu();
+      qrCode.removeStoreClub();
+    });
+
     async function getQrCode() {
       await qrCode.getQrCode();
       qrCode.addStoreClub(qrCode.clubData.clubName);
@@ -56,7 +61,7 @@ export default defineComponent({
     }
 
     let minutes = ref(0);
-    let seconds = ref(20);
+    let seconds = ref(10);
     let timer: any;
 
     const countdown = () => {
@@ -81,10 +86,18 @@ export default defineComponent({
         clearInterval(timer);
         qrCode.base64QrCode = null;
         qrCode.removeStoreClub();
-        minutes.value = 0;
-        seconds.value = 10;
+        minutes.value = 10;
+        seconds.value = 0;
       }
     });
+
+    function showTime() {
+      if (qrCode.storeQr === null) {
+        return false;
+      } else if (qrCode.base64QrCode !== null) {
+        return true;
+      }
+    }
 
     return { qrCode, getQrCode, minutes, seconds };
   },
