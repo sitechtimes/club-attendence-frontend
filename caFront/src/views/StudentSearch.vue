@@ -1,83 +1,119 @@
 <template>
   <div>
-      <h2>
-          Student Search
-      </h2>
+    <h2>Student Search</h2>
 
-      <section class="top">
-          <input v-model="searchBy" class="input" type="text" @input="logValue">
-          <button @click="changeFilter" class="dropdown">{{ store.currentFilter }}</button>
-              <li v-if="filterStatus == true" class="choices" @click="selectFilter(heading)" v-for="heading in head" >{{ heading }}</li>
-      </section>
-     <studentSearchTable :theData="store.filteredStudentData" :headings="head" ></studentSearchTable>
-
-
-
-
+    <section class="top">
+      <input v-model="searchBy" class="input" type="text" @input="logValue" />
+      <button @click="changeFilter" class="dropdown">
+        {{ store.currentFilter }}
+      </button>
+      <li
+        v-if="filterStatus == true"
+        class="choices"
+        @click="selectFilter(heading)"
+        v-for="heading in head"
+      >
+        {{ heading }}
+      </li>
+    </section>
+    <studentSearchTable
+      :theData="store.filteredStudentData"
+      :headings="head"
+    ></studentSearchTable>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent , ref } from 'vue'
-import {studentStore} from "../stores/studentSearch"
-import studentSearchTable from '@/components/studentSearchTable.vue'
+import { defineComponent, ref } from "vue";
+import { studentStore } from "../stores/studentSearch";
+import studentSearchTable from "@/components/studentSearchTable.vue";
 export default defineComponent({
-  components:{
-      studentSearchTable
+  components: {
+    studentSearchTable,
   },
-  setup () {
-      const store = studentStore()
-      store.getAllStudentData()
-      const head = ["Osis","Name","Email","Grade","Official Class"]
-      const searchBy = ref("")
-      const filterStatus = ref(false)
+  setup() {
+    const store = studentStore();
+    store.getAllStudentData();
+    const head = ["Osis", "Name", "Email", "Grade", "Official Class"];
+    const searchBy = ref("");
+    const filterStatus = ref(false);
 
-      console.log(filterStatus)
+    console.log(filterStatus);
 
-      return {
-          store, head, searchBy, filterStatus, 
+    return {
+      store,
+      head,
+      searchBy,
+      filterStatus,
+    };
+  },
+  methods: {
+    changeFilter() {
+      this.filterStatus = !this.filterStatus;
+      console.log(this.filterStatus, this.searchBy);
+    },
+
+    logValue() {
+      console.log(this.searchBy);
+
+      if (this.store.currentFilter == "Name") {
+        this.store.updateFilteredStudentData(
+          this.store.allStudentData.filter((student) =>
+            (student.firstName + student.lastName)
+              .replace(/ /g, "")
+              .toLowerCase()
+              .includes(this.searchBy.toLowerCase().replace(/ /g, ""))
+          )
+        );
       }
-  },
-  methods:{
-      changeFilter(){
-          this.filterStatus = !this.filterStatus
-          console.log(this.filterStatus, this.searchBy)
-      },
-
-      logValue(){
-          console.log(this.searchBy)
-          
-          if(this.store.currentFilter == "Name"){
-                          this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => (student.firstName + student.lastName).replace(/ /g,"").toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-          }
-          if(this.store.currentFilter == "Osis"){
-                          this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.osis.toLowerCase().includes(this.searchBy.replace(/ /g,""))))
-          }
-          if(this.store.currentFilter == "Email"){
-                          this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.email.toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-          }
-          if(this.store.currentFilter == "Official Class"){
-                          this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.officialClass.toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-          }
-          if(this.store.currentFilter == "Grade"){
-                          this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.grade.includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-          }
-    
-      },
-
-      selectFilter(param: string){
-          this.store.updateCurrentFilter(param)
-          this.filterStatus = !this.filterStatus
-          console.log(this.store.currentFilter)
+      if (this.store.currentFilter == "Osis") {
+        this.store.updateFilteredStudentData(
+          this.store.allStudentData.filter((student) =>
+            student.osis.toLowerCase().includes(this.searchBy.replace(/ /g, ""))
+          )
+        );
       }
+      if (this.store.currentFilter == "Email") {
+        this.store.updateFilteredStudentData(
+          this.store.allStudentData.filter((student) =>
+            student.email
+              .toLowerCase()
+              .includes(this.searchBy.toLowerCase().replace(/ /g, ""))
+          )
+        );
+      }
+      if (this.store.currentFilter == "Official Class") {
+        this.store.updateFilteredStudentData(
+          this.store.allStudentData.filter((student) =>
+            student.officialClass
+              .toLowerCase()
+              .includes(this.searchBy.toLowerCase().replace(/ /g, ""))
+          )
+        );
+      }
+      if (this.store.currentFilter == "Grade") {
+        this.store.updateFilteredStudentData(
+          this.store.allStudentData.filter((student) =>
+            student.grade.includes(
+              this.searchBy.toLowerCase().replace(/ /g, "")
+            )
+          )
+        );
+      }
+    },
+
+    selectFilter(param: string) {
+      this.store.updateCurrentFilter(param);
+      this.filterStatus = !this.filterStatus;
+      console.log(this.store.currentFilter);
+    },
   },
-  computed:{
-      allData(){
-          const data = this.store.allStudentData
-          
-      },
-  }
-})
+  computed: {
+    allData() {
+      const data = this.store.allStudentData;
+    },
+  },
+});
 </script>
 
 <style scoped>
@@ -108,11 +144,9 @@ export default defineComponent({
   padding: 10px;
   border-radius: 4px 4px 4px 4px;
   margin-right: 1rem;
- 
 }
 
 .choices-container {
-  
   position: absolute;
   top: 100%;
   left: 0;
@@ -139,53 +173,47 @@ export default defineComponent({
   background-color: #f2f2f2;
 }
 
-
-
-
 @media (max-width: 768px) {
-/* Styles for screens smaller than 768px */
-.top {
-  flex-wrap: wrap;
-  height: auto;
-  margin: 0.5rem;
-  justify-content: center;
-}
+  /* Styles for screens smaller than 768px */
+  .top {
+    flex-wrap: wrap;
+    height: auto;
+    margin: 0.5rem;
+    justify-content: center;
+  }
 
-.input {
-  width: 100%;
-  margin-right: 0;
-  margin-bottom: 1rem;
-}
+  .input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
 
-.dropdown {
-  width: 100%;
-  margin-right: 0;
-  margin-bottom: 1rem;
-}
+  .dropdown {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
 
-.choices-container {
-  position: static;
-  width: 100%;
-  max-height: none;
-  overflow-y: visible;
-}
+  .choices-container {
+    position: static;
+    width: 100%;
+    max-height: none;
+    overflow-y: visible;
+  }
 }
 
 @media (max-width: 576px) {
-/* Styles for screens smaller than 576px */
-.input {
-  font-size: 1.5rem;
+  /* Styles for screens smaller than 576px */
+  .input {
+    font-size: 1.5rem;
+  }
+
+  .dropdown {
+    font-size: 1.2rem;
+  }
+
+  .choices {
+    font-size: 1.2rem;
+  }
 }
-
-.dropdown {
-  font-size: 1.2rem;
-}
-
-.choices {
-  font-size: 1.2rem;
-}
-}
-
-
-
 </style>

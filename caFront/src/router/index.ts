@@ -1,34 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AboutView from "../views/AboutView.vue"
-import ClubView from "../views/ClubView.vue"
-import HomeView from '../views/HomeView.vue'
-import TeacherView from '../views/TeacherView.vue'
-import Scanner from '../views/Scanner.vue'
-import Member from '../views/Member.vue'
-import Home from "../views/HomeView.vue";
-import StudentSearch from "../views/StudentSearch.vue"
-
+import ClubView from "../views/ClubView.vue";
+import LoginView from "../views/LoginView.vue";
+import TeacherView from "../views/TeacherView.vue";
+import Scanner from "../views/Scanner.vue";
+import Member from "../views/Member.vue";
+import StudentSearch from "../views/StudentSearch.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: AboutView,
-    
+      name: "Login",
+      component: LoginView,
     },
     {
       path: "/scanner",
       name: "scanner",
       component: Scanner,
     },
-
 
     {
       path: "/qrcode",
@@ -55,9 +45,7 @@ const router = createRouter({
       name: "member",
 
       component: () => {
-        return import(
-          /*webpackChunkName: "club-view" */ "../views/Member.vue"
-        );
+        return import(/*webpackChunkName: "club-view" */ "../views/Member.vue");
       },
     },
     {
@@ -87,30 +75,25 @@ const router = createRouter({
         );
       },
     },
-     
 
     {
-      
-        path:'/teacher',
-        name:'teacher',
-        component: TeacherView
-      
+      path: "/teacher",
+      name: "teacher",
+      component: TeacherView,
     },
     {
-      path:"/student",
-      name:"Student",
-      component: StudentSearch
+      path: "/student",
+      name: "Student",
+      component: StudentSearch,
     },
     {
       path: "/president",
-      name:"President",
+      name: "President",
       component: () => {
-        return import(
-          "@/views/presidentView.vue")
-      }
-    }
+        return import("@/views/presidentView.vue");
+      },
+    },
   ],
 });
-      
 
 export default router;

@@ -25,7 +25,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .calendar {
   background: #2b4450;
   height: 60rem;

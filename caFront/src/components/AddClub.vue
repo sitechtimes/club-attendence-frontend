@@ -36,7 +36,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .add {
   background: white;
   height: 30rem;

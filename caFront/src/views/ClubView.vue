@@ -5,7 +5,6 @@
         <h2>{{ currentDate() }}</h2>
       </Button>
     </div>
-
     <div class="clublist">
       <Card
         v-for="club in clubs"
@@ -20,7 +19,6 @@
     <div class="scan">
       <Camera v-show="clubActivity.isCameraVisible"></Camera>
     </div>
-
     <div class="overlap">
       <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>

@@ -41,11 +41,11 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import miniButton from "../components/miniButton.vue"
+import miniButton from "../components/miniButton.vue";
 
 export default defineComponent({
   name: "UploadImage",
-  components: {miniButton},
+  components: { miniButton },
 
   setup() {
     let imageFile: any = null;
@@ -74,7 +74,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .uploadedimg {
   padding: 10%;
 

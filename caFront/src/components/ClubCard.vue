@@ -11,43 +11,40 @@
           </li>
         </ul>
       </div>
-<div class="menubar">
-   <ul v-if="status">
-        <li v-if="ifPresident">
-          <img
-            @click="clubActivity.openUpload()"
-            class="upload"
-            src="../assets/logos/upload.png"
-            alt=""
-          />
-        </li>
-        <li>
-          <img class="calendarpic" src="../assets/logos/calendar.svg" />
-        </li>
+      <div class="menubar">
+        <ul v-if="status">
+          <li v-if="ifPresident">
+            <img
+              @click="clubActivity.openUpload()"
+              class="upload"
+              src="../assets/logos/upload.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <img class="calendarpic" src="../assets/logos/calendar.svg" />
+          </li>
+          <li class="member" @click="clubstore.getClubData(clubCode)">
+            <router-link to="/member">
+              <img class="human" src="../assets/logos/human.svg" />
+            </router-link>
+          </li>
 
-        <li class="member" @click="clubstore.getClubData(clubCode)">
-          <router-link to="/member">
-            <img class="human" src="../assets/logos/human.svg" />
-          </router-link>
-        </li>
-
-        <li
-          class="container"
-          v-if="ifPresident"
-          @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
-        >
-          <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-        </li>
-      </ul>
-
-      <img
-        @click="status = !status"
-        class="open-icon"
-        src="../assets/logos/pointing-left.svg"
-        alt=""
-      />
-</div>
-     
+          <li
+            class="container"
+            v-if="ifPresident"
+            @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+          >
+            <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+          </li>
+        </ul>
+        <img
+          @click="status = !status"
+          class="open-icon"
+          src="../assets/logos/pointing-left.svg"
+          alt=""
+        />
+      </div>
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
@@ -119,7 +116,8 @@ export default {
       };
       reader.readAsBinaryString(fileObject);
     }
-    const ifPresident = props.position === "president";
+    const ifPresident = ref(props.position === "president");
+
     const objectData = useUserDataStore();
     const user = objectData.user;
     const clubData = user?.clubData;
@@ -170,7 +168,7 @@ export default {
   width: 100%;
   position: absolute;
   top: 0;
-  background-color: rgb(252, 66, 66);
+  background-color: #f0342e;
 }
 
 .bottom {
@@ -181,7 +179,7 @@ export default {
   width: 100%;
   bottom: 15%;
   position: absolute;
- 
+
   overflow: auto;
 }
 
@@ -194,24 +192,25 @@ li {
   position: absolute;
   width: 5rem;
   height: 5rem;
-   bottom: 0.5rem;
-     right: 29rem;
+  bottom: 0.5rem;
+  right: 29rem;
   cursor: pointer;
 }
+
 .qrcode {
   position: absolute;
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-     right: 22rem;
+  right: 22rem;
   cursor: pointer;
 }
 .human {
   position: absolute;
   width: 5rem;
   height: 5rem;
-   bottom: 0.5rem;
-     right: 8rem;
+  bottom: 0.5rem;
+  right: 8rem;
   cursor: pointer;
 }
 
@@ -219,8 +218,8 @@ li {
   position: absolute;
   width: 5rem;
   height: 5rem;
-   bottom: 0.5rem;
-     right: 15rem;
+  bottom: 0.5rem;
+  right: 15rem;
   cursor: pointer;
 }
 .open-icon {
@@ -228,8 +227,8 @@ li {
   width: 5rem;
   height: 5rem;
 
-     bottom: 0.5rem;
-     right: 1rem;
+  bottom: 0.5rem;
+  right: 1rem;
 
   cursor: pointer;
 }
@@ -243,6 +242,8 @@ label {
   display: flex;
   justify-content: center;
   margin-top: 10rem;
+  width: 100%;
+  height: 100%;
 }
 .cardbox {
   position: absolute;

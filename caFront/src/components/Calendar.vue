@@ -179,7 +179,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .current-date {
   font-size: 3rem;
   border-bottom: 1px solid rgba(73, 114, 133, 0.6);
