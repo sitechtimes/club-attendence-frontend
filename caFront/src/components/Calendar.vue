@@ -49,6 +49,7 @@
         <div
           class="day"
           v-for="day in currentMonthDays"
+          @click="showMdate(currentDate, day)"
           :class="{
             active: isSameDay,
           }"
@@ -134,12 +135,12 @@ export default defineComponent({
     const clubActivity = useClubActivity();
     const currentDate: CalendarType[] = [{ date: 0, month: 1, year: 0 }];
 
-    function isSameDay() {
-      allDates.forEach(
-        (element) =>
-          element ===
-          `${currentDate[0].month + 1}/${day}/${currentDate[0].year}`
-      );
+    function isSameDay(day: any, currentDate: any) {
+      allDates.forEach(function (element) {
+        if (element === `${currentDate.month + 1}/${day}/${currentDate.year}`) {
+          return true;
+        }
+      });
     }
 
     return {
@@ -185,6 +186,9 @@ export default defineComponent({
     },
   },
   methods: {
+    showMdate(currentDate: any, day: any) {
+      console.log(`${currentDate.month + 1}/${day}/${currentDate.year}`);
+    },
     checkDate(allDates: any, day: any) {
       allDates.forEach((element: any) => {
         if (
@@ -237,7 +241,7 @@ export default defineComponent({
   font-size: 3rem;
 }
 
-.color {
+.active {
   background-color: red;
 }
 .font {
