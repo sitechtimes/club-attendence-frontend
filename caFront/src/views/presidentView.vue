@@ -125,7 +125,8 @@ export default defineComponent({
 
       let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
 
-      console.log(a)
+      let presidentList = this.store.clubList.filter((allClub) =>{ this.userStore.user?.clubData.forEach((club) => {allClub.clubCode == club.clubCode})})
+      console.log(a, presidentList)
     }
   },
 
@@ -142,10 +143,13 @@ export default defineComponent({
       console.log(this.userStore.user?.clubData)
       let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
 
-      let presidentList = this.userStore.user?.clubData.forEach((presidentClub) => {
+      let b = this.userStore.user?.clubData.forEach((presidentClub) => {
         this.store.clubList.filter((allClub) => { allClub.clubCode = presidentClub.clubCode })        
       });
       
+
+      
+
 
       return a
     }

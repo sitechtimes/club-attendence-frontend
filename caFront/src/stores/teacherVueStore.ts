@@ -138,10 +138,11 @@ export const teacherStore = defineStore("teacher", {
       },
 
       async getClubData(clubCode: string | undefined) {
-     
+      
         this.clearPrevData()
 
         this.pushClubCode(clubCode);
+        console.log(clubCode, this.currentClubCode)
         const postData = {
           clubCode: clubCode,
         };
