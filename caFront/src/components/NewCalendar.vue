@@ -58,24 +58,18 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
 .my-calendar :deep(.vc-weekday-1, .vc-weekday-7) {
   color: #6366f1;
 }
-.my-calendar {
-  height: fit-content;
-  width: 80rem;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  position: fixed;
-  z-index: 10;
-}
+
 .my-calendar :deep(.vc-title) {
   font-size: 7rem;
   margin-right: 20rem;
   background: none;
   color: inherit;
+  
 }
 
 .my-calendar :deep(.vc-arrow) {
@@ -84,7 +78,19 @@ export default defineComponent({
   color: inherit;
 }
 .my-calendar :deep(.vc-header) {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+ 
+}
+
+.my-calendar :deep(.vc-popover-content-wrapper) {
+ height: 50rem;
+ width: 80rem;
+display: flex;
+align-content: center;
 }
 
 .static {
