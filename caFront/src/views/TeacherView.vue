@@ -130,9 +130,19 @@ input {
   justify-content: space-around;
 }
 
-.left::-webkit-scrollbar {
-  display: none;
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
 }
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
 .right{
   width: 65%;
 }
@@ -145,7 +155,7 @@ input {
 }
 
 .right::-webkit-scrollbar {
-  display: none;
+
 }
 
 .head {
@@ -166,8 +176,12 @@ input {
     display: flex;
     flex-direction: row;
     width: 100%;
+    overflow-x: scroll;
   
   }
+  .left::-webkit-scrollbar {
+  display:inline;
+}
 
 }
 

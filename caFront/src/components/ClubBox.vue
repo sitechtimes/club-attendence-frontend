@@ -42,6 +42,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
 .clubBox {
   height: 15%;
   width: 100%;
@@ -95,9 +97,11 @@ align-items: center;
 @media (max-width: 1600px){
   .clubBox{
     height: 10rem;
-    width: 33%;
-
   }
+  .app{
+  width: 300px;
+  }
+
 }
 
 
