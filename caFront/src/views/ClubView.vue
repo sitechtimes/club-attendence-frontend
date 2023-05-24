@@ -22,7 +22,7 @@
     </div>
 
     <div class="overlap">
-      <Modal v-show="clubActivity.isModalVisible"></Modal>
+      <NewCalendar v-show="clubActivity.isModalVisible"></NewCalendar>
     </div>
     <div class="test">
       <UploadImage v-show="clubActivity.isUploadVisible"> </UploadImage>
@@ -40,7 +40,7 @@ import Camera from "../components/Camera.vue";
 import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
-import Calendar from "../components/Calendar.vue";
+import NewCalendar from "../components/NewCalendar.vue";
 import ClubActivity from "../components/ClubActivity.vue";
 import UploadImage from "../components/uploadImage.vue";
 
@@ -50,7 +50,7 @@ export default defineComponent({
     Card,
     Button,
     Modal,
-    Calendar,
+    NewCalendar,
     ClubActivity,
     Camera,
     UploadImage,

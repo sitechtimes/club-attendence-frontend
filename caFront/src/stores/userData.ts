@@ -13,15 +13,12 @@ type UserObject = {
       clubCode: string;
       clubName: string;
       position: string;
-      meetingDates: Array<Dates>;
+      meetingDates: Array<string>;
     }
   ];
   clientAuthority: string;
   uid: string;
 };
-interface Dates {
-  date: string;
-}
 interface UserState {
   user: null | UserObject;
 }
