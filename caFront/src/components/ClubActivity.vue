@@ -7,7 +7,9 @@
         </li>
         <li>
           <router-link to="/scanner">
-            <button class="openscan">Scan QR Code</button>
+            <button @click="clubActivity.openCamera()" class="openscan">
+              Scan QR Code
+            </button>
           </router-link>
         </li>
       </ul>
@@ -45,6 +47,7 @@ export default defineComponent({
         clubActivity.openMenu();
       }
     }
+
     return { clubActivity, show };
   },
   data: () => {
@@ -80,7 +83,6 @@ li {
   border: 3px solid black;
   border-radius: 1rem;
   background-color: #f3c87c;
- 
 }
 li button {
   height: 4rem;
@@ -88,8 +90,7 @@ li button {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  width: 100%; 
-
+  width: 100%;
 }
 .dropdown-item {
   font-size: 2rem;
@@ -99,7 +100,6 @@ li button {
   right: 2rem;
 }
 .buttonpanel {
-
   display: flex;
   align-items: center;
   justify-content: center;

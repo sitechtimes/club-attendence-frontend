@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ClubView from "../views/ClubView.vue";
 import LoginView from "../views/LoginView.vue";
 import TeacherView from "../views/TeacherView.vue";
 import Scanner from "../views/Scanner.vue";
-import Member from "../views/Member.vue";
 import StudentSearch from "../views/StudentSearch.vue";
 
 const router = createRouter({
@@ -17,7 +15,9 @@ const router = createRouter({
     {
       path: "/scanner",
       name: "scanner",
-      component: Scanner,
+      component: () => {
+        return import(/*webpackChunkName: "qrcode" */ "@/views/Scanner.vue");
+      },
     },
 
     {

@@ -1,12 +1,15 @@
 <template>
-  <div v-if="(clubActivity.isCameraAllowed = true)">
-    <qrcode-stream @decode="onDecode" @init="onInit" />
-    <h2 class="decode-result">
-      Last result: <b>{{ result }}</b>
-    </h2>
+  <div class="container" v-if="clubActivity.isCameraAllowed === true">
+    <div class="camera">
+      <qrcode-stream @decode="onDecode" @init="onInit" />
+    </div>
+    <div>
+      <h2 class="decode-result">
+        Last result: <b>{{ result }}</b>
+      </h2>
+    </div>
 
-    <miniButton class="position" @click="clubActivity.closeCamera()">
-    </miniButton>
+    <miniButton class="position" @click="goBackHome()"> </miniButton>
   </div>
 </template>
 
@@ -14,6 +17,7 @@
 import { defineComponent } from "vue";
 import { QrcodeStream } from "vue3-qrcode-reader";
 import { useClubActivity } from "../stores/clubActivity";
+import { useRouter } from "vue-router";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
   components: {
@@ -30,7 +34,6 @@ export default defineComponent({
     onDecode(result: string) {
       this.result = result;
     },
-
     async onInit(promise: any) {
       try {
         await promise;
@@ -56,12 +59,30 @@ export default defineComponent({
       }
     },
   },
-
   setup() {
     const clubActivity = useClubActivity();
+    const router = useRouter();
+    function goBackHome() {
+      router.push("/club");
+      clubActivity.closeCamera();
+    }
     return {
       clubActivity,
+      goBackHome,
     };
   },
 });
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
+}
+.camera {
+  width: 100rem;
+}
+</style>
