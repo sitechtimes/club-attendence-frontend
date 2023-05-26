@@ -159,6 +159,7 @@ export default defineComponent({
 })
 </script>
 
+
 <style scoped>
 input {
   font-size: 2rem;
@@ -188,13 +189,13 @@ input {
 }
 .left {
   width: 25%;
- 
+
   position: relative;
   padding: 1rem;
   overflow-y: scroll;
   max-height: 80vh;
 }
-.top-right{
+.top-right {
   display: flex;
   justify-content: space-around;
 }
@@ -202,15 +203,13 @@ input {
 .left::-webkit-scrollbar {
   display: none;
 }
-.right{
+.right {
   width: 65%;
 }
 .table-right {
   width: 100%;
   overflow-y: scroll;
-  overflow-x:visible;
-
-
+  overflow-x: visible;
 }
 
 .right::-webkit-scrollbar {
@@ -225,19 +224,14 @@ input {
   z-index: 2;
 }
 
-@media (max-width: 1600px){
-  
-  .bottom{
+@media (max-width: 1600px) {
+  .bottom {
     flex-direction: column;
-   
   }
-  .left{
+  .left {
     display: flex;
     flex-direction: row;
     width: 100%;
-  
   }
-
 }
-
 </style>

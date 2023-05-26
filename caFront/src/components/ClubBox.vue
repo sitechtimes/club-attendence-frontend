@@ -79,7 +79,7 @@ align-items: center;
 .clubName{
   text-align: left;
   font-weight: 400;
-  font-size: 3rem;
+  font-size: 2rem;  
 }
 
 @media (max-width:1700px){
@@ -96,7 +96,10 @@ align-items: center;
   .clubBox{
     height: 10rem;
     width: 33%;
-
+    margin-right: 1rem;
+  }
+  .app{
+    width: 300px;
   }
 }
 
