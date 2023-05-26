@@ -5,11 +5,10 @@
         <input v-model="input" type="text" />
       </div>
 
-      <div class="top-right ">
+      <div class="top-right">
         <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
       </div>
-
     </section>
     <section class="bottom">
       <div v-if="clubData" class="left">
@@ -23,40 +22,35 @@
         ></clubBox>
       </div>
       <div class="table-right">
-
-
-        <tableData v-if="store.selectedStatus"
+        <tableData
+          v-if="store.selectedStatus"
           :headings="headings"
           :theData="store.filteredAttendance"
         ></tableData>
-        <tableData v-if="!store.selectedStatus"
+        <tableData
+          v-if="!store.selectedStatus"
           :headings="headings"
           :theData="store.currentAttendance"
         ></tableData>
-
-
-
       </div>
-
     </section>
-
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { teacherStore } from '@/stores/teacherVueStore'
-import clubBox from '@/components/ClubBox.vue'
-import tableData from '@/components/tableData.vue'
-import dateDropdown from '@/components/dateDropdown.vue'
-import statusDropdown from '@/components/statusDropdown.vue'
+import { defineComponent, ref } from "vue";
+import { teacherStore } from "@/stores/teacherVueStore";
+import clubBox from "@/components/ClubBox.vue";
+import tableData from "@/components/tableData.vue";
+import dateDropdown from "@/components/dateDropdown.vue";
+import statusDropdown from "@/components/statusDropdown.vue";
 
 interface Club {
   advisor: string;
   advisorEmail: string;
   clubCode: string;
-  clubName:string;
-  clubSpreadsheetId:string;
+  clubName: string;
+  clubSpreadsheetId: string;
   memberCount: string;
   nextMeeting: string;
   president: string;
@@ -67,27 +61,28 @@ interface Club {
 }
 
 export default defineComponent({
-  components:{
-    clubBox, tableData, dateDropdown, statusDropdown,
+  components: {
+    clubBox,
+    tableData,
+    dateDropdown,
+    statusDropdown,
   },
-  setup () {
-    const store = teacherStore()
-    const input = ref<string>("")
-    store.getData()
+  setup() {
+    const store = teacherStore();
+    const input = ref<string>("");
+    store.getData();
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
-    return {store, input, headings }
-
-    
+    return { store, input, headings };
   },
-  computed:{
+  computed: {
     clubData(): Array<Club> {
       console.log(this.store.clubList);
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
     },
-  }
-})
+  },
+});
 </script>
 
 <style scoped>
@@ -119,13 +114,13 @@ input {
 }
 .left {
   width: 25%;
- 
+
   position: relative;
   padding: 1rem;
   overflow-y: scroll;
   max-height: 80vh;
 }
-.top-right{
+.top-right {
   display: flex;
   justify-content: space-around;
 }
@@ -133,15 +128,13 @@ input {
 .left::-webkit-scrollbar {
   display: none;
 }
-.right{
+.right {
   width: 65%;
 }
 .table-right {
   width: 100%;
   overflow-y: scroll;
-  overflow-x:visible;
-
-
+  overflow-x: visible;
 }
 
 .right::-webkit-scrollbar {
@@ -156,19 +149,14 @@ input {
   z-index: 2;
 }
 
-@media (max-width: 1600px){
-  
-  .bottom{
+@media (max-width: 1600px) {
+  .bottom {
     flex-direction: column;
-   
   }
-  .left{
+  .left {
     display: flex;
     flex-direction: row;
     width: 100%;
-  
   }
-
 }
-
 </style>

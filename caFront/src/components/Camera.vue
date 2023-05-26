@@ -5,7 +5,7 @@
     </div>
     <div>
       <h2 class="decode-result">
-        Last result: <b>{{ result }}</b>
+        Last result: <b>{{ state.data }}</b>
       </h2>
     </div>
 
@@ -14,9 +14,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import { QrcodeStream } from "vue3-qrcode-reader";
 import { useClubActivity } from "../stores/clubActivity";
+import { useQrCode } from "../stores/qrCode";
+import { useUserDataStore } from "../stores/userData";
 import { useRouter } from "vue-router";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
@@ -26,14 +28,10 @@ export default defineComponent({
   },
   data() {
     return {
-      result: "",
       error: "",
     };
   },
   methods: {
-    onDecode(result: string) {
-      this.result = result;
-    },
     async onInit(promise: any) {
       try {
         await promise;
@@ -61,14 +59,38 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
+    const userData = useUserDataStore();
+    const qrCodeStore = useQrCode();
     const router = useRouter();
     function goBackHome() {
       router.push("/club");
       clubActivity.closeCamera();
     }
+    interface State {
+      data: null | string;
+    }
+    const state: State = reactive({
+      data: null,
+    });
+
+    let dateOfToday = new Date().toLocaleDateString();
+
+    async function onDecode(data: string) {
+      state.data = data;
+      qrCodeStore.qrCode = data;
+      let info = {
+        qrCode: qrCodeStore.qrCode,
+        user: userData.user,
+        dateOfToday: dateOfToday,
+      };
+      await qrCodeStore.markAttendence(info);
+    }
+
     return {
       clubActivity,
       goBackHome,
+      onDecode,
+      state,
     };
   },
 });

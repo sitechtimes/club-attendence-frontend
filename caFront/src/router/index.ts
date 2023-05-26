@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../views/LoginView.vue";
 import TeacherView from "../views/TeacherView.vue";
-import Scanner from "../views/Scanner.vue";
 import StudentSearch from "../views/StudentSearch.vue";
 
 const router = createRouter({
@@ -91,6 +90,13 @@ const router = createRouter({
       name: "President",
       component: () => {
         return import("@/views/presidentView.vue");
+      },
+    },
+    {
+      path: "/club-orgin",
+      name: "club-orgin",
+      component: () => {
+        return import("@/views/ClubOrgin.vue");
       },
     },
   ],

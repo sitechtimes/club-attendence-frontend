@@ -6,6 +6,7 @@ interface QrCode {
   clubData: ClubData;
   storeClub: string | null | undefined;
   storeQr: string | null;
+  qrCode: string | null;
 }
 type ClubData = {
   clubCode: string | null | undefined;
@@ -20,6 +21,7 @@ export const useQrCode = defineStore("qrCode", {
     isQrCodeOpen: false,
     storeQr: null,
     storeClub: null,
+    qrCode: null,
   }),
   getters: {},
   actions: {
@@ -75,6 +77,25 @@ export const useQrCode = defineStore("qrCode", {
         .then((res) => {
           this.base64QrCode = res;
           this.storeClub = res;
+        });
+    },
+    async markAttendence(data: object | null) {
+      await fetch("http://localhost:3000/mark-attendence", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
         });
     },
   },

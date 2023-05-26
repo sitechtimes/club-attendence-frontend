@@ -91,14 +91,6 @@ export default defineComponent({
       }
     });
 
-    function showTime() {
-      if (qrCode.storeQr === null) {
-        return false;
-      } else if (qrCode.base64QrCode !== null) {
-        return true;
-      }
-    }
-
     return { qrCode, getQrCode, minutes, seconds };
   },
 });
