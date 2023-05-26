@@ -27,42 +27,42 @@ export default defineComponent({
   data() {
     return {};
   },
-
+  computed: {},
   setup() {
     const objectData = useUserDataStore();
     const user = objectData.user;
     const clubData = user!.clubData;
     const allDates: Array<string> = [];
+
     const eventDescription: Array<string> = [];
     const attrs: any = ref();
-    onMounted(() =>
-      clubData
-        .map((element) => ({
-          clubName: element.clubName,
-          meetingDates: element.meetingDates,
-        }))
-        .forEach((element: any) => {
-          for (let i = 0; element.meetingDates.length > i; i++) {
-            console.log(element.meetingDates[i]);
-            allDates.push(element.meetingDates[i]);
-          }
-          for (let i = 0; element.clubName.length > i; i++) {
-            eventDescription.push(element.clubName[i]);
-          }
+    onMounted(() => {
+      let MappedDates = clubData.map((element) => ({
+        clubName: element.clubName,
+        meetingDates: element.meetingDates,
+      }));
 
-          console.log(allDates);
-          attrs.value = [
-            {
-              key: "allDates",
-              highlight: true,
-              popover: {
-                label: eventDescription,
-              },
-              dates: allDates,
+      MappedDates.forEach((element: any) => {
+        for (let i = 0; element.meetingDates.length > i; i++) {
+          console.log(element.meetingDates[i]);
+          allDates.push(element.meetingDates[i]);
+        }
+
+        console.log(MappedDates);
+        console.log(allDates);
+
+        attrs.value = [
+          {
+            key: "allDates",
+            highlight: true,
+            popover: {
+              label: MappedDates,
             },
-          ];
-        })
-    );
+            dates: allDates,
+          },
+        ];
+      });
+    });
 
     const clubActivity = useClubActivity();
     return { clubActivity, clubData, allDates, objectData, attrs };
