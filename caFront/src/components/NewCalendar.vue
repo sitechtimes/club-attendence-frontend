@@ -33,22 +33,35 @@ export default defineComponent({
     const user = objectData.user;
     const clubData = user!.clubData;
     const allDates: Array<string> = [];
+    const eventDescription: Array<string> = [];
     const attrs: any = ref();
     onMounted(() =>
-      clubData.forEach((element: any) => {
-        for (let i = 0; element.meetingDates.length > i; i++) {
-          console.log(element.meetingDates[i]);
-          allDates.push(element.meetingDates[i]);
-        }
-        console.log(allDates);
-        attrs.value = [
-          {
-            key: "allDates",
-            highlight: true,
-            dates: allDates,
-          },
-        ];
-      })
+      clubData
+        .map((element) => ({
+          clubName: element.clubName,
+          meetingDates: element.meetingDates,
+        }))
+        .forEach((element: any) => {
+          for (let i = 0; element.meetingDates.length > i; i++) {
+            console.log(element.meetingDates[i]);
+            allDates.push(element.meetingDates[i]);
+          }
+          for (let i = 0; element.clubName.length > i; i++) {
+            eventDescription.push(element.clubName[i]);
+          }
+
+          console.log(allDates);
+          attrs.value = [
+            {
+              key: "allDates",
+              highlight: true,
+              popover: {
+                label: eventDescription,
+              },
+              dates: allDates,
+            },
+          ];
+        })
     );
 
     const clubActivity = useClubActivity();
@@ -58,8 +71,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
-
 .my-calendar :deep(.vc-weekday-1, .vc-weekday-7) {
   color: #6366f1;
 }
@@ -69,7 +80,6 @@ export default defineComponent({
   margin-right: 20rem;
   background: none;
   color: inherit;
-  
 }
 
 .my-calendar :deep(.vc-arrow) {
@@ -83,14 +93,13 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
- 
 }
 
 .my-calendar :deep(.vc-popover-content-wrapper) {
- height: 50rem;
- width: 80rem;
-display: flex;
-align-content: center;
+  height: 50rem;
+  width: 80rem;
+  display: flex;
+  align-content: center;
 }
 
 .static {
