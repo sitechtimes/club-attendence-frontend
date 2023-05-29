@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Calendar, DatePicker } from "v-calendar";
 import { useUserDataStore } from "../stores/userData";
-import { defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import { ref } from "vue";
 import miniButton from "../components/miniButton.vue";
@@ -35,34 +35,20 @@ export default defineComponent({
     const allDates: Array<string> = [];
 
     const eventDescription: Array<string> = [];
-    const attrs: any = ref();
-    onMounted(() => {
-      let MappedDates = clubData.map((element) => ({
-        clubName: element.clubName,
-        meetingDates: element.meetingDates,
-      }));
 
-      MappedDates.forEach((element: any) => {
-        for (let i = 0; element.meetingDates.length > i; i++) {
-          console.log(element.meetingDates[i]);
-          allDates.push(element.meetingDates[i]);
-        }
+    let newClubData = ref(objectData.user?.clubData);
+    console.log(newClubData);
 
-        console.log(MappedDates);
-        console.log(allDates);
-
-        attrs.value = [
-          {
-            key: "allDates",
-            highlight: true,
-            popover: {
-              label: MappedDates,
-            },
-            dates: allDates,
-          },
-        ];
-      });
-    });
+    const attrs = computed(() => [
+      // Attributes for todos
+      ...newClubData.value!.map((clubData) => ({
+        dates: clubData.meetingDates,
+        popover: {
+          label: clubData.clubName,
+        },
+        highlight: true,
+      })),
+    ]);
 
     const clubActivity = useClubActivity();
     return { clubActivity, clubData, allDates, objectData, attrs };
