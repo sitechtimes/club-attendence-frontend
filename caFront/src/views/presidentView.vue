@@ -1,191 +1,237 @@
 <template>
+  <div class="page">
+    <section class="top">
+      <div class="right">
+        <input v-model="input" type="text" />
+        <button @click="test" >asdfasdf</button>
+
+
+      </div>
+
+      <div class="top-right ">
+        <statusDropdown></statusDropdown>
+        <dateDropdown></dateDropdown>
+      </div>
+
+    </section>
+    <section class="bottom">
+      <div  class="left">
+        <clubBox
+          v-for="club in userClubPresident"
+          :key="club.clubName"
+          :ClubName="club.clubName"
+          :Advisor="club.advisor"
+          :Room="club.roomNumber"
+          :clubCode="club.clubCode"
+        ></clubBox>
+      </div>
+      <div class="table-right">
+
+
+        <tableData v-if="store.selectedStatus"
+          :headings="headings"
+          :theData="store.filteredAttendance"
+        ></tableData>
+        <tableData v-if="!store.selectedStatus"
+          :headings="headings"
+          :theData="store.currentAttendance"
+        ></tableData>
+
+
+
+      </div>
+
+    </section>
+
     <div>
-        <h2>
-            Student Search
-        </h2>
+        <li v-for="club in userClubPresident" >
+          {{ club.clubName }}
+        </li></div>
+
+    
+
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { teacherStore } from '@/stores/teacherVueStore'
+import clubBox from '@/components/ClubBox.vue'
+import tableData from '@/components/tableData.vue'
+import dateDropdown from '@/components/dateDropdown.vue'
+import statusDropdown from '@/components/statusDropdown.vue'
+import { useUserDataStore } from '@/stores/userData'
+
+interface Club {
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName:string;
+  clubSpreadsheetId:string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  roomNumber: string;
+}
+
+interface clubDataInfo{
+  clubCode: string,
+  positoin: string,
+  clubName: string, 
   
-        <section class="top">
-            <input v-model="searchBy" class="input" type="text" @input="logValue">
-            <button @click="changeFilter" class="dropdown">{{ store.currentFilter }}</button>
-                <li v-if="filterStatus == true" class="choices" @click="selectFilter(heading)" v-for="heading in head" >{{ heading }}</li>
-        </section>
-       <studentSearchTable :theData="store.filteredStudentData" :headings="head" ></studentSearchTable>
-  
-  
-  
-  
-    </div>
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent , ref } from 'vue'
-  import {studentStore} from "../stores/studentSearch"
-  import studentSearchTable from '@/components/studentSearchTable.vue'
-  export default defineComponent({
-    components:{
-        studentSearchTable
+}
+
+interface clubDataTemp{
+  email: string;
+  emailDomain: string;
+  firstName: string;
+  grade: string;
+  lastName: string;
+  officalClass: string;
+  osis: string;
+  clubData: Array<clubDataInfo>
+  clientAuthority: string;
+  uid: string;
+};
+
+export default defineComponent({
+  components:{
+    clubBox, tableData, dateDropdown, statusDropdown,
+  },
+  setup () {
+    const store = teacherStore()
+    const userStore = useUserDataStore()
+    const input = ref<string>("")
+    store.getData()
+    const headings = ["Osis", "Name", "Grade", "Class", "Email"];
+
+ 
+
+    return {store, input, headings, userStore }
+
+    
+  },
+  methods:{
+    getUserData() {
+      console.log(this.userStore.user)
+
     },
-    setup () {
-        const store = studentStore()
-        store.getAllStudentData()
-        const head = ["Osis","Name","Email","Grade","Official Class"]
-        const searchBy = ref("")
-        const filterStatus = ref(false)
-  
-        console.log(filterStatus)
-  
-        return {
-            store, head, searchBy, filterStatus, 
-        }
-    },
-    methods:{
-        changeFilter(){
-            this.filterStatus = !this.filterStatus
-            console.log(this.filterStatus, this.searchBy)
-        },
-  
-        logValue(){
-            console.log(this.searchBy)
-            
-            if(this.store.currentFilter == "Name"){
-                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => (student.firstName + student.lastName).replace(/ /g,"").toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-            }
-            if(this.store.currentFilter == "Osis"){
-                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.osis.toLowerCase().includes(this.searchBy.replace(/ /g,""))))
-            }
-            if(this.store.currentFilter == "Email"){
-                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.email.toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-            }
-            if(this.store.currentFilter == "Official Class"){
-                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.officialClass.toLowerCase().includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-            }
-            if(this.store.currentFilter == "Grade"){
-                            this.store.updateFilteredStudentData(this.store.allStudentData.filter((student) => student.grade.includes(this.searchBy.toLowerCase().replace(/ /g,""))))
-            }
-      
-        },
-  
-        selectFilter(param: string){
-            this.store.updateCurrentFilter(param)
-            this.filterStatus = !this.filterStatus
-            console.log(this.store.currentFilter)
-        }
-    },
-    computed:{
-        allData(){
-            const data = this.store.allStudentData
-            
-        },
+
+    test(){
+      console.log(this.userStore.user?.clubData)
+
+      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+
+      let presidentList = this.store.clubList.filter((allClub) =>{ this.userStore.user?.clubData.forEach((club) => {allClub.clubCode == club.clubCode})})
+      console.log(a, presidentList)
     }
-  })
-  </script>
-  
-  <style scoped>
-  .top {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    height: 50px;
-    margin-left: 1rem;
-  }
-  
-  .input {
-    border: 1px solid black;
-    padding: 1rem;
-    margin-right: 2rem;
-    font-size: 2rem;
-    border-radius: 4px 4px 4px 4px;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    background-color: #ddd;
-    height: 100%;
-    color: #444;
-    font-size: 16px;
-    border: none;
-    padding: 10px;
-    border-radius: 4px 4px 4px 4px;
-    margin-right: 1rem;
+  },
+
+  computed:{
+   
+    clubData(): Array<Club> {
+      console.log(this.store.clubList);
+      this.getUserData()
+      return this.store.clubList.filter((club) =>
+        club.clubName.toLowerCase().includes(this.input.toLowerCase())
+      );
+    },
+    userClubPresident(): Array<clubDataInfo>{
+      console.log(this.userStore.user?.clubData)
+      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+
+      let b = this.userStore.user?.clubData.forEach((presidentClub) => {
+        this.store.clubList.filter((allClub) => { allClub.clubCode = presidentClub.clubCode })        
+      });
+      
+
+      
+
+
+      return a
+    }
+
    
   }
-  
-  .choices-container {
-    
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    border-radius: 0 0 4px 4px;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .choices {
-    padding: 10px;
-    font-size: 16px;
-    color: #444;
-    cursor: pointer;
-    list-style-type: none;
-  }
-  
-  .choices:hover {
-    background-color: #f2f2f2;
-  }
-  
-  
+})
+</script>
 
 
-  @media (max-width: 768px) {
-  /* Styles for screens smaller than 768px */
-  .top {
-    flex-wrap: wrap;
-    height: auto;
-    margin: 0.5rem;
-    justify-content: center;
-  }
-  
-  .input {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .dropdown {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .choices-container {
-    position: static;
-    width: 100%;
-    max-height: none;
-    overflow-y: visible;
-  }
+<style scoped>
+input {
+  font-size: 2rem;
+  border-radius: 0.4rem;
+  width: 100%;
+  height: 4rem;
+  padding: 1rem;
+}
+.page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  font-size: 4rem;
+}
+.top {
+  height: 10vh;
+  display: flex;
+  font-size: 4rem;
+  align-items: center;
+}
+.bottom {
+  display: flex;
+  width: 100%;
+  height: 80vh;
+}
+.left {
+  width: 25%;
+
+  position: relative;
+  padding: 1rem;
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+.top-right {
+  display: flex;
+  justify-content: space-around;
 }
 
-@media (max-width: 576px) {
-  /* Styles for screens smaller than 576px */
-  .input {
-    font-size: 1.5rem;
-  }
-  
-  .dropdown {
-    font-size: 1.2rem;
-  }
-  
-  .choices {
-    font-size: 1.2rem;
-  }
+.left::-webkit-scrollbar {
+  display: none;
+}
+.right {
+  width: 65%;
+}
+.table-right {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: visible;
 }
 
+.right::-webkit-scrollbar {
+  display: none;
+}
 
+.head {
+  font-size: 5rem;
+}
+.drop {
+  position: absolute;
+  z-index: 2;
+}
 
-  </style>
+@media (max-width: 1600px) {
+  .bottom {
+    flex-direction: column;
+  }
+  .left {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+}
+</style>
