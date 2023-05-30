@@ -755,7 +755,7 @@ img {
     border-right: none;
   }
   .cardbox {
-    height: 50rem;
+    height: 45rem;
     width: 30rem;
   }
   .closeUpload {

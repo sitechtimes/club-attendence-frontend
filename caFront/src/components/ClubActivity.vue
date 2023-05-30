@@ -1,7 +1,13 @@
 <template>
   <div class="dropdown">
     <div class="buttonpanel">
-      <ul class="dropdown-item" v-if="clubActivity.isOpen">
+      <ul class="dropdown-item" v-if="clubActivity.isOpen"><li>
+            <router-link to="/teacher">
+              <button  class="openscan">
+                Teacher
+              </button>
+            </router-link>
+          </li>
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
@@ -12,6 +18,7 @@
             </button>
           </router-link>
         </li>
+            
       </ul>
       <button class="open-panel" @click="show"><h2>+</h2></button>
     </div>
@@ -39,6 +46,7 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
+    
 
     function show() {
       if (clubActivity.isOpen === true) {
