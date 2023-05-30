@@ -179,4 +179,24 @@ export default defineComponent({
   box-shadow: rgba(72, 35, 7, 0.46) 0 0 0 4px,
     -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
 }
+
+@media (max-width: 675px) {
+  .modal {
+    background: #ffffff;
+    overflow-x: auto;
+    width: 40rem;
+    height: 40rem;
+    border-radius: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .modal {
+    background: #ffffff;
+    overflow-x: auto;
+    width: 35rem;
+    height: 40rem;
+    border-radius: 1rem;
+  }
+}
 </style>
