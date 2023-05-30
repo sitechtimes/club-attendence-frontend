@@ -3,71 +3,62 @@
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
-        <button @click="test" >asdfasdf</button>
-
-
+        <button @click="test">asdfasdf</button>
       </div>
 
-      <div class="top-right ">
+      <div class="top-right">
         <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
       </div>
-
     </section>
     <section class="bottom">
-      <div  class="left">
+      <div class="left">
         <clubBox
           v-for="club in userClubPresident"
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
-          :Room="club.roomNumber"
+          :Room="club.room"
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
       <div class="table-right">
-
-
-        <tableData v-if="store.selectedStatus"
+        <tableData
+          v-if="store.selectedStatus"
           :headings="headings"
           :theData="store.filteredAttendance"
         ></tableData>
-        <tableData v-if="!store.selectedStatus"
+        <tableData
+          v-if="!store.selectedStatus"
           :headings="headings"
           :theData="store.currentAttendance"
         ></tableData>
-
-
-
       </div>
-
     </section>
 
     <div>
-        <li v-for="club in userClubPresident" >
-          {{ club.clubName }}
-        </li></div>
-
-    
-
+      <li v-for="club in userClubPresident">
+        {{ club.clubName }}
+      </li>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { teacherStore } from '@/stores/teacherVueStore'
-import clubBox from '@/components/ClubBox.vue'
-import tableData from '@/components/tableData.vue'
-import dateDropdown from '@/components/dateDropdown.vue'
-import statusDropdown from '@/components/statusDropdown.vue'
-import { useUserDataStore } from '@/stores/userData'
+import { defineComponent, ref } from "vue";
+import { teacherStore } from "@/stores/teacherVueStore";
+import clubBox from "@/components/ClubBox.vue";
+import tableData from "@/components/tableData.vue";
+import dateDropdown from "@/components/dateDropdown.vue";
+import statusDropdown from "@/components/statusDropdown.vue";
+import { useUserDataStore } from "@/stores/userData";
 
 interface Club {
   advisor: string;
   advisorEmail: string;
   clubCode: string;
-  clubName:string;
-  clubSpreadsheetId:string;
+  clubName: string;
+  clubSpreadsheetId: string;
   memberCount: string;
   nextMeeting: string;
   president: string;
@@ -77,15 +68,14 @@ interface Club {
   roomNumber: string;
 }
 
-interface clubDataInfo{
-  clubCode: string,
-  position: string,
-  clubName: string, 
-  meetingDates: string[]| undefined,
-  
+interface clubDataInfo {
+  clubCode: string;
+  position: string;
+  clubName: string;
+  meetingDates: string[] | undefined;
 }
 
-interface clubDataTemp{
+interface clubDataTemp {
   email: string;
   emailDomain: string;
   firstName: string;
@@ -93,111 +83,121 @@ interface clubDataTemp{
   lastName: string;
   officalClass: string;
   osis: string;
-  clubData: Array<clubDataInfo>
+  clubData: Array<clubDataInfo>;
   clientAuthority: string;
   uid: string;
-};
+}
 interface eachClub {
-    advisor: string;
-    advisorEmail: string;
-    clubCode: string;
-    clubName:string;
-    clubSpreadsheetId:string;
-    memberCount: string;
-    nextMeeting: string;
-    president: string;
-    presidentEmail: string;
-    presidentUID: string;
-    qeCode: string;
-    roomNumber: string;
-  }
-
-
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName: string;
+  clubSpreadsheetId: string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  roomNumber: string;
+}
 
 export default defineComponent({
-  components:{
-    clubBox, tableData, dateDropdown, statusDropdown,
+  components: {
+    clubBox,
+    tableData,
+    dateDropdown,
+    statusDropdown,
   },
-  setup () {
-    const store = teacherStore()
-    const userStore = useUserDataStore()
-    const input = ref<string>("")
-    store.getData()
+  setup() {
+    const store = teacherStore();
+    const userStore = useUserDataStore();
+    const input = ref<string>("");
+    store.getData();
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
 
- 
-
-    return {store, input, headings, userStore }
-
-    
+    return { store, input, headings, userStore };
   },
-  methods:{
+  methods: {
     getUserData() {
-      console.log(this.userStore.user)
-
+      console.log(this.userStore.user);
     },
 
-    test(){
-      console.log(this.userStore.user?.clubData)
+    test() {
+      console.log(this.userStore.user?.clubData);
 
-      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+      let a = this.userStore.user?.clubData.filter(
+        (club) => club.position != "member"
+      );
 
-      let presidentList = this.store.clubList.filter((allClub) =>{ this.userStore.user?.clubData.forEach((club) => {allClub.clubCode == club.clubCode})})
-      console.log(a, presidentList)
+      let presidentList = this.store.clubList.filter((allClub) => {
+        this.userStore.user?.clubData.forEach((club) => {
+          allClub.clubCode == club.clubCode;
+        });
+      });
+      console.log(a, presidentList);
 
-      let ans: { advisor: string; advisorEmail: string; clubCode: string; clubName: string; clubSpreadsheetId: string; memberCount: string; nextMeeting: string; president: string; presidentEmail: string; presidentUID: string; qeCode: string; roomNumber: string }[] = []
+      let ans: {
+        advisor: string;
+        advisorEmail: string;
+        clubCode: string;
+        clubName: string;
+        clubSpreadsheetId: string;
+        memberCount: string;
+        nextMeeting: string;
+        president: string;
+        presidentEmail: string;
+        presidentUID: string;
+        qeCode: string;
+        roomNumber: string;
+      }[] = [];
 
-      console.log(this.store.clubList)
+      console.log(this.store.clubList);
 
       a?.forEach((club) => {
-        this.store.clubList.forEach((allClub) =>{
-          if(allClub.clubName == club.clubName){
-            ans.push(allClub)
-
+        this.store.clubList.forEach((allClub) => {
+          if (allClub.clubName == club.clubName) {
+            ans.push(allClub);
           }
-        })
-      })
- 
-      console.log(ans)
+        });
+      });
 
-
-
-
-
-    }
+      console.log(ans);
+    },
   },
 
-  computed:{
-   
+  computed: {
     clubData(): Array<Club> {
       console.log(this.store.clubList);
-      this.getUserData()
+      this.getUserData();
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
     },
-    userClubPresident(): Array<clubDataInfo>{
-      let filterList = this.userStore.user?.clubData.filter((club) => {
-        club.position != "member"
-      })
+    userClubPresident(): Array<clubDataInfo> {
+      let filterList: any = [];
 
-      let presidentList: Array<eachClub> = []
+      this.userStore.user?.clubData.forEach((club) => {
+        if (club.position === "president") {
+          filterList.push(club);
+        }
+      });
 
-      filterList?.forEach((club) =>{
+      let presidentList: any = [];
+
+      filterList.forEach((club: any) => {
         this.store.clubList.forEach((allClub) => {
-          if(allClub.clubName == club.clubName){
-            presidentList.push(allClub)
+          if (allClub.clubName == club.clubName) {
+            presidentList.push(allClub);
           }
-        })
-      })
+        });
+      });
 
-      return presidentList
-    }
-
-
-   
-  }
-})
+      console.log(presidentList);
+      return presidentList;
+    },
+  },
+});
 </script>
 
 <style scoped>
@@ -229,13 +229,13 @@ input {
 }
 .left {
   width: 25%;
- 
+
   position: relative;
   padding: 1rem;
   overflow-y: scroll;
   max-height: 80vh;
 }
-.top-right{
+.top-right {
   display: flex;
   justify-content: space-around;
 }
@@ -243,15 +243,13 @@ input {
 .left::-webkit-scrollbar {
   display: none;
 }
-.right{
+.right {
   width: 65%;
 }
 .table-right {
   width: 100%;
   overflow-y: scroll;
-  overflow-x:visible;
-
-
+  overflow-x: visible;
 }
 
 .right::-webkit-scrollbar {
@@ -266,19 +264,14 @@ input {
   z-index: 2;
 }
 
-@media (max-width: 1600px){
-  
-  .bottom{
+@media (max-width: 1600px) {
+  .bottom {
     flex-direction: column;
-   
   }
-  .left{
+  .left {
     display: flex;
     flex-direction: row;
     width: 100%;
-  
   }
-
 }
-
 </style>
