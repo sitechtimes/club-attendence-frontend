@@ -37,7 +37,7 @@ import { defineComponent, onMounted, ref, watch } from "vue";
 import { useQrCode } from "../stores/qrCode";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
-  name: "AddClub",
+  name: "QRScanner",
   components: {
     miniButton,
   },
