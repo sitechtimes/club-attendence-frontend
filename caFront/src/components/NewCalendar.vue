@@ -35,21 +35,23 @@ export default defineComponent({
     const allDates: Array<string> = [];
 
     let newClubData = ref(objectData.user?.clubData);
-    console.log(newClubData);
 
-    const attrs = computed(() => [
-      // Attributes for todos
-      ...newClubData.value!.map((clubData) => ({
-        dates: clubData.meetingDates,
-        popover: {
-          label: clubData.clubName,
-        },
-        highlight: true,
-      })),
-    ]);
+    if (newClubData !== null) {
+      let attrs = computed(() => [
+        // Attributes for todos
+        ...newClubData.value!.map((clubData) => ({
+          dates: clubData.meetingDates,
+          popover: {
+            label: clubData.clubName,
+          },
+          highlight: true,
+        })),
+      ]);
+      return attrs;
+    }
 
     const clubActivity = useClubActivity();
-    return { clubActivity, clubData, allDates, objectData, attrs };
+    return { clubActivity, clubData, allDates, objectData };
   },
 });
 </script>
@@ -109,7 +111,7 @@ export default defineComponent({
     z-index: 11;
     position: fixed;
     top: 30rem;
-    right: 20              rem;
+    right: 20 rem;
   }
 }
 

@@ -11,18 +11,18 @@
           </li>
         </ul>
       </div>
-      <div class="menubar">
+      <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
-          <li v-if="ifPresident">
+          <li>
+            <img class="calendarpic" src="../assets/logos/calendar.svg" />
+          </li>
+          <li>
             <img
               @click="clubActivity.openUpload()"
               class="upload"
               src="../assets/logos/upload.png"
               alt=""
             />
-          </li>
-          <li>
-            <img class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
           <li class="member" @click="clubstore.getClubData(clubCode)">
             <router-link to="/member">
@@ -32,7 +32,6 @@
 
           <li
             class="container"
-            v-if="ifPresident"
             @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
           >
             <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
@@ -206,7 +205,8 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 8rem;
+  right: 15rem;
+
   cursor: pointer;
 }
 
@@ -215,7 +215,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 15rem;
+  right: 8rem;
   cursor: pointer;
 }
 .open-icon {
