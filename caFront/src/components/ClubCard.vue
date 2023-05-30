@@ -98,13 +98,6 @@ export default {
     const status = ref(false);
     let image: string = "";
 
-    function display() {
-      if (clubActivity.isMenuVisible === true) {
-        clubActivity.closeIcon();
-      } else if (clubActivity.isMenuVisible === false) {
-        clubActivity.openIcon();
-      }
-    }
     function handleImage(event: any) {
       const selectedImage = event.target.files[0];
       createBase64Image(selectedImage);
