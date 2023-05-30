@@ -3,8 +3,8 @@
     <form id="form" @submit.prevent="sendAdditionalUserInfo">
       <label for="name"><slot slot name="name"></slot>:</label>
       <input v-model="form.userValue" type="text" required id="name" />
-      <h3>{{ form.userValue }}</h3>
-      <h3 class="context"><slot name="context"></slot></h3>
+      <h1>{{ form.userValue }}</h1>
+      <h2 class="context"><slot name="context"></slot></h2>
       <div>{{ osisGradeOfficalClass }}</div>
     </form>
   </div>

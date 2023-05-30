@@ -1,13 +1,9 @@
 <template>
-  <div class="container" v-if="clubActivity.isCameraAllowed === true">
-    <div class="camera">
-      <qrcode-stream @decode="onDecode" @init="onInit" />
-    </div>
-    <div>
-      <h2 class="decode-result">
-        Last result: <b>{{ state.data }}</b>
-      </h2>
-    </div>
+  <div v-if="(clubActivity.isCameraAllowed = true)">
+    <qrcode-stream @decode="onDecode" @init="onInit" />
+    <h1 class="decode-result">
+      Last result: <b>{{ result }}</b>
+    </h1>
 
     <miniButton class="position" @click="goBackHome()"> </miniButton>
   </div>

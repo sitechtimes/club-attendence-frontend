@@ -1,19 +1,12 @@
 <template>
-  <transition name="modal-fade">
-    <div class="modal-backdrop">
-      <div class="modal">
-        <miniButton class="position" @click="qrCode.closeMenu()">x</miniButton>
-        <div class="container">
-          <h2 class="club-name">{{ qrCode.clubData.clubName }}</h2>
-          <div class="body-container">
-            <h3>Create attendance for {{ qrCode.clubData.dateOfToday }}?</h3>
-            <button
-              class="button"
-              @click="getQrCode"
-              v-if="qrCode.storeQr === null"
-            >
-              <h3>Yes</h3>
-            </button>
+  <div class="modal-backdrop">
+    <div class="create-attendence">
+      <miniButton class="position" @click="qrCode.closeMenu()">x</miniButton>
+      <div>
+        <h1>
+          Create attendance for today({{ qrCode.clubData.dateOfToday }}) for
+          {{ qrCode.clubData.clubName }}?
+        </h1>
 
             <img
               class="qr-code"
