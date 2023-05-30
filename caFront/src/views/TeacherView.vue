@@ -46,6 +46,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { teacherStore } from '@/stores/teacherVueStore'
+import { useUserDataStore } from '@/stores/userData'
 import clubBox from '@/components/ClubBox.vue'
 import tableData from '@/components/tableData.vue'
 import dateDropdown from '@/components/dateDropdown.vue'
@@ -72,10 +73,15 @@ export default defineComponent({
   },
   setup () {
     const store = teacherStore()
+    const userStore = useUserDataStore()
     const input = ref<string>("")
-    store.getData()
+    store.getData(userStore.user)
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
+
+    console.log(userStore.user)
     return {store, input, headings }
+
+    
 
     
   },

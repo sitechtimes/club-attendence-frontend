@@ -59,6 +59,7 @@ type clubData = {
 
   }
 
+
 export const teacherStore = defineStore("teacher", {
     state:(): dataRes =>({
         fetchURL: "http://localhost:3000/",
@@ -128,14 +129,32 @@ export const teacherStore = defineStore("teacher", {
       },
 
 
-      async getData() {
+      async getData(user:any) {
         this.loading = true;
-        const res = await fetch(this.fetchURL + "all-club-data");
+        
+        const res = await fetch(this.fetchURL + "all-club-data",
+        
+          {
+            method: "POST",
+            headers:{
+              "Content-type":"application/json"
+
+            },
+            body: JSON.stringify(user)
+          }
+        );
         const data = await res.json();
         
         this.clubList = data;
         this.loading = false;
+ 
+
+
+
+
       },
+
+
 
       async getClubData(clubCode: string) {
       

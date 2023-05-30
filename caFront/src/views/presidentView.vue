@@ -113,9 +113,10 @@ export default defineComponent({
     const store = teacherStore();
     const userStore = useUserDataStore();
     const input = ref<string>("");
-    store.getData();
+    store.getData(userStore.user);
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
 
+    
     return { store, input, headings, userStore };
   },
   methods: {
