@@ -124,7 +124,6 @@ export default {
       dateOfToday,
       clubstore,
       clubActivity,
-      display,
       status,
       user,
       clubData,

@@ -33,7 +33,7 @@
 <script lang="ts">
 import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
-import Modal from "../components/Modal.vue";
+
 import Camera from "../components/Camera.vue";
 import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
@@ -47,7 +47,7 @@ export default defineComponent({
   components: {
     Card,
     Button,
-    Modal,
+
     NewCalendar,
     ClubActivity,
     Camera,

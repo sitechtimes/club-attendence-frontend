@@ -731,4 +731,36 @@ img {
     top: rem;
   }
 }
+@media (max-width: 500px) {
+  .otherhalf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+  .uploadbutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    border-bottom: black solid;
+    border-right: none;
+  }
+  .cardbox {
+    height: 50rem;
+    width: 30rem;
+  }
+  .closeUpload {
+    top: 5rem;
+    left: -5rem;
+  }
+}
 </style>

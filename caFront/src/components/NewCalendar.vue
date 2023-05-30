@@ -1,6 +1,6 @@
 <template>
   <div class="my-calendar">
-    <Calendar expanded :attributes="attrs" title-position="right" />
+    <VCalendar :attributes="attrs" />
 
     <miniButton class="static" @click="clubActivity.closeModal()">
       x
@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Calendar, DatePicker } from "v-calendar";
 import { useUserDataStore } from "../stores/userData";
-import { computed, defineComponent, onMounted } from "vue";
+import { computed, defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import { ref } from "vue";
 import miniButton from "../components/miniButton.vue";
@@ -33,8 +33,6 @@ export default defineComponent({
     const user = objectData.user;
     const clubData = user!.clubData;
     const allDates: Array<string> = [];
-
-    const eventDescription: Array<string> = [];
 
     let newClubData = ref(objectData.user?.clubData);
     console.log(newClubData);
@@ -63,13 +61,24 @@ export default defineComponent({
 
 .my-calendar :deep(.vc-title) {
   font-size: 7rem;
-  margin-right: 20rem;
+
   background: none;
   color: inherit;
+}
+.my-calendar :deep(.vc-container) {
+  width: 100rem;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 10;
 }
 
 .my-calendar :deep(.vc-arrow) {
   font-size: 7rem;
+  margin-left: 30rem;
+  margin-right: 30rem;
   background: none;
   color: inherit;
 }
@@ -78,19 +87,84 @@ export default defineComponent({
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
+  align-content: center;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
-.my-calendar :deep(.vc-popover-content-wrapper) {
-  height: 50rem;
-  width: 80rem;
+.my-calendar :deep(.vc-popover-content-wrapper is-interactive) {
   display: flex;
   align-content: center;
 }
 
 .static {
+  z-index: 11;
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 29rem;
+  right: 28rem;
+}
+
+@media (max-width: 1250px) {
+  .static {
+    z-index: 11;
+    position: fixed;
+    top: 25rem;
+    right: 12rem;
+  }
+}
+
+@media (max-width: 1050px) {
+  .my-calendar :deep(.vc-container) {
+    height: 37rem;
+    width: 50rem;
+  }
+  .my-calendar :deep(.vc-arrow) {
+    font-size: 7rem;
+    margin-left: 18rem;
+    margin-right: 18rem;
+    background: none;
+    color: inherit;
+  }
+  .static {
+    z-index: 11;
+    position: fixed;
+    bottom: -1rem;
+    right: 27rem;
+  }
+}
+@media (max-width: 700px) {
+  .static {
+    bottom: -4rem;
+    right: 10rem;
+  }
+}
+@media (max-width: 500px) {
+  .my-calendar :deep(.vc-container) {
+    height: 38rem;
+    width: 35rem;
+  }
+  .my-calendar :deep(.vc-title) {
+    font-size: 4rem;
+  }
+
+  .my-calendar :deep(.vc-arrow) {
+    font-size: 4rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+  }
+  .static {
+    z-index: 11;
+    position: fixed;
+    bottom: -4rem;
+    right: 8rem;
+  }
+}
+@media (max-width: 375px) {
+  .static {
+    z-index: 11;
+    position: fixed;
+    bottom: -5rem;
+    right: 3rem;
+  }
 }
 </style>

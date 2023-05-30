@@ -9,7 +9,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.7",
+    "@popperjs/core": "^2.11.8",
     "pinia": "^2.0.23",
     "pinia-plugin-persistedstate": "^3.0.1",
     "qrcode-reader-vue3": "^3.1.2",

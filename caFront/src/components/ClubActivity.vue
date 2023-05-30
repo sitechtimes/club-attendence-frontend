@@ -66,7 +66,7 @@ export default defineComponent({
 }
 .open-panel {
   font-size: 6rem;
-  position: absolute;
+  position: fixed;
   border: 2px black solid;
   border-radius: 10rem;
   height: 7rem;
@@ -94,7 +94,7 @@ li button {
 }
 .dropdown-item {
   font-size: 2rem;
-  position: absolute;
+  position: fixed;
   width: 20rem;
   bottom: 13rem;
   right: 2rem;
