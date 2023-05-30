@@ -19,7 +19,6 @@ type UserObject = {
   clientAuthority: string;
   uid: string;
 };
-
 interface UserState {
   user: null | UserObject;
 }

@@ -27,7 +27,8 @@ export default defineComponent({
 
 <style scoped>
 .calendar {
-  background: #2b4450;
+  border: black solid;
+  background: white;
   height: 60rem;
   width: 100rem;
   border-radius: 3rem;
@@ -36,6 +37,7 @@ export default defineComponent({
   margin-right: -50%;
   transform: translate(-50%, -50%);
   position: fixed;
+  z-index: 10;
 }
 @media (max-width: 1150px) {
   .calendar {

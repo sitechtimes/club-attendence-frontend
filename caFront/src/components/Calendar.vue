@@ -8,6 +8,12 @@
             currentDate.year
           }}
         </span>
+        <ul class="nextdates" v-for="date in meetingDates" :key="date">
+          <h2>
+            {{ date }}
+          </h2>
+        </ul>
+
         <miniButton class="static" @click="clubActivity.closeModal()">
           x
         </miniButton>
@@ -42,8 +48,11 @@
         </div>
         <div
           class="day"
-          @click="currentDate.date = day"
           v-for="day in currentMonthDays"
+          @click="verifyDate(currentDate, day)"
+          :class="{
+            active: checkDate(allDates, day),
+          }"
           :key="day"
         >
           {{ day }}
@@ -55,7 +64,7 @@
 
 <script lang="ts">
 import { useUserDataStore } from "../stores/userData";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 
@@ -105,16 +114,42 @@ export default defineComponent({
   props: {
     meetingDates: {
       type: Array<string>,
-      required: true,
+      required: false,
     },
   },
-  setup(props) {
-    const meetingDates = props.meetingDates;
+  setup() {
     const objectData = useUserDataStore();
+    const user = objectData.user;
+    const clubData = user!.clubData;
+    const allDates: Array<string> = [];
+    onMounted(() =>
+      clubData.forEach((element: any) => {
+        for (let i = 0; element.meetingDates.length > i; i++) {
+          console.log(element.meetingDates[i]);
+          allDates.push(element.meetingDates[i]);
+        }
+        console.log(allDates);
+      })
+    );
+
     const clubActivity = useClubActivity();
     const currentDate: CalendarType[] = [{ date: 0, month: 1, year: 0 }];
 
-    return { clubActivity, meetingDates, objectData, currentDate };
+    function checkDate(allDates: any, day: any) {
+      allDates.forEach((element: any, currentDate: any) => {
+        if (element === `${currentDate.month + 1}/${day}/${currentDate.year}`)
+          return true;
+      });
+    }
+
+    return {
+      clubActivity,
+      clubData,
+      allDates,
+      objectData,
+      currentDate,
+      checkDate,
+    };
   },
   computed: {
     prevMonthDays() {
@@ -150,6 +185,19 @@ export default defineComponent({
     },
   },
   methods: {
+    showMdate(currentDate: any, day: any) {
+      console.log(`${currentDate.month + 1}/${day}/${currentDate.year}`);
+    },
+    verifyDate(allDates: any, day: any) {
+      allDates.forEach((element: any) => {
+        if (
+          element ===
+          `${this.currentDate.month + 1}/${day}/${this.currentDate.year}`
+        )
+          console.log(element);
+      });
+    },
+
     getCurrentDate() {
       let today = new Date();
       this.currentDate.date = today.getDate();
@@ -192,12 +240,12 @@ export default defineComponent({
   font-size: 3rem;
 }
 
-.color {
+.active {
   background-color: red;
 }
 .font {
   font-size: 4rem;
-  color: white;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -205,7 +253,7 @@ export default defineComponent({
 
 .current-weekday {
   margin-top: 2rem;
-  color: white;
+
   font-size: 5rem;
   position: static;
 }
@@ -213,7 +261,7 @@ export default defineComponent({
 .triangle-up {
   border-left: 1rem solid transparent;
   border-right: 1rem solid transparent;
-  border-bottom: 2rem solid white;
+  border-bottom: 2rem solid;
   height: 1rem;
   width: 1rem;
 }
@@ -221,7 +269,7 @@ export default defineComponent({
 .triangle-down {
   border-left: 1rem solid transparent;
   border-right: 1rem solid transparent;
-  border-top: 2rem solid white;
+  border-top: 2rem solid;
   height: 1rem;
   width: 1rem;
   align-items: center;
@@ -231,7 +279,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto;
   font-size: 4rem;
-  color: white;
+
   column-gap: 5rem;
   row-gap: 2rem;
 }
@@ -245,6 +293,7 @@ export default defineComponent({
 .day {
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .day-hidden {
@@ -286,9 +335,12 @@ export default defineComponent({
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
     font-size: 2rem;
-    color: white;
+
     column-gap: 2rem;
     row-gap: 2rem;
+  }
+  .static {
+    bottom: -38rem;
   }
   .font {
     font-size: 3rem;
@@ -304,7 +356,7 @@ export default defineComponent({
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;
     font-size: 3rem;
-    color: white;
+
     column-gap: 1rem;
     row-gap: 2rem;
   }
