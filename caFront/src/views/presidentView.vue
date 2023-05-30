@@ -79,8 +79,9 @@ interface Club {
 
 interface clubDataInfo{
   clubCode: string,
-  positoin: string,
+  position: string,
   clubName: string, 
+  meetingDates: string[]| undefined,
   
 }
 
@@ -96,6 +97,22 @@ interface clubDataTemp{
   clientAuthority: string;
   uid: string;
 };
+interface eachClub {
+    advisor: string;
+    advisorEmail: string;
+    clubCode: string;
+    clubName:string;
+    clubSpreadsheetId:string;
+    memberCount: string;
+    nextMeeting: string;
+    president: string;
+    presidentEmail: string;
+    presidentUID: string;
+    qeCode: string;
+    roomNumber: string;
+  }
+
+
 
 export default defineComponent({
   components:{
@@ -127,6 +144,26 @@ export default defineComponent({
 
       let presidentList = this.store.clubList.filter((allClub) =>{ this.userStore.user?.clubData.forEach((club) => {allClub.clubCode == club.clubCode})})
       console.log(a, presidentList)
+
+      let ans: { advisor: string; advisorEmail: string; clubCode: string; clubName: string; clubSpreadsheetId: string; memberCount: string; nextMeeting: string; president: string; presidentEmail: string; presidentUID: string; qeCode: string; roomNumber: string }[] = []
+
+      console.log(this.store.clubList)
+
+      a?.forEach((club) => {
+        this.store.clubList.forEach((allClub) =>{
+          if(allClub.clubName == club.clubName){
+            ans.push(allClub)
+
+          }
+        })
+      })
+ 
+      console.log(ans)
+
+
+
+
+
     }
   },
 
@@ -140,19 +177,23 @@ export default defineComponent({
       );
     },
     userClubPresident(): Array<clubDataInfo>{
-      console.log(this.userStore.user?.clubData)
-      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+      let filterList = this.userStore.user?.clubData.filter((club) => {
+        club.position != "member"
+      })
 
-      let b = this.userStore.user?.clubData.forEach((presidentClub) => {
-        this.store.clubList.filter((allClub) => { allClub.clubCode = presidentClub.clubCode })        
-      });
-      
+      let presidentList: Array<eachClub> = []
 
-      
+      filterList?.forEach((club) =>{
+        this.store.clubList.forEach((allClub) => {
+          if(allClub.clubName == club.clubName){
+            presidentList.push(allClub)
+          }
+        })
+      })
 
-
-      return a
+      return presidentList
     }
+
 
    
   }

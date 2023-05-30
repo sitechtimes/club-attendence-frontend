@@ -28,7 +28,10 @@ export default defineComponent({
     ClubName: String,
     Advisor: String,
     Room: String || Number,
-    clubCode: String,
+    clubCode: {
+      type: String,
+      required: true
+    }
   },
   setup() {
     const store = teacherStore();
@@ -46,7 +49,7 @@ export default defineComponent({
 
 .clubBox {
   height: 15%;
-  width: 100%;
+
 
   margin-top: 0.7rem;
 
@@ -97,6 +100,7 @@ align-items: center;
 @media (max-width: 1600px){
   .clubBox{
     height: 10rem;
+    margin-right: 1rem;
   }
   .app{
   width: 300px;

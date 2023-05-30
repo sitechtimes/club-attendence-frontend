@@ -47,7 +47,7 @@ type clubData = {
     currentAttendance: clubData | Array<clubData>;
     filteredAttendance: clubData | Array<clubData>;
     filterDate: string | null;
-    listOfDates: Array<string | number>;
+    listOfDates: Array<string >;
     getDates: boolean;
     datesButton: boolean;
     statusButton: boolean;
@@ -91,7 +91,7 @@ export const teacherStore = defineStore("teacher", {
         console.log(this.currentAttendance);
         this.selectedClub = true;
       },
-      pushListOfDates(param: Array<number | string>) {
+      pushListOfDates(param: Array<string>) {
         this.listOfDates = param;
         console.log(this.listOfDates);
         this.getDates = true;
@@ -116,10 +116,10 @@ export const teacherStore = defineStore("teacher", {
         this.selectedStatus = true
 
        if(this.statusFilterCurrent == "Present"){
-        this.pushFilteredAttendance(this.currentAttendance.filter((student) => student.status == "present"))
+        this.pushFilteredAttendance(this.currentAttendance.filter((student: { status: string; }) => student.status == "present"))
        }
        if(this.statusFilterCurrent == "Absent"){
-        this.pushFilteredAttendance(this.currentAttendance.filter((student) => student.status == "absent"))
+        this.pushFilteredAttendance(this.currentAttendance.filter((student: { status: string; }) => student.status == "absent"))
        }
        if(this.statusFilterCurrent == "All"){
         this.pushFilteredAttendance(this.currentAttendance)
@@ -137,7 +137,7 @@ export const teacherStore = defineStore("teacher", {
         this.loading = false;
       },
 
-      async getClubData(clubCode: string | undefined) {
+      async getClubData(clubCode: string) {
       
         this.clearPrevData()
 
