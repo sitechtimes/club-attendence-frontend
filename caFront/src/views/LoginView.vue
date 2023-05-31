@@ -61,13 +61,12 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
+          console.log(data.clientAuthority === "student");
 
           if (data.clientAuthority === "student") {
             userDataStore.addUserData(data);
 
             if (data.osis === "null") {
-              console.log("eoiefinefwefifieewi");
-
               return router.push("/additional-information/osis");
             }
             if (data.grade === "null") {
@@ -80,7 +79,6 @@ export default defineComponent({
           } else if (data.clientAuthority === "admin") {
             userDataStore.addUserData(data);
             return router.push("/club");
-            //  data.grade === "none" || data.officalClass === "none"
           }
         });
     }

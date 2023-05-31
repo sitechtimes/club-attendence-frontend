@@ -4,9 +4,7 @@
       <qrcode-stream @decode="onDecode" @init="onInit" />
     </div>
     <div>
-      <h2 class="decode-result">
-        Last result: <b>{{ state.data }}</b>
-      </h2>
+      <h1 class="decode-result">{{ state.response }}</h1>
     </div>
 
     <miniButton class="position" @click="goBackHome()"> </miniButton>
@@ -62,15 +60,19 @@ export default defineComponent({
     const userData = useUserDataStore();
     const qrCodeStore = useQrCode();
     const router = useRouter();
-    function goBackHome() {
-      router.push("/club");
+
+    async function goBackHome() {
       clubActivity.closeCamera();
+      await router.push("/club");
     }
+
     interface State {
       data: null | string;
+      response: string;
     }
     const state: State = reactive({
       data: null,
+      response: "No QR Code Detected",
     });
 
     let dateOfToday = new Date().toLocaleDateString();
@@ -84,6 +86,7 @@ export default defineComponent({
         dateOfToday: dateOfToday,
       };
       await qrCodeStore.markAttendence(info);
+      state.response = qrCodeStore.qrcodeResponse;
     }
 
     return {
@@ -106,5 +109,8 @@ export default defineComponent({
 }
 .camera {
   width: 100rem;
+}
+.decode-result {
+  font-size: 4rem;
 }
 </style>

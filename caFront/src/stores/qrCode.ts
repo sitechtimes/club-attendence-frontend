@@ -7,6 +7,7 @@ interface QrCode {
   storeClub: string | null | undefined;
   storeQr: string | null;
   qrCode: string | null;
+  qrcodeResponse: string;
 }
 type ClubData = {
   clubCode: string | null | undefined;
@@ -22,6 +23,7 @@ export const useQrCode = defineStore("qrCode", {
     storeQr: null,
     storeClub: null,
     qrCode: null,
+    qrcodeResponse: "",
   }),
   getters: {},
   actions: {
@@ -95,7 +97,7 @@ export const useQrCode = defineStore("qrCode", {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+          this.qrcodeResponse = res;
         });
     },
   },

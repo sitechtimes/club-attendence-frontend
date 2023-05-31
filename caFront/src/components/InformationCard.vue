@@ -27,9 +27,9 @@ export default defineComponent({
 
     onBeforeMount(() => {
       if (
-        userDataStore.user!.osis !== "none" &&
-        userDataStore.user!.grade !== "none" &&
-        userDataStore.user!.officalClass !== "none"
+        userDataStore.user!.osis !== "null" &&
+        userDataStore.user!.grade !== "null" &&
+        userDataStore.user!.officalClass !== "null"
       ) {
         return router.push("/club");
       }
@@ -37,9 +37,9 @@ export default defineComponent({
 
     function checker() {
       if (
-        userDataStore.user!.osis !== "none" &&
-        userDataStore.user!.grade !== "none" &&
-        userDataStore.user!.officalClass !== "none"
+        userDataStore.user!.osis !== "null" &&
+        userDataStore.user!.grade !== "null" &&
+        userDataStore.user!.officalClass !== "null"
       ) {
         return router.push("/club");
       }
@@ -48,7 +48,7 @@ export default defineComponent({
     async function postData(userData: object) {
       // Default options are marked with *
       console.log("ths is post data");
-      await fetch("http://localhost:3000/addOsisGradeOfficalClass", {
+      await fetch("http://localhost:3000/addOsisGradeOfficialClass", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",

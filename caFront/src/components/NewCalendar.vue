@@ -11,9 +11,8 @@
 <script lang="ts">
 import { Calendar, DatePicker } from "v-calendar";
 import { useUserDataStore } from "../stores/userData";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import { ref } from "vue";
 import miniButton from "../components/miniButton.vue";
 import "v-calendar/style.css";
 
@@ -39,16 +38,7 @@ export default defineComponent({
     let attrs;
 
     if (objectData.user?.clubData === null) {
-      attrs = computed(() => [
-        // Attributes for todos
-        ...newClubData.value!.map((clubData) => ({
-          dates: [],
-          popover: {
-            label: "",
-          },
-          highlight: false,
-        })),
-      ]);
+      attrs = null;
     } else {
       attrs = computed(() => [
         // Attributes for todos
