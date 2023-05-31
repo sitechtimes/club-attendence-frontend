@@ -47,8 +47,17 @@
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
-    </div>
+    <div class="bottom"></div> 
   </div>
+  <div class="overlap">
+    <QRScanner v-show="qrCode.isQrCodeOpen">
+    </QRScanner>
+  </div>
+  <div>
+    <NewMeeting v-show="createMeeting.isPanelVisible"></NewMeeting>
+  </div>
+</div>
+  
 </template>
 
 <script lang="ts">
@@ -56,15 +65,18 @@ import { useUserDataStore } from "../stores/userData";
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import { useClubActivity } from "../stores/clubActivity";
-import QRScanner from "../components/QRScanner.vue";
-import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
 
 import { ref } from "vue";
 
+import QRScanner from '../components/QRScanner.vue'
+import { RouterLink } from 'vue-router'
+import NewMeeting from '../components/NewMeeting.vue'
+import {useNewMeeting} from "../stores/newMeeting"
 export default {
   name: "Card",
   components: {
+    NewMeeting,
     QRScanner,
     UploadImage,
     RouterLink,
@@ -116,6 +128,14 @@ export default {
     const clubstore = useClubStore();
     const clubActivity = useClubActivity();
     const qrCode = useQrCode();
+    const createMeeting = useNewMeeting ();
+    function show() {
+      if (createMeeting.isMeetingOpen === true) {
+        createMeeting.closePanel();
+      } else if (createMeeting.isMeetingOpen === false) {
+        createMeeting.showPanel(null);
+      }
+    }
     let dateOfToday = new Date().toLocaleDateString();
     return {
       ifPresident,
@@ -129,12 +149,17 @@ export default {
       handleImage,
       createBase64Image,
       image,
+      createMeeting, show
     };
   },
 };
 </script>
 
 <style scoped>
+
+.newMeet {
+  border: .0625rem solid lightgreen;
+}
 .card {
   position: relative;
   overflow: hidden;
