@@ -131,10 +131,10 @@ export const teacherStore = defineStore("teacher", {
 
       async getData(user:any) {
         this.loading = true;
+        console.log("hi", JSON.stringify(user))
+        const res = await fetch("http://localhost:3000/all-club-data",
         
-        const res = await fetch(this.fetchURL + "all-club-data",
-        
-          {
+      {
             method: "POST",
             headers:{
               "Content-type":"application/json"
@@ -144,6 +144,8 @@ export const teacherStore = defineStore("teacher", {
           }
         );
         const data = await res.json();
+
+
         
         this.clubList = data;
         this.loading = false;
