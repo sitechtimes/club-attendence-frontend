@@ -1,8 +1,9 @@
 # club-attendence-frontend
 
-//Views
+***Views***
 
-//Components
+***Components***
+
 //Button.vue
 This is the vue component for the seagull button and all the classes for the elements are labeled. If you want to change the color scheme of the seagull, you may do so by changing the main color and sub color for class ".button--piyo" and ".button--hoo" in the style. The Button is exported and can be imported for use.
 
