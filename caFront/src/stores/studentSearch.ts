@@ -53,8 +53,27 @@ export const studentStore = defineStore("studentStore",{
 
 
 
-        async getAllStudentData(){
-            await fetch(this.fetchURL + 'get-all-user-data').then((res) => res.json()).then((res) => this.allStudentData = res).then((res) => this.filteredStudentData = res).then(()=> console.log(this.allStudentData))
+        async getAllStudentData(user:any){
+
+            const postData = {
+                user: user
+            }
+
+
+
+            await fetch(this.fetchURL + 'get-all-user-data',{
+            method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(postData), // body data type must match "Content-Type" header
+            }  ).then((res) => res.json()).then((res) => this.allStudentData = res).then((res) => this.filteredStudentData = res).then(()=> console.log(this.allStudentData))
                
 
         },

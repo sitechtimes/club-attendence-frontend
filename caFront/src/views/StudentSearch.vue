@@ -20,6 +20,7 @@
 <script lang="ts">
 import { defineComponent , ref } from 'vue'
 import {studentStore} from "../stores/studentSearch"
+import { useUserDataStore } from '@/stores/userData'
 import studentSearchTable from '@/components/studentSearchTable.vue'
 export default defineComponent({
   components:{
@@ -27,7 +28,8 @@ export default defineComponent({
   },
   setup () {
       const store = studentStore()
-      store.getAllStudentData()
+      const userStore = useUserDataStore()
+      store.getAllStudentData(userStore.user)
       const head = ["Osis","Name","Email","Grade","Official Class"]
       const searchBy = ref("")
       const filterStatus = ref(false)
@@ -35,7 +37,7 @@ export default defineComponent({
       console.log(filterStatus)
 
       return {
-          store, head, searchBy, filterStatus, 
+          store, head, searchBy, filterStatus, userStore
       }
   },
   methods:{

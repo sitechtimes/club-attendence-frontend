@@ -140,7 +140,7 @@ export const teacherStore = defineStore("teacher", {
               "Content-type":"application/json"
 
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify({user})
           }
         );
         const data = await res.json();
@@ -158,7 +158,7 @@ export const teacherStore = defineStore("teacher", {
 
 
 
-      async getClubData(clubCode: string) {
+      async getClubData(clubCode: string, user:any) {
       
         this.clearPrevData()
 
@@ -166,6 +166,7 @@ export const teacherStore = defineStore("teacher", {
         console.log(clubCode, this.currentClubCode)
         const postData = {
           clubCode: clubCode,
+          user: user,
         };
   
         await fetch(this.fetchURL + "one-club-data", {
@@ -201,7 +202,7 @@ export const teacherStore = defineStore("teacher", {
           .then((dates) => this.pushListOfDates(dates));
       },
 
-      async fetchAttendance(dates: string) {
+      async fetchAttendance(dates: string, user:any) {
         this.datesCurrent = dates
         this.datesButton = !this.datesButton
         this.filterDate = dates
@@ -209,6 +210,7 @@ export const teacherStore = defineStore("teacher", {
         const postData = {
           clubCode: this.currentClubCode,
           attendenceDate: this.filterDate,
+          user: user
         };
   
         await fetch(this.fetchURL + "get-club-attendence-data", {

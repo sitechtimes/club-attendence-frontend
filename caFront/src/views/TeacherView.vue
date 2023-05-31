@@ -18,7 +18,7 @@
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
-          :Room="club.roomNumber"
+          :Room="club.room"
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
@@ -64,7 +64,7 @@ interface Club {
   presidentEmail: string;
   presidentUID: string;
   qeCode: string;
-  roomNumber: string;
+  room: string;
 }
 
 export default defineComponent({

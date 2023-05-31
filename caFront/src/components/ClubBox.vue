@@ -1,5 +1,5 @@
 <template>
-  <div @click="store.getClubData(clubCode)" class="clubBox">
+  <div @click="store.getClubData(clubCode, userStore.user)" class="clubBox">
     <div class="app">
 
       <div class="top">
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
+import { useUserDataStore } from "@/stores/userData";
 import { teacherStore } from '@/stores/teacherVueStore'
 
 
@@ -35,9 +35,9 @@ export default defineComponent({
   },
   setup() {
     const store = teacherStore();
-
+    const userStore = useUserDataStore()
     return {
-      store,
+      store, userStore
     };
   },
   methods: {},

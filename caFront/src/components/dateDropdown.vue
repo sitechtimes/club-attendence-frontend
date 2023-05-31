@@ -4,7 +4,7 @@
 
     <button class="button2"  @click="store.datesButton = !store.datesButton" >{{ store.datesCurrent }}</button>
     <div v-if="store.datesButton == true" class="status">
-        <li class="choices2" @click="store.fetchAttendance(dates)" v-for="dates in store.listOfDates" >{{ dates }}</li>
+        <li class="choices2" @click="store.fetchAttendance(dates, userStore.user)" v-for="dates in store.listOfDates" >{{ dates }}</li>
     </div>
   </div>
    
@@ -17,13 +17,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { teacherStore } from '@/stores/teacherVueStore';
+import { useUserDataStore } from '@/stores/userData';
 
 export default defineComponent({
     setup () {
-
+        const userStore = useUserDataStore()
         const store = teacherStore()
 
-        return {store, }
+        return {store, userStore }
     }
 })
 </script>
