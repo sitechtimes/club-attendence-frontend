@@ -16,7 +16,7 @@
           <li>
             <img class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
-          <li>
+          <li @click="UploadImage.displayUpload(clubCode, clubName)">
             <img
               @click="clubActivity.openUpload()"
               class="upload"
@@ -55,6 +55,7 @@
 import { useUserDataStore } from "../stores/userData";
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
+import { useUploadImage } from "@/stores/uploadImage";
 import { useClubActivity } from "../stores/clubActivity";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
@@ -115,6 +116,7 @@ export default {
     const clubData = user?.clubData;
     const clubstore = useClubStore();
     const clubActivity = useClubActivity();
+    const UploadImage = useUploadImage();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
     return {
@@ -129,6 +131,7 @@ export default {
       handleImage,
       createBase64Image,
       image,
+      UploadImage,
     };
   },
 };

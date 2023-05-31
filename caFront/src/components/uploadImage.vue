@@ -30,13 +30,16 @@
             </div>
           </div>
         </span>
-        <button class="submitImage">Submit</button>
+        <button class="submitImage" @click="UploadImage.uploadImage()">
+          Submit
+        </button>
       </div>
 
       <div class="otherhalf">
         <div v-show="clubActivity.isImageVisible">
           <img :src="pickImage" alt="" class="uploadedimg" />
         </div>
+        <h2>{{ UploadImage.sendResponse }}</h2>
       </div>
     </div>
   </div>
@@ -45,6 +48,8 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
+import { useUserDataStore } from "@/stores/userData";
+import { useUploadImage } from "@/stores/uploadImage";
 import miniButton from "../components/miniButton.vue";
 
 export default defineComponent({
@@ -70,19 +75,30 @@ export default defineComponent({
       imageFile = files[0];
 
       console.log(imageFile);
+      UploadImage.file = imageFile;
+      console.log(UploadImage.file);
     }
 
     const clubActivity = useClubActivity();
-    return { clubActivity, handleImage, pickImage, imageFile };
+    const userData = useUserDataStore();
+    const UploadImage = useUploadImage();
+
+    return {
+      clubActivity,
+      handleImage,
+      pickImage,
+      imageFile,
+      userData,
+      UploadImage,
+    };
   },
 });
 </script>
 
 <style scoped>
 .uploadedimg {
-  padding: 10%;
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: 80%;
   aspect-ratio: 1/1;
   object-fit: scale-down;
 }
@@ -100,7 +116,9 @@ export default defineComponent({
   font-size: 3rem;
 }
 .otherhalf {
+  font-size: 3rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
