@@ -52,20 +52,20 @@ import tableData from '@/components/tableData.vue'
 import dateDropdown from '@/components/dateDropdown.vue'
 import statusDropdown from '@/components/statusDropdown.vue'
 
-interface Club {
-  advisor: string;
-  advisorEmail: string;
-  clubCode: string;
-  clubName:string;
-  clubSpreadsheetId:string;
-  memberCount: string;
-  nextMeeting: string;
-  president: string;
-  presidentEmail: string;
-  presidentUID: string;
-  qeCode: string;
-  room: string;
-}
+interface eachClub {
+    advisor: string;
+    advisorEmail: string;
+    clubCode: string;
+    clubName:string;
+    clubSpreadsheetId:string;
+    memberCount: string;
+    nextMeeting: string;
+    president: string;
+    presidentEmail: string;
+    presidentUID: string;
+    qeCode: string;
+    room: string;
+  }
 
 export default defineComponent({
   components:{
@@ -86,11 +86,13 @@ export default defineComponent({
     
   },
   computed:{
-    clubData(): Array<Club> {
+    clubData(): Array<eachClub> {
       console.log(this.store.clubList);
-      return this.store.clubList.filter((club) =>
+      let a =  this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
+
+      return a
     },
   }
 })

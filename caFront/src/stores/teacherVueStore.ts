@@ -12,6 +12,7 @@ type clubData = {
     officalClass: string;
     numbOfAttendence: string;
     numbOfAbsent: string;
+    status: string
   };
   
   interface eachClub {
@@ -26,7 +27,7 @@ type clubData = {
     presidentEmail: string;
     presidentUID: string;
     qeCode: string;
-    roomNumber: string;
+    room: string;
   }
   
   interface studentsAtDate {
@@ -44,8 +45,8 @@ type clubData = {
     loading: boolean;
     selectedClub: boolean;
     currentClubCode: string | null;
-    currentAttendance: clubData | Array<clubData>;
-    filteredAttendance: clubData | Array<clubData>;
+    currentAttendance:  Array<clubData>;
+    filteredAttendance:  Array<clubData>;
     filterDate: string | null;
     listOfDates: Array<string >;
     getDates: boolean;
@@ -83,11 +84,11 @@ export const teacherStore = defineStore("teacher", {
 
     }),
     actions:{
-      pushClubCode(param: any) {
+      pushClubCode(param: string) {
         this.currentClubCode = param;
         console.log(this.currentClubCode);
       },
-      pushCurrentAttendance(param: clubData) {
+      pushCurrentAttendance(param: clubData[]) {
         this.currentAttendance = param;
         console.log(this.currentAttendance);
         this.selectedClub = true;
@@ -97,7 +98,7 @@ export const teacherStore = defineStore("teacher", {
         console.log(this.listOfDates);
         this.getDates = true;
       },
-      pushFilteredAttendance(param: clubData){
+      pushFilteredAttendance(param: clubData[]){
         this.filteredAttendance = param
         console.log(this.filteredAttendance)
       },
@@ -115,12 +116,13 @@ export const teacherStore = defineStore("teacher", {
       filterStatus(param: string){
         this.pushStatusFilter(param)
         this.selectedStatus = true
+        console.log(this.currentAttendance)
 
        if(this.statusFilterCurrent == "Present"){
-        this.pushFilteredAttendance(this.currentAttendance.filter((student: { status: string; }) => student.status == "present"))
+        this.pushFilteredAttendance(this.currentAttendance.filter((student) => student.status == "present"))
        }
        if(this.statusFilterCurrent == "Absent"){
-        this.pushFilteredAttendance(this.currentAttendance.filter((student: { status: string; }) => student.status == "absent"))
+        this.pushFilteredAttendance(this.currentAttendance.filter((student) => student.status == "absent"))
        }
        if(this.statusFilterCurrent == "All"){
         this.pushFilteredAttendance(this.currentAttendance)

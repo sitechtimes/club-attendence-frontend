@@ -86,7 +86,7 @@ export const useStore = defineStore("global", {
       console.log(this.listOfDates);
       this.getDates = true;
     },
-    pushClubCode(param: any) {
+    pushClubCode(param: string) {
       this.currentClubCode = param;
       console.log(this.currentClubCode);
     },
@@ -113,7 +113,7 @@ export const useStore = defineStore("global", {
       this.currentFilterAttendance = "All"
     },
 
-    async getClubData(clubCode: string | undefined) {
+    async getClubData(clubCode: string) {
      
       this.pushClubCode(clubCode);
       const postData = {

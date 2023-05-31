@@ -53,22 +53,10 @@ import dateDropdown from "@/components/dateDropdown.vue";
 import statusDropdown from "@/components/statusDropdown.vue";
 import { useUserDataStore } from "@/stores/userData";
 
-interface Club {
-  advisor: string;
-  advisorEmail: string;
-  clubCode: string;
-  clubName: string;
-  clubSpreadsheetId: string;
-  memberCount: string;
-  nextMeeting: string;
-  president: string;
-  presidentEmail: string;
-  presidentUID: string;
-  qeCode: string;
-  roomNumber: string;
-}
 
 interface clubDataInfo {
+advisor: string;
+room: string;
   clubCode: string;
   position: string;
   clubName: string;
@@ -87,20 +75,21 @@ interface clubDataTemp {
   clientAuthority: string;
   uid: string;
 }
+
 interface eachClub {
-  advisor: string;
-  advisorEmail: string;
-  clubCode: string;
-  clubName: string;
-  clubSpreadsheetId: string;
-  memberCount: string;
-  nextMeeting: string;
-  president: string;
-  presidentEmail: string;
-  presidentUID: string;
-  qeCode: string;
-  roomNumber: string;
-}
+    advisor: string;
+    advisorEmail: string;
+    clubCode: string;
+    clubName:string;
+    clubSpreadsheetId:string;
+    memberCount: string;
+    nextMeeting: string;
+    president: string;
+    presidentEmail: string;
+    presidentUID: string;
+    qeCode: string;
+    room: string;
+  }
 
 export default defineComponent({
   components: {
@@ -150,7 +139,7 @@ export default defineComponent({
         presidentEmail: string;
         presidentUID: string;
         qeCode: string;
-        roomNumber: string;
+        room: string;
       }[] = [];
 
       console.log(this.store.clubList);
@@ -168,7 +157,7 @@ export default defineComponent({
   },
 
   computed: {
-    clubData(): Array<Club> {
+    clubData(): Array<eachClub> {
       console.log(this.store.clubList);
       this.getUserData();
       return this.store.clubList.filter((club) =>
