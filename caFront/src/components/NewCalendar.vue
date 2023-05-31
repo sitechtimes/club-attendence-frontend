@@ -36,8 +36,21 @@ export default defineComponent({
 
     let newClubData = ref(objectData.user?.clubData);
 
-    if (newClubData !== null) {
-      let attrs = computed(() => [
+    let attrs;
+
+    if (objectData.user?.clubData === null) {
+      attrs = computed(() => [
+        // Attributes for todos
+        ...newClubData.value!.map((clubData) => ({
+          dates: [],
+          popover: {
+            label: "",
+          },
+          highlight: false,
+        })),
+      ]);
+    } else {
+      attrs = computed(() => [
         // Attributes for todos
         ...newClubData.value!.map((clubData) => ({
           dates: clubData.meetingDates,
@@ -47,11 +60,10 @@ export default defineComponent({
           highlight: true,
         })),
       ]);
-      return attrs;
     }
 
     const clubActivity = useClubActivity();
-    return { clubActivity, clubData, allDates, objectData };
+    return { clubActivity, clubData, allDates, objectData, attrs };
   },
 });
 </script>
