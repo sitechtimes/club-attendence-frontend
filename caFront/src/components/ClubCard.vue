@@ -14,7 +14,7 @@
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
           <li>
-            <img class="calendarpic" src="../assets/logos/calendar.svg" />
+            <img @click="clubActivity.showPanel()" class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
           <li>
             <img
