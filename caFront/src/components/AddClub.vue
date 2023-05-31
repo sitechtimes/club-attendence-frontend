@@ -73,4 +73,17 @@ export default defineComponent({
     justify-content: center;
   }
 }
+@media (max-width: 450px) {
+  .add {
+    background: white;
+    height: 40rem;
+    width: 30rem;
+  }
+  #form {
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 </style>
