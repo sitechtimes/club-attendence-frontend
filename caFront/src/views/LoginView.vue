@@ -74,9 +74,9 @@ export default defineComponent({
               return router.push("/additional-information/offical-class");
             }
             return router.push("/club");
-          } else if (data.type === "admin") {
+          } else if (data.clientAuthority === "admin") {
             userDataStore.addUserData(data);
-            return router.push("/admin");
+            return router.push("/club");
             //  data.grade === "none" || data.officalClass === "none"
           }
         });

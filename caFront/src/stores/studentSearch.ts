@@ -1,39 +1,39 @@
 import { defineStore } from "pinia";
 
-interface clubDataValues {
+interface ClubDataValues {
   clubCode: string;
   clubName: string;
   position: string;
 }
-interface location {
+interface Location {
   inClubToday: boolean;
   club: string;
   roomNumber: string;
 }
 
-interface studentData {
-  clubData: Array<clubDataValues>;
+interface StudentData {
+  clubData: Array<ClubDataValues>;
   email: string;
   firstName: string;
   grade: string;
   lastName: string;
   officialClass: string;
   osis: string;
-  presentLocation: location;
+  presentLocation: Location;
   type: string;
   uid: string;
 }
 
-interface studentInterface {
+interface StudentInterface {
   didYouSelectFilter: boolean;
   fetchURL: string;
-  allStudentData: Array<studentData> | [];
-  filteredStudentData: Array<studentData> | [];
+  allStudentData: Array<StudentData> | [];
+  filteredStudentData: Array<StudentData> | [];
   currentFilter: string;
 }
 
 export const studentStore = defineStore("studentStore", {
-  state: (): studentInterface => ({
+  state: (): StudentInterface => ({
     didYouSelectFilter: false,
     fetchURL: "http://localhost:3000/",
     allStudentData: [],
@@ -48,7 +48,11 @@ export const studentStore = defineStore("studentStore", {
     async getAllStudentData(user: any) {
       await fetch(this.fetchURL + "get-all-user-data", {
         method: "POST",
-        body: user,
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(user),
       })
         .then((res) => res.json())
         .then((res) => (this.allStudentData = res))
@@ -56,7 +60,7 @@ export const studentStore = defineStore("studentStore", {
         .then(() => console.log(this.allStudentData));
     },
 
-    updateFilteredStudentData(updatedAllStudentData: Array<studentData>) {
+    updateFilteredStudentData(updatedAllStudentData: Array<StudentData>) {
       this.filteredStudentData = updatedAllStudentData;
     },
   },

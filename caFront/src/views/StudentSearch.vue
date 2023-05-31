@@ -27,15 +27,16 @@
 import { defineComponent, ref } from "vue";
 import { studentStore } from "../stores/studentSearch";
 import studentSearchTable from "@/components/studentSearchTable.vue";
-import { useUserDataStore } from "@/stores/userData";
+import { useUserDataStore } from "../stores/userData";
 export default defineComponent({
   components: {
     studentSearchTable,
   },
   async setup() {
-    const userDataStore = useUserDataStore;
+    const userDataStore = useUserDataStore();
+    console.log(userDataStore.user);
     const store = studentStore();
-    await store.getAllStudentData(userDataStore?.user);
+    await store.getAllStudentData(userDataStore.user);
     const head = ["Osis", "Name", "Email", "Grade", "Official Class"];
     const searchBy = ref("");
     const filterStatus = ref(false);

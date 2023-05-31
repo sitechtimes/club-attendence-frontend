@@ -47,7 +47,6 @@ export default defineComponent({
   components: {
     Card,
     Button,
-
     NewCalendar,
     ClubActivity,
     Camera,
