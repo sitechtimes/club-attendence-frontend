@@ -44,6 +44,7 @@ export const useClubActivity = defineStore("clubActivity", {
     },
     closeCamera() {
       this.isCameraVisible = false;
+      this.isCameraAllowed = false;
     },
     openIcon() {
       this.isMenuVisible = true;
@@ -64,4 +65,5 @@ export const useClubActivity = defineStore("clubActivity", {
       this.isImageVisible = false;
     },
   },
+  persist: true,
 });

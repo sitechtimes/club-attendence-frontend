@@ -14,7 +14,7 @@ export default defineComponent({
   name: "About",
   components: {},
   methods: {
-    signInButtonPressed(event) {
+    signInButtonPressed(event: any) {
       console.log("Sign In Button Pressed");
       event.preventDefault();
       event.target.reset();

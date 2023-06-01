@@ -2,7 +2,10 @@
   <div class="imagebox">
     <div class="cardbox">
       <div class="uploadbutton">
-        <miniButton @click="clubActivity.closeUpload"></miniButton>
+        <miniButton
+          class="closeUpload"
+          @click="clubActivity.closeUpload"
+        ></miniButton>
         <span href="#" class="button button--piyo">
           <label for="image" class="button__wrapper">Upload</label>
 
@@ -27,12 +30,16 @@
             </div>
           </div>
         </span>
+        <button class="submitImage" @click="UploadImage.uploadImage()">
+          Submit
+        </button>
       </div>
 
       <div class="otherhalf">
         <div v-show="clubActivity.isImageVisible">
           <img :src="pickImage" alt="" class="uploadedimg" />
         </div>
+        <h2>{{ UploadImage.sendResponse }}</h2>
       </div>
     </div>
   </div>
@@ -41,11 +48,13 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
-import miniButton from "../components/miniButton.vue"
+import { useUserDataStore } from "@/stores/userData";
+import { useUploadImage } from "@/stores/uploadImage";
+import miniButton from "../components/miniButton.vue";
 
 export default defineComponent({
   name: "UploadImage",
-  components: {miniButton},
+  components: { miniButton },
 
   setup() {
     let imageFile: any = null;
@@ -66,25 +75,50 @@ export default defineComponent({
       imageFile = files[0];
 
       console.log(imageFile);
+      UploadImage.file = imageFile;
+      console.log(UploadImage.file);
     }
 
     const clubActivity = useClubActivity();
-    return { clubActivity, handleImage, pickImage, imageFile };
+    const userData = useUserDataStore();
+    const UploadImage = useUploadImage();
+
+    return {
+      clubActivity,
+      handleImage,
+      pickImage,
+      imageFile,
+      userData,
+      UploadImage,
+    };
   },
 });
 </script>
 
-<style>
+<style scoped>
 .uploadedimg {
-  padding: 10%;
-
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: 80%;
   aspect-ratio: 1/1;
   object-fit: scale-down;
 }
+
+.closeUpload {
+  top: 5rem;
+  left: -50rem;
+}
+.submitImage {
+  width: 16rem;
+  height: 7rem;
+  border-radius: 2rem;
+  border: black solid;
+  background-color: white;
+  font-size: 3rem;
+}
 .otherhalf {
+  font-size: 3rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -95,6 +129,7 @@ export default defineComponent({
 }
 .uploadbutton {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -686,5 +721,64 @@ img {
 }
 .button:not(:last-child) {
   margin-bottom: 80px;
+}
+
+@media (max-width: 1150px) {
+  .cardbox {
+    background-color: white;
+    border-radius: 2rem;
+    border: black solid;
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    width: 50rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    margin-right: -50%;
+  }
+  .button--piyo {
+    transform: scale(0.5);
+    top: 7rem;
+  }
+  .submitImage,
+  .closeUpload {
+    transform: scale(0.5);
+    right: -25rem;
+    top: rem;
+  }
+}
+@media (max-width: 500px) {
+  .otherhalf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+  .uploadbutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    border-bottom: black solid;
+    border-right: none;
+  }
+  .cardbox {
+    height: 45rem;
+    width: 30rem;
+  }
+  .closeUpload {
+    top: 5rem;
+    left: -5rem;
+  }
 }
 </style>
