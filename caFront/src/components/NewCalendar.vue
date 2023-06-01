@@ -104,7 +104,7 @@ export default defineComponent({
 .static {
   z-index: 11;
   position: fixed;
-  top: 29rem;
+  top: 25rem;
   right: 28rem;
 }
 
