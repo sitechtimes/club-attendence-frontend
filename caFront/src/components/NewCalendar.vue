@@ -59,10 +59,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.my-calendar :deep(.vc-weekday-1, .vc-weekday-7) {
-  color: #6366f1;
-}
-
 .my-calendar :deep(.vc-title) {
   font-size: 7rem;
 
