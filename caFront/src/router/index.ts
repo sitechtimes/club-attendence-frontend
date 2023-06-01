@@ -32,7 +32,6 @@ const router = createRouter({
     {
       path: "/club",
       name: "club",
-
       component: () => {
         return import(
           /*webpackChunkName: "club-view" */ "../views/ClubView.vue"

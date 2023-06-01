@@ -3,88 +3,66 @@
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
-        <button @click="test" >asdfasdf</button>
-
-
+        <button @click="test">asdfasdf</button>
       </div>
 
-      <div class="top-right ">
+      <div class="top-right">
         <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
       </div>
-
     </section>
     <section class="bottom">
-      <div  class="left">
+      <div class="left">
         <clubBox
           v-for="club in userClubPresident"
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
-          :Room="club.roomNumber"
+          :Room="club.room"
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
       <div class="table-right">
-
-
-        <tableData v-if="store.selectedStatus"
+        <tableData
+          v-if="store.selectedStatus"
           :headings="headings"
           :theData="store.filteredAttendance"
         ></tableData>
-        <tableData v-if="!store.selectedStatus"
+        <tableData
+          v-if="!store.selectedStatus"
           :headings="headings"
           :theData="store.currentAttendance"
         ></tableData>
-
-
-
       </div>
-
     </section>
 
     <div>
-        <li v-for="club in userClubPresident" >
-          {{ club.clubName }}
-        </li></div>
-
-    
-
+      <li v-for="club in userClubPresident">
+        {{ club.clubName }}
+      </li>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { teacherStore } from '@/stores/teacherVueStore'
-import clubBox from '@/components/ClubBox.vue'
-import tableData from '@/components/tableData.vue'
-import dateDropdown from '@/components/dateDropdown.vue'
-import statusDropdown from '@/components/statusDropdown.vue'
-import { useUserDataStore } from '@/stores/userData'
+import { defineComponent, ref } from "vue";
+import { teacherStore } from "@/stores/teacherVueStore";
+import clubBox from "@/components/ClubBox.vue";
+import tableData from "@/components/tableData.vue";
+import dateDropdown from "@/components/dateDropdown.vue";
+import statusDropdown from "@/components/statusDropdown.vue";
+import { useUserDataStore } from "@/stores/userData";
 
-interface Club {
+interface clubDataInfo {
   advisor: string;
-  advisorEmail: string;
+  room: string;
   clubCode: string;
-  clubName:string;
-  clubSpreadsheetId:string;
-  memberCount: string;
-  nextMeeting: string;
-  president: string;
-  presidentEmail: string;
-  presidentUID: string;
-  qeCode: string;
-  roomNumber: string;
+  position: string;
+  clubName: string;
+  meetingDates: string[] | undefined;
 }
 
-interface clubDataInfo{
-  clubCode: string,
-  positoin: string,
-  clubName: string, 
-  
-}
-
-interface clubDataTemp{
+interface clubDataTemp {
   email: string;
   emailDomain: string;
   firstName: string;
@@ -92,73 +70,123 @@ interface clubDataTemp{
   lastName: string;
   officalClass: string;
   osis: string;
-  clubData: Array<clubDataInfo>
+  clubData: Array<clubDataInfo>;
   clientAuthority: string;
   uid: string;
-};
+}
+
+interface eachClub {
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName: string;
+  clubSpreadsheetId: string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  room: string;
+}
 
 export default defineComponent({
-  components:{
-    clubBox, tableData, dateDropdown, statusDropdown,
+  components: {
+    clubBox,
+    tableData,
+    dateDropdown,
+    statusDropdown,
   },
-  setup () {
-    const store = teacherStore()
-    const userStore = useUserDataStore()
-    const input = ref<string>("")
-    store.getData()
+  setup() {
+    const store = teacherStore();
+    const userStore = useUserDataStore();
+    const input = ref<string>("");
+    store.getData(userStore.user);
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
 
- 
-
-    return {store, input, headings, userStore }
-
-    
+    return { store, input, headings, userStore };
   },
-  methods:{
+  methods: {
     getUserData() {
-      console.log(this.userStore.user)
-
+      console.log(this.userStore.user);
     },
 
-    test(){
-      console.log(this.userStore.user?.clubData)
+    test() {
+      console.log(this.userStore.user?.clubData);
 
-      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+      let a = this.userStore.user?.clubData.filter(
+        (club) => club.position != "member"
+      );
 
-      let presidentList = this.store.clubList.filter((allClub) =>{ this.userStore.user?.clubData.forEach((club) => {allClub.clubCode == club.clubCode})})
-      console.log(a, presidentList)
-    }
+      let presidentList = this.store.clubList.filter((allClub) => {
+        this.userStore.user?.clubData.forEach((club) => {
+          allClub.clubCode == club.clubCode;
+        });
+      });
+      console.log(a, presidentList);
+
+      let ans: {
+        advisor: string;
+        advisorEmail: string;
+        clubCode: string;
+        clubName: string;
+        clubSpreadsheetId: string;
+        memberCount: string;
+        nextMeeting: string;
+        president: string;
+        presidentEmail: string;
+        presidentUID: string;
+        qeCode: string;
+        room: string;
+      }[] = [];
+
+      console.log(this.store.clubList);
+
+      a?.forEach((club) => {
+        this.store.clubList.forEach((allClub) => {
+          if (allClub.clubName == club.clubName) {
+            ans.push(allClub);
+          }
+        });
+      });
+
+      console.log(ans);
+    },
   },
 
-  computed:{
-   
-    clubData(): Array<Club> {
+  computed: {
+    clubData(): Array<eachClub> {
       console.log(this.store.clubList);
-      this.getUserData()
+      this.getUserData();
       return this.store.clubList.filter((club) =>
         club.clubName.toLowerCase().includes(this.input.toLowerCase())
       );
     },
-    userClubPresident(): Array<clubDataInfo>{
-      console.log(this.userStore.user?.clubData)
-      let a = this.userStore.user?.clubData.filter((club) => club.position != "member")
+    userClubPresident(): Array<clubDataInfo> {
+      let filterList: any = [];
 
-      let b = this.userStore.user?.clubData.forEach((presidentClub) => {
-        this.store.clubList.filter((allClub) => { allClub.clubCode = presidentClub.clubCode })        
+      this.userStore.user?.clubData.forEach((club) => {
+        if (club.position === "president") {
+          filterList.push(club);
+        }
       });
-      
 
-      
+      let presidentList: any = [];
 
+      filterList.forEach((club: any) => {
+        this.store.clubList.forEach((allClub) => {
+          if (allClub.clubName == club.clubName) {
+            presidentList.push(allClub);
+          }
+        });
+      });
 
-      return a
-    }
-
-   
-  }
-})
+      console.log(presidentList);
+      return presidentList;
+    },
+  },
+});
 </script>
-
 
 <style scoped>
 input {

@@ -1,39 +1,39 @@
 import { defineStore } from "pinia";
 
-interface ClubDataValues {
+interface clubDataValues {
   clubCode: string;
   clubName: string;
   position: string;
 }
-interface Location {
+interface location {
   inClubToday: boolean;
   club: string;
   roomNumber: string;
 }
 
-interface StudentData {
-  clubData: Array<ClubDataValues>;
+interface studentData {
+  clubData: Array<clubDataValues>;
   email: string;
   firstName: string;
   grade: string;
   lastName: string;
   officialClass: string;
   osis: string;
-  presentLocation: Location;
+  presentLocation: location;
   type: string;
   uid: string;
 }
 
-interface StudentInterface {
+interface studentInterface {
   didYouSelectFilter: boolean;
   fetchURL: string;
-  allStudentData: Array<StudentData> | [];
-  filteredStudentData: Array<StudentData> | [];
+  allStudentData: Array<studentData> | [];
+  filteredStudentData: Array<studentData> | [];
   currentFilter: string;
 }
 
 export const studentStore = defineStore("studentStore", {
-  state: (): StudentInterface => ({
+  state: (): studentInterface => ({
     didYouSelectFilter: false,
     fetchURL: "http://localhost:3000/",
     allStudentData: [],
@@ -46,13 +46,22 @@ export const studentStore = defineStore("studentStore", {
     },
 
     async getAllStudentData(user: any) {
+      const postData = {
+        user: user,
+      };
+
       await fetch(this.fetchURL + "get-all-user-data", {
         method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(user),
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(postData), // body data type must match "Content-Type" header
       })
         .then((res) => res.json())
         .then((res) => (this.allStudentData = res))
@@ -60,7 +69,7 @@ export const studentStore = defineStore("studentStore", {
         .then(() => console.log(this.allStudentData));
     },
 
-    updateFilteredStudentData(updatedAllStudentData: Array<StudentData>) {
+    updateFilteredStudentData(updatedAllStudentData: Array<studentData>) {
       this.filteredStudentData = updatedAllStudentData;
     },
   },

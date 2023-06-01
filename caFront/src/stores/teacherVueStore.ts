@@ -12,6 +12,7 @@ type clubData = {
     officalClass: string;
     numbOfAttendence: string;
     numbOfAbsent: string;
+    status: string
   };
   
   interface eachClub {
@@ -26,7 +27,7 @@ type clubData = {
     presidentEmail: string;
     presidentUID: string;
     qeCode: string;
-    roomNumber: string;
+    room: string;
   }
   
   interface studentsAtDate {
@@ -44,10 +45,10 @@ type clubData = {
     loading: boolean;
     selectedClub: boolean;
     currentClubCode: string | null;
-    currentAttendance: clubData | Array<clubData>;
-    filteredAttendance: clubData | Array<clubData>;
+    currentAttendance:  Array<clubData>;
+    filteredAttendance:  Array<clubData>;
     filterDate: string | null;
-    listOfDates: Array<string | number>;
+    listOfDates: Array<string >;
     getDates: boolean;
     datesButton: boolean;
     statusButton: boolean;
@@ -58,6 +59,7 @@ type clubData = {
     
 
   }
+
 
 export const teacherStore = defineStore("teacher", {
     state:(): dataRes =>({
@@ -82,21 +84,21 @@ export const teacherStore = defineStore("teacher", {
 
     }),
     actions:{
-      pushClubCode(param: any) {
+      pushClubCode(param: string) {
         this.currentClubCode = param;
         console.log(this.currentClubCode);
       },
-      pushCurrentAttendance(param: clubData) {
+      pushCurrentAttendance(param: clubData[]) {
         this.currentAttendance = param;
         console.log(this.currentAttendance);
         this.selectedClub = true;
       },
-      pushListOfDates(param: Array<number | string>) {
+      pushListOfDates(param: Array<string>) {
         this.listOfDates = param;
         console.log(this.listOfDates);
         this.getDates = true;
       },
-      pushFilteredAttendance(param: clubData){
+      pushFilteredAttendance(param: clubData[]){
         this.filteredAttendance = param
         console.log(this.filteredAttendance)
       },
@@ -114,6 +116,7 @@ export const teacherStore = defineStore("teacher", {
       filterStatus(param: string){
         this.pushStatusFilter(param)
         this.selectedStatus = true
+        console.log(this.currentAttendance)
 
        if(this.statusFilterCurrent == "Present"){
         this.pushFilteredAttendance(this.currentAttendance.filter((student) => student.status == "present"))
@@ -128,22 +131,44 @@ export const teacherStore = defineStore("teacher", {
       },
 
 
-      async getData() {
+      async getData(user:any) {
         this.loading = true;
-        const res = await fetch(this.fetchURL + "all-club-data");
+        console.log("hi", JSON.stringify(user))
+        const res = await fetch("http://localhost:3000/all-club-data",
+        
+      {
+            method: "POST",
+            headers:{
+              "Content-type":"application/json"
+
+            },
+            body: JSON.stringify({user})
+          }
+        );
         const data = await res.json();
+
+
         
         this.clubList = data;
         this.loading = false;
+ 
+
+
+
+
       },
 
-      async getClubData(clubCode: string | undefined) {
-     
+
+
+      async getClubData(clubCode: string, user:any) {
+      
         this.clearPrevData()
 
         this.pushClubCode(clubCode);
+        console.log(clubCode, this.currentClubCode)
         const postData = {
           clubCode: clubCode,
+          user: user,
         };
   
         await fetch(this.fetchURL + "one-club-data", {
@@ -179,7 +204,7 @@ export const teacherStore = defineStore("teacher", {
           .then((dates) => this.pushListOfDates(dates));
       },
 
-      async fetchAttendance(dates: string) {
+      async fetchAttendance(dates: string, user:any) {
         this.datesCurrent = dates
         this.datesButton = !this.datesButton
         this.filterDate = dates
@@ -187,6 +212,7 @@ export const teacherStore = defineStore("teacher", {
         const postData = {
           clubCode: this.currentClubCode,
           attendenceDate: this.filterDate,
+          user: user
         };
   
         await fetch(this.fetchURL + "get-club-attendence-data", {

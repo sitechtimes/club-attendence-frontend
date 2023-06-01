@@ -1,5 +1,5 @@
 <template>
-  <div @click="store.getClubData(clubCode)" class="clubBox">
+  <div @click="store.getClubData(clubCode, userStore.user)" class="clubBox">
     <div class="app">
       <div class="top">
         <h2 class="clubName">{{ ClubName }}</h2>
@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
+import { useUserDataStore } from "@/stores/userData";
 import { teacherStore } from "@/stores/teacherVueStore";
 
 export default defineComponent({
@@ -23,13 +23,17 @@ export default defineComponent({
     ClubName: String,
     Advisor: String,
     Room: String || Number,
-    clubCode: String,
+    clubCode: {
+      type: String,
+      required: true,
+    },
   },
   setup() {
     const store = teacherStore();
-
+    const userStore = useUserDataStore();
     return {
       store,
+      userStore,
     };
   },
   methods: {},
@@ -39,7 +43,6 @@ export default defineComponent({
 <style scoped>
 .clubBox {
   height: 15%;
-  width: 100%;
 
   margin-top: 0.7rem;
 
@@ -82,8 +85,12 @@ export default defineComponent({
 @media (max-width: 1600px) {
   .clubBox {
     height: 10rem;
+    margin-right: 1rem;
     width: 33%;
     margin-right: 1rem;
+  }
+  .app {
+    width: 300px;
   }
   .app {
     width: 300px;
