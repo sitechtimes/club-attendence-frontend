@@ -14,7 +14,7 @@
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
           <li>
-            <img @click="clubActivity.openMeeting()" class="calendarpic" src="../assets/logos/calendar.svg" />
+            <img @click="clubActivity.openMeeting(clubName)" class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
           <li>
             <img

@@ -24,7 +24,9 @@
     components: {
       miniButton,
     },
-    props: [],
+    props: {
+      
+    },
     methods: {
       close() {
         this.$emit("close");
@@ -59,7 +61,7 @@
           const bundle = {
             user: userDataStore.user,
             newMeeting: form.userValue,
-            clubName: userDataStore.user?.clubData?.clubName
+            clubName: clubActivity.clubName,
           };
           console.log(bundle);
           console.log("jumping into postData");
