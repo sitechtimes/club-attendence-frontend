@@ -2,7 +2,7 @@
     <div class="modal-backdrop">
       <div class="add">
         <form id="form" @submit.prevent="addMeeting">
-          <miniButton class="position" @click="clubActivity.closePanel()"
+          <miniButton class="position" @click="clubActivity.closeMeeting()"
             >x</miniButton
           >
           <span></span>
@@ -58,7 +58,8 @@
          const addMeeting = () => {
           const bundle = {
             user: userDataStore.user,
-            clubCode: form.userValue,
+            newMeeting: form.userValue,
+            clubName: userDataStore.user?.clubData?.clubName
           };
           console.log(bundle);
           console.log("jumping into postData");

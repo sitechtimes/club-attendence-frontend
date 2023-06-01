@@ -14,7 +14,7 @@
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
           <li>
-            <img @click="clubActivity.showPanel()" class="calendarpic" src="../assets/logos/calendar.svg" />
+            <img @click="clubActivity.openMeeting()" class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
           <li>
             <img
@@ -48,6 +48,9 @@
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
     </div>
+    <div>
+      <newMeeting v-show="clubActivity.isMeetingVisible"></newMeeting>
+    </div>
   </div>
 </template>
 
@@ -56,6 +59,7 @@ import { useUserDataStore } from "../stores/userData";
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import { useClubActivity } from "../stores/clubActivity";
+import newMeeting from "../components/newMeeting.vue"
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
@@ -68,6 +72,7 @@ export default {
     QRScanner,
     UploadImage,
     RouterLink,
+    newMeeting
   },
 
   props: {

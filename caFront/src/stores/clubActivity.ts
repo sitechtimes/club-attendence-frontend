@@ -11,6 +11,7 @@ export const useClubActivity = defineStore("clubActivity", {
     isMenuVisible: false,
     isUploadVisible: false,
     isImageVisible: false,
+    isMeetingVisible: false,
   }),
   actions: {
     openMenu() {
@@ -64,6 +65,12 @@ export const useClubActivity = defineStore("clubActivity", {
     closeImage() {
       this.isImageVisible = false;
     },
+    openMeeting(){
+      this.isMeetingVisible =true;
+    },
+    closeMeeting(){
+      this.isMeetingVisible =false;
+    }
   },
   persist: true,
 });
