@@ -6,8 +6,13 @@
       </div>
       <div class="bottom">
         <ul class="nextdates" v-for="date in meetingDates" :key="date">
-          <li>
+          <li class="delete">
             {{ date }}
+            <img
+              src="../assets/logos/trashcan.png"
+              class="trashcan"
+              alt="trashcan"
+            />
           </li>
         </ul>
       </div>
@@ -21,12 +26,12 @@
               @click="clubActivity.openUpload()"
               class="upload"
               src="../assets/logos/upload.png"
-              alt=""
+              alt="upload"
             />
           </li>
           <li class="member" @click="clubstore.getClubData(clubCode)">
             <router-link to="/member">
-              <img class="human" src="../assets/logos/human.svg" />
+              <img class="human" src="../assets/logos/human.svg" alt="human" />
             </router-link>
           </li>
 
@@ -34,14 +39,14 @@
             class="container"
             @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
           >
-            <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
+            <img class="qrcode" src="../assets/logos/scanicon.png" alt="scan" />
           </li>
         </ul>
         <img
           @click="status = !status"
           class="open-icon"
           src="../assets/logos/pointing-left.svg"
-          alt=""
+          alt="open"
         />
       </div>
     </div>
@@ -179,13 +184,25 @@ export default {
   width: 100%;
   bottom: 15%;
   position: absolute;
-
   overflow: auto;
 }
 
 li {
   font-size: 2rem;
   margin-left: 3rem;
+}
+.trashcan {
+  visibility: hidden;
+}
+
+.delete:hover {
+  .trashcan {
+    visibility: visible;
+  }
+}
+.trashcan {
+  width: 2rem;
+  height: 2rem;
 }
 
 .upload {
