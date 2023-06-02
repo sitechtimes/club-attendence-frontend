@@ -101,8 +101,8 @@ export default defineComponent({
 
 <style scoped>
 .uploadedimg {
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
   aspect-ratio: 1/1;
   object-fit: scale-down;
 }
@@ -148,7 +148,7 @@ export default defineComponent({
   border: black solid;
   display: flex;
   flex-direction: column;
-  height: 60rem;
+  height: 70rem;
   width: 100rem;
   top: 50%;
   left: 50%;
@@ -742,6 +742,12 @@ img {
     position: fixed;
     margin-right: -50%;
   }
+  .uploadedimg {
+    height: 70%;
+    width: 70%;
+    aspect-ratio: 1/1;
+    object-fit: scale-down;
+  }
   .button--piyo {
     transform: scale(0.5);
     top: 7rem;
@@ -754,6 +760,12 @@ img {
   }
 }
 @media (max-width: 500px) {
+  .uploadedimg {
+    height: 80%;
+    width: 80%;
+    aspect-ratio: 1/1;
+    object-fit: scale-down;
+  }
   .otherhalf {
     display: flex;
     justify-content: center;
@@ -777,7 +789,7 @@ img {
     border-right: none;
   }
   .cardbox {
-    height: 45rem;
+    height: 55rem;
     width: 30rem;
   }
   .closeUpload {
