@@ -19,8 +19,8 @@
         </button>
       </div>
 
-      <div class="circle"></div>
-      <div class="circle2"></div>
+      <div class="circle circles"></div>
+      <div class="circle2 circles"></div>
     </section>
   </div>
 </template>
@@ -203,4 +203,29 @@ export default defineComponent({
 .OAuth:hover h2:before {
   width: 100%;
 }
+
+@media (max-width:1000px){
+  .left{
+    display: none;
+  }
+
+  .circles{
+    display: none;
+  }
+
+  .right{
+    margin: auto;
+    font-size: 10rem;
+  }
+  .title{
+    font-size: 7vw;
+    width: 100vw;
+  }
+  .OAuth h3{
+    font-size: 7vw;
+  }
+ 
+  
+}
+
 </style>

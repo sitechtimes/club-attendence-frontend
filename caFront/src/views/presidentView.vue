@@ -11,8 +11,8 @@
       </div>
 
       <div class="top-right">
-        <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
+        <statusDropdown></statusDropdown>
       </div>
     </section>
     <section class="bottom">
@@ -110,7 +110,7 @@ export default defineComponent({
     const userStore = useUserDataStore();
     const input = ref<string>("");
     store.getData(userStore.user);
-    const headings = ["Osis", "Name", "Grade", "Class", "Email"];
+    const headings = [ "Name", "Grade", "Class", "Email"];
 
     
     return { store, input, headings, userStore };

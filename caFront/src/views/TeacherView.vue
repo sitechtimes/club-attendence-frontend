@@ -8,8 +8,8 @@
       </div>
 
       <div class="top-right ">
-        <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
+        <statusDropdown></statusDropdown>
       </div>
 
     </section>
