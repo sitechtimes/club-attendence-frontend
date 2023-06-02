@@ -2,10 +2,7 @@
   <div class="imagebox">
     <div class="cardbox">
       <div class="uploadbutton">
-        <miniButton
-          class="closeUpload"
-          @click="clubActivity.closeUpload"
-        ></miniButton>
+        <miniButton class="closeUpload" @click="resetImage"></miniButton>
         <span href="#" class="button button--piyo">
           <label for="image" class="button__wrapper">Upload</label>
 
@@ -83,6 +80,10 @@ export default defineComponent({
     const userData = useUserDataStore();
     const UploadImage = useUploadImage();
 
+    function resetImage() {
+      clubActivity.closeUpload(), (pickImage.value = ref(""));
+    }
+
     return {
       clubActivity,
       handleImage,
@@ -90,6 +91,7 @@ export default defineComponent({
       imageFile,
       userData,
       UploadImage,
+      resetImage,
     };
   },
 });
