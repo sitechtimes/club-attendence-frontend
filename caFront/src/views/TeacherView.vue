@@ -10,13 +10,16 @@
       <div class="top-right ">
         <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
+        <input type="text"  placeholder="Remove Student From Club Code"  >
+
       </div>
 
     </section>
     <section class="bottom">
       <div v-if="clubData" class="left">
-        <clubBox
-          v-for="club in clubData"
+        <clubBox 
+        v-for="club in clubData"
+        @click="currentClubCode = club.clubCode"
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
@@ -78,11 +81,12 @@ export default defineComponent({
     const store = teacherStore()
     const userStore = useUserDataStore()
     const input = ref<string>("")
+    const currentClubCode = ref<string|null>(null)
     store.getData(userStore.user)
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
-
+    
     console.log(userStore.user)
-    return {store, input, headings }
+    return {store, input, headings, currentClubCode }
 
     
 
