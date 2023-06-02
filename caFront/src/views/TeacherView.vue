@@ -10,7 +10,7 @@
       <div class="top-right ">
         <statusDropdown></statusDropdown>
         <dateDropdown></dateDropdown>
-        <input type="text"  placeholder="Remove Student From Club Code"  >
+        <input type="text" v-model="goneOsis"  placeholder="Remove Student From Club Code" @submit="removeStudent()"  >
 
       </div>
 
@@ -86,12 +86,22 @@ export default defineComponent({
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
     
     console.log(userStore.user)
-    return {store, input, headings, currentClubCode }
+    return {store, input, headings, currentClubCode, goneOsis:ref<string>("") }
 
     
 
     
   },
+
+  methods:{
+    removeStudent(){
+        //goneOsis is the student's osis number
+        //currentClubCode is the current club code use that to determine which club 
+
+    }
+  },
+
+
   computed:{
     clubData(): Array<eachClub> {
       console.log(this.store.clubList);
