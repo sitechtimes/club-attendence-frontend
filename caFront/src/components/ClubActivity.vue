@@ -1,13 +1,23 @@
 <template>
   <div class="dropdown">
     <div class="buttonpanel">
-      <ul class="dropdown-item" v-if="clubActivity.isOpen"><li>
-            <router-link to="/teacher">
+      <ul class="dropdown-item" v-if="clubActivity.isOpen">
+        <li>
+            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/teacher">
               <button  class="openscan">
                 Teacher
               </button>
             </router-link>
           </li>
+        <li>
+            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/club-origin">
+              <button  class="openscan">
+                Club Origins
+              </button>
+            </router-link>
+          </li>
+
+          
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
@@ -37,6 +47,7 @@ import { useClubActivity } from "../stores/clubActivity";
 import AddClub from "../components/AddClub.vue";
 import Camera from "../components/Camera.vue";
 import { RouterLink } from "vue-router";
+import { useUserDataStore } from "@/stores/userData";
 export default defineComponent({
   name: "ClubActivity",
   components: {
@@ -46,7 +57,7 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
-    
+    const userStore = useUserDataStore()
 
     function show() {
       if (clubActivity.isOpen === true) {
@@ -56,7 +67,7 @@ export default defineComponent({
       }
     }
 
-    return { clubActivity, show };
+    return { clubActivity, show, userStore };
   },
   data: () => {
     return {
