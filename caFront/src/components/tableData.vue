@@ -11,7 +11,7 @@
           null: data.status == null,
         }"
       >
-        <h3 class="asset osis">
+        <h3 v-if=" $props.headings[0] =='Osis' "  class="asset osis">
           {{ data.osis }}
         </h3>
 
@@ -25,7 +25,7 @@
         <h3 class="asset offClass">
           {{ data.officalClass }}
         </h3>
-        <h3 class="asset email">
+        <h3  class="asset email">
           {{ data.email }}
         </h3>
       </div>
