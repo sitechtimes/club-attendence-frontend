@@ -2,9 +2,10 @@
   <div class="home">
     <div class="nav">
       <Button @click="clubActivity.showModal()">
-        <h1 class="todaydate">{{ currentDate() }}</h1>
+        <h2>{{ currentDate() }}</h2>
       </Button>
     </div>
+
     <div class="clublist">
       <Card
         v-for="club in clubs"
@@ -19,8 +20,9 @@
     <div class="scan">
       <Camera v-show="clubActivity.isCameraVisible"></Camera>
     </div>
+
     <div class="overlap">
-      <NewCalendar v-show="clubActivity.isModalVisible"></NewCalendar>
+      <Modal v-show="clubActivity.isModalVisible"></Modal>
     </div>
     <div class="test">
       <UploadImage v-show="clubActivity.isUploadVisible"> </UploadImage>
@@ -33,12 +35,12 @@
 <script lang="ts">
 import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
-
+import Modal from "../components/Modal.vue";
 import Camera from "../components/Camera.vue";
 import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
-import NewCalendar from "../components/NewCalendar.vue";
+import Calendar from "../components/Calendar.vue";
 import ClubActivity from "../components/ClubActivity.vue";
 import UploadImage from "../components/uploadImage.vue";
 
@@ -47,7 +49,8 @@ export default defineComponent({
   components: {
     Card,
     Button,
-    NewCalendar,
+    Modal,
+    Calendar,
     ClubActivity,
     Camera,
     UploadImage,
@@ -81,9 +84,6 @@ export default defineComponent({
   background-color: #f3c87c;
   height: 13rem;
   width: 100%;
-}
-.todaydate {
-  font-size: 4rem;
 }
 #cpic {
   height: 50px;

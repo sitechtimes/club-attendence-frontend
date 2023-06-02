@@ -1,6 +1,6 @@
 <template>
   <div class="choice">
-    <h1>Next Meeting: 12/03/2022</h1>
+    <h2>Next Meeting: 12/03/2022</h2>
 
     <div class="buttons">
       <Button class="edit">Edit</Button>

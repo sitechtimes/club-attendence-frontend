@@ -1,23 +1,19 @@
 <template>
-  <div class="container" v-if="clubActivity.isCameraAllowed === true">
-    <div class="camera">
-      <qrcode-stream @decode="onDecode" @init="onInit" />
-    </div>
-    <div>
-      <h1 class="decode-result">{{ state.response }}</h1>
-    </div>
+  <div v-if="(clubActivity.isCameraAllowed = true)">
+    <qrcode-stream @decode="onDecode" @init="onInit" />
+    <h2 class="decode-result">
+      Last result: <b>{{ result }}</b>
+    </h2>
 
-    <miniButton class="position" @click="goBackHome()"> </miniButton>
+    <miniButton class="position" @click="clubActivity.closeCamera()">
+    </miniButton>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 import { QrcodeStream } from "vue3-qrcode-reader";
 import { useClubActivity } from "../stores/clubActivity";
-import { useQrCode } from "../stores/qrCode";
-import { useUserDataStore } from "../stores/userData";
-import { useRouter } from "vue-router";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
   components: {
@@ -26,10 +22,15 @@ export default defineComponent({
   },
   data() {
     return {
+      result: "",
       error: "",
     };
   },
   methods: {
+    onDecode(result: string) {
+      this.result = result;
+    },
+
     async onInit(promise: any) {
       try {
         await promise;
@@ -55,62 +56,12 @@ export default defineComponent({
       }
     },
   },
+
   setup() {
     const clubActivity = useClubActivity();
-    const userData = useUserDataStore();
-    const qrCodeStore = useQrCode();
-    const router = useRouter();
-
-    async function goBackHome() {
-      clubActivity.closeCamera();
-      await router.push("/club");
-    }
-
-    interface State {
-      data: null | string;
-      response: string;
-    }
-    const state: State = reactive({
-      data: null,
-      response: "No QR Code Detected",
-    });
-
-    let dateOfToday = new Date().toLocaleDateString();
-
-    async function onDecode(data: string) {
-      state.data = data;
-      qrCodeStore.qrCode = data;
-      let info = {
-        qrCode: qrCodeStore.qrCode,
-        user: userData.user,
-        dateOfToday: dateOfToday,
-      };
-      await qrCodeStore.markAttendence(info);
-      state.response = qrCodeStore.qrcodeResponse;
-    }
-
     return {
       clubActivity,
-      goBackHome,
-      onDecode,
-      state,
     };
   },
 });
 </script>
-
-<style scoped>
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 5rem;
-}
-.camera {
-  width: 100rem;
-}
-.decode-result {
-  font-size: 4rem;
-}
-</style>
