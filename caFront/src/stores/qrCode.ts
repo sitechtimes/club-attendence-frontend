@@ -69,11 +69,10 @@ export const useQrCode = defineStore("qrCode", {
         credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(this.clubData), // body data type must match "Content-Type" header
+        body: JSON.stringify(this.clubData),
       })
         .then((res) => res.json())
         .then((res) => {
@@ -89,11 +88,10 @@ export const useQrCode = defineStore("qrCode", {
         credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: JSON.stringify(data),
       })
         .then((res) => res.json())
         .then((res) => {
