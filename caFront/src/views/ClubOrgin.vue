@@ -4,35 +4,53 @@
       <div class="generate" @click="selectYear()">
         <button>generate</button>
       </div>
-      <select
-        class="form-select"
-        id="month"
-        name="month"
-        @change="selectYear(date)"
-      >
-        <option selected value="">--Please select an acdemic year--</option>
-        <option v-for="date in dates" value="year" 
+      <select v-model="yearSelected" class="year-select">
+        <option disabled value="">Select an academic year</option>
+        <option v-for="date in dates">
           {{ date }}
         </option>
       </select>
+      <div>
+        <h2 class="status">{{ status }}</h2>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useUserDataStore } from "@/stores/userData";
 
+let userDataStore = useUserDataStore();
+let status = ref<string | null>(null);
 let dates: Array<string> = [];
 let yearSelected = ref<string | null>(null);
-for (let i = 0; 6 > i; i++) {
+
+for (let i = 0; 3 > i; i++) {
   let date1 = new Date().getFullYear() + i;
   let date2 = new Date().getFullYear() + i + 1;
   dates.push(`${date1} - ${date2}`);
 }
 
-function selectYear(date: string) {
-  yearSelected.value = date;
-  console.log(yearSelected.value, "eoiwoiv");
+async function selectYear() {
+  if (yearSelected.value === null) {
+    return (status.value = "Please select an academic year!");
+  }
+  status.value = "Pending";
+  await fetch("http://localhost:3000/update-club-data", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      acdemicYear: yearSelected.value,
+      user: userDataStore.user,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      status.value = res;
+    });
 }
 </script>
 
