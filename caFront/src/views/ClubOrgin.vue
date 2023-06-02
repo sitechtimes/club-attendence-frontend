@@ -1,4 +1,6 @@
 <template>
+  
+  <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
   <div class="whole">
     <div class="container">
       <div class="left">
@@ -25,6 +27,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useUserDataStore } from "@/stores/userData";
+import miniButton from "@/components/miniButton.vue";
+
+
 
 let userDataStore = useUserDataStore();
 let status = ref<string | null>(null);
