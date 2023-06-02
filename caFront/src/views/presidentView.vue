@@ -18,7 +18,7 @@
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
-          :Room="club.room"
+          :Room="club.roomNumber"
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
@@ -56,7 +56,7 @@ import { useUserDataStore } from "@/stores/userData";
 
 interface clubDataInfo {
 advisor: string;
-room: string;
+roomNumber: string;
   clubCode: string;
   position: string;
   clubName: string;
@@ -88,7 +88,7 @@ interface eachClub {
     presidentEmail: string;
     presidentUID: string;
     qeCode: string;
-    room: string;
+    roomNumber: string;
   }
 
 export default defineComponent({
@@ -139,7 +139,7 @@ export default defineComponent({
         presidentEmail: string;
         presidentUID: string;
         qeCode: string;
-        room: string;
+        roomNumber: string;
       }[] = [];
 
       console.log(this.store.clubList);
