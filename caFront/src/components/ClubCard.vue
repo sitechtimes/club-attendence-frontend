@@ -151,7 +151,7 @@ export default {
 }
 
 .clubname {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 .card:hover {
@@ -162,6 +162,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
   height: 50%;
   width: 100%;
   position: absolute;
