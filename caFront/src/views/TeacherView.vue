@@ -1,4 +1,5 @@
 <template>
+
   <div class="table">
     <div v-for="head in headings" :key="head" class="header">{{ head }}</div>
     <div v-for="data in theData" :key="data.osis" class="row">
@@ -27,20 +28,39 @@
         </h2>
       </div>
     </div>
+
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+
+import { defineComponent, ref } from 'vue'
+import { teacherStore } from '@/stores/teacherVueStore'
+import { useUserDataStore } from '@/stores/userData'
+import clubBox from '@/components/ClubBox.vue'
+import tableData from '@/components/tableData.vue'
+import dateDropdown from '@/components/dateDropdown.vue'
+import statusDropdown from '@/components/statusDropdown.vue'
+import miniButton from '@/components/miniButton.vue'
+
+interface eachClub {
+    advisor: string;
+    advisorEmail: string;
+    clubCode: string;
+    clubName:string;
+    clubSpreadsheetId:string;
+    memberCount: string;
+    nextMeeting: string;
+    president: string;
+    presidentEmail: string;
+    presidentUID: string;
+    qeCode: string;
+    roomNumber: string;
+  }
+
 export default defineComponent({
-  props: {
-    headings: {
-      type: Array<string>,
-      required: true,
-    },
-    theData: {
-      type: Object,
-      required: false,
-    },
+  components:{
+    clubBox, tableData, dateDropdown, statusDropdown, miniButton
+
   },
   setup(props) {
     const present = "present";

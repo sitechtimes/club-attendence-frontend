@@ -1,5 +1,5 @@
 <template>
-  <div @click="store.getClubData(clubCode, userStore.user)" class="clubBox">
+  <div @click="store.getClubData(clubCode, userStore.user, ClubName)" class="clubBox">
     <div class="app">
       <div class="top">
         <h2 class="clubName">{{ ClubName }}</h2>
@@ -20,7 +20,10 @@ import { teacherStore } from "@/stores/teacherVueStore";
 
 export default defineComponent({
   props: {
-    ClubName: String,
+    ClubName: {
+      type: String,
+      required: true,
+    },
     Advisor: String,
     Room: String || Number,
     clubCode: {
