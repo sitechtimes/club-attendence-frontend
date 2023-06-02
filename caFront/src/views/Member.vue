@@ -32,16 +32,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useClubStore } from "../stores/sendcode";
 export default defineComponent({
   name: "Member",
+
   setup() {
     const clubstore = useClubStore();
+    console.log(clubstore.currentClubCode);
+    onMounted(() => {
+      clubstore.getClubData(clubstore.currentClubCode); // <- This fails in the unit test
+    });
     const present = "present";
     const absent = "absent";
 
-    return { clubstore,  present, absent };
+    return { clubstore, present, absent };
   },
 });
 </script>
