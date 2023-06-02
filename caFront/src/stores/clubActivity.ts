@@ -11,6 +11,7 @@ export const useClubActivity = defineStore("clubActivity", {
     isUploadVisible: false,
     isImageVisible: false,
     isMeetingVisible: false,
+    isDMeetingVisible: false,
     isDeleteVisible: false,
     clubName: ""
   }),
@@ -72,6 +73,13 @@ export const useClubActivity = defineStore("clubActivity", {
     },
     closeMeeting(){
       this.isMeetingVisible =false;
+    },
+    openDMeeting(clubName: string ){
+      this.isDMeetingVisible =true;
+      this.clubName = clubName
+    },
+    closeDMeeting(){
+      this.isDMeetingVisible =false;
     },
     openDelete() {
       this.isDeleteVisible = true;
