@@ -100,7 +100,7 @@ export default defineComponent({
 .static {
   z-index: 11;
   position: fixed;
-  top: 25rem;
+  top: 28rem;
   right: 28rem;
 }
 
@@ -108,8 +108,8 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    top: 30rem;
-    right: 20 rem;
+    top: 25rem;
+    right: 20rem;
   }
 }
 
@@ -155,7 +155,7 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    bottom: -4rem;
+    bottom: 1rem;
     right: 8rem;
   }
 }
@@ -163,7 +163,7 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    bottom: -5rem;
+    bottom: -1rem;
     right: 3rem;
   }
 }
