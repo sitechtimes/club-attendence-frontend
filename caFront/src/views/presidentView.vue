@@ -1,5 +1,9 @@
 <template>
   <div class="page">
+
+    <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
+
+
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
@@ -20,7 +24,7 @@
           :Advisor="club.advisor"
           :Room="club.roomNumber"
           :clubCode="club.clubCode"
-        ></clubBox>
+        ></clubBox> 
       </div>
       <div class="table-right">
         <tableData
@@ -52,6 +56,7 @@ import tableData from "@/components/tableData.vue";
 import dateDropdown from "@/components/dateDropdown.vue";
 import statusDropdown from "@/components/statusDropdown.vue";
 import { useUserDataStore } from "@/stores/userData";
+import miniButton from "@/components/miniButton.vue";
 
 
 interface clubDataInfo {
@@ -97,6 +102,8 @@ export default defineComponent({
     tableData,
     dateDropdown,
     statusDropdown,
+    miniButton
+
   },
   setup() {
     const store = teacherStore();
