@@ -4,7 +4,7 @@
     <div class="container">
       <div class="left">
         <div class="generate" @click="selectYear()">
-          <button>generate</button>
+          <button>Configurate Club Data</button>
         </div>
         <select v-model="yearSelected" class="year-select">
           <option disabled value="">Select an academic year</option>
@@ -16,9 +16,6 @@
           <h2 class="status">{{ status }}</h2>
         </div>
       </div>
-    </div>
-    <div class="right">
-      <h2>Clear</h2>
     </div>
   </div>
 </template>
@@ -78,10 +75,13 @@ async function selectYear() {
   align-items: center;
   flex-direction: column;
 }
-.right {
+.generate {
+  margin-bottom: 2rem;
+}
+/* .right {
   width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 </style>
