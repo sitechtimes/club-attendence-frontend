@@ -3,8 +3,8 @@
     <form id="form" @submit.prevent="sendAdditionalUserInfo">
       <label for="name"><slot slot name="name"></slot>:</label>
       <input v-model="form.userValue" type="text" required id="name" />
-      <h3>{{ form.userValue }}</h3>
-      <h3 class="context"><slot name="context"></slot></h3>
+      <h1>{{ form.userValue }}</h1>
+      <h2 class="context"><slot name="context"></slot></h2>
       <div>{{ osisGradeOfficalClass }}</div>
     </form>
   </div>
@@ -27,19 +27,18 @@ export default defineComponent({
 
     onBeforeMount(() => {
       if (
-        userDataStore.user!.osis !== "none" &&
-        userDataStore.user!.grade !== "none" &&
-        userDataStore.user!.officalClass !== "none"
+        userDataStore.user!.osis !== null &&
+        userDataStore.user!.grade !== null &&
+        userDataStore.user!.officalClass !== null
       ) {
         return router.push("/club");
       }
     });
-
     function checker() {
       if (
-        userDataStore.user!.osis !== "none" &&
-        userDataStore.user!.grade !== "none" &&
-        userDataStore.user!.officalClass !== "none"
+        userDataStore.user!.osis !== null &&
+        userDataStore.user!.grade !== null &&
+        userDataStore.user!.officalClass !== null
       ) {
         return router.push("/club");
       }
@@ -48,7 +47,7 @@ export default defineComponent({
     async function postData(userData: object) {
       // Default options are marked with *
       console.log("ths is post data");
-      await fetch("http://localhost:3000/addOsisGradeOfficalClass", {
+      await fetch("http://localhost:3000/addOsisGradeOfficialClass", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -67,22 +66,22 @@ export default defineComponent({
           if (response.status) {
             if (response.type === "OSIS") {
               userDataStore.addOsis(response.value);
-              if (userDataStore.user!.grade === "none") {
+              if (userDataStore.user!.grade === null) {
                 return router.push("/additional-information/grade");
-              } else if (userDataStore.user!.officalClass === "none") {
+              } else if (userDataStore.user!.officalClass === null) {
                 return router.push("/additional-information/offical-class");
               } else if (
-                userDataStore.user!.grade !== "none" &&
-                userDataStore.user!.officalClass !== "none"
+                userDataStore.user!.grade !== null &&
+                userDataStore.user!.officalClass !== null
               )
                 checker();
             }
 
             if (response.type === "Grade") {
               userDataStore.addGrade(response.value);
-              if (userDataStore.user!.osis === "none") {
+              if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
-              } else if (userDataStore.user!.officalClass === "none") {
+              } else if (userDataStore.user!.officalClass === null) {
                 return router.push("/additional-information/offical-class");
               }
               checker();
@@ -90,9 +89,9 @@ export default defineComponent({
 
             if (response.type === "Official Class") {
               userDataStore.addOfficallClass(response.value);
-              if (userDataStore.user!.osis === "none") {
+              if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
-              } else if (userDataStore.user!.grade === "none") {
+              } else if (userDataStore.user!.grade === null) {
                 return router.push("/additional-information/grade");
               }
               checker();

@@ -58,10 +58,11 @@ import statusDropdown from "@/components/statusDropdown.vue";
 import { useUserDataStore } from "@/stores/userData";
 import miniButton from "@/components/miniButton.vue";
 
-
 interface clubDataInfo {
+
 advisor: string;
 roomNumber: string;
+
   clubCode: string;
   position: string;
   clubName: string;
@@ -82,6 +83,7 @@ interface clubDataTemp {
 }
 
 interface eachClub {
+
     advisor: string;
     advisorEmail: string;
     clubCode: string;
@@ -95,6 +97,7 @@ interface eachClub {
     qeCode: string;
     roomNumber: string;
   }
+
 
 export default defineComponent({
   components: {
@@ -112,7 +115,6 @@ export default defineComponent({
     store.getData(userStore.user);
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
 
-    
     return { store, input, headings, userStore };
   },
   methods: {

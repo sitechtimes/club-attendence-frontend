@@ -1,15 +1,24 @@
 <template>
   <div class="dropdown">
     <div class="buttonpanel">
-      <ul class="dropdown-item" v-if="clubActivity.isOpen">
+      <ul class="dropdown-item" v-if="clubActivity.isOpen"><li>
+            <router-link to="/teacher">
+              <button  class="openscan">
+                Teacher
+              </button>
+            </router-link>
+          </li>
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
         <li>
           <router-link to="/scanner">
-            <button class="openscan">Scan QR Code</button>
+            <button @click="clubActivity.openCamera()" class="openscan">
+              Scan QR Code
+            </button>
           </router-link>
         </li>
+            
       </ul>
       <button class="open-panel" @click="show"><h2>+</h2></button>
     </div>
@@ -37,6 +46,7 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
+    
 
     function show() {
       if (clubActivity.isOpen === true) {
@@ -45,6 +55,7 @@ export default defineComponent({
         clubActivity.openMenu();
       }
     }
+
     return { clubActivity, show };
   },
   data: () => {
@@ -63,7 +74,7 @@ export default defineComponent({
 }
 .open-panel {
   font-size: 6rem;
-  position: absolute;
+  position: fixed;
   border: 2px black solid;
   border-radius: 10rem;
   height: 7rem;
@@ -91,7 +102,7 @@ li button {
 }
 .dropdown-item {
   font-size: 2rem;
-  position: absolute;
+  position: fixed;
   width: 20rem;
   bottom: 13rem;
   right: 2rem;

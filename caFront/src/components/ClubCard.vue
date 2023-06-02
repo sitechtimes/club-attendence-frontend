@@ -2,50 +2,57 @@
   <div>
     <div class="card">
       <div class="half">
-        <h2>{{ clubName }}</h2>
+        <h1 class="clubname">{{ clubName }}</h1>
+        <div class="content">
+          <h2 class="message">{{ clubCode }}</h2>
+        </div>
       </div>
+
       <div class="bottom">
         <ul class="nextdates" v-for="date in meetingDates" :key="date">
-          <li>
+          <li class="delete">
             {{ date }}
+            <img
+              src="../assets/logos/trashcan.png"
+              class="trashcan"
+              alt="trashcan"
+            />
           </li>
         </ul>
       </div>
+      <div class="menubar" v-if="ifPresident">
+        <ul v-if="status">
+          <li>
+            <img class="calendarpic" src="../assets/logos/calendar.svg" />
+          </li>
+          <li @click="UploadImage.displayUpload(clubCode, clubName)">
+            <img
+              @click="clubActivity.openUpload()"
+              class="upload"
+              src="../assets/logos/upload.png"
+              alt="upload"
+            />
+          </li>
+          <li class="member" @click="clubstore.getClubData(clubCode)">
+            <router-link to="/member">
+              <img class="human" src="../assets/logos/human.svg" alt="human" />
+            </router-link>
+          </li>
 
-      <ul v-if="status">
-        <li v-if="ifPresident">
-          <img
-            @click="clubActivity.openUpload()"
-            class="upload"
-            src="../assets/logos/upload.png"
-            alt=""
-          />
-        </li>
-        <li>
-          <img class="calendarpic" src="../assets/logos/calendar.svg" />
-        </li>
-
-        <li class="member" @click="clubstore.getClubData(clubCode)">
-          <router-link to="/member">
-            <img class="human" src="../assets/logos/human.svg" />
-          </router-link>
-        </li>
-
-        <li
-          class="container"
-          v-if="ifPresident"
-          @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
-        >
-          <img class="qrcode" src="../assets/logos/scanicon.png" alt="" />
-        </li>
-      </ul>
-
-      <img
-        @click="status = !status"
-        class="open-icon"
-        src="../assets/logos/pointing-left.svg"
-        alt=""
-      />
+          <li
+            class="container"
+            @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
+          >
+            <img class="qrcode" src="../assets/logos/scanicon.png" alt="scan" />
+          </li>
+        </ul>
+        <img
+          @click="status = !status"
+          class="open-icon"
+          src="../assets/logos/pointing-left.svg"
+          alt="open"
+        />
+      </div>
     </div>
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
@@ -57,6 +64,7 @@
 import { useUserDataStore } from "../stores/userData";
 import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
+import { useUploadImage } from "@/stores/uploadImage";
 import { useClubActivity } from "../stores/clubActivity";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
@@ -99,13 +107,6 @@ export default {
     const status = ref(false);
     let image: string = "";
 
-    function display() {
-      if (clubActivity.isMenuVisible === true) {
-        clubActivity.closeIcon();
-      } else if (clubActivity.isMenuVisible === false) {
-        clubActivity.openIcon();
-      }
-    }
     function handleImage(event: any) {
       const selectedImage = event.target.files[0];
       createBase64Image(selectedImage);
@@ -117,12 +118,14 @@ export default {
       };
       reader.readAsBinaryString(fileObject);
     }
-    const ifPresident = props.position === "president";
+    const ifPresident = ref(props.position === "president");
+
     const objectData = useUserDataStore();
     const user = objectData.user;
     const clubData = user?.clubData;
     const clubstore = useClubStore();
     const clubActivity = useClubActivity();
+    const UploadImage = useUploadImage();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
     return {
@@ -131,13 +134,13 @@ export default {
       dateOfToday,
       clubstore,
       clubActivity,
-      display,
       status,
       user,
       clubData,
       handleImage,
       createBase64Image,
       image,
+      UploadImage,
     };
   },
 };
@@ -156,6 +159,11 @@ export default {
   transition: 0.5s;
 }
 
+.clubname {
+  font-size: 2.5rem;
+  position: absolute;
+}
+
 .card:hover {
   transform: translateY(-7px);
 }
@@ -164,50 +172,94 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
   height: 50%;
   width: 100%;
   position: absolute;
   top: 0;
-  background-color: rgb(252, 66, 66);
+  background-color: #f0342e;
+}
+
+.half:hover .content {
+  visibility: visible;
+  position: relative;
+}
+
+.message {
+  font-size: 5rem;
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  text-align: center;
+  height: 5rem;
+  width: 26rem;
+  visibility: hidden;
+  background: white;
+  position: absolute;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
 }
 
 .bottom {
   display: flex;
   flex-direction: column;
   list-style-type: circle;
-  height: 50%;
+  height: 35%;
   width: 100%;
+  bottom: 15%;
   position: absolute;
-  bottom: 0;
+  overflow: auto;
 }
 
 li {
   font-size: 2rem;
   margin-left: 3rem;
 }
+.trashcan {
+  visibility: hidden;
+}
+
+.delete:hover {
+  .trashcan {
+    visibility: visible;
+  }
+}
+.trashcan {
+  width: 2rem;
+  height: 2rem;
+}
 
 .upload {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 6rem;
+  bottom: 0.5rem;
+  right: 29rem;
   cursor: pointer;
 }
+
 .qrcode {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 13rem;
+  bottom: 0.5rem;
+  right: 22rem;
   cursor: pointer;
 }
 .human {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 27rem;
+  bottom: 0.5rem;
+  right: 15rem;
+
   cursor: pointer;
 }
 
@@ -215,16 +267,18 @@ li {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 20rem;
+  bottom: 0.5rem;
+  right: 8rem;
   cursor: pointer;
 }
 .open-icon {
   position: absolute;
   width: 5rem;
   height: 5rem;
-  top: 23.5rem;
-  left: 34rem;
+
+  bottom: 0.5rem;
+  right: 1rem;
+
   cursor: pointer;
 }
 input {
@@ -237,6 +291,8 @@ label {
   display: flex;
   justify-content: center;
   margin-top: 10rem;
+  width: 100%;
+  height: 100%;
 }
 .cardbox {
   position: absolute;
@@ -273,19 +329,36 @@ label {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
-    left: 21rem;
+    left: 23rem;
   }
   .calendarpic {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
-    left: 14rem;
+    left: 18rem;
   }
   .qrcode {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
-    left: 7rem;
+    left: 13rem;
+  }
+  .upload {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 8rem;
+  }
+  .qrcode,
+  .calendarpic,
+  .human,
+  .open-icon,
+  .upload {
+    transform: scale(0.7);
+  }
+  .bottom {
+    right: 3rem;
+    transform: scale(0.8);
   }
 }
 </style>

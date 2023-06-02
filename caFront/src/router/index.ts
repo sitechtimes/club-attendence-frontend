@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AboutView from "../views/AboutView.vue";
-import HomeView from "../views/HomeView.vue";
+import LoginView from "../views/LoginView.vue";
 import TeacherView from "../views/TeacherView.vue";
 import StudentSearch from "../views/StudentSearch.vue";
 
@@ -9,21 +8,14 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: AboutView,
+      name: "Login",
+      component: LoginView,
     },
     {
       path: "/scanner",
       name: "scanner",
       component: () => {
-        return import(
-          /*webpackChunkName: "club-view" */ "../views/Scanner.vue"
-        );
+        return import(/*webpackChunkName: "qrcode" */ "@/views/Scanner.vue");
       },
     },
 
@@ -97,6 +89,13 @@ const router = createRouter({
       name: "President",
       component: () => {
         return import("@/views/presidentView.vue");
+      },
+    },
+    {
+      path: "/club-orgin",
+      name: "club-orgin",
+      component: () => {
+        return import("@/views/ClubOrgin.vue");
       },
     },
   ],
