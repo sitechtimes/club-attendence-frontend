@@ -1,5 +1,7 @@
 <template>
   <div class="page">
+    
+    <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
@@ -51,6 +53,7 @@ import clubBox from '@/components/ClubBox.vue'
 import tableData from '@/components/tableData.vue'
 import dateDropdown from '@/components/dateDropdown.vue'
 import statusDropdown from '@/components/statusDropdown.vue'
+import miniButton from '@/components/miniButton.vue'
 
 interface eachClub {
     advisor: string;
@@ -69,7 +72,7 @@ interface eachClub {
 
 export default defineComponent({
   components:{
-    clubBox, tableData, dateDropdown, statusDropdown,
+    clubBox, tableData, dateDropdown, statusDropdown, miniButton
   },
   setup () {
     const store = teacherStore()
