@@ -23,7 +23,10 @@
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
           <li>
-            <img class="calendarpic" src="../assets/logos/calendar.svg" />
+            <img class="trashCanPic" src="../assets/logos/trash-can.png" />
+          </li>
+          <li>
+            <img @click="clubActivity.openMeeting(clubName)" class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
           <li @click="UploadImage.displayUpload(clubCode, clubName)">
             <img
@@ -57,6 +60,9 @@
     <div class="overlap">
       <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
     </div>
+    <div>
+      <newMeeting v-show="clubActivity.isMeetingVisible"></newMeeting>
+    </div>
   </div>
 </template>
 
@@ -66,6 +72,7 @@ import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import { useUploadImage } from "@/stores/uploadImage";
 import { useClubActivity } from "../stores/clubActivity";
+import newMeeting from "../components/newMeeting.vue"
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
@@ -78,6 +85,7 @@ export default {
     QRScanner,
     UploadImage,
     RouterLink,
+    newMeeting
   },
 
   props: {
@@ -241,7 +249,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 29rem;
+  right: 27rem;
   cursor: pointer;
 }
 
@@ -250,7 +258,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 22rem;
+  right: 20rem;
   cursor: pointer;
 }
 .human {
@@ -258,7 +266,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 15rem;
+  right: 13.8rem;
 
   cursor: pointer;
 }
@@ -268,7 +276,15 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 8rem;
+  right: 6.7rem;
+  cursor: pointer;
+}
+.trashCanPic{
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  bottom: 0.5rem;
+  right: 33.5rem;
   cursor: pointer;
 }
 .open-icon {
@@ -332,6 +348,12 @@ label {
     left: 23rem;
   }
   .calendarpic {
+    width: 5rem;
+    height: 5rem;
+    top: 23.5rem;
+    left: 18rem;
+  }
+  .trashCanPic{
     width: 5rem;
     height: 5rem;
     top: 23.5rem;

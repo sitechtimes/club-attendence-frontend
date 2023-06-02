@@ -1,20 +1,22 @@
 <template>
   <div class="modal-backdrop">
     <div class="add">
-      <form id="form">
+      <form id="form" @submit.prevent="addClub">
         <miniButton class="position" @click="clubActivity.closePanel()"
           >x</miniButton
         >
         <span></span>
         <label for="name">Input Code: </label>
-        <input type="text" required id="name" />
+        <input v-model="form.userValue" type="text" required id="name" />
+        <h3>{{ form.userValue }}</h3>
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent , reactive} from "vue";
+import { useUserDataStore } from "@/stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
@@ -30,8 +32,39 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
-
-    return { clubActivity };
+    const userDataStore = useUserDataStore();
+    const form = reactive({ userValue: "" });
+    async function postData(userData: object) {
+      // Default options are marked with *
+      console.log("ths is post data");
+      await fetch("http://localhost:3000/addclub", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(userData), // body data type must match "Content-Type" header
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+        });
+      }
+       const addClub = () => {
+        const bundle = {
+          user: userDataStore.user,
+          clubCode: form.userValue,
+        };
+        console.log(bundle);
+        console.log("jumping into postData");
+      postData(bundle);
+    };
+    return { form, addClub, clubActivity };
   },
 });
 </script>
