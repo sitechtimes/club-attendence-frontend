@@ -6,6 +6,7 @@ export const uploadAttendance = defineStore("Attendance", {
     currentClubCode: null,
     clubName: null,
     selectedClub: false,
+    memberlist: null,
   }),
   getters: {},
   actions: {
@@ -32,9 +33,7 @@ export const uploadAttendance = defineStore("Attendance", {
         redirect: "follow",
         referrerPolicy: "no-referrer",
         body: JSON.stringify(postData), // body data type must match "Content-Type" header
-      })
-        .then((res) => res.json())
-        .then((res) => this.showMemberList(res));
+      }).then((res) => res.json());
     },
   },
 });
