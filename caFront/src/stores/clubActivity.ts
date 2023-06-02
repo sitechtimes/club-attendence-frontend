@@ -1,3 +1,4 @@
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useClubActivity = defineStore("clubActivity", {
@@ -43,7 +44,6 @@ export const useClubActivity = defineStore("clubActivity", {
     },
     closeCamera() {
       this.isCameraVisible = false;
-      this.isCameraAllowed = false;
     },
     openIcon() {
       this.isMenuVisible = true;
@@ -64,5 +64,4 @@ export const useClubActivity = defineStore("clubActivity", {
       this.isImageVisible = false;
     },
   },
-  persist: true,
 });

@@ -8,6 +8,7 @@
         <div class="title">
           Staten Island Technical High School Club Attendance
         </div>
+
         <button class="OAuth" @click="login">
           <img
             class="g-logo"
@@ -76,6 +77,7 @@ export default defineComponent({
           } else if (data.clientAuthority === "admin") {
             userDataStore.addUserData(data);
             return router.push("/club");
+            //  data.grade === "none" || data.officalClass === "none"
           }
         });
     }

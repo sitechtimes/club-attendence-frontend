@@ -4,14 +4,10 @@ interface QrCode {
   base64QrCode: string | null;
   isQrCodeOpen: boolean;
   clubData: ClubData;
-  storeClub: string | null | undefined;
-  storeQr: string | null;
-  qrCode: string | null;
-  qrcodeResponse: string;
 }
 type ClubData = {
   clubCode: string | null | undefined;
-  dateOfToday: string | null | undefined;
+  dateOfToday: string | null;
   clubName: string | null | undefined;
 };
 
@@ -20,10 +16,6 @@ export const useQrCode = defineStore("qrCode", {
     base64QrCode: null,
     clubData: { clubCode: null, dateOfToday: null, clubName: null },
     isQrCodeOpen: false,
-    storeQr: null,
-    storeClub: null,
-    qrCode: null,
-    qrcodeResponse: "",
   }),
   getters: {},
   actions: {
@@ -36,30 +28,13 @@ export const useQrCode = defineStore("qrCode", {
       this.clubData.clubCode = clubCode;
       this.clubData.dateOfToday = dateOfToday;
       this.clubData.clubName = clubName;
-
-      this.checkerForClub();
-    },
-    addStoreClub(clubName: string | null | undefined) {
-      this.storeClub = clubName;
-      this.storeQr = this.base64QrCode;
-    },
-    removeStoreClub() {
-      this.storeClub = null;
-      this.storeQr = null;
     },
     closeMenu() {
       this.isQrCodeOpen = false;
+      this.base64QrCode = null;
       this.clubData.clubCode = null;
       this.clubData.dateOfToday = null;
       this.clubData.clubName = null;
-      this.checkerForClub();
-    },
-    checkerForClub() {
-      if (this.clubData.clubName !== this.storeClub) {
-        this.base64QrCode = null;
-      } else {
-        this.base64QrCode = this.storeQr;
-      }
     },
     async getQrCode() {
       await fetch("http://localhost:3000/get-qrcode", {
@@ -76,29 +51,7 @@ export const useQrCode = defineStore("qrCode", {
         body: JSON.stringify(this.clubData), // body data type must match "Content-Type" header
       })
         .then((res) => res.json())
-        .then((res) => {
-          this.base64QrCode = res;
-          this.storeClub = res;
-        });
-    },
-    async markAttendence(data: object | null) {
-      await fetch("http://localhost:3000/mark-attendence", {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          this.qrcodeResponse = res;
-        });
+        .then((res) => (this.base64QrCode = res));
     },
   },
   persist: true,
