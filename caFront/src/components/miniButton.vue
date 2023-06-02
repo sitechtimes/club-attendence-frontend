@@ -1,7 +1,5 @@
 <template>
-  <button class="closebutton">
-    <slot></slot>
-  </button>
+  <button class="closebutton">X</button>
 </template>
 
 <script lang="ts">
@@ -12,26 +10,24 @@ export default {
 
 <style scoped>
 .closebutton {
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
-  width: 32px;
-  height: 32px;
-
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 1rem;
+  display: block;
+  margin: auto;
+  text-decoration: none;
+  font-size: 28px;
+  border: 3px solid transparent;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  border-radius: 50%;
 }
-
-.closebutton:before, .closebutton:after {
-  position: absolute;
-  
-  content: ' ';
-  
-  background-color: #333;
+.closebutton:hover {
+  color: red;
+  border: 3px solid grey;
+  transform: scale(0.8) rotateZ(90deg);
 }
-.closebutton:before {
-  transform: rotate(45deg);
-}
-.close:after {
-  transform: rotate(-45deg);
-}
-
 </style>

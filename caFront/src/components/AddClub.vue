@@ -36,7 +36,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .add {
   background: white;
   height: 30rem;
@@ -51,6 +51,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   display: flex;
+  z-index: 2;
 }
 #form {
   font-size: 4rem;
@@ -59,5 +60,30 @@ export default defineComponent({
   position: fixed;
   top: 3rem;
   right: 3rem;
+}
+@media (max-width: 1150px) {
+  .add {
+    background: white;
+    height: 50rem;
+    width: 40rem;
+  }
+  #form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@media (max-width: 450px) {
+  .add {
+    background: white;
+    height: 40rem;
+    width: 30rem;
+  }
+  #form {
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 </style>
