@@ -97,9 +97,9 @@ export default defineComponent({
     removeStudent(){
         //goneOsis is the student's osis number
         //currentClubCode is the current club code use that to determine which club 
-        
+
     }
-  }
+  },
 
 
   computed:{
