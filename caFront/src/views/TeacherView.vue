@@ -1,126 +1,199 @@
 <template>
-  <div class="table">
-    <div v-for="head in headings" :key="head" class="header">{{ head }}</div>
-    <div v-for="data in theData" :key="data.osis" class="row">
-      <div
-        class="test"
-        :class="{
-          absent: data.presentLocation.inClubToday == false,
-          present: data.presentLocation.inClubToday == true,
-        }"
-      >
-        <h2 class="asset osis">
-          {{ data.osis }}
-        </h2>
-        <h2 class="asset name">
-          {{ data.firstName + " " + data.lastName }}
-        </h2>
-
-        <h2 class="asset email">
-          {{ data.email }}
-        </h2>
-        <h2 class="asset grade">
-          {{ data.grade }}
-        </h2>
-        <h2 class="asset offClass">
-          {{ data.officialClass }}
-        </h2>
+  <div class="page">
+    
+    <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
+    <section class="top">
+      <div class="right">
+        <input v-model="input" type="text" />
       </div>
-    </div>
+
+      <div class="top-right ">
+        <statusDropdown></statusDropdown>
+        <dateDropdown></dateDropdown>
+      </div>
+
+    </section>
+    <section class="bottom">
+      <div v-if="clubData" class="left">
+        <clubBox
+          v-for="club in clubData"
+          :key="club.clubName"
+          :ClubName="club.clubName"
+          :Advisor="club.advisor"
+          :Room="club.roomNumber"
+          :clubCode="club.clubCode"
+        ></clubBox>
+      </div>
+      <div class="table-right">
+
+
+        <tableData v-if="store.selectedStatus"
+          :headings="headings"
+          :theData="store.filteredAttendance"
+        ></tableData>
+        <tableData v-if="!store.selectedStatus"
+          :headings="headings"
+          :theData="store.currentAttendance"
+        ></tableData>
+
+
+
+      </div>
+
+    </section>
+
   </div>
 </template>
+
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from 'vue'
+import { teacherStore } from '@/stores/teacherVueStore'
+import { useUserDataStore } from '@/stores/userData'
+import clubBox from '@/components/ClubBox.vue'
+import tableData from '@/components/tableData.vue'
+import dateDropdown from '@/components/dateDropdown.vue'
+import statusDropdown from '@/components/statusDropdown.vue'
+import miniButton from '@/components/miniButton.vue'
+
+interface eachClub {
+    advisor: string;
+    advisorEmail: string;
+    clubCode: string;
+    clubName:string;
+    clubSpreadsheetId:string;
+    memberCount: string;
+    nextMeeting: string;
+    president: string;
+    presidentEmail: string;
+    presidentUID: string;
+    qeCode: string;
+    roomNumber: string;
+  }
+
 export default defineComponent({
-  props: {
-    headings: {
-      type: Array<string>,
-      required: true,
-    },
-    theData: {
-      type: Object,
-      required: false,
-    },
+  components:{
+    clubBox, tableData, dateDropdown, statusDropdown, miniButton
   },
-  setup(props) {
-    const present = "present";
-    const absent = "absent";
-    const numColumn = props.headings.length;
-    return { present, absent, numColumn };
+  setup () {
+    const store = teacherStore()
+    const userStore = useUserDataStore()
+    const input = ref<string>("")
+    store.getData(userStore.user)
+    const headings = ["Osis", "Name", "Grade", "Class", "Email"];
+
+    console.log(userStore.user)
+    return {store, input, headings }
+
+    
+
+    
   },
-});
+  computed:{
+    clubData(): Array<eachClub> {
+      console.log(this.store.clubList);
+      let a =  this.store.clubList.filter((club) =>
+        club.clubName.toLowerCase().includes(this.input.toLowerCase())
+      );
+
+      return a
+    },
+  }
+})
 </script>
+
 <style scoped>
-h2 {
-  font-weight: 400;
+input {
+  font-size: 2rem;
+  border-radius: 0.4rem;
+  width: 100%;
+  height: 4rem;
+  padding: 1rem;
 }
-.table {
-  display: grid;
-  grid-template-columns: repeat(v-bind(numColumn), auto);
-  font-size: 7rem;
-}
-.card {
+.page {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  padding: 4rem;
+  font-size: 4rem;
 }
-.header {
+.top {
+  height: 10vh;
+  display: flex;
+  font-size: 4rem;
+  align-items: center;
+}
+.bottom {
+  display: flex;
+  width: 100%;
+  height: 80vh;
+}
+.left {
+  width: 25%;
+ 
+  position: relative;
   padding: 1rem;
-  position: sticky;
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+.top-right{
+  display: flex;
+  justify-content: space-around;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.right{
+  width: 65%;
+}
+.table-right {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x:visible;
+
+
+}
+
+.right::-webkit-scrollbar {
+
+}
+
+.head {
+  font-size: 5rem;
+}
+.drop {
+  position: absolute;
   z-index: 2;
-  top: 0;
-  background-color: white;
-}
-.row {
-  height: 5rem;
-  display: contents;
-}
-.test {
-  display: inherit;
-}
-.asset {
-  padding: 20px;
-  font-size: 3rem;
-}
-.present .asset {
-  background-color: rgb(130, 255, 130);
-}
-.absent .asset {
-  background-color: rgb(255, 135, 135);
-}
-.null .asset {
-  background-color: inherit;
-}
-.here {
-  background-color: rgb(130, 255, 130);
 }
 
-@media (max-width: 1600px) {
-  .header {
-    font-size: 3rem;
+@media (max-width: 1600px){
+  
+  .bottom{
+    flex-direction: column;
+   
   }
+  .left{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: scroll;
+  
+  }
+  .left::-webkit-scrollbar {
+  display:inline;
 }
 
-@media (max-width: 1300px) {
-  .asset {
-    font-size: 2.5rem;
-    padding: 1rem;
-  }
 }
 
-@media (max-width: 800px) {
-  .header {
-    font-size: 2rem;
-  }
-  .asset {
-    font-size: 1.5rem;
-  }
-}
-@media (max-width: 620px) {
-  .header {
-    padding: 0.75rem;
-  }
-  .asset {
-    padding: 0.5rem;
-  }
-}
 </style>
