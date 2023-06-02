@@ -3,7 +3,11 @@
     <div class="card">
       <div class="half">
         <h1 class="clubname">{{ clubName }}</h1>
+        <div class="content">
+          <h2 class="message">{{ clubCode }}</h2>
+        </div>
       </div>
+
       <div class="bottom">
         <ul class="nextdates" v-for="date in meetingDates" :key="date">
           <li class="delete">
@@ -157,6 +161,7 @@ export default {
 
 .clubname {
   font-size: 2.5rem;
+  position: absolute;
 }
 
 .card:hover {
@@ -174,6 +179,32 @@ export default {
   position: absolute;
   top: 0;
   background-color: #f0342e;
+}
+
+.half:hover .content {
+  visibility: visible;
+  position: relative;
+}
+
+.message {
+  font-size: 2rem;
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  text-align: center;
+  height: 3rem;
+  width: 10rem;
+  visibility: hidden;
+  background: white;
+  position: absolute;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
 }
 
 .bottom {

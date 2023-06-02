@@ -81,7 +81,9 @@ export default defineComponent({
     const UploadImage = useUploadImage();
 
     function resetImage() {
-      clubActivity.closeUpload(), (pickImage.value = ref(""));
+      clubActivity.closeUpload(),
+        (pickImage.value = ref("")),
+        UploadImage.$reset();
     }
 
     return {
