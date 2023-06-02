@@ -92,8 +92,8 @@ const router = createRouter({
       },
     },
     {
-      path: "/club-orgin",
-      name: "club-orgin",
+      path: "/club-origin",
+      name: "club-origin",
       component: () => {
         return import("@/views/ClubOrgin.vue");
       },
