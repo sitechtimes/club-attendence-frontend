@@ -41,7 +41,7 @@ export const useClubStore = defineStore("clubData", {
         clubCode: clubCode,
       };
 
-      await fetch(this.fetchURL + "one-club-data", {
+      await fetch(this.fetchURL + "one-club-data-president", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
