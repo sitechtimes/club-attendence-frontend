@@ -1,9 +1,5 @@
 <template>
   <div class="page">
-
-    <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
-
-
     <section class="top">
       <div class="right">
         <input v-model="input" type="text" />
@@ -22,9 +18,9 @@
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
-          :Room="club.roomNumber"
+          :Room="club.room"
           :clubCode="club.clubCode"
-        ></clubBox> 
+        ></clubBox>
       </div>
       <div class="table-right">
         <tableData
@@ -56,13 +52,10 @@ import tableData from "@/components/tableData.vue";
 import dateDropdown from "@/components/dateDropdown.vue";
 import statusDropdown from "@/components/statusDropdown.vue";
 import { useUserDataStore } from "@/stores/userData";
-import miniButton from "@/components/miniButton.vue";
 
 interface clubDataInfo {
-
-advisor: string;
-roomNumber: string;
-
+  advisor: string;
+  room: string;
   clubCode: string;
   position: string;
   clubName: string;
@@ -83,21 +76,19 @@ interface clubDataTemp {
 }
 
 interface eachClub {
-
-    advisor: string;
-    advisorEmail: string;
-    clubCode: string;
-    clubName:string;
-    clubSpreadsheetId:string;
-    memberCount: string;
-    nextMeeting: string;
-    president: string;
-    presidentEmail: string;
-    presidentUID: string;
-    qeCode: string;
-    roomNumber: string;
-  }
-
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName: string;
+  clubSpreadsheetId: string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  room: string;
+}
 
 export default defineComponent({
   components: {
@@ -105,8 +96,6 @@ export default defineComponent({
     tableData,
     dateDropdown,
     statusDropdown,
-    miniButton
-
   },
   setup() {
     const store = teacherStore();
@@ -148,7 +137,7 @@ export default defineComponent({
         presidentEmail: string;
         presidentUID: string;
         qeCode: string;
-        roomNumber: string;
+        room: string;
       }[] = [];
 
       console.log(this.store.clubList);

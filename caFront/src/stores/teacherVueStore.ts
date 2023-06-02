@@ -27,7 +27,7 @@ type clubData = {
     presidentEmail: string;
     presidentUID: string;
     qeCode: string;
-    roomNumber: string;
+    room: string;
   }
   
   interface studentsAtDate {
@@ -160,7 +160,7 @@ export const teacherStore = defineStore("teacher", {
 
 
 
-      async getClubData(clubCode: string, user:any, ClubName: string) {
+      async getClubData(clubCode: string, user:any) {
       
         this.clearPrevData()
 
@@ -169,7 +169,6 @@ export const teacherStore = defineStore("teacher", {
         const postData = {
           clubCode: clubCode,
           user: user,
-          clubName: ClubName
         };
   
         await fetch(this.fetchURL + "one-club-data", {
