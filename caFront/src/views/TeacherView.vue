@@ -1,46 +1,81 @@
 <template>
-  <div class="table">
-    <div v-for="head in headings" :key="head" class="header">{{ head }}</div>
-    <div v-for="data in theData" :key="data.osis" class="row">
-      <div
-        class="test"
-        :class="{
-          absent: data.presentLocation.inClubToday == false,
-          present: data.presentLocation.inClubToday == true,
-        }"
-      >
-        <h2 class="asset osis">
-          {{ data.osis }}
-        </h2>
-        <h2 class="asset name">
-          {{ data.firstName + " " + data.lastName }}
-        </h2>
 
-        <h2 class="asset email">
-          {{ data.email }}
-        </h2>
-        <h2 class="asset grade">
-          {{ data.grade }}
-        </h2>
-        <h2 class="asset offClass">
-          {{ data.officialClass }}
-        </h2>
+  <div class="page">
+    
+    <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
+    <section class="top">
+      <div class="right">
+        <input v-model="input" type="text" />
       </div>
-    </div>
+
+      <div class="top-right ">
+        <statusDropdown></statusDropdown>
+        <dateDropdown></dateDropdown>
+      </div>
+
+    </section>
+    <section class="bottom">
+      <div v-if="clubData" class="left">
+        <clubBox
+          v-for="club in clubData"
+          :key="club.clubName"
+          :ClubName="club.clubName"
+          :Advisor="club.advisor"
+          :Room="club.roomNumber"
+          :clubCode="club.clubCode"
+        ></clubBox>
+      </div>
+      <div class="table-right">
+
+
+        <tableData v-if="store.selectedStatus"
+          :headings="headings"
+          :theData="store.filteredAttendance"
+        ></tableData>
+        <tableData v-if="!store.selectedStatus"
+          :headings="headings"
+          :theData="store.currentAttendance"
+        ></tableData>
+
+
+
+      </div>
+
+    </section>
+
+
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+
+import { defineComponent, ref } from 'vue'
+import { teacherStore } from '@/stores/teacherVueStore'
+import { useUserDataStore } from '@/stores/userData'
+import clubBox from '@/components/ClubBox.vue'
+import tableData from '@/components/tableData.vue'
+import dateDropdown from '@/components/dateDropdown.vue'
+import statusDropdown from '@/components/statusDropdown.vue'
+import miniButton from '@/components/miniButton.vue'
+
+interface eachClub {
+    advisor: string;
+    advisorEmail: string;
+    clubCode: string;
+    clubName:string;
+    clubSpreadsheetId:string;
+    memberCount: string;
+    nextMeeting: string;
+    president: string;
+    presidentEmail: string;
+    presidentUID: string;
+    qeCode: string;
+    roomNumber: string;
+  }
+
 export default defineComponent({
-  props: {
-    headings: {
-      type: Array<string>,
-      required: true,
-    },
-    theData: {
-      type: Object,
-      required: false,
-    },
+  components:{
+    clubBox, tableData, dateDropdown, statusDropdown, miniButton
+
   },
   setup(props) {
     const present = "present";
