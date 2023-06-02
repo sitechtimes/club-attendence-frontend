@@ -70,7 +70,7 @@ export default defineComponent({
             if (data.grade === null) {
               return router.push("/additional-information/grade");
             }
-            if (data.officalClass === null) {
+            if (data.officialClass === null) {
               return router.push("/additional-information/offical-class");
             }
             return router.push("/club");
@@ -204,28 +204,25 @@ export default defineComponent({
   width: 100%;
 }
 
-@media (max-width:1000px){
-  .left{
+@media (max-width: 1000px) {
+  .left {
     display: none;
   }
 
-  .circles{
+  .circles {
     display: none;
   }
 
-  .right{
+  .right {
     margin: auto;
     font-size: 10rem;
   }
-  .title{
+  .title {
     font-size: 7vw;
     width: 100vw;
   }
-  .OAuth h3{
+  .OAuth h3 {
     font-size: 7vw;
   }
- 
-  
 }
-
 </style>

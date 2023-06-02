@@ -29,7 +29,7 @@ export default defineComponent({
       if (
         userDataStore.user!.osis !== null &&
         userDataStore.user!.grade !== null &&
-        userDataStore.user!.officalClass !== null
+        userDataStore.user!.officialClass !== null
       ) {
         return router.push("/club");
       }
@@ -38,7 +38,7 @@ export default defineComponent({
       if (
         userDataStore.user!.osis !== null &&
         userDataStore.user!.grade !== null &&
-        userDataStore.user!.officalClass !== null
+        userDataStore.user!.officialClass !== null
       ) {
         return router.push("/club");
       }
@@ -68,11 +68,11 @@ export default defineComponent({
               userDataStore.addOsis(response.value);
               if (userDataStore.user!.grade === null) {
                 return router.push("/additional-information/grade");
-              } else if (userDataStore.user!.officalClass === null) {
+              } else if (userDataStore.user!.officialClass === null) {
                 return router.push("/additional-information/offical-class");
               } else if (
                 userDataStore.user!.grade !== null &&
-                userDataStore.user!.officalClass !== null
+                userDataStore.user!.officialClass !== null
               )
                 checker();
             }
@@ -81,7 +81,7 @@ export default defineComponent({
               userDataStore.addGrade(response.value);
               if (userDataStore.user!.osis === null) {
                 return router.push("/additional-information/osis");
-              } else if (userDataStore.user!.officalClass === null) {
+              } else if (userDataStore.user!.officialClass === null) {
                 return router.push("/additional-information/offical-class");
               }
               checker();

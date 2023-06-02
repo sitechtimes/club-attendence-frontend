@@ -1,18 +1,23 @@
 <template>
   <div class="whole">
     <div class="container">
-      <div class="generate" @click="selectYear()">
-        <button>generate</button>
+      <div class="left">
+        <div class="generate" @click="selectYear()">
+          <button>generate</button>
+        </div>
+        <select v-model="yearSelected" class="year-select">
+          <option disabled value="">Select an academic year</option>
+          <option v-for="date in dates">
+            {{ date }}
+          </option>
+        </select>
+        <div>
+          <h2 class="status">{{ status }}</h2>
+        </div>
       </div>
-      <select v-model="yearSelected" class="year-select">
-        <option disabled value="">Select an academic year</option>
-        <option v-for="date in dates">
-          {{ date }}
-        </option>
-      </select>
-      <div>
-        <h2 class="status">{{ status }}</h2>
-      </div>
+    </div>
+    <div class="right">
+      <h2>Clear</h2>
     </div>
   </div>
 </template>
@@ -63,5 +68,18 @@ async function selectYear() {
 }
 .container {
   font-size: 5rem;
+}
+.left {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.right {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
