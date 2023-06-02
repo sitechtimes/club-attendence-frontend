@@ -9,6 +9,17 @@
             </router-link>
           </li>
         <li>
+<<<<<<< Updated upstream
+=======
+            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/club-origin">
+              <button  class="openscan">
+                Club Origins
+              </button>
+            </router-link>
+          </li>
+
+        <li> 
+>>>>>>> Stashed changes
           <button @click="clubActivity.openDelete()">Delete Club</button>
         </li>
         <li>
