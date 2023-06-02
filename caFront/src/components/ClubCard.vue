@@ -187,7 +187,7 @@ export default {
 }
 
 .message {
-  font-size: 2rem;
+  font-size: 5rem;
 }
 .content {
   display: flex;
@@ -195,8 +195,8 @@ export default {
   justify-content: center;
   border-radius: 2rem;
   text-align: center;
-  height: 3rem;
-  width: 10rem;
+  height: 5rem;
+  width: 26rem;
   visibility: hidden;
   background: white;
   position: absolute;
