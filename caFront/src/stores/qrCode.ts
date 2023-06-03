@@ -82,7 +82,7 @@ export const useQrCode = defineStore("qrCode", {
         });
     },
     async markAttendence(data: object | null) {
-      await fetch("https://tech-club-attendance.onrender.com/mark-attendence", {
+      await fetch("http://localhost:3000/mark-attendence", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",

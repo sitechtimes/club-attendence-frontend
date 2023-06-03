@@ -28,18 +28,15 @@ export const useUploadImage = defineStore("upload", {
       clubData.append("clubName", this.clubData.clubName);
       clubData.append("file", this.file);
 
-      await fetch(
-        "https://tech-club-attendance.onrender.com/upload-attendance",
-        {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: clubData,
-        }
-      )
+      await fetch("http://localhost:3000/upload-attendance", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: clubData,
+      })
         .then((res) => res.json())
         .then((res) => {
           this.sendResponse = res;
