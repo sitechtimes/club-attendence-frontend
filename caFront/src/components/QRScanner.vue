@@ -60,8 +60,8 @@ export default defineComponent({
       startTimer();
     }
 
-    let minutes = ref(0);
-    let seconds = ref(10);
+    let minutes = ref(10);
+    let seconds = ref(0);
     let timer: any;
 
     const countdown = () => {

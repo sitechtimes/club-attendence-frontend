@@ -18,7 +18,7 @@ interface ClubState {
 
 export const useClubStore = defineStore("clubData", {
   state: (): ClubState => ({
-    fetchURL: "http://localhost:3000/",
+    fetchURL: "https://tech-club-attendance.onrender.com/",
     currentClubCode: null,
     memberlist: [],
     selectedClub: false,

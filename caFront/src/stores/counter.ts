@@ -42,9 +42,7 @@ interface dataRes {
   currentFilterDate: string;
   filtersAttendance: Array<string>;
 
-  currentFilterAttendance: string,
-
-
+  currentFilterAttendance: string;
 }
 
 export const useStore = defineStore("global", {
@@ -62,8 +60,8 @@ export const useStore = defineStore("global", {
     filterDate: null,
     currentFilterDate: "Select Date",
     filtersAttendance: ["All", "Absent", "Present"],
-  
-    currentFilterAttendance: ("All"),
+
+    currentFilterAttendance: "All",
   }),
   getters: {},
   actions: {
@@ -100,8 +98,6 @@ export const useStore = defineStore("global", {
     },
 
     clearData() {
- 
- 
       this.currentAttendance = [];
 
       this.getDates = false;
@@ -109,12 +105,11 @@ export const useStore = defineStore("global", {
       this.currentClubCode = null;
       this.attendanceAtDate = [];
       this.filterDate = null;
-      this.currentFilterDate = "Select Date"
-      this.currentFilterAttendance = "All"
+      this.currentFilterDate = "Select Date";
+      this.currentFilterAttendance = "All";
     },
 
     async getClubData(clubCode: string) {
-     
       this.pushClubCode(clubCode);
       const postData = {
         clubCode: clubCode,
@@ -154,8 +149,6 @@ export const useStore = defineStore("global", {
     },
 
     async fetchAttendance() {
-
-
       console.log("hi");
       const postData = {
         clubCode: this.currentClubCode,

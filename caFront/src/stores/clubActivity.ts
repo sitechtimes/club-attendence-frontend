@@ -64,5 +64,4 @@ export const useClubActivity = defineStore("clubActivity", {
       this.isImageVisible = false;
     },
   },
-  persist: true,
 });

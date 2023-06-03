@@ -62,7 +62,7 @@ export const useQrCode = defineStore("qrCode", {
       }
     },
     async getQrCode() {
-      await fetch("http://localhost:3000/get-qrcode", {
+      await fetch("https://tech-club-attendance.onrender.com/get-qrcode", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -82,7 +82,7 @@ export const useQrCode = defineStore("qrCode", {
         });
     },
     async markAttendence(data: object | null) {
-      await fetch("http://localhost:3000/mark-attendence", {
+      await fetch("https://tech-club-attendance.onrender.com/mark-attendence", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",

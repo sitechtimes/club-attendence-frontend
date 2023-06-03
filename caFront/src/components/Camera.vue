@@ -6,14 +6,13 @@
     <div>
       <h1 class="decode-result">{{ state.response }}</h1>
     </div>
-
     <miniButton class="position" @click="goBackHome()"> </miniButton>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { QrcodeStream } from "vue-qrcode-reader";
+import { QrcodeStream } from "vue3-qrcode-reader";
 import { useClubActivity } from "../stores/clubActivity";
 import { useQrCode } from "../stores/qrCode";
 import { useUserDataStore } from "../stores/userData";
