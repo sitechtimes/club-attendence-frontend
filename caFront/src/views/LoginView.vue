@@ -56,7 +56,7 @@ export default defineComponent({
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: "follow",
-        referrerPolicy: "no-referrer",
+        referrerPolicy: "no-referrer-when-downgrade",
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
         .then((response) => response.json())
