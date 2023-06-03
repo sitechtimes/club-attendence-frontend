@@ -62,7 +62,7 @@ export const useQrCode = defineStore("qrCode", {
       }
     },
     async getQrCode() {
-      await fetch("https://tech-club-attendance.onrender.com/get-qrcode", {
+      await fetch("http://localhost:3000/get-qrcode", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",

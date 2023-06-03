@@ -79,6 +79,8 @@ export default defineComponent({
     async function onDecode(data: string) {
       state.data = data;
       qrCodeStore.qrCode = data;
+      console.log(userData.user);
+
       let info = {
         qrCode: qrCodeStore.qrCode,
         user: userData.user,
