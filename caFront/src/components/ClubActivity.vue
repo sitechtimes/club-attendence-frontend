@@ -51,6 +51,8 @@ import AddClub from "../components/AddClub.vue";
 import DeleteClub from "../components/DeleteClub.vue"
 import Camera from "../components/Camera.vue";
 import { RouterLink } from "vue-router";
+import { useUserDataStore } from "@/stores/userData";
+
 export default defineComponent({
   name: "ClubActivity",
   components: {
@@ -61,7 +63,7 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
-    
+    const userStore = useUserDataStore()
 
     function show() {
       if (clubActivity.isOpen === true) {
@@ -71,7 +73,7 @@ export default defineComponent({
       }
     }
 
-    return { clubActivity, show };
+    return { clubActivity, show, userStore };
   },
   data: () => {
     return {
