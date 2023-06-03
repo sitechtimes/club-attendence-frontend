@@ -9,13 +9,8 @@
 
       <div class="top-right ">
         <statusDropdown></statusDropdown>
-<<<<<<< Updated upstream
         <dateDropdown></dateDropdown>
         <input type="text" v-model="goneOsis"  placeholder="Remove Student From Club Code" @submit="removeStudent()"  >
-
-=======
-        <input type="text" v-model="goneOsis"  placeholder="Remove Student From Club Code" @submit="removeStudent()"  >
->>>>>>> Stashed changes
       </div>
 
     </section>
