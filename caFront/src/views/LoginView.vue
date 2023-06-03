@@ -46,7 +46,7 @@ export default defineComponent({
     async function postData(data: object) {
       // Default options are marked with *
       console.log("ths is post data");
-      await fetch("http://localhost:3000/login", {
+      await fetch("https://tech-club-attendance.onrender.com/login", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
