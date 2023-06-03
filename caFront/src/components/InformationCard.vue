@@ -47,19 +47,22 @@ export default defineComponent({
     async function postData(userData: object) {
       // Default options are marked with *
       console.log("ths is post data");
-      await fetch("http://localhost:3000/addOsisGradeOfficialClass", {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(userData), // body data type must match "Content-Type" header
-      })
+      await fetch(
+        "https://tech-club-attendance.onrender.com/addOsisGradeOfficialClass",
+        {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify(userData), // body data type must match "Content-Type" header
+        }
+      )
         .then((response) => response.json())
         .then((response) => {
           console.log(response);

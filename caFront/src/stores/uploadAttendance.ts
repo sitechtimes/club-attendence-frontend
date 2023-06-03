@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const uploadAttendance = defineStore("Attendance", {
   state: () => ({
-    fetchURL: "http://localhost:3000/",
+    fetchURL: "https://tech-club-attendance.onrender.com/",
     currentClubCode: null,
     clubName: null,
     selectedClub: false,

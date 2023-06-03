@@ -41,7 +41,7 @@ async function selectYear() {
     return (status.value = "Please select an academic year!");
   }
   status.value = "Pending";
-  await fetch("http://localhost:3000/update-club-data", {
+  await fetch("https://tech-club-attendance.onrender.com/update-club-data", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

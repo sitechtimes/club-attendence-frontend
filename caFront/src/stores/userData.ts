@@ -43,7 +43,7 @@ export const useUserDataStore = defineStore("userData", {
       this.user!.officialClass = officalClass;
     },
     async getData() {
-      const res = await fetch("http://localhost:3000");
+      const res = await fetch("https://tech-club-attendance.onrender.com");
       const data = await res.json();
       this.user = data;
     },

@@ -58,7 +58,7 @@ interface dataRes {
 
 export const teacherStore = defineStore("teacher", {
   state: (): dataRes => ({
-    fetchURL: "http://localhost:3000/",
+    fetchURL: "https://tech-club-attendance.onrender.com/",
     clubList: [],
     loading: false,
     selectedClub: false,
