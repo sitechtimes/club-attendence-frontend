@@ -42,7 +42,9 @@ const router = createRouter({
       path: "/clubs",
       name: "clubs",
       component: () => {
-        return import(/*webpackChunkName: "club-view" */ "../views/");
+        return import(
+          /*webpackChunkName: "club-view" */ "../views/ClubsView.vue"
+        );
       },
     },
     {

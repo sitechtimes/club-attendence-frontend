@@ -99,7 +99,35 @@ export default {
     },
     clubCode: {
       type: String,
-      required: true,
+      required: false,
+    },
+    clubDescription: {
+      type: String,
+      require: false,
+    },
+    clubDay: {
+      type: String,
+      require: false,
+    },
+    clubAdvisor: {
+      type: String,
+      require: false,
+    },
+    clubPresident: {
+      type: String,
+      require: false,
+    },
+    clubRoom: {
+      type: String,
+      require: false,
+    },
+    clubActivityType: {
+      type: String,
+      require: false,
+    },
+    clubFrequency: {
+      type: String,
+      require: false,
     },
   },
 
