@@ -16,6 +16,7 @@
               src="../assets/logos/trashcan.png"
               class="trashcan"
               alt="trashcan"
+              v-show="showItem === 'false'"
             />
           </li>
         </ul>
@@ -100,6 +101,7 @@ export default {
     clubCode: {
       type: String,
       required: false,
+      default: null,
     },
     clubDescription: {
       type: String,
@@ -126,6 +128,10 @@ export default {
       require: false,
     },
     clubFrequency: {
+      type: String,
+      require: false,
+    },
+    showItem: {
       type: String,
       require: false,
     },
@@ -156,6 +162,13 @@ export default {
     const UploadImage = useUploadImage();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
+    let isActive = ref<boolean>(false);
+    function showClubCode() {
+      if (props.showItem === "false") {
+        isActive.value = true;
+      }
+    }
+    showClubCode();
     return {
       ifPresident,
       qrCode,
@@ -169,6 +182,7 @@ export default {
       createBase64Image,
       image,
       UploadImage,
+      isActive,
     };
   },
 };
@@ -213,7 +227,10 @@ export default {
   visibility: visible;
   position: relative;
 }
-
+.active {
+  position: relative;
+  visibility: hidden;
+}
 .message {
   font-size: 5rem;
 }

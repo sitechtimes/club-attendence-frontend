@@ -1,18 +1,18 @@
 import { defineStore } from "pinia";
 
-interface uploadImg {
+interface UploadImg {
   clubData: ClubData;
   file: Blob | string;
   sendResponse: string;
 }
 
 type ClubData = {
-  clubCode: string;
-  clubName: string;
+  clubCode: string | undefined;
+  clubName: string | undefined;
 };
 
 export const useUploadImage = defineStore("upload", {
-  state: (): uploadImg => ({
+  state: (): UploadImg => ({
     clubData: { clubCode: "", clubName: "" },
     file: "",
     sendResponse: "Pending for your image!",
@@ -24,8 +24,11 @@ export const useUploadImage = defineStore("upload", {
     },
     async uploadImage() {
       let clubData = new FormData();
-      clubData.append("clubCode", this.clubData.clubCode);
-      clubData.append("clubName", this.clubData.clubName);
+      const clubCode = this.clubData.clubCode ?? "";
+      const clubName = this.clubData.clubName ?? "";
+
+      clubData.append("clubCode", clubCode);
+      clubData.append("clubName", clubName);
       clubData.append("file", this.file);
 
       await fetch("http://localhost:3000/upload-attendance", {

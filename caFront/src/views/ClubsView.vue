@@ -11,6 +11,7 @@
       :clubActivityType="club.activityType"
       :meetingDates="club.nextMeeting"
       :clubDescription="club.clubDescription"
+      :showItem="false"
       :key="club.clubName"
     ></Card>
   </div>
