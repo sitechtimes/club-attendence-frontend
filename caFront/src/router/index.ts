@@ -39,6 +39,13 @@ const router = createRouter({
       },
     },
     {
+      path: "/clubs",
+      name: "clubs",
+      component: () => {
+        return import(/*webpackChunkName: "club-view" */ "../views/");
+      },
+    },
+    {
       path: "/member",
       name: "member",
 
