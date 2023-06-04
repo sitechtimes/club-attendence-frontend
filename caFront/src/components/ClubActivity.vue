@@ -3,21 +3,26 @@
     <div class="buttonpanel">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
         <li>
-            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/teacher">
-              <button  class="openscan">
-                Teacher
-              </button>
-            </router-link>
-          </li>
+          <router-link to="/clubs">
+            <button class="openscan">Clubs</button>
+          </router-link>
+        </li>
         <li>
-            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/club-origin">
-              <button  class="openscan">
-                Club Origins
-              </button>
-            </router-link>
-          </li>
-
-          
+          <router-link
+            v-if="userStore.user?.clientAuthority == 'admin'"
+            to="/teacher"
+          >
+            <button class="openscan">Teacher</button>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            v-if="userStore.user?.clientAuthority == 'admin'"
+            to="/club-origin"
+          >
+            <button class="openscan">Club Origins</button>
+          </router-link>
+        </li>
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
@@ -28,7 +33,6 @@
             </button>
           </router-link>
         </li>
-            
       </ul>
       <button class="open-panel" @click="show"><h2>+</h2></button>
     </div>
@@ -57,7 +61,7 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
-    const userStore = useUserDataStore()
+    const userStore = useUserDataStore();
 
     function show() {
       if (clubActivity.isOpen === true) {
