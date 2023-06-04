@@ -3,6 +3,13 @@
     <div class="buttonpanel">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
         <li>
+            <router-link to="/" >
+              <button @click="signout"  class="openscan">
+                Sign Out
+              </button>
+            </router-link>
+          </li>
+        <li>
             <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/teacher">
               <button  class="openscan">
                 Teacher
@@ -44,6 +51,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
+
 import AddClub from "../components/AddClub.vue";
 import Camera from "../components/Camera.vue";
 import { RouterLink } from "vue-router";
@@ -69,11 +77,20 @@ export default defineComponent({
 
     return { clubActivity, show, userStore };
   },
+
+
   data: () => {
     return {
       isModalVisible: false,
     };
   },
+
+  methods:{
+    signout(){
+      this.userStore.user = null;
+    }
+  }
+  
 });
 </script>
 
