@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="containter">
     <Card
       v-for="club in clubs"
       :clubName="club.clubName"
@@ -42,4 +42,9 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.containter {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>

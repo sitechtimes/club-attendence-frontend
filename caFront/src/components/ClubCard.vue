@@ -3,20 +3,26 @@
     <div class="card">
       <div class="half">
         <h1 class="clubname">{{ clubName }}</h1>
-        <div class="content">
+        <div class="content" v-show="showItem === true">
           <h2 class="message">{{ clubCode }}</h2>
         </div>
       </div>
 
       <div class="bottom">
-        <ul class="nextdates" v-for="date in meetingDates" :key="date">
+        <div class="description">{{ clubDescription }}</div>
+        <ul
+          class="nextdates"
+          v-for="date in meetingDates"
+          :key="date"
+          v-show="showItem === true"
+        >
           <li class="delete">
             {{ date }}
             <img
               src="../assets/logos/trashcan.png"
               class="trashcan"
               alt="trashcan"
-              v-show="showItem === 'false'"
+              v-show="showItem === true"
             />
           </li>
         </ul>
@@ -132,12 +138,15 @@ export default {
       require: false,
     },
     showItem: {
-      type: String,
+      type: Boolean,
       require: false,
+      default: null,
     },
   },
 
   setup(props) {
+    console.log(props.showItem);
+
     const status = ref(false);
     let image: string = "";
 
@@ -162,13 +171,7 @@ export default {
     const UploadImage = useUploadImage();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
-    let isActive = ref<boolean>(false);
-    function showClubCode() {
-      if (props.showItem === "false") {
-        isActive.value = true;
-      }
-    }
-    showClubCode();
+
     return {
       ifPresident,
       qrCode,
@@ -182,7 +185,6 @@ export default {
       createBase64Image,
       image,
       UploadImage,
-      isActive,
     };
   },
 };
@@ -261,6 +263,10 @@ export default {
   bottom: 15%;
   position: absolute;
   overflow: auto;
+}
+
+.description {
+  font-size: 2rem;
 }
 
 li {
