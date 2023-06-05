@@ -9,7 +9,6 @@
       </div>
 
       <div class="bottom">
-        <div class="description">{{ clubDescription }}</div>
         <ul
           class="nextdates"
           v-for="date in meetingDates"
@@ -266,7 +265,7 @@ export default {
 }
 
 .description {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 li {
