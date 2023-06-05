@@ -3,28 +3,21 @@
     <div class="buttonpanel">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
         <li>
-            <router-link to="/" >
-              <button @click="signout"  class="openscan">
-                Sign Out
-              </button>
-            </router-link>
-          </li>
-        <li>
-            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/teacher">
-              <button  class="openscan">
-                Teacher
-              </button>
-            </router-link>
-          </li>
-        <li>
-            <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/club-origin">
-              <button  class="openscan">
-                Club Origins
-              </button>
-            </router-link>
-          </li>
+          <router-link to="/">
+            <button @click="signout" class="openscan">Sign Out</button>
+          </router-link>
+        </li>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/teacher">
+            <button class="openscan">Teacher</button>
+          </router-link>
+        </li>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/club-origin">
+            <button class="openscan">Club Origins</button>
+          </router-link>
+        </li>
 
-          
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
@@ -35,7 +28,6 @@
             </button>
           </router-link>
         </li>
-            
       </ul>
       <button class="open-panel" @click="show"><h2>+</h2></button>
     </div>
@@ -65,7 +57,7 @@ export default defineComponent({
   },
   setup() {
     const clubActivity = useClubActivity();
-    const userStore = useUserDataStore()
+    const userStore = useUserDataStore();
 
     function show() {
       if (clubActivity.isOpen === true) {
@@ -78,19 +70,17 @@ export default defineComponent({
     return { clubActivity, show, userStore };
   },
 
-
   data: () => {
     return {
       isModalVisible: false,
     };
   },
 
-  methods:{
-    signout(){
+  methods: {
+    signout() {
       this.userStore.user = null;
-    }
-  }
-  
+    },
+  },
 });
 </script>
 

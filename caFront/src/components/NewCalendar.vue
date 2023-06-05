@@ -11,10 +11,15 @@
 <script lang="ts">
 import { Calendar, DatePicker } from "v-calendar";
 import { useUserDataStore } from "../stores/userData";
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, onMounted } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 import "v-calendar/style.css";
+
+type club = {
+  clubName: string;
+  meetingDates: string[];
+};
 
 export default defineComponent({
   name: "NewCalendar",
@@ -32,6 +37,20 @@ export default defineComponent({
     const user = objectData.user;
     const clubData = user!.clubData;
     const allDates: Array<string> = [];
+    const transformedArray = ref<club[]>([]);
+
+    onMounted(() => {
+      transformedArray.value = clubData.map((club) => {
+        if (club.meetingDates[0] === "No meeting date yet.") {
+          club.meetingDates = [];
+        }
+        return {
+          clubName: club.clubName,
+          meetingDates: club.meetingDates,
+        };
+      });
+      console.log(transformedArray);
+    });
 
     let newClubData = ref(objectData.user?.clubData);
 
@@ -47,7 +66,7 @@ export default defineComponent({
           popover: {
             label: clubData.clubName,
           },
-          highlight: true,
+          dot: true,
         })),
       ]);
     }
@@ -100,7 +119,7 @@ export default defineComponent({
 .static {
   z-index: 11;
   position: fixed;
-  top: 28rem;
+  top: 26rem;
   right: 28rem;
 }
 
@@ -108,14 +127,14 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    top: 25rem;
-    right: 20rem;
+    top: 21rem;
+    right: 18rem;
   }
 }
 
 @media (max-width: 1050px) {
   .my-calendar :deep(.vc-container) {
-    height: 37rem;
+    height: 43rem;
     width: 50rem;
   }
   .my-calendar :deep(.vc-arrow) {
@@ -128,19 +147,19 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    bottom: 2rem;
-    right: 27rem;
+    bottom: -5rem;
+    right: rem;
   }
 }
 @media (max-width: 700px) {
   .static {
-    bottom: 1rem;
+    bottom: -5rem;
     right: 10rem;
   }
 }
 @media (max-width: 500px) {
   .my-calendar :deep(.vc-container) {
-    height: 38rem;
+    height: 42rem;
     width: 35rem;
   }
   .my-calendar :deep(.vc-title) {
@@ -155,7 +174,7 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    bottom: 1rem;
+    bottom: -5rem;
     right: 8rem;
   }
 }
@@ -163,7 +182,7 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    bottom: -1rem;
+    bottom: -5rem;
     right: 3rem;
   }
 }
