@@ -98,6 +98,13 @@ const router = createRouter({
         return import("@/views/ClubOrgin.vue");
       },
     },
+    {
+      path:'/error',
+      name:'404Error',
+      component:() =>{
+        return import ("@/views/ErrorView.vue");
+      }
+    },
   ],
 });
 
