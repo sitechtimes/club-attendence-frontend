@@ -7,7 +7,7 @@
           <h2 class="message">{{ clubCode }}</h2>
         </div>
       </div>
-
+      ``
       <div class="bottom">
         <div class="description">{{ clubDescription }}</div>
         <ul
