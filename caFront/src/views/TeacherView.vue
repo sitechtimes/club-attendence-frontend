@@ -9,14 +9,15 @@
 
       <div class="top-right ">
         <dateDropdown></dateDropdown>
-        <statusDropdown></statusDropdown>
+        <input type="text" v-model="goneOsis"  placeholder="Remove Student From Club Code" @submit="removeStudent()"  >
       </div>
 
     </section>
     <section class="bottom">
       <div v-if="clubData" class="left">
-        <clubBox
-          v-for="club in clubData"
+        <clubBox 
+        v-for="club in clubData"
+        @click="currentClubCode = club.clubCode"
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
@@ -78,16 +79,27 @@ export default defineComponent({
     const store = teacherStore()
     const userStore = useUserDataStore()
     const input = ref<string>("")
+    const currentClubCode = ref<string|null>(null)
     store.getData(userStore.user)
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
-
+    
     console.log(userStore.user)
-    return {store, input, headings }
+    return {store, input, headings, currentClubCode, goneOsis:ref<string>("") }
 
     
 
     
   },
+
+  methods:{
+    removeStudent(){
+        //goneOsis is the student's osis number
+        //currentClubCode is the current club code use that to determine which club 
+
+    }
+  },
+
+
   computed:{
     clubData(): Array<eachClub> {
       console.log(this.store.clubList);

@@ -10,6 +10,10 @@ export const useClubActivity = defineStore("clubActivity", {
     isMenuVisible: false,
     isUploadVisible: false,
     isImageVisible: false,
+    isMeetingVisible: false,
+    isDMeetingVisible: false,
+    isDeleteVisible: false,
+    clubName: ""
   }),
   actions: {
     openMenu() {
@@ -62,6 +66,29 @@ export const useClubActivity = defineStore("clubActivity", {
     },
     closeImage() {
       this.isImageVisible = false;
+    },
+    openMeeting(clubName: string ){
+      this.isMeetingVisible =true;
+      this.clubName = clubName
+    },
+    closeMeeting(){
+      this.isMeetingVisible =false;
+    },
+    openDMeeting(clubName: string ){
+      this.isDMeetingVisible =true;
+      this.clubName = clubName
+    },
+    closeDMeeting(){
+      this.isDMeetingVisible =false;
+    },
+    openDelete() {
+      this.isDeleteVisible = true;
+      this.isModalVisible = false;
+      this.isOpen = false;
+      this.isCameraVisible = false;
+    },
+    closeDelete() {
+      this.isDeleteVisible = false;
     },
   },
   persist: true,

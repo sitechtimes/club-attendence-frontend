@@ -19,6 +19,16 @@
         </li>
 
         <li>
+          <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/club-origin">
+            <button  class="openscan">
+              Club Origins
+            </button>
+          </router-link>
+        </li>
+        <li>
+          <button @click="clubActivity.openDelete()">Delete Club</button>
+        </li>
+        <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
         <li>
@@ -35,6 +45,9 @@
       <AddClub v-show="clubActivity.isPanelVisible"></AddClub>
     </div>
     <div>
+      <DeleteClub v-show="clubActivity.isDeleteVisible"></DeleteClub>
+    </div>
+    <div>
       <Camera v-show="clubActivity.isCameraVisible"></Camera>
     </div>
   </div>
@@ -45,12 +58,14 @@ import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 
 import AddClub from "../components/AddClub.vue";
+import DeleteClub from "../components/DeleteClub.vue"
 import Camera from "../components/Camera.vue";
 import { RouterLink } from "vue-router";
 import { useUserDataStore } from "@/stores/userData";
 export default defineComponent({
   name: "ClubActivity",
   components: {
+    DeleteClub,
     AddClub,
     Camera,
     RouterLink,
