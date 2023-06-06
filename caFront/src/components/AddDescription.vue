@@ -24,7 +24,13 @@
             @click="
               clubsDescription
                 .updateClubDescription(description, clubsDescription.clubCode)
-                .then(() => {})
+                .then(() => {
+                  userDataStore.user?.clubData.forEach((club) => {
+                    if (club.clubCode === clubsDescription.clubCode) {
+                      club.clubDescription = clubsDescription.clubDescription;
+                    }
+                  });
+                })
             "
           >
             Update club description
