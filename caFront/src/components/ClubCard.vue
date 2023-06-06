@@ -307,7 +307,7 @@ li {
 }
 
 .delete:hover.trashcan {
-    visibility: visible;
+  visibility: visible;
 }
 
 .trashcan {
@@ -321,6 +321,15 @@ li {
   height: 5rem;
   bottom: 0.5rem;
   right: 30rem;
+  cursor: pointer;
+}
+
+.edit-description {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  bottom: 0.5rem;
+  right: 37rem;
   cursor: pointer;
 }
 
@@ -356,6 +365,7 @@ li {
   height: 5rem;
   bottom: 0.5rem;
   right: 34.5rem;
+}
 .edit-description {
   position: absolute;
   width: 4rem;

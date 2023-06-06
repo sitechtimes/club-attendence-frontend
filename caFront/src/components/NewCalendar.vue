@@ -52,7 +52,7 @@ export default defineComponent({
       console.log(transformedArray);
     });
 
-    let newClubData = ref(objectData.user?.clubData);
+    // let newClubData = ref(objectData.user?.clubData);
 
     let attrs;
 
@@ -61,7 +61,7 @@ export default defineComponent({
     } else {
       attrs = computed(() => [
         // Attributes for todos
-        ...newClubData.value!.map((clubData) => ({
+        ...transformedArray.value!.map((clubData) => ({
           dates: clubData.meetingDates,
           popover: {
             label: clubData.clubName,
