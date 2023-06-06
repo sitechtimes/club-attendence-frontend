@@ -17,22 +17,22 @@
     </div>
     <div class="overlay" v-if="appear" @click.self="appear = !appear">
       <div class="popup">
-        <span>ClubName:</span>
-        <span>ClubAdvisor:</span>
-        <span>ClubPresident:</span>
-        <span>ClubFrequency:</span>
-        <span>ClubDay:</span>
-        <span>ClubRoom:</span>
-        <span>ClubType:</span>
-        <span>Next Meeting:</span>
-        <span>{{ clubName }}</span>
-        <span>{{ clubAdvisor }}</span>
-        <span>{{ clubPresident }}</span>
-        <span>{{ clubFrequency }}</span>
-        <span>{{ clubDay }}</span>
-        <span>{{ clubRoom }}</span>
-        <span>{{ clubActivityType }}</span>
-        <span>{{ meetingDates }}</span>
+        <span class="label1">ClubName:</span>
+        <span class="label2">ClubAdvisor:</span>
+        <span class="label3">ClubPresident:</span>
+        <span class="label4">ClubFrequency:</span>
+        <span class="label5">ClubDay:</span>
+        <span class="label6">ClubRoom:</span>
+        <span class="label7">ClubType:</span>
+        <span class="label8">Next Meeting:</span>
+        <span class="text1">{{ clubName }}</span>
+        <span class="text2">{{ clubAdvisor }}</span>
+        <span class="text3">{{ clubPresident }}</span>
+        <span class="text4">{{ clubFrequency }}</span>
+        <span class="text5">{{ clubDay }}</span>
+        <span class="text6">{{ clubRoom }}</span>
+        <span class="text7">{{ clubActivityType }}</span>
+        <span class="text8">{{ meetingDates }}</span>
       </div>
       <div class="popup2">
         <h2 class="clubdescription">{{ clubDescription }}</h2>
@@ -265,10 +265,129 @@ export default {
   font-size: 2rem;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 1250px) {
+  .overlay {
+    height: 70rem;
+    width: 90rem;
+  }
+  .popup {
+    font-size: 1.5rem;
+    gap: 0.5rem;
+  }
+  .clubdescription {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .overlay {
+    height: 70rem;
+    width: 70rem;
+  }
+  .popup {
+    font-size: 1.5rem;
+    gap: 0.5rem;
+  }
+  .clubdescription {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 700px) {
   .overlay {
     height: 70rem;
     width: 40rem;
+  }
+  .popup {
+    font-size: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-template-areas:
+      "label1 text1"
+      "label2 text2"
+      "label3 text3"
+      "label4 text4"
+      "label5 text5"
+      "label6 text6"
+      "label7 text7"
+      "label8 text8";
+    grid-gap: 10px;
+  }
+
+  .label1 {
+    grid-area: label1;
+    text-align: right;
+  }
+
+  .label2 {
+    grid-area: label2;
+    text-align: right;
+  }
+
+  .label3 {
+    grid-area: label3;
+    text-align: right;
+  }
+  .label4 {
+    grid-area: label4;
+    text-align: right;
+  }
+  .label5 {
+    grid-area: label5;
+    text-align: right;
+  }
+  .label6 {
+    grid-area: label6;
+    text-align: right;
+  }
+  .label7 {
+    grid-area: label7;
+    text-align: right;
+  }
+
+  .label8 {
+    grid-area: label8;
+    text-align: right;
+  }
+
+  /* Repeat the above pattern for label3-label8 */
+
+  .text1 {
+    grid-area: text1;
+    text-align: left;
+  }
+
+  .text2 {
+    grid-area: text2;
+    text-align: left;
+  }
+  .text3 {
+    grid-area: text3;
+    text-align: left;
+  }
+  .text4 {
+    grid-area: text4;
+    text-align: left;
+  }
+  .text5 {
+    grid-area: text5;
+    text-align: left;
+  }
+  .text6 {
+    grid-area: text6;
+    text-align: left;
+  }
+  .text7 {
+    grid-area: text7;
+    text-align: left;
+  }
+  .text8 {
+    grid-area: text8;
+    text-align: left;
+  }
+
+  .clubdescription {
+    font-size: 1.2rem;
   }
 }
 </style>
