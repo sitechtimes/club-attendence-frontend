@@ -1,6 +1,6 @@
 <template>
-  <div class="containter">
-    <Card
+  <div class="container">
+    <DescriptionCard
       v-for="club in clubs"
       :clubName="club.clubName"
       :clubAdvisor="club.advisor"
@@ -13,12 +13,13 @@
       :clubDescription="club.clubDescription"
       :showItem="false"
       :key="club.clubName"
-    ></Card>
+    ></DescriptionCard>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Card from "@/components/ClubCard.vue";
+import DescriptionCard from "@/components/DescriptionBox.vue";
+
 import { onMounted, ref } from "vue";
 type Clubs = {
   clubName: string;
@@ -43,7 +44,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.containter {
+.container {
   display: flex;
   flex-wrap: wrap;
 }
