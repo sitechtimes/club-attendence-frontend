@@ -102,9 +102,12 @@ export default defineComponent({
         fetch("http://localhost:3000/deleteClubTeacher", {
           method: "POST",
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
-          body: formData,
+          body: JSON.stringify({
+            currentClubCode: this.currentClubCode,
+            goneOsis: this.goneOsis
+          }),
         })
 
           .then(response => {

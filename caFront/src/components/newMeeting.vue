@@ -24,9 +24,6 @@
     components: {
       miniButton,
     },
-    props: {
-      
-    },
     methods: {
       close() {
         this.$emit("close");

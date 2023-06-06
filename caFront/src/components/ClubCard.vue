@@ -239,11 +239,10 @@ li {
   visibility: hidden;
 }
 
-.delete:hover {
-  .trashcan {
+.delete:hover.trashcan {
     visibility: visible;
-  }
 }
+
 .trashcan {
   width: 2rem;
   height: 2rem;
