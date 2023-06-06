@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent , reactive} from "vue";
+import { defineComponent, reactive } from "vue";
 import { useUserDataStore } from "@/stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
@@ -54,14 +54,14 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
         });
-      }
-       const addClub = () => {
-        const bundle = {
-          user: userDataStore.user,
-          clubCode: form.userValue,
-        };
-        console.log(bundle);
-        console.log("jumping into postData");
+    }
+    const addClub = () => {
+      const bundle = {
+        user: userDataStore.user,
+        clubCode: form.userValue,
+      };
+      console.log(bundle);
+      console.log("jumping into postData");
       postData(bundle);
     };
     return { form, addClub, clubActivity };

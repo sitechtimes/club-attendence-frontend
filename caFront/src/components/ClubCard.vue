@@ -3,11 +3,10 @@
     <div class="card">
       <div class="half">
         <h1 class="clubname">{{ clubName }}</h1>
-        <div class="content" v-show="showItem === true">
+        <div class="content" v-show="position === 'president'">
           <h2 class="message">{{ clubCode }}</h2>
         </div>
       </div>
-      ``
       <div class="bottom">
         <ul
           class="nextdates"
@@ -181,7 +180,7 @@ export default {
       createBase64Image(selectedImage);
     }
     function createBase64Image(fileObject: any) {
-      const reader = new FileReader();
+      const reader = new FileReaderasync();
       reader.onload = (event: any) => {
         image = event.target.result;
       };

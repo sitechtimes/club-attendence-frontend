@@ -1,8 +1,6 @@
 <template>
   <div class="page">
-
     <RouterLink to="/club"> <miniButton></miniButton></RouterLink>
-
 
     <section class="top">
       <div class="right">
@@ -24,7 +22,7 @@
           :Advisor="club.advisor"
           :Room="club.roomNumber"
           :clubCode="club.clubCode"
-        ></clubBox> 
+        ></clubBox>
       </div>
       <div class="table-right">
         <tableData
@@ -58,10 +56,9 @@ import statusDropdown from "@/components/statusDropdown.vue";
 import { useUserDataStore } from "@/stores/userData";
 import miniButton from "@/components/miniButton.vue";
 
-
 interface clubDataInfo {
-advisor: string;
-roomNumber: string;
+  advisor: string;
+  roomNumber: string;
   clubCode: string;
   position: string;
   clubName: string;
@@ -82,19 +79,19 @@ interface clubDataTemp {
 }
 
 interface eachClub {
-    advisor: string;
-    advisorEmail: string;
-    clubCode: string;
-    clubName:string;
-    clubSpreadsheetId:string;
-    memberCount: string;
-    nextMeeting: string;
-    president: string;
-    presidentEmail: string;
-    presidentUID: string;
-    qeCode: string;
-    roomNumber: string;
-  }
+  advisor: string;
+  advisorEmail: string;
+  clubCode: string;
+  clubName: string;
+  clubSpreadsheetId: string;
+  memberCount: string;
+  nextMeeting: string;
+  president: string;
+  presidentEmail: string;
+  presidentUID: string;
+  qeCode: string;
+  roomNumber: string;
+}
 
 export default defineComponent({
   components: {
@@ -102,17 +99,15 @@ export default defineComponent({
     tableData,
     dateDropdown,
     statusDropdown,
-    miniButton
-
+    miniButton,
   },
   setup() {
     const store = teacherStore();
     const userStore = useUserDataStore();
     const input = ref<string>("");
     store.getData(userStore.user);
-    const headings = [ "Name", "Grade", "Class", "Email"];
+    const headings = ["Name", "Grade", "Class", "Email"];
 
-    
     return { store, input, headings, userStore };
   },
   methods: {

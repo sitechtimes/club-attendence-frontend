@@ -1,7 +1,6 @@
 <template>
   <div class="my-calendar">
     <VCalendar :attributes="attrs" />
-
     <miniButton class="static" @click="clubActivity.closeModal()">
       x
     </miniButton>
@@ -40,15 +39,18 @@ export default defineComponent({
     const transformedArray = ref<club[]>([]);
 
     onMounted(() => {
-      transformedArray.value = clubData.map((club) => {
-        if (club.meetingDates[0] === "No meeting date yet.") {
-          club.meetingDates = [];
-        }
-        return {
-          clubName: club.clubName,
-          meetingDates: club.meetingDates,
-        };
-      });
+      if (clubData !== null) {
+        transformedArray.value = clubData.map((club) => {
+          if (club.meetingDates[0] === "No meeting date yet.") {
+            club.meetingDates = [];
+          }
+          return {
+            clubName: club.clubName,
+            meetingDates: club.meetingDates,
+          };
+        });
+      }
+
       console.log(transformedArray);
     });
 

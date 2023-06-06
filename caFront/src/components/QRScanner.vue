@@ -25,6 +25,7 @@
             <h3 v-if="qrCode.base64QrCode !== null">
               <div>{{ minutes }}:{{ seconds }}</div>
             </h3>
+            <h3>{{ qrCode.response }}</h3>
           </div>
         </div>
       </div>
@@ -56,6 +57,12 @@ export default defineComponent({
 
     async function getQrCode() {
       await qrCode.getQrCode();
+      let dateOfToday = new Date().toLocaleDateString();
+      if (
+        qrCode.response === `Attendence of ${dateOfToday} is already created.`
+      ) {
+        return;
+      }
       qrCode.addStoreClub(qrCode.clubData.clubName);
       startTimer();
     }

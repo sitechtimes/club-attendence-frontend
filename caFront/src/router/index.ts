@@ -108,11 +108,10 @@ const router = createRouter({
       },
     },
     {
-      path:'/*',
-      name:'404Error',
-      component: ErrorViewVue
+      path: "/:pathMatch(.*)*",
+      name: "404Error",
+      component: ErrorViewVue,
     },
-    
   ],
 });
 

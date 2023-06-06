@@ -35,7 +35,7 @@
           >
             Update club description
           </button>
-          <p>{{ response }}</p>
+          <p>{{ clubsDescription.response }}</p>
         </div>
       </div>
     </div>
@@ -56,14 +56,12 @@ export default defineComponent({
     const userDataStore = useUserDataStore();
 
     const description = clubsDescription.clubDescription;
-    let response;
     console.log(description);
 
     return {
       clubsDescription,
       userDataStore,
       description,
-      response,
     };
   },
 });

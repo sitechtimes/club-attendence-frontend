@@ -5,6 +5,7 @@ type State = {
   clubCode: string | null;
   clubDescription: string;
   clubName: string;
+  response: string;
 };
 
 export const useClubsDescription = defineStore("clubDescription", {
@@ -13,6 +14,7 @@ export const useClubsDescription = defineStore("clubDescription", {
     clubCode: null,
     clubDescription: "",
     clubName: "",
+    response: "Pending for update",
   }),
   getters: {},
   actions: {
@@ -31,9 +33,11 @@ export const useClubsDescription = defineStore("clubDescription", {
       this.clubCode = null;
       this.clubDescription = "";
       this.clubName = "";
+      this.response = "Pending for update";
     },
     async updateClubDescription(description: string, clubCode: string | null) {
       this.clubDescription = description;
+
       await fetch("http://localhost:3000/update-description", {
         method: "POST",
         headers: {
@@ -47,6 +51,7 @@ export const useClubsDescription = defineStore("clubDescription", {
         .then((res) => res.json())
         .then((res) => {
           console.log(res);
+          this.response = "Finish updating club description";
         });
     },
   },
