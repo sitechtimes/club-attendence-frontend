@@ -17,14 +17,13 @@
             <button class="openscan">Club Origins</button>
           </router-link>
         </li>
-
-        <li v-if="userStore.user?.clientAuthority == 'admin'">
-          <router-link to="/club-origin">
-            <button class="openscan">Club Origins</button>
-          </router-link>
-        </li>
         <li>
           <button @click="clubActivity.openDelete()">Delete Club</button>
+        </li>
+        <li>
+          <router-link to="/clubs">
+            <button class="openscan">Clubs</button>
+          </router-link>
         </li>
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
