@@ -95,13 +95,18 @@ export default defineComponent({
         const formData = new FormData();
         formData.append('goneOsis', this.goneOsis);
         formData.append('currentClubCode', this.currentClubCode);
-        console.log('Form Data:', this.currentClubCode);
+        console.log('this.currentClubCode', this.currentClubCode);
+        console.log('this.goneOsis', this.goneOsis);
 
         // Make the fetch request
-        fetch("http://localhost:3000/deleteMeeting", {
-          method: 'POST',
-          body: formData
+        fetch("http://localhost:3000/deleteClubTeacher", {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: formData,
         })
+
           .then(response => {
             if (response.ok) {
               // Handle successful response if needed
