@@ -28,7 +28,15 @@
       </div>
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
-          <li @click="clubsDescription.openDescription(clubName)">
+          <li
+            @click="
+              clubsDescription.openDescription(
+                clubCode,
+                clubName,
+                clubDescription
+              )
+            "
+          >
             <img
               class="edit-description"
               src="../assets/logos/pencil.svg"
@@ -120,6 +128,7 @@ export default {
     clubDescription: {
       type: String,
       require: false,
+      default: "",
     },
     clubDay: {
       type: String,
@@ -153,8 +162,6 @@ export default {
   },
 
   setup(props) {
-    console.log(props.showItem);
-
     const status = ref(false);
     let image: string = "";
 

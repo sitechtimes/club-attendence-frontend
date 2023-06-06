@@ -13,6 +13,7 @@
         :clubCode="club.clubCode"
         :meetingDates="club.meetingDates"
         :showItem="true"
+        :clubDescription="club.clubDescription"
         :key="club.clubCode"
       >
       </Card>

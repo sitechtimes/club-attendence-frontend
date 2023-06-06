@@ -8,10 +8,28 @@
           >x</miniButton
         >
         <div class="container">
-          <div class="header">Club Description</div>
-          <textarea name="textarea" rows="5" cols="30" class="club-description"
+          <div class="header">
+            <h2>{{ clubsDescription.clubName }}</h2>
+            <h3>Club Description</h3>
+          </div>
+          <textarea
+            name="textarea"
+            rows="10"
+            cols="50"
+            class="club-description"
+            v-model="description"
             >{{ description }}
           </textarea>
+          <button
+            @click="
+              clubsDescription
+                .updateClubDescription(description, clubsDescription.clubCode)
+                .then(() => {})
+            "
+          >
+            Update club description
+          </button>
+          <p>{{ response }}</p>
         </div>
       </div>
     </div>
@@ -19,32 +37,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent } from "vue";
 import { useClubsDescription } from "@/stores/ClubDescription";
 import { useUserDataStore } from "@/stores/userData";
 import miniButton from "../components/miniButton.vue";
 export default defineComponent({
   name: "ClubDescription",
   components: { miniButton },
-  props: {},
+
   setup() {
     const clubsDescription = useClubsDescription();
     const userDataStore = useUserDataStore();
 
-    const description = ref<string>("");
-
-    onMounted(() => {
-      userDataStore.user?.clubData.forEach((club) => {
-        if (club.clubName === clubsDescription.clubName) {
-          description.value = club.clubDescription;
-        }
-      });
-    });
+    const description = clubsDescription.clubDescription;
+    let response;
+    console.log(description);
 
     return {
       clubsDescription,
       userDataStore,
       description,
+      response,
     };
   },
 });
