@@ -155,6 +155,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   position: fixed;
   margin-right: -50%;
+  z-index: 10;
 }
 
 img {

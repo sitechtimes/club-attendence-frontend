@@ -55,7 +55,7 @@
             />
           </li>
           <li class="member" @click="clubstore.getClubData(clubCode)">
-            <router-link to="/member">
+            <router-link to="/president">
               <img class="human" src="../assets/logos/human.svg" alt="human" />
             </router-link>
           </li>
