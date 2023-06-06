@@ -37,7 +37,7 @@ import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 
 import Camera from "../components/Camera.vue";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import NewCalendar from "../components/NewCalendar.vue";
@@ -67,6 +67,7 @@ export default defineComponent({
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
     const clubs = userDataStore.user!.clubData;
+
     return { userDataStore, clubs, clubActivity };
   },
 });

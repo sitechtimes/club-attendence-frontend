@@ -55,6 +55,26 @@ export default defineComponent({
           console.log(response);
         });
     }
+    async function alreadyLogin() {
+      await fetch("http://localhost:3000/alreadyLogin", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer-when-downgrade",
+        body: JSON.stringify(userDataStore.user), // body data type must match "Content-Type" header
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          userDataStore.user = data;
+        });
+    }
+
     const addClub = () => {
       const bundle = {
         user: userDataStore.user,
@@ -63,6 +83,7 @@ export default defineComponent({
       console.log(bundle);
       console.log("jumping into postData");
       postData(bundle);
+      alreadyLogin();
     };
     return { form, addClub, clubActivity };
   },
