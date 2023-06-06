@@ -13,6 +13,7 @@
           <li class="delete">
             {{ date }}
             <img
+              @click="useDelete.deleteMDate(clubName, date)"
               src="../assets/logos/trashcan.png"
               class="trashcan"
               alt="trashcan"
@@ -91,6 +92,7 @@ import deleteMeeting from "../components/deleteMeeting.vue";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
+import { useDeleteMeeting } from "@/stores/deleteMeeting";
 
 import { ref } from "vue";
 
@@ -145,6 +147,7 @@ export default {
     const ifPresident = ref(props.position === "president");
 
     const objectData = useUserDataStore();
+    const useDelete = useDeleteMeeting();
     const user = objectData.user;
     const clubData = user?.clubData;
     const clubstore = useClubStore();
@@ -165,6 +168,7 @@ export default {
       createBase64Image,
       image,
       UploadImage,
+      useDelete,
     };
   },
 };
