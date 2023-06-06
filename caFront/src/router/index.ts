@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../views/LoginView.vue";
 import TeacherView from "../views/TeacherView.vue";
 import StudentSearch from "../views/StudentSearch.vue";
-
+import ErrorViewVue from "@/views/ErrorView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -99,12 +99,11 @@ const router = createRouter({
       },
     },
     {
-      path:'/error',
+      path:'/*',
       name:'404Error',
-      component:() =>{
-        return import ("@/views/ErrorView.vue");
-      }
+      component: ErrorViewVue
     },
+    
   ],
 });
 
