@@ -26,10 +26,18 @@
             <img class="trashCanPic" src="../assets/logos/trash-can.png" />
           </li>
           <li>
-            <img @click="clubActivity.openDMeeting(clubName)" class="deleteCalendar" src="../assets/logos/Calendar-Delete.png" />
+            <img
+              @click="clubActivity.openDMeeting(clubName)"
+              class="deleteCalendar"
+              src="../assets/logos/Calendar-Delete.png"
+            />
           </li>
           <li>
-            <img @click="clubActivity.openMeeting(clubName)" class="calendarpic" src="../assets/logos/calendar.svg" />
+            <img
+              @click="clubActivity.openMeeting(clubName)"
+              class="calendarpic"
+              src="../assets/logos/calendar.svg"
+            />
           </li>
           <li @click="UploadImage.displayUpload(clubCode, clubName)">
             <img
@@ -93,7 +101,7 @@ export default {
     UploadImage,
     RouterLink,
     newMeeting,
-    deleteMeeting
+    deleteMeeting,
   },
 
   props: {
@@ -295,7 +303,7 @@ li {
   right: 12rem;
   cursor: pointer;
 }
-.trashCanPic{
+.trashCanPic {
   position: absolute;
   width: 5rem;
   height: 5rem;
@@ -369,13 +377,13 @@ label {
     top: 23.5rem;
     left: 18rem;
   }
-  .deleteCalendar{
+  .deleteCalendar {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;
     left: 18rem;
   }
-  .trashCanPic{
+  .trashCanPic {
     width: 5rem;
     height: 5rem;
     top: 23.5rem;

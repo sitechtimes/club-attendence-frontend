@@ -66,7 +66,7 @@ export default defineComponent({
           popover: {
             label: clubData.clubName,
           },
-          dot: true,
+          highlight: true,
         })),
       ]);
     }
@@ -119,7 +119,7 @@ export default defineComponent({
 .static {
   z-index: 11;
   position: fixed;
-  top: 26rem;
+  top: 28rem;
   right: 28rem;
 }
 
@@ -127,8 +127,8 @@ export default defineComponent({
   .static {
     z-index: 11;
     position: fixed;
-    top: 21rem;
-    right: 18rem;
+    top: 24rem;
+    right: 16rem;
   }
 }
 
@@ -148,7 +148,7 @@ export default defineComponent({
     z-index: 11;
     position: fixed;
     bottom: -5rem;
-    right: rem;
+    right: 30rem;
   }
 }
 @media (max-width: 700px) {
