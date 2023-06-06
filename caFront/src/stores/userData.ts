@@ -15,6 +15,7 @@ type UserObject = {
       clubName: string;
       position: string;
       meetingDates: Array<string>;
+      clubDescription: string;
     }
   ];
   clientAuthority: string;

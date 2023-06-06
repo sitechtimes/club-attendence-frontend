@@ -3,25 +3,46 @@
     <div class="card">
       <div class="half">
         <h1 class="clubname">{{ clubName }}</h1>
-        <div class="content">
+        <div class="content" v-show="showItem === true">
           <h2 class="message">{{ clubCode }}</h2>
         </div>
       </div>
-
+      ``
       <div class="bottom">
-        <ul class="nextdates" v-for="date in meetingDates" :key="date">
+        <ul
+          class="nextdates"
+          v-for="date in meetingDates"
+          :key="date"
+          v-show="showItem === true"
+        >
           <li class="delete">
             {{ date }}
             <img
               src="../assets/logos/trashcan.png"
               class="trashcan"
               alt="trashcan"
+              v-show="showItem === true"
             />
           </li>
         </ul>
       </div>
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
+          <li
+            @click="
+              clubsDescription.openDescription(
+                clubCode,
+                clubName,
+                clubDescription
+              )
+            "
+          >
+            <img
+              class="edit-description"
+              src="../assets/logos/pencil.svg"
+              alt="scan"
+            />
+          </li>
           <li>
             <img class="calendarpic" src="../assets/logos/calendar.svg" />
           </li>
@@ -38,7 +59,6 @@
               <img class="human" src="../assets/logos/human.svg" alt="human" />
             </router-link>
           </li>
-
           <li
             class="container"
             @click="qrCode.openMenu(clubCode, dateOfToday, clubName)"
@@ -55,7 +75,8 @@
       </div>
     </div>
     <div class="overlap">
-      <QRScanner v-show="qrCode.isQrCodeOpen"> </QRScanner>
+      <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
+      <ClubDescription v-if="clubsDescription.isDescription"></ClubDescription>
     </div>
   </div>
 </template>
@@ -69,7 +90,8 @@ import { useClubActivity } from "../stores/clubActivity";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
-
+import ClubDescription from "../components/AddDescription.vue";
+import { useClubsDescription } from "@/stores/ClubDescription";
 import { ref } from "vue";
 
 export default {
@@ -78,6 +100,7 @@ export default {
     QRScanner,
     UploadImage,
     RouterLink,
+    ClubDescription,
   },
 
   props: {
@@ -99,7 +122,42 @@ export default {
     },
     clubCode: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
+    },
+    clubDescription: {
+      type: String,
+      require: false,
+      default: "",
+    },
+    clubDay: {
+      type: String,
+      require: false,
+    },
+    clubAdvisor: {
+      type: String,
+      require: false,
+    },
+    clubPresident: {
+      type: String,
+      require: false,
+    },
+    clubRoom: {
+      type: String,
+      require: false,
+    },
+    clubActivityType: {
+      type: String,
+      require: false,
+    },
+    clubFrequency: {
+      type: String,
+      require: false,
+    },
+    showItem: {
+      type: Boolean,
+      require: false,
+      default: null,
     },
   },
 
@@ -119,7 +177,7 @@ export default {
       reader.readAsBinaryString(fileObject);
     }
     const ifPresident = ref(props.position === "president");
-
+    const clubsDescription = useClubsDescription();
     const objectData = useUserDataStore();
     const user = objectData.user;
     const clubData = user?.clubData;
@@ -128,6 +186,7 @@ export default {
     const UploadImage = useUploadImage();
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
+
     return {
       ifPresident,
       qrCode,
@@ -141,6 +200,7 @@ export default {
       createBase64Image,
       image,
       UploadImage,
+      clubsDescription,
     };
   },
 };
@@ -185,7 +245,10 @@ export default {
   visibility: visible;
   position: relative;
 }
-
+.active {
+  position: relative;
+  visibility: hidden;
+}
 .message {
   font-size: 5rem;
 }
@@ -216,6 +279,10 @@ export default {
   bottom: 15%;
   position: absolute;
   overflow: auto;
+}
+
+.description {
+  font-size: 2.5rem;
 }
 
 li {
@@ -253,13 +320,13 @@ li {
   right: 22rem;
   cursor: pointer;
 }
+
 .human {
   position: absolute;
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
   right: 15rem;
-
   cursor: pointer;
 }
 
@@ -269,6 +336,14 @@ li {
   height: 5rem;
   bottom: 0.5rem;
   right: 8rem;
+  cursor: pointer;
+}
+.edit-description {
+  position: absolute;
+  width: 4rem;
+  height: 5rem;
+  top: 23.5rem;
+  left: 1rem;
   cursor: pointer;
 }
 .open-icon {

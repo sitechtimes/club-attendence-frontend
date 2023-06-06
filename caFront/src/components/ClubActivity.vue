@@ -17,7 +17,11 @@
             <button class="openscan">Club Origins</button>
           </router-link>
         </li>
-
+        <li>
+          <router-link to="/clubs">
+            <button class="openscan">Clubs</button>
+          </router-link>
+        </li>
         <li>
           <button @click="clubActivity.showPanel()">Add Club</button>
         </li>
