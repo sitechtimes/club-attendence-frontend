@@ -9,7 +9,7 @@
 
       <div class="top-right ">
         <dateDropdown></dateDropdown>
-        <input type="text" v-model="goneOsis"  placeholder="Remove Student From Club Code" @submit="removeStudent()"  >
+        <input type="text" v-model="goneOsis"  placeholder="Remove Student From Club Code" @keyup.enter="removeStudent"  >
       </div>
 
     </section>
@@ -85,17 +85,38 @@ export default defineComponent({
     
     console.log(userStore.user)
     return {store, input, headings, currentClubCode, goneOsis:ref<string>("") }
-
-    
-
-    
   },
 
-  methods:{
-    removeStudent(){
-        //goneOsis is the student's osis number
-        //currentClubCode is the current club code use that to determine which club 
+  methods: {
+    removeStudent() {
+      // Check if goneOsis and currentClubCode have values
+      if (this.goneOsis && this.currentClubCode) {
+        // Create a new FormData object
+        const formData = new FormData();
+        formData.append('goneOsis', this.goneOsis);
+        formData.append('currentClubCode', this.currentClubCode);
+        console.log('Form Data:', this.currentClubCode);
 
+        // Make the fetch request
+        fetch("http://localhost:3000/deleteMeeting", {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => {
+            if (response.ok) {
+              // Handle successful response if needed
+            } else {
+              // Handle errors if needed
+            }
+          })
+          .catch(error => {
+            // Handle errors if needed
+          });
+
+        // Clear the input fields after submitting
+        this.goneOsis = '';
+        this.currentClubCode = null;
+      }
     }
   },
 
