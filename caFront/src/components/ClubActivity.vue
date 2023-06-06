@@ -18,11 +18,9 @@
           </router-link>
         </li>
 
-        <li>
-          <router-link v-if="userStore.user?.clientAuthority == 'admin'"  to="/club-origin">
-            <button  class="openscan">
-              Club Origins
-            </button>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/club-origin">
+            <button class="openscan">Club Origins</button>
           </router-link>
         </li>
         <li>
@@ -58,7 +56,7 @@ import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 
 import AddClub from "../components/AddClub.vue";
-import DeleteClub from "../components/DeleteClub.vue"
+import DeleteClub from "../components/DeleteClub.vue";
 import Camera from "../components/Camera.vue";
 import { RouterLink } from "vue-router";
 import { useUserDataStore } from "@/stores/userData";
