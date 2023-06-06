@@ -24,16 +24,6 @@
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
           <li>
-            <img class="trashCanPic" src="../assets/logos/trash-can.png" />
-          </li>
-          <li>
-            <img
-              @click="clubActivity.openDMeeting(clubName)"
-              class="deleteCalendar"
-              src="../assets/logos/Calendar-Delete.png"
-            />
-          </li>
-          <li>
             <img
               @click="clubActivity.openMeeting(clubName)"
               class="calendarpic"
@@ -75,9 +65,6 @@
     <div>
       <newMeeting v-show="clubActivity.isMeetingVisible"></newMeeting>
     </div>
-    <div>
-      <deleteMeeting v-show="clubActivity.isDMeetingVisible"></deleteMeeting>
-    </div>
   </div>
 </template>
 
@@ -88,7 +75,6 @@ import { useQrCode } from "../stores/qrCode";
 import { useUploadImage } from "@/stores/uploadImage";
 import { useClubActivity } from "../stores/clubActivity";
 import newMeeting from "../components/newMeeting.vue";
-import deleteMeeting from "../components/deleteMeeting.vue";
 import QRScanner from "../components/QRScanner.vue";
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
@@ -103,7 +89,6 @@ export default {
     UploadImage,
     RouterLink,
     newMeeting,
-    deleteMeeting,
   },
 
   props: {
@@ -269,7 +254,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 29rem;
+  right: 30rem;
   cursor: pointer;
 }
 
@@ -278,7 +263,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 23.5rem;
+  right: 23rem;
   cursor: pointer;
 }
 .human {
@@ -286,7 +271,7 @@ li {
   width: 5rem;
   height: 5rem;
   bottom: 0.5rem;
-  right: 18rem;
+  right: 16rem;
 
   cursor: pointer;
 }
@@ -294,17 +279,9 @@ li {
 .calendarpic {
   position: absolute;
   width: 5rem;
-  height: 5rem;
+  height: 4.8rem;
   bottom: 0.5rem;
-  right: 6.3rem;
-  cursor: pointer;
-}
-.deleteCalendar {
-  position: absolute;
-  width: 5rem;
-  height: 5rem;
-  bottom: 0.5rem;
-  right: 12rem;
+  right: 8rem;
   cursor: pointer;
 }
 .trashCanPic {
@@ -381,12 +358,7 @@ label {
     top: 23.5rem;
     left: 18rem;
   }
-  .deleteCalendar {
-    width: 5rem;
-    height: 5rem;
-    top: 23.5rem;
-    left: 18rem;
-  }
+  
   .trashCanPic {
     width: 5rem;
     height: 5rem;
@@ -408,7 +380,6 @@ label {
   .qrcode,
   .trashCanPic,
   .calendarpic,
-  .deleteCalendar,
   .human,
   .open-icon,
   .upload {
