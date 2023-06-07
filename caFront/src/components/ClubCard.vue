@@ -28,21 +28,6 @@
       </div>
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
-          <li
-            @click="
-              clubsDescription.openDescription(
-                clubCode,
-                clubName,
-                clubDescription
-              )
-            "
-          >
-            <img
-              class="edit-description"
-              src="../assets/logos/pencil.svg"
-              alt="scan"
-            />
-          </li>
           <li>
             <img
               @click="clubActivity.openMeeting(clubName)"
@@ -78,13 +63,6 @@
         />
       </div>
     </div>
-    <div class="overlap">
-      <QRScanner v-show="qrCode.isQrCodeOpen"></QRScanner>
-      <ClubDescription v-if="clubsDescription.isDescription"></ClubDescription>
-    </div>
-    <div>
-      <newMeeting v-show="clubActivity.isMeetingVisible"></newMeeting>
-    </div>
   </div>
 </template>
 
@@ -94,8 +72,7 @@ import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import { useUploadImage } from "@/stores/uploadImage";
 import { useClubActivity } from "../stores/clubActivity";
-import newMeeting from "../components/newMeeting.vue";
-import QRScanner from "../components/QRScanner.vue";
+
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
 import { useDeleteMeeting } from "@/stores/deleteMeeting";
@@ -106,10 +83,9 @@ import { ref } from "vue";
 export default {
   name: "Card",
   components: {
-    QRScanner,
     UploadImage,
     RouterLink,
-    newMeeting,
+
     ClubDescription,
   },
 
@@ -173,19 +149,7 @@ export default {
 
   setup(props) {
     const status = ref(false);
-    let image: string = "";
 
-    function handleImage(event: any) {
-      const selectedImage = event.target.files[0];
-      createBase64Image(selectedImage);
-    }
-    function createBase64Image(fileObject: any) {
-      const reader = new FileReaderasync();
-      reader.onload = (event: any) => {
-        image = event.target.result;
-      };
-      reader.readAsBinaryString(fileObject);
-    }
     const ifPresident = ref(props.position === "president");
     const clubsDescription = useClubsDescription();
     const objectData = useUserDataStore();
@@ -207,9 +171,6 @@ export default {
       status,
       user,
       clubData,
-      handleImage,
-      createBase64Image,
-      image,
       UploadImage,
       useDelete,
       clubsDescription,

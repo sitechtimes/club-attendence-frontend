@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../views/LoginView.vue";
-import TeacherView from "../views/TeacherView.vue";
-import StudentSearch from "../views/StudentSearch.vue";
+
 import ErrorViewVue from "@/views/ErrorView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,15 +34,6 @@ const router = createRouter({
       component: () => {
         return import(
           /*webpackChunkName: "club-view" */ "../views/ClubView.vue"
-        );
-      },
-    },
-    {
-      path: "/clubs",
-      name: "clubs",
-      component: () => {
-        return import(
-          /*webpackChunkName: "club-view" */ "../views/ClubsView.vue"
         );
       },
     },
@@ -83,16 +73,6 @@ const router = createRouter({
       },
     },
 
-    {
-      path: "/teacher",
-      name: "teacher",
-      component: TeacherView,
-    },
-    {
-      path: "/student",
-      name: "Student",
-      component: StudentSearch,
-    },
     {
       path: "/president",
       name: "President",

@@ -36,12 +36,11 @@
 import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 
-import Camera from "../components/Camera.vue";
 import { defineComponent, onMounted } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import NewCalendar from "../components/NewCalendar.vue";
-import ClubActivity from "../components/ClubActivity.vue";
+
 import UploadImage from "../components/uploadImage.vue";
 
 export default defineComponent({
@@ -50,8 +49,7 @@ export default defineComponent({
     Card,
     Button,
     NewCalendar,
-    ClubActivity,
-    Camera,
+
     UploadImage,
   },
   methods: {
