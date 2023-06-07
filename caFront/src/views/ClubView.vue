@@ -12,20 +12,12 @@
         :position="club.position"
         :clubCode="club.clubCode"
         :meetingDates="club.meetingDates"
-        :showItem="true"
-        :clubDescription="club.clubDescription"
         :key="club.clubCode"
       >
       </Card>
     </div>
-    <div class="scan">
-      <Camera v-show="clubActivity.isCameraVisible"></Camera>
-    </div>
     <div class="overlap">
       <NewCalendar v-show="clubActivity.isModalVisible"></NewCalendar>
-    </div>
-    <div class="test">
-      <UploadImage v-show="clubActivity.isUploadVisible"> </UploadImage>
     </div>
 
     <ClubActivity />
