@@ -28,6 +28,21 @@
       </div>
       <div class="menubar" v-if="ifPresident">
         <ul v-if="status">
+          <li
+            @click="
+              clubsDescription.openDescription(
+                clubCode,
+                clubName,
+                clubDescription
+              )
+            "
+          >
+            <img
+              class="edit-description"
+              src="../assets/logos/pencil.svg"
+              alt="scan"
+            />
+          </li>
           <li>
             <img
               @click="clubActivity.openMeeting(clubName)"
@@ -62,6 +77,9 @@
           alt="open"
         />
       </div>
+    </div>
+    <div class="overlap">
+      <ClubDescription v-if="clubsDescription.isDescription"></ClubDescription>
     </div>
   </div>
 </template>
