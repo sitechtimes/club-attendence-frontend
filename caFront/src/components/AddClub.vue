@@ -71,19 +71,22 @@ export default defineComponent({
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log((userDataStore.user = data), "vdskkdsvlkn");
+
           userDataStore.user = data;
         });
     }
 
-    const addClub = () => {
+    const addClub = async () => {
       const bundle = {
         user: userDataStore.user,
         clubCode: form.userValue,
       };
       console.log(bundle);
-      console.log("jumping into postData");
-      postData(bundle);
-      alreadyLogin();
+      await postData(bundle);
+      console.log("accalalad");
+      await alreadyLogin();
+      console.log("cwevev");
     };
     return { form, addClub, clubActivity };
   },
