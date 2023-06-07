@@ -90,7 +90,7 @@ export default defineComponent({
 
   methods: {
     signout() {
-      this.userStore.userasync = null;
+      this.userStore.user = null;
     },
   },
 });
