@@ -18,9 +18,7 @@
       >
       </Card>
     </div>
-    <div class="scan">
-      <Camera v-show="clubActivity.isCameraVisible"></Camera>
-    </div>
+
     <div class="overlap">
       <NewCalendar v-show="clubActivity.isModalVisible"></NewCalendar>
     </div>
