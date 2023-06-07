@@ -18,9 +18,7 @@
       >
       </Card>
     </div>
-    <div class="scan">
-      <Camera v-show="clubActivity.isCameraVisible"></Camera>
-    </div>
+
     <div class="overlap">
       <NewCalendar v-show="clubActivity.isModalVisible"></NewCalendar>
     </div>
@@ -36,8 +34,7 @@
 import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 
-import Camera from "../components/Camera.vue";
-import { defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import NewCalendar from "../components/NewCalendar.vue";
@@ -51,7 +48,7 @@ export default defineComponent({
     Button,
     NewCalendar,
     ClubActivity,
-    Camera,
+
     UploadImage,
   },
   methods: {

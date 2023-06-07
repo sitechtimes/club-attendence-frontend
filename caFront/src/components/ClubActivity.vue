@@ -3,36 +3,8 @@
     <div class="buttonpanel">
       <ul class="dropdown-item" v-if="clubActivity.isOpen">
         <li>
-          <router-link to="/">
-            <button @click="signout" class="openscan">Sign Out</button>
-          </router-link>
-        </li>
-        <li v-if="userStore.user?.clientAuthority == 'admin'">
-          <router-link to="/teacher">
-            <button class="openscan">Teacher</button>
-          </router-link>
-        </li>
-        <li v-if="userStore.user?.clientAuthority == 'admin'">
-          <router-link to="/club-origin">
-            <button class="openscan">Club Origins</button>
-          </router-link>
-        </li>
-        <li>
-          <button @click="clubActivity.openDelete()">Delete Club</button>
-        </li>
-        <li>
           <router-link to="/clubs">
             <button class="openscan">Clubs</button>
-          </router-link>
-        </li>
-        <li>
-          <button @click="clubActivity.showPanel()">Add Club</button>
-        </li>
-        <li>
-          <router-link to="/scanner">
-            <button @click="clubActivity.openCamera()" class="openscan">
-              Scan QR Code
-            </button>
           </router-link>
         </li>
       </ul>
@@ -54,17 +26,11 @@
 import { defineComponent } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 
-import AddClub from "../components/AddClub.vue";
-import DeleteClub from "../components/DeleteClub.vue";
-import Camera from "../components/Camera.vue";
 import { RouterLink } from "vue-router";
 import { useUserDataStore } from "@/stores/userData";
 export default defineComponent({
   name: "ClubActivity",
   components: {
-    DeleteClub,
-    AddClub,
-    Camera,
     RouterLink,
   },
   setup() {

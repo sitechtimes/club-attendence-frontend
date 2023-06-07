@@ -47,7 +47,7 @@ import { useClubStore } from "../stores/sendcode";
 import { useQrCode } from "../stores/qrCode";
 import { useUploadImage } from "@/stores/uploadImage";
 import { useClubActivity } from "../stores/clubActivity";
-import QRScanner from "../components/QRScanner.vue";
+
 import miniButton from "../components/miniButton.vue";
 import { RouterLink } from "vue-router";
 import UploadImage from "../components/uploadImage.vue";
@@ -57,7 +57,6 @@ import { ref } from "vue";
 export default {
   name: "DescriptionCard",
   components: {
-    QRScanner,
     UploadImage,
     RouterLink,
     miniButton,
