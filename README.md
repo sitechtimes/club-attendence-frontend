@@ -1,10 +1,11 @@
-#club-attendance-frontend
+# club-attendance-frontend
 
-##Components
+## Components
 
-###Button.vue
-*A reusuable button that is designed with a seagull in the gold and white color scheme. To change the color scheme of the seagull, you may so by changing the main color and sub color for class ".button--piyo" and ".button--hoo" in the style
-```.button--piyo {
+### Button.vue
+* A reusuable button that is designed with a seagull in the gold and white color scheme. To change the color scheme of the seagull, you may so by changing the main color and sub color for class ".button--piyo" and ".button--hoo" in the style
+``` 
+.button--piyo {
   --main_color: white;
   --sub_color1: #f4e19c;
   --sub_color2: #ff8108;
@@ -26,12 +27,13 @@
 }
 ```
 
-###Camera.vue
-*A Vue component that captures and decodes QR codes using the device's camera.
+### Camera.vue
+* A Vue component that captures and decodes QR codes using the device's camera.
 
-*This component consists of a container div that is conditionally displayed if "clubActivity.isCameraAllowed === true". Inside the div, there is a qr-code-stream component imported from the npm package called vue3-qrcode-reader and the documentation is at "https://www.vuescript.com/qr-code-reader-vue-3/". When the Camera.vue is accessed, it triggers the onDecode and onInite async functions.
+* This component consists of a container div that is conditionally displayed if "clubActivity.isCameraAllowed === true". Inside the div, there is a qr-code-stream component imported from the npm package called vue3-qrcode-reader and the documentation is at https://www.vuescript.com/qr-code-reader-vue-3/ . When the Camera.vue is accessed, it triggers the onDecode and onInite async functions.
 
-``` async onInit(promise: any) {
+```
+async onInit(promise: any) {
       try {
         await promise;
       } catch (error: any) {
@@ -54,11 +56,13 @@
           this.error = `ERROR: Camera error (${error.name})`;
         }
       }
-    },
-    ```
-*The onInit is an asynchronous function that handles the initialization of the QR code stream by passing in the paramter 'promise'. The try-catch block  handles the error that could occur during the initialization process. The function checks 'error.name' to determine the type of error and returns it as an error message.
+    } 
+ ```
+    
+* The onInit is an asynchronous function that handles the initialization of the QR code stream by passing in the paramter 'promise'. The try-catch block  handles the error that could occur during the initialization process. The function checks 'error.name' to determine the type of error and returns it as an error message.
 
-```async function onDecode(data: string) {
+```
+async function onDecode(data: string) {
       state.data = data;
       qrCodeStore.qrCode = data;
       console.log(userData.user);
@@ -71,8 +75,79 @@
       await qrCodeStore.markAttendence(info);
       state.response = qrCodeStore.qrcodeResponse;
     }
-    ```
-*The onDecode is an asynchronous function that is called when a QR code is successfully decoded by the QR code reader by passing in the parameter 'data' which is the decoded data from the qr scan. It calls the qrCodeStore.markAttendance method and passes the info object as a parameter. This method is responsible for handling the attendance marking process or performing some action based on the QR code data and user data. These actions are passed in from the pinia store useQrCode. The response from the onDecode function will then be displayed. 
+```
+* The onDecode is an asynchronous function that is called when a QR code is successfully decoded by the QR code reader by passing in the parameter 'data' which is the decoded data from the qr scan. It calls the qrCodeStore.markAttendance method and passes the info object as a parameter. This method is responsible for handling the attendance marking process or performing some action based on the QR code data and user data. These actions are passed in from the pinia store useQrCode. The response from the onDecode function will then be displayed. 
+
+### ClubActivity.vue
+* This component represents a dropdown menu that provides icons that trigger different functionality whether it's navigating to a different page or display specific vue components. Here are the functionalities:
+
+* The dropdown container has three nested components which are 'AddClub', 'DeleteClub', and 'Camera'. These components are conditionally displayed depending on the state in the useclubActivity store. The specific buttons are labeled to inform the user on which button will prompt the specific component.
+```
+ <ul class="dropdown-item" v-if="clubActivity.isOpen">
+        <li>
+          <router-link to="/">
+            <button @click="signout" class="openscan">Sign Out</button>
+          </router-link>
+        </li>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/teacher">
+            <button class="openscan">Teacher</button>
+          </router-link>
+        </li>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/club-origin">
+            <button class="openscan">Club Origins</button>
+          </router-link>
+        </li>
+        <li>
+          <button @click="clubActivity.openDelete()">Delete Club</button>
+        </li>
+        <li>
+          <router-link to="/clubs">
+            <button class="openscan">Clubs</button>
+          </router-link>
+        </li>
+        <li>
+          <button @click="clubActivity.showPanel()">Add Club</button>
+        </li>
+        <li>
+          <router-link to="/scanner">
+            <button @click="clubActivity.openCamera()" class="openscan">
+              Scan QR Code
+            </button>
+          </router-link>
+        </li>
+      </ul>
+  ```
+  * Sign Out" button",when clicked, triggers the signout method and logs out the user by setting userStore.user to null.
+
+```
+ methods: {
+    signout() {
+      this.userStore.user = null;
+    },
+  },
+```
+
+* The buttons Teacher, ClubOrigin, Clubs are all router-link that navigates user to a specific route. Teacher and ClubOrigin buttons are only visible if the userStore.user?.clientAuthority property is equal to "admin". 
+
+```
+ <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/teacher">
+            <button class="openscan">Teacher</button>
+          </router-link>
+ </li>
+ 
+ <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/club-origin">
+            <button class="openscan">Club Origins</button>
+          </router-link>
+ </li>
+```
+
+## ClubCard.vue
+* 
+
 
 
 
