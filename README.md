@@ -809,7 +809,9 @@ Functions:
 * addUserData: Sets the param to the state user
 * addOsis: Sets the param to the user's osis (First time sign in for students)
 * addGrade: Sets the param to the user's grade. (First time sign in for students)
-* addOfficallClass: Sets the param to the user's officialClass. (First time sign in for students) **Please be aware that the function is MISPELLED as OFFICALL and NOT OFFICIAL. However, the user's respective object property is properly spelled as official. *This is due to Michael Chen's poor spelling* **
+* addOfficallClass: Sets the param to the user's officialClass. (First time sign in for students)
+
+**Please be aware that the function is MISPELLED as OFFICALL and NOT OFFICIAL. However, the user's respective object property is properly spelled as official. *This is due to Michael Chen's poor spelling*
 
 
 
