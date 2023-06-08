@@ -1,20 +1,155 @@
-# club-attendence-frontend
+# club-attendance-frontend
 
-***Views***
+## Components
 
-***Components***
+### Button.vue
+* A reusuable button that is designed with a seagull in the gold and white color scheme. To change the color scheme of the seagull, you may so by changing the main color and sub color for class ".button--piyo" and ".button--hoo" in the style
+``` 
+.button--piyo {
+  --main_color: white;
+  --sub_color1: #f4e19c;
+  --sub_color2: #ff8108;
+  --base_color: #000;
+  --border_radius1: 60px 60px 40px 40px / 48px 48px 30px 30px;
+  --border_radius2: 70px 70px 40px 40px / 48px 48px 30px 30px;
+  --border_radius3: 40px 40px 40px 40px / 48px 48px 30px 30px;
+}
+.button--hoo {
+  --main_color: #4993ff;
+  --sub_color1: #385082;
+  --sub_color2: #fff58f;
+  --sub_color3: #fff;
+  --base_color: #fff;
+  --border_radius1: 50px 50px 50px 50px / 40px 40px 40px 40px;
+  --border_radius2: 60px 60px 50px 50px / 40px 40px 40px 40px;
+  --border_radius3: 40px 40px 50px 50px / 60px 60px 40px 40px;
+  --border_radius3: 50px 50px 45px 45px / 40px 40px 60px 60px;
+}
+```
 
-**Button.vue**
-This is the vue component for the seagull button and all the classes for the elements are labeled. If you want to change the color scheme of the seagull, you may do so by changing the main color and sub color for class ".button--piyo" and ".button--hoo" in the style. The Button is exported and can be imported for use.
+### Camera.vue
+* A Vue component that captures and decodes QR codes using the device's camera.
 
-**Camera.vue**
-For this project we installed a npm package called vue3 qr reader and the documentation is at "https://www.vuescript.com/qr-code-reader-vue-3/". After we imported the component QrcodeStream from the package and called it in the template. The component can only be displayed if the state club.Activity.isCameraAllowed is true. When opened, the browser will prompt the user for camera access and the result or error of the qr code scan will be displayed at the bottom.
+* This component consists of a container div that is conditionally displayed if "clubActivity.isCameraAllowed === true". Inside the div, there is a qr-code-stream component imported from the npm package called vue3-qrcode-reader and the documentation is at https://www.vuescript.com/qr-code-reader-vue-3/ . When the Camera.vue is accessed, it triggers the onDecode and onInite async functions.
 
-**ClubActivity.vue**
-This vue component contains the (+) located near the bottom right of the ClubView.vue or /club route and serves the purpose of navigating to the QR Scanner as well as adding clubs and navigating to the /teacher route. The function show() in the setup script is what prompts the dropdown to appear and clubActivity.isOpen is passed from the clubActivity.ts file in the stores pinia folder. The actions clubActivity.closeMenu() and clubActivity.openMenu() is used in the if conditional statement depending upon whether the state of clubActivity.isOpen is true or false. In the template, the "Teacher" dropdown button navigates to the /teacher route. The "Add Club" dropdown button has the function clubActivity.showPanel() on click which prompts the state clubActivity.isPanelVisible to turn to true in order to display the AddClub component. The "Scan QR Code" dropdown button is a router-link to navigate to the /scanner route and has the function clubActivity.openCamera() on click to prompt state club.isCameraVisible to turn to true in order to display the Camera component.
+```
+async onInit(promise: any) {
+      try {
+        await promise;
+      } catch (error: any) {
+        if (error.name === "NotAllowedError") {
+          this.error = "ERROR: you need to grant camera access permission";
+        } else if (error.name === "NotFoundError") {
+          this.error = "ERROR: no camera on this device";
+        } else if (error.name === "NotSupportedError") {
+          this.error = "ERROR: secure context required (HTTPS, localhost)";
+        } else if (error.name === "NotReadableError") {
+          this.error = "ERROR: is the camera already in use?";
+        } else if (error.name === "OverconstrainedError") {
+          this.error = "ERROR: installed cameras are not suitable";
+        } else if (error.name === "StreamApiNotSupportedError") {
+          this.error = "ERROR: Stream API is not supported in this browser";
+        } else if (error.name === "InsecureContextError") {
+          this.error =
+            "ERROR: Camera access is only permitted in secure context. Use HTTPS or localhost rather than HTTP.";
+        } else {
+          this.error = `ERROR: Camera error (${error.name})`;
+        }
+      }
+    } 
+ ```
+    
+* The onInit is an asynchronous function that handles the initialization of the QR code stream by passing in the paramter 'promise'. The try-catch block  handles the error that could occur during the initialization process. The function checks 'error.name' to determine the type of error and returns it as an error message.
 
-**ClubCard.vue**
-This vue component displays each clubcard container in the /club route. By passing in the props {clubName, meetingDates, position, date, clubCode) in the script, we were able to display the information on the card. The clubName is printed in the upperhalf of the Card and the bottom half of the card contains all the upcoming meeting dates for the particular club by using v-for to iterate through each date element in the array meetingDates. On the very bottom, we have the menubar which would only be displayed when the v-if statement is true, and in this case the ifPresident condition is only fulfilled if the user has a position of president which is passed in as a prop previously indicated. There's a total of four icons within the menubar. The "member" icon is a router-link that would navigate the user to the /member route where all members are displayed and on click the clubstore.getClubData function from pinia file sendcode.ts and the specific clubCode is passed in as a parameter to get an array of all the members for that specific club. The "upload" icon on click will trigger the pinia action clubActivity.openUpload() to turn the state isUploadVisible to true and display the component UploadImage.
+```
+async function onDecode(data: string) {
+      state.data = data;
+      qrCodeStore.qrCode = data;
+      console.log(userData.user);
 
-**NewCalendar.vue**
-This vue component is specifically made for the calendar where we downloaded and utilized the npm package vcalendar and the documentation is at "https://vcalendar.io/getting-started/installation.html". 
+      let info = {
+        qrCode: qrCodeStore.qrCode,
+        user: userData.user,
+        dateOfToday: dateOfToday,
+      };
+      await qrCodeStore.markAttendence(info);
+      state.response = qrCodeStore.qrcodeResponse;
+    }
+```
+* The onDecode is an asynchronous function that is called when a QR code is successfully decoded by the QR code reader by passing in the parameter 'data' which is the decoded data from the qr scan. It calls the qrCodeStore.markAttendance method and passes the info object as a parameter. This method is responsible for handling the attendance marking process or performing some action based on the QR code data and user data. These actions are passed in from the pinia store useQrCode. The response from the onDecode function will then be displayed. 
+
+### ClubActivity.vue
+* This component represents a dropdown menu that provides icons that trigger different functionality whether it's navigating to a different page or display specific vue components. Here are the functionalities:
+
+* The dropdown container has three nested components which are 'AddClub', 'DeleteClub', and 'Camera'. These components are conditionally displayed depending on the state in the useclubActivity store. The specific buttons are labeled to inform the user on which button will prompt the specific component.
+```
+ <ul class="dropdown-item" v-if="clubActivity.isOpen">
+        <li>
+          <router-link to="/">
+            <button @click="signout" class="openscan">Sign Out</button>
+          </router-link>
+        </li>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/teacher">
+            <button class="openscan">Teacher</button>
+          </router-link>
+        </li>
+        <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/club-origin">
+            <button class="openscan">Club Origins</button>
+          </router-link>
+        </li>
+        <li>
+          <button @click="clubActivity.openDelete()">Delete Club</button>
+        </li>
+        <li>
+          <router-link to="/clubs">
+            <button class="openscan">Clubs</button>
+          </router-link>
+        </li>
+        <li>
+          <button @click="clubActivity.showPanel()">Add Club</button>
+        </li>
+        <li>
+          <router-link to="/scanner">
+            <button @click="clubActivity.openCamera()" class="openscan">
+              Scan QR Code
+            </button>
+          </router-link>
+        </li>
+      </ul>
+  ```
+  * Sign Out" button",when clicked, triggers the signout method and logs out the user by setting userStore.user to null.
+
+```
+ methods: {
+    signout() {
+      this.userStore.user = null;
+    },
+  },
+```
+
+* The buttons Teacher, ClubOrigin, Clubs are all router-link that navigates user to a specific route. Teacher and ClubOrigin buttons are only visible if the userStore.user?.clientAuthority property is equal to "admin". 
+
+```
+ <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/teacher">
+            <button class="openscan">Teacher</button>
+          </router-link>
+ </li>
+ 
+ <li v-if="userStore.user?.clientAuthority == 'admin'">
+          <router-link to="/club-origin">
+            <button class="openscan">Club Origins</button>
+          </router-link>
+ </li>
+```
+
+## ClubCard.vue
+* 
+
+
+
+
+
+
