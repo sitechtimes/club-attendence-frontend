@@ -45,7 +45,6 @@ export default defineComponent({
     const allDates: Array<string> = [];
     const transformedArray = ref<club[]>([]);
     const clubs = ref<ClubData[]>(objectData.user!.clubData ?? []);
-
     onMounted(() => {
       if (clubData !== null) {
         transformedArray.value = clubData.map((club) => {

@@ -82,9 +82,8 @@ export default defineComponent({
       };
       console.log(bundle);
       await postData(bundle);
-      console.log("accalalad");
+
       await alreadyLogin();
-      console.log("cwevev");
     };
     return { form, addClub, clubActivity };
   },
