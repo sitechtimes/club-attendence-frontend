@@ -82,7 +82,6 @@ export default defineComponent({
       };
       console.log(bundle);
       await postData(bundle);
-
       await alreadyLogin();
     };
     return { form, addClub, clubActivity };

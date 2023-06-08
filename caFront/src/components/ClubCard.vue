@@ -17,7 +17,7 @@
           <li class="delete">
             {{ date }}
             <img
-              @click="useDelete.deleteMDate(clubName, date)"
+              @click="deleteMeet(clubName, date)"
               src="../assets/logos/trashcan.png"
               class="trashcan"
               alt="trashcan"
@@ -180,7 +180,7 @@ export default {
       createBase64Image(selectedImage);
     }
     function createBase64Image(fileObject: any) {
-      const reader = new FileReaderasync();
+      const reader = new FileReader();
       reader.onload = (event: any) => {
         image = event.target.result;
       };
@@ -198,6 +198,12 @@ export default {
     const qrCode = useQrCode();
     let dateOfToday = new Date().toLocaleDateString();
 
+    async function deleteMeet(clubName: string, date: string) {
+      await useDelete.deleteMDate(clubName, date);
+      objectData.deleteMeeting(clubName, date);
+      console.log("vdjsnlsdn");
+    }
+
     return {
       ifPresident,
       qrCode,
@@ -213,6 +219,7 @@ export default {
       UploadImage,
       useDelete,
       clubsDescription,
+      deleteMeet,
     };
   },
 };
@@ -302,16 +309,13 @@ li {
   margin-left: 3rem;
 }
 .trashcan {
+  width: 2rem;
+  height: 2rem;
   visibility: hidden;
 }
 
-.delete:hover.trashcan {
+.delete:hover .trashcan {
   visibility: visible;
-}
-
-.trashcan {
-  width: 2rem;
-  height: 2rem;
 }
 
 .upload {
