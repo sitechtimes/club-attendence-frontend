@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Calendar, DatePicker } from "v-calendar";
 import { useUserDataStore } from "../stores/userData";
-import { computed, defineComponent, ref, onMounted } from "vue";
+import { computed, defineComponent, ref, onMounted, watchEffect } from "vue";
 import { useClubActivity } from "../stores/clubActivity";
 import miniButton from "../components/miniButton.vue";
 import "v-calendar/style.css";
@@ -32,17 +32,28 @@ export default defineComponent({
   },
   computed: {},
   setup() {
+    type ClubData = {
+      clubCode: string;
+      clubName: string;
+      position: string;
+      meetingDates: string[];
+      clubDescription: string;
+    };
     const objectData = useUserDataStore();
     const user = objectData.user;
     const clubData = user!.clubData;
     const allDates: Array<string> = [];
     const transformedArray = ref<club[]>([]);
+    const clubs = ref<ClubData[]>(objectData.user!.clubData ?? []);
 
     onMounted(() => {
       if (clubData !== null) {
         transformedArray.value = clubData.map((club) => {
           if (club.meetingDates[0] === "No meeting date yet.") {
-            club.meetingDates = [];
+            return {
+              clubName: club.clubName,
+              meetingDates: [],
+            };
           }
           return {
             clubName: club.clubName,
@@ -50,14 +61,12 @@ export default defineComponent({
           };
         });
       }
-
       console.log(transformedArray);
     });
 
     // let newClubData = ref(objectData.user?.clubData);
 
     let attrs;
-
     if (objectData.user?.clubData === null) {
       attrs = null;
     } else {
@@ -72,6 +81,42 @@ export default defineComponent({
         })),
       ]);
     }
+
+    watchEffect(() => {
+      const newUserData = objectData;
+      if (newUserData.user?.clubData !== clubs.value) {
+        clubs.value = newUserData.user?.clubData ?? [];
+        console.log(clubs.value, "before");
+
+        transformedArray.value = clubs.value.map((club) => {
+          if (club.meetingDates[0] === "No meeting date yet.") {
+            console.log(club.meetingDates[0]);
+            return {
+              clubName: club.clubName,
+              meetingDates: [],
+            };
+          }
+          return {
+            clubName: club.clubName,
+            meetingDates: club.meetingDates,
+          };
+        });
+        console.log(clubs.value, "after");
+
+        console.log(transformedArray.value);
+
+        attrs = computed(() => [
+          // Attributes for todos
+          ...transformedArray.value!.map((clubData) => ({
+            dates: clubData.meetingDates,
+            popover: {
+              label: clubData.clubName,
+            },
+            highlight: true,
+          })),
+        ]);
+      }
+    });
 
     const clubActivity = useClubActivity();
     return { clubActivity, clubData, allDates, objectData, attrs };

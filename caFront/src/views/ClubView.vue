@@ -37,7 +37,7 @@ import Card from "../components/ClubCard.vue";
 import Button from "../components/Button.vue";
 
 import Camera from "../components/Camera.vue";
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, watchEffect, ref } from "vue";
 import { useUserDataStore } from "../stores/userData";
 import { useClubActivity } from "../stores/clubActivity";
 import NewCalendar from "../components/NewCalendar.vue";
@@ -64,11 +64,25 @@ export default defineComponent({
     },
   },
   setup() {
+    type ClubData = {
+      clubCode: string;
+      clubName: string;
+      position: string;
+      meetingDates: string[];
+      clubDescription: string;
+    };
     const userDataStore = useUserDataStore();
     const clubActivity = useClubActivity();
-    const clubs = userDataStore.user!.clubData;
+    const clubs = ref<ClubData[]>(userDataStore.user!.clubData ?? []);
+    let key = ref<number>(0);
 
-    return { userDataStore, clubs, clubActivity };
+    watchEffect(() => {
+      const newUserData = userDataStore;
+      if (newUserData.user?.clubData !== clubs.value) {
+        clubs.value = newUserData.user?.clubData ?? [];
+      }
+    });
+    return { userDataStore, clubs, clubActivity, key };
   },
 });
 </script>

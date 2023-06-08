@@ -71,8 +71,6 @@ export default defineComponent({
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log((userDataStore.user = data), "vdskkdsvlkn");
-
           userDataStore.user = data;
         });
     }
