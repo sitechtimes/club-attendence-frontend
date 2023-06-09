@@ -11,21 +11,24 @@
           null: data.status == null,
         }"
       >
-        <h3 v-if=" $props.headings[0] =='Osis' "  class="asset osis">
+        <h3
+          v-if="headings[0] === 'Osis' && data.osis != 'null'"
+          class="asset osis"
+        >
           {{ data.osis }}
         </h3>
 
-        <h3 class="asset name">
+        <h3 class="asset name" v-if="data.firstName && data.lastName != 'null'">
           {{ data.firstName + " " + data.lastName }}
         </h3>
 
-        <h3 class="asset grade">
+        <h3 class="asset grade" v-if="data.grade != 'null'">
           {{ data.grade }}
         </h3>
-        <h3 class="asset offClass">
+        <h3 class="asset offClass" v-if="data.officalClass != 'null'">
           {{ data.officalClass }}
         </h3>
-        <h3  class="asset email">
+        <h3 class="asset email" v-if="data.email != 'null'">
           {{ data.email }}
         </h3>
       </div>
@@ -34,32 +37,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 export default defineComponent({
   props: {
-    headings:{
+    headings: {
       type: Array<string>,
       required: true,
-
-    } ,
+    },
     theData: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   setup(props) {
     const present = "present";
     const absent = "absent";
-    const numColumn = props.headings.length
+    const numColumn = props.headings.length;
     return { present, absent, numColumn };
   },
 });
 </script>
 
 <style scoped>
-
-
-h3{
+h3 {
   font-weight: 400;
 }
 .table {
@@ -67,7 +67,6 @@ h3{
   grid-template-columns: repeat(v-bind(numColumn), auto);
   font-size: 7rem;
   background-color: antiquewhite;
-
 }
 .card {
   display: flex;
@@ -104,11 +103,11 @@ h3{
   background-color: rgb(130, 255, 130);
 }
 
-@media (max-width:1600px){
-  .header{
+@media (max-width: 1600px) {
+  .header {
     font-size: 3rem;
   }
-  .asset{
+  .asset {
     padding: 0.75rem;
     font-size: 2rem;
   }
