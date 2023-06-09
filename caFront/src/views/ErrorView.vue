@@ -65,6 +65,9 @@ img {
   70% {
     color: white;
   }
+  100% {
+    color: red;
+  }
 }
 
 @keyframes bacco-change {
@@ -91,6 +94,9 @@ img {
   }
   70% {
     background-color: red;
+  }
+  100% {
+    background-color: orange;
   }
 }
 </style>
