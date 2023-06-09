@@ -21,7 +21,7 @@
               src="../assets/logos/trashcan.png"
               class="trashcan"
               alt="trashcan"
-              v-show="showItem === true"
+              v-if="ifPresident"
             />
           </li>
         </ul>
