@@ -63,18 +63,28 @@ export const useUserDataStore = defineStore("userData", {
       }
     },
     deleteMeeting(clubName: string, meetingDate: string) {
-      for (let i = 0; this.user!.clubData.length > i; i++) {
+      outer: for (let i = 0; this.user!.clubData.length > i; i++) {
         if (this.user!.clubData[i].clubName === clubName) {
           {
-            console.log(this.user!.clubData[i].clubName === clubName);
-
             for (
               let j = 0;
               this.user!.clubData[i].meetingDates.length > 0;
-              i++
+              j++
             ) {
+              if (
+                this.user!.clubData[i].meetingDates[j] ===
+                "No meeting date yet."
+              ) {
+                break outer;
+              }
               if (this.user!.clubData[i].meetingDates[j] === meetingDate) {
                 this.user!.clubData[i].meetingDates.splice(j, 1);
+                if (this.user!.clubData[i].meetingDates.length === 0) {
+                  this.user!.clubData[i].meetingDates.push(
+                    "No meeting date yet."
+                  );
+                }
+                break outer;
               }
             }
           }

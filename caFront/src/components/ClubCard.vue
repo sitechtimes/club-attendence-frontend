@@ -200,8 +200,9 @@ export default {
 
     async function deleteMeet(clubName: string, date: string) {
       await useDelete.deleteMDate(clubName, date);
+      console.log("time to delete meeting");
+
       objectData.deleteMeeting(clubName, date);
-      console.log("vdjsnlsdn");
     }
 
     return {
