@@ -5,7 +5,11 @@
       <div class="right">
         <input v-model="input" type="text" />
       </div>
-      <div><button class="show-image">Show Attendence Image</button></div>
+      <div>
+        <button class="show-image" @click="toggleImage()">
+          Show Attendence Image
+        </button>
+      </div>
       <div class="top-right">
         <dateDropdown></dateDropdown>
         <input
@@ -20,7 +24,7 @@
       <div v-if="clubData" class="left">
         <clubBox
           v-for="club in clubData"
-          @click="currentClubCode = club.clubCode"
+          @click="(currentClubCode = club.clubCode), store.showImage()"
           :key="club.clubName"
           :ClubName="club.clubName"
           :Advisor="club.advisor"
@@ -28,7 +32,7 @@
           :clubCode="club.clubCode"
         ></clubBox>
       </div>
-      <div class="table-right">
+      <div class="table-right" v-show="store.imageOrattedence">
         <tableData
           v-if="store.selectedStatus"
           :headings="headings"
@@ -41,6 +45,7 @@
         ></tableData>
       </div>
     </section>
+    <TwoSection v-if="store.imageOrattedence === false"></TwoSection>
   </div>
 </template>
 
@@ -53,6 +58,7 @@ import tableData from "@/components/tableData.vue";
 import dateDropdown from "@/components/dateDropdown.vue";
 import statusDropdown from "@/components/statusDropdown.vue";
 import miniButton from "@/components/miniButton.vue";
+import TwoSection from "@/components/TwoSection.vue";
 
 interface eachClub {
   advisor: string;
@@ -76,6 +82,7 @@ export default defineComponent({
     dateDropdown,
     statusDropdown,
     miniButton,
+    TwoSection,
   },
   setup() {
     const store = teacherStore();
@@ -85,12 +92,22 @@ export default defineComponent({
     store.getData(userStore.user);
     const headings = ["Osis", "Name", "Grade", "Class", "Email"];
 
+    const toggleImage = async () => {
+      if (store.imageOrattedence === true) {
+        await store.getImageId(userStore.user);
+        console.log(store.imageId);
+        return store.closeImage();
+      }
+      store.showImage();
+    };
+
     console.log(userStore.user);
     return {
       store,
       input,
       headings,
       currentClubCode,
+      toggleImage,
       goneOsis: ref<string>(""),
     };
   },

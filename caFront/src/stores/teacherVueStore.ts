@@ -35,6 +35,10 @@ interface studentsAtDate {
   status: string;
   uid: string;
 }
+type ImageId = {
+  id: string;
+  name: string;
+};
 
 interface studentsAtDate extends Array<studentsAtDate> {}
 
@@ -54,6 +58,8 @@ interface dataRes {
   datesCurrent: string;
   statusFilterCurrent: string;
   selectedStatus: boolean;
+  imageOrattedence: boolean;
+  imageId: ImageId[] | null;
 }
 
 export const teacherStore = defineStore("teacher", {
@@ -73,6 +79,8 @@ export const teacherStore = defineStore("teacher", {
     datesCurrent: "Select Date",
     statusFilterCurrent: "All",
     selectedStatus: false,
+    imageOrattedence: true,
+    imageId: null,
   }),
   actions: {
     pushClubCode(param: string) {
@@ -103,7 +111,12 @@ export const teacherStore = defineStore("teacher", {
       this.datesButton = false;
       this.selectedStatus = false;
     },
-
+    showImage() {
+      this.imageOrattedence = true;
+    },
+    closeImage() {
+      this.imageOrattedence = false;
+    },
     filterStatus(param: string) {
       this.pushStatusFilter(param);
       this.selectedStatus = true;
@@ -125,7 +138,6 @@ export const teacherStore = defineStore("teacher", {
         this.pushFilteredAttendance(this.currentAttendance);
       }
     },
-
     async getData(user: any) {
       this.loading = true;
       console.log("hi", JSON.stringify(user));
@@ -145,7 +157,6 @@ export const teacherStore = defineStore("teacher", {
       this.clubList = data;
       this.loading = false;
     },
-
     async getClubData(clubCode: string, user: any, ClubName: string) {
       this.clearPrevData();
 
@@ -156,7 +167,6 @@ export const teacherStore = defineStore("teacher", {
         user: user,
         clubName: ClubName,
       };
-
       await fetch(this.fetchURL + "one-club-data", {
         method: "POST",
         mode: "cors",
@@ -189,7 +199,6 @@ export const teacherStore = defineStore("teacher", {
         .then((dates) => dates.json())
         .then((dates) => this.pushListOfDates(dates));
     },
-
     async fetchAttendance(dates: string, user: any) {
       this.datesCurrent = dates;
       this.datesButton = !this.datesButton;
@@ -216,6 +225,28 @@ export const teacherStore = defineStore("teacher", {
       })
         .then((res) => res.json())
         .then((res) => this.pushCurrentAttendance(res));
+    },
+    async getImageId(user: any) {
+      if (this.currentClubCode === null) {
+        return console.log("No club selected");
+      }
+      let postData = {
+        user: user,
+        clubCode: this.currentClubCode,
+      };
+      await fetch(this.fetchURL + "get-image-id", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(postData), // body data type must match "Content-Type" header
+      })
+        .then((res) => res.json())
+        .then((res) => (this.imageId = res));
     },
   },
 });
