@@ -98,6 +98,12 @@ const router = createRouter({
         return import("@/views/ClubOrgin.vue");
       },
     },
+    // 404 PAGE
+    {
+      path: "/:pathMatch(.*)*", component: () => {
+        return import("@/views/NotFound.vue")
+      }
+    }
   ],
 });
 
